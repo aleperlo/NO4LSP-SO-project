@@ -1,6 +1,6 @@
 function [xk, fk, gradfk_norm, k, xseq, btseq, pcgiterseq] = ...
     truncated_newton(x0, f, gradf, Hessf, ...
-    kmax, tolgrad, c1, rho, btmax, fterms, pcg_maxit)
+    kmax, tolgrad, c1, rho, btmax, fterms, pcg_maxit, logging)
 %
 % Function that performs the Inexact Newton optimization method, using
 % backtracking strategy for the step-length selection.
@@ -38,9 +38,15 @@ farmijo = @(fk, alpha, c1_gradfk_pk) ...
     fk + alpha * c1_gradfk_pk;
 
 % Initializations
-xseq = zeros(length(x0), kmax);
-btseq = zeros(1, kmax);
-pcgiterseq = zeros(1, kmax);
+if logging
+    xseq = zeros(length(x0), kmax);
+    btseq = zeros(1, kmax);
+    pcgiterseq = zeros(1, kmax);
+else
+    xseq = [];
+    btseq = [];
+    pcgiterseq = [];
+end
 
 xk = x0;
 fk = f(xk);
@@ -90,6 +96,7 @@ while k < kmax && gradfk_norm >= tolgrad
         bt = bt + 1;
     end
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
+        disp('Armijo condition could not be satisfied!')
         break
     end
 
@@ -102,18 +109,22 @@ while k < kmax && gradfk_norm >= tolgrad
     % Increase the step by one
     k = k + 1;
 
-    % Store current xk in xseq
-    xseq(:, k) = xk;
-    % Store bt iterations in btseq
-    btseq(k) = bt;
-    pcgiterseq(k) = iterk;
+    if logging
+        % Store current xk in xseq
+        xseq(:, k) = xk;
+        % Store bt iterations in btseq
+        btseq(k) = bt;
+        pcgiterseq(k) = iterk;
+    end
 end
 
-% "Cut" xseq and btseq to the correct size
-xseq = xseq(:, 1:k);
-btseq = btseq(1:k);
-pcgiterseq = pcgiterseq(1:k);
-% "Add" x0 at the beginning of xseq (otherwise the first el. is x1)
-xseq = [x0, xseq];
+if logging
+    % "Cut" xseq and btseq to the correct size
+    xseq = xseq(:, 1:k);
+    btseq = btseq(1:k);
+    pcgiterseq = pcgiterseq(1:k);
+    % "Add" x0 at the beginning of xseq (otherwise the first el. is x1)
+    xseq = [x0, xseq];
+end
 
 end

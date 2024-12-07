@@ -12,7 +12,7 @@ n = sizes(1);
 for i = 1:max_iter
     try L = chol(A + tau*eye(n));
         if i > 1
-            disp(['Modified Cholesky factorization converged in ', num2str(tau), ' tau.'])
+            disp(['Choosing tau', num2str(tau)])
         end
         return
     catch

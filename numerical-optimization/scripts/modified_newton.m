@@ -1,6 +1,6 @@
 function [xk, fk, gradfk_norm, k, xseq, btseq] = ...
     modified_newton(x0, f, gradf, Hessf, beta,...
-    kmax, tolgrad, c1, rho, btmax, max_chol_iter)
+    kmax, tolgrad, c1, rho, btmax, max_chol_iter, logging)
 %
 %
 % INPUTS:
@@ -30,8 +30,13 @@ farmijo = @(fk, alpha, c1_gradfk_pk) ...
     fk + alpha * c1_gradfk_pk;
 
 % Initializations
-xseq = zeros(length(x0), kmax);
-btseq = zeros(1, kmax);
+if logging
+    xseq = zeros(length(x0), kmax);
+    btseq = zeros(1, kmax);
+else
+    xseq = [];
+    btseq = [];
+end
 
 xk = x0;
 fk = f(xk);
@@ -55,7 +60,8 @@ while k < kmax && gradfk_norm >= tolgrad
     % If you want to silence the messages about "solution quality", use
     % instead:
     % [pk, flagk, relresk, iterk, resveck] = pcg(Hessf(xk), -gradfk);
-    [tau, ~, ~] = chol_with_addition(Hessfk, beta, 2, max_chol_iter);
+    % [tau, ~, ~] = chol_with_addition(Hessfk, beta, 2, max_chol_iter);
+    tau = eigenvalue_modification(Hessfk);
     [pk, ~, ~, ~, ~] = pcg(Hessfk + tau*eye(n), -gradfk);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -82,6 +88,7 @@ while k < kmax && gradfk_norm >= tolgrad
         bt = bt + 1;
     end
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
+        disp("Armijo condition could not be satisfied!")
         break
     end
 
@@ -95,16 +102,20 @@ while k < kmax && gradfk_norm >= tolgrad
     % Increase the step by one
     k = k + 1;
 
-    % Store current xk in xseq
-    xseq(:, k) = xk;
-    % Store bt iterations in btseq
-    btseq(k) = bt;
+    if logging
+        % Store current xk in xseq
+        xseq(:, k) = xk;
+        % Store bt iterations in btseq
+        btseq(k) = bt;
+    end
 end
 
-% "Cut" xseq and btseq to the correct size
-xseq = xseq(:, 1:k);
-btseq = btseq(1:k);
-% "Add" x0 at the beginning of xseq (otherwise the first el. is x1)
-xseq = [x0, xseq];
+if logging
+    % "Cut" xseq and btseq to the correct size
+    xseq = xseq(:, 1:k);
+    btseq = btseq(1:k);
+    % "Add" x0 at the beginning of xseq (otherwise the first el. is x1)
+    xseq = [x0, xseq];
+end
 
 end
