@@ -60,8 +60,8 @@ while k < kmax && gradfk_norm >= tolgrad
     % If you want to silence the messages about "solution quality", use
     % instead:
     % [pk, flagk, relresk, iterk, resveck] = pcg(Hessf(xk), -gradfk);
-    % [tau, ~, ~] = chol_with_addition(Hessfk, beta, 2, max_chol_iter);
-    tau = eigenvalue_modification(Hessfk);
+    [tau, ~, ~] = chol_with_addition(Hessfk, beta, 2, max_chol_iter);
+    % tau = eigenvalue_modification(Hessfk);
     [pk, ~, ~, ~, ~] = pcg(Hessfk + tau*eye(n), -gradfk);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

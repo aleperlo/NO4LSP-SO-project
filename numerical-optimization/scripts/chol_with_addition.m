@@ -11,9 +11,9 @@ n = sizes(1);
 
 for i = 1:max_iter
     try L = chol(A + tau*eye(n));
-        if i > 1
-            disp(['Choosing tau', num2str(tau)])
-        end
+        % if i > 1
+        %     disp(['Choosing tau', num2str(tau)])
+        % end
         return
     catch
         tau = max(coeffient*tau, beta);
