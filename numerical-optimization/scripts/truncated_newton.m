@@ -80,6 +80,8 @@ while k < kmax && gradfk_norm >= tolgrad
     xnew = xk + alpha * pk;
     % Compute the value of f in the candidate new xk
     fnew = f(xnew);
+    fnew_min = fnew;
+    alpha_min = alpha;
 
     c1_gradfk_pk = c1 * gradfk' * pk;
     bt = 0;
@@ -91,13 +93,20 @@ while k < kmax && gradfk_norm >= tolgrad
         % Update xnew and fnew w.r.t. the reduced alpha
         xnew = xk + alpha * pk;
         fnew = f(xnew);
+        % If fnew is the smallest value found so far, store it along with alpha
+        if fnew < fnew_min
+            fnew_min = fnew;
+            alpha_min = alpha;
+        end
 
         % Increase the counter by one
         bt = bt + 1;
     end
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
         disp('Armijo condition could not be satisfied!')
-        break
+        alpha = alpha_min;
+        fnew = fnew_min;
+        xnew = xk + alpha * pk;
     end
 
     % Update xk, fk, gradfk_norm
