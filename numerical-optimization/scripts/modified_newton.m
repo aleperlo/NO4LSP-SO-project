@@ -59,10 +59,10 @@ while k < kmax && gradfk_norm >= tolgrad
     % pk = pcg(Hessf(xk), -gradfk);
     % If you want to silence the messages about "solution quality", use
     % instead:
-    % [pk, flagk, relresk, iterk, resveck] = pcg(Hessf(xk), -gradfk);
-    [tau, ~, ~] = chol_with_addition(Hessfk, beta, 2, max_chol_iter);
-    % tau = eigenvalue_modification(Hessfk);
-    [pk, ~, ~, ~, ~] = pcg(Hessfk + tau*eye(n), -gradfk);
+    B = chol_with_addition(Hessfk, beta, 5, max_chol_iter);
+    % B = eigenvalue_modification(Hessfk);
+    % B = modchol_ldlt(Hessfk);
+    [pk, ~, ~, ~, ~] = pcg(Hessfk + B, -gradfk);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Reset the value of alpha

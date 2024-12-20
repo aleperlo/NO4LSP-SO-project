@@ -1,4 +1,4 @@
-function [tau, L, i] = chol_with_addition(A, beta, coeffient, max_iter)
+function [B] = chol_with_addition(A, beta, coeffient, max_iter)
 
 if min(diag(A)) > 0
     tau = 0;
@@ -10,7 +10,7 @@ sizes = size(A);
 n = sizes(1);
 
 for i = 1:max_iter
-    try L = chol(A + tau*speye(n));
+    try chol(A + tau*speye(n));
         if i > 1
             disp(['Choosing tau ', num2str(tau), ' after iterations ', num2str(i), '.'])
         end
@@ -20,7 +20,10 @@ for i = 1:max_iter
     end
 end
 if i == max_iter
+    tau = 0;
     disp('Tau could not be found!')
 end
+
+B = speye(n) * tau;
 
 end
