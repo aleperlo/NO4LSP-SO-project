@@ -26,4 +26,5 @@ function [JF] = findiff_banded(F, x, h, codiags)
     end
 
     JF = spdiags(Bin, -codiags:codiags, n, n);
+    JF = (JF + JF')/2;
 end
