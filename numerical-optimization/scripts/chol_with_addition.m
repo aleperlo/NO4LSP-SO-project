@@ -1,9 +1,10 @@
 function [B] = chol_with_addition(A, beta, coeffient, max_iter)
 
-if min(diag(A)) > 0
+mindiag = min(diag(A));
+if mindiag > 0
     tau = 0;
 else
-    tau = -min(diag(A)) + beta;
+    tau = -mindiag + beta;
 end
 
 sizes = size(A);
