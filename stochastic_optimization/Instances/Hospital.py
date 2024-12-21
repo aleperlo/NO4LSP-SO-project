@@ -66,19 +66,14 @@ class Surgeon:
         return f"Surgeon {self.id}"
 
 
-class Patient:
+class Patient(Occupant):
     def __init__(self, id, mandatory, gender, age_group, length_of_stay, surgery_release_day, surgery_duration, surgeon, incompatible_rooms, workload_produced, skill_level_required, surgery_due_day=None):
-        self.id = id
+        super().__init__(id, gender, age_group, length_of_stay, workload_produced, skill_level_required, None)
         self.mandatory = mandatory
-        self.gender = gender
-        self.age_group = age_group
-        self.length_of_stay = length_of_stay
         self.surgery_release_day = surgery_release_day
         self.surgery_duration = surgery_duration
         self.surgeon = surgeon
         self.incompatible_rooms = incompatible_rooms
-        self.workload_produced = workload_produced
-        self.skill_level_required = skill_level_required
         self.surgery_due_day = surgery_due_day
     
     def __str__(self):
