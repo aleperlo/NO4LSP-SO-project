@@ -189,3 +189,43 @@ class Hospital:
             coordinates = (np.arange(0, patient.length_of_stay),
                            room_index, patient_index)
             self.pas_matrix[coordinates] = True
+
+    def schedule_patient(self, day, room_index, patient_index, assign=False):
+        room = self.indexer.lookup("rooms", room_index)
+        patient = self.indexer.lookup("patients", patient_index)
+
+        end_day = min(self.days, day + patient.length_of_stay)
+
+        if not isinstance(patient, Patient):
+            raise ValueError("Only patients can be scheduled")
+
+        # Global constraints
+        # Constraint H6: Admission day
+        admission_day_ok = day >= patient.surgery_release_day
+        if patient.mandatory:
+            admission_day_ok &= (day <= patient.surgery_due_day)
+        if not admission_day_ok:
+            raise ValueError("Patient cannot be scheduled on this day")
+        # If patient is already scheduled, remove from PAS matrix
+        self.pas_matrix[:, :, patient_index] = False
+
+        # PAS constraints
+        # Constraint H1: No gender mix
+        patients_same_room = np.any(
+            self.pas_matrix[day:end_day, room_index, :], axis=0)
+        gender_ok = np.apply_along_axis(lambda x: x.gender == patient.gender,
+                                        0, self.patients[patients_same_room]).all()
+        # Constraint H2: Compatible rooms
+        compatible_ok = room.id not in patient.incompatible_rooms
+        # Constraint H7: Room capacity
+        n_patients_in_room = self.pas_matrix[day:end_day, room_index, :].sum(
+            axis=1)
+        capacity_ok = np.all(n_patients_in_room <= room.capacity)
+
+        if gender_ok and compatible_ok and capacity_ok and admission_day_ok:
+            if assign:
+                self.pas_matrix[day:end_day, room_index, patient_index] = True
+        #TODO: Return the loss upon scheduling
+
+    def schedule_nurse(self, shift, room_index, nurse_index):
+        pass
