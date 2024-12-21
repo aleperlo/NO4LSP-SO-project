@@ -149,3 +149,20 @@ class Hospital:
             nurse = Nurse(**nurse_dict)
             self.nurses[nurse.id] = nurse
             self.indexer.get_index("nurses", nurse)
+
+        # Create matrix for Patient Admission Scheduling (PAS) problem
+        self.pas_size = (self.days, len(self.rooms), len(self.patients) + len(self.occupants))
+        self.pas_matrix = np.zeros(self.pas_size, dtype=bool)
+        # Create matrix for Nurse to Room Assignment (NRA) problem
+        self.nra_size = (self.days * len(self.shift_types), len(self.rooms), len(self.nurses))
+        self.nra_matrix = np.zeros(self.nra_size, dtype=bool)
+        # Create matrix for Surgical Case Planning (SCP) problem
+        self.scp_size = (self.days, len(self.operating_theaters), len(self.patients))
+        self.scp_matrix = np.zeros(self.scp_size, dtype=bool)
+
+        # Add occupants to PAS matrix
+        for i, patient in enumerate(self.occupants.values()):
+            patient_index = self.indexer.reverse_lookup("occupants", patient.id)
+            room_index = self.indexer.reverse_lookup("rooms", patient.room.id)
+            coordinates = (np.arange(0, patient.length_of_stay), room_index, patient_index)
+            self.pas_matrix[coordinates] = True
