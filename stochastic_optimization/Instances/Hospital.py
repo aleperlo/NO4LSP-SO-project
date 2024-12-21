@@ -1,4 +1,28 @@
 import json
+from collections import defaultdict
+import numpy as np
+
+
+class Indexer:
+    def __init__(self):
+        self.types = defaultdict(lambda: 0)
+        self.indexer = defaultdict(lambda: {})
+        self.reverse_indexer = defaultdict(lambda: {})
+    
+    def get_index(self, type, obj):
+        if type == "occupant":
+            type = "patient"
+        index = self.types[type]
+        self.types[type] += 1
+        self.indexer[type][index] = obj
+        self.reverse_indexer[type][obj.id] = index
+        return index
+    
+    def lookup(self, type, index):
+        return self.indexer[type][index]
+    
+    def reverse_lookup(self, type, id):
+        return self.reverse_indexer[type][id]
 
 
 class Room:
@@ -83,6 +107,7 @@ class Nurse:
 
 class Hospital:
     def __init__(self, fp):
+        self.indexer = Indexer()
         json_data = json.load(fp)
 
         self.days = json_data["days"]
@@ -101,17 +126,21 @@ class Hospital:
         for room_dict in json_data["rooms"]:
             room = Room(**room_dict)
             self.rooms[room.id] = room
+            self.indexer.get_index("rooms", room)
         for operating_theater_dict in json_data["operating_theaters"]:
             operating_theater = OperatingTheater(**operating_theater_dict)
             self.operating_theaters[operating_theater.id] = operating_theater
+            self.indexer.get_index("operating_theaters", operating_theater)
         for occupant_dict in json_data["occupants"]:
             room_id = occupant_dict.pop("room_id")
             room = self.rooms[room_id]
             occupant = Occupant(room=room, **occupant_dict)
             self.occupants[occupant.id] = occupant
+            self.indexer.get_index("occupants", occupant)
         for surgeon_dict in json_data["surgeons"]:
             surgeon = Surgeon(**surgeon_dict)
             self.surgeons[surgeon.id] = surgeon
+            self.indexer.get_index("surgeons", surgeon)
         for patient_dict in json_data["patients"]:
             surgeon_id = patient_dict.pop('surgeon_id')
             surgeon = self.surgeons[surgeon_id]
@@ -120,6 +149,8 @@ class Hospital:
             patient = Patient(
                 surgeon=surgeon, incompatible_rooms=incompatible_rooms, **patient_dict)
             self.patients[patient.id] = patient
+            self.indexer.get_index("patients", patient)
         for nurse_dict in json_data["nurses"]:
             nurse = Nurse(**nurse_dict)
             self.nurses[nurse.id] = nurse
+            self.indexer.get_index("nurses", nurse)
