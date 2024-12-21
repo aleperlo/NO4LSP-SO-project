@@ -71,14 +71,15 @@ class Surgeon:
 
 class Patient(Occupant):
     def __init__(self, id, mandatory, gender, age_group, length_of_stay, surgery_release_day, surgery_duration, surgeon, incompatible_rooms, workload_produced, skill_level_required, surgery_due_day=None):
-        super().__init__(id, gender, age_group, length_of_stay, workload_produced, skill_level_required, None)
+        super().__init__(id, gender, age_group, length_of_stay,
+                         workload_produced, skill_level_required, None)
         self.mandatory = mandatory
         self.surgery_release_day = surgery_release_day
         self.surgery_duration = surgery_duration
         self.surgeon = surgeon
         self.incompatible_rooms = incompatible_rooms
         self.surgery_due_day = surgery_due_day
-    
+
     def __str__(self):
         return f"Patient {self.id}"
 
@@ -168,18 +169,23 @@ class Hospital:
         self.nurses = np.array(self.nurses)
 
         # Create matrix for Patient Admission Scheduling (PAS) problem
-        self.pas_size = (self.days, len(self.rooms), len(self.patients) + len(self.occupants))
+        self.pas_size = (self.days, len(self.rooms), len(
+            self.patients) + len(self.occupants))
         self.pas_matrix = np.zeros(self.pas_size, dtype=bool)
         # Create matrix for Nurse to Room Assignment (NRA) problem
-        self.nra_size = (self.days * len(self.shift_types), len(self.rooms), len(self.nurses))
+        self.nra_size = (self.days * len(self.shift_types),
+                         len(self.rooms), len(self.nurses))
         self.nra_matrix = np.zeros(self.nra_size, dtype=bool)
         # Create matrix for Surgical Case Planning (SCP) problem
-        self.scp_size = (self.days, len(self.operating_theaters), len(self.patients))
+        self.scp_size = (self.days, len(
+            self.operating_theaters), len(self.patients))
         self.scp_matrix = np.zeros(self.scp_size, dtype=bool)
 
         # Add occupants to PAS matrix
-        for i, patient in enumerate(self.occupants.values()):
-            patient_index = self.indexer.reverse_lookup("occupants", patient.id)
+        for patient in self.occupants:
+            patient_index = self.indexer.reverse_lookup(
+                "occupants", patient.id)
             room_index = self.indexer.reverse_lookup("rooms", patient.room.id)
-            coordinates = (np.arange(0, patient.length_of_stay), room_index, patient_index)
+            coordinates = (np.arange(0, patient.length_of_stay),
+                           room_index, patient_index)
             self.pas_matrix[coordinates] = True
