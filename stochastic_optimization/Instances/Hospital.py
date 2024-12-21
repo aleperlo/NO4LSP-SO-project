@@ -84,21 +84,28 @@ class Patient(Occupant):
 
 
 class WorkingShift:
-    def __init__(self, day, shift, max_load):
+    def __init__(self, day, shift, max_load, shift_types):
         self.day = day
         self.shift = shift
         self.max_load = max_load
+        for i, s in enumerate(shift_types):
+            if shift == s:
+                break
+        self.index = day * len(shift_types) + i
 
     def __str__(self):
         return f"Shift {self.day} {self.shift} {self.max_load}"
 
 
 class Nurse:
-    def __init__(self, id, skill_level, working_shifts):
+    def __init__(self, id, skill_level, working_shifts, shift_types):
         self.id = id
         self.skill_level = skill_level
-        self.working_shifts = [WorkingShift(**w) for w in working_shifts]
-    
+        self.working_shifts = []
+        for w in working_shifts:
+            w["shift_types"] = shift_types
+            self.working_shifts.append(WorkingShift(**w))
+
     def __str__(self):
         return f"Nurse {self.id}"
 
