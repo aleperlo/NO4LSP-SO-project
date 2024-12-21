@@ -175,17 +175,14 @@ class Hospital:
         self.nurses = np.array(self.nurses)
 
         # Create matrix for Patient Admission Scheduling (PAS) problem
+        # Actually it also includes the Surgical Case Planning (SCP) problem
         self.pas_size = (self.days, len(self.rooms), len(
-            self.patients) + len(self.occupants))
+            self.patients) + len(self.occupants), len(self.operating_theaters))
         self.pas_matrix = np.zeros(self.pas_size, dtype=bool)
         # Create matrix for Nurse to Room Assignment (NRA) problem
         self.nra_size = (self.days * len(self.shift_types),
                          len(self.rooms), len(self.nurses))
         self.nra_matrix = np.zeros(self.nra_size, dtype=bool)
-        # Create matrix for Surgical Case Planning (SCP) problem
-        self.scp_size = (self.days, len(
-            self.operating_theaters), len(self.patients))
-        self.scp_matrix = np.zeros(self.scp_size, dtype=bool)
 
         # Add occupants to PAS matrix
         for patient in self.occupants:
@@ -196,9 +193,12 @@ class Hospital:
                            room_index, patient_index)
             self.pas_matrix[coordinates] = True
 
-    def schedule_patient(self, day, room_index, patient_index, assign=False):
+    def schedule_patient(self, day, room_index, patient_index, operating_theater_index, assign=False):
         room = self.indexer.lookup("rooms", room_index)
         patient = self.indexer.lookup("patients", patient_index)
+        surgeon = patient.surgeon
+        operating_theater = self.indexer.lookup(
+            "operating_theaters", operating_theater_index)
 
         end_day = min(self.days, day + patient.length_of_stay)
 
@@ -213,20 +213,43 @@ class Hospital:
         if not admission_day_ok:
             raise ValueError("Patient cannot be scheduled on this day")
         # If patient is already scheduled, remove from PAS matrix
-        self.pas_matrix[:, :, patient_index] = False
+        self.pas_matrix[:, :, patient_index, operating_theater_index] = False
 
         # PAS constraints
         # Constraint H1: No gender mix
         patients_same_room = np.any(
-            self.pas_matrix[day:end_day, room_index, :], axis=0)
+            self.pas_matrix[day:end_day, room_index, :, :], axis=0)
         gender_ok = np.apply_along_axis(lambda x: x.gender == patient.gender,
                                         0, self.patients[patients_same_room]).all()
         # Constraint H2: Compatible rooms
         compatible_ok = room.id not in patient.incompatible_rooms
         # Constraint H7: Room capacity
-        n_patients_in_room = self.pas_matrix[day:end_day, room_index, :].sum(
+        n_patients_in_room = self.pas_matrix[day:end_day, room_index, :, :].sum(
             axis=1)
         capacity_ok = np.all(n_patients_in_room <= room.capacity)
+        if not gender_ok or not compatible_ok or not capacity_ok:
+            raise ValueError("Patient cannot be scheduled in this room")
+
+        # SCP constraints
+        patients_on_day = self.patients[self.pas_matrix[day, :, :, :].any(axis=1)]
+        # Constraint H5: Surgeon overtime
+        surgeon_patients = np.apply_along_axis(
+            lambda x: x.surgeon.id == surgeon.id, 0, patients_on_day)
+        scheduled_duration = np.apply_along_axis(
+            lambda x: x.surgery_duration, 0, self.patients[surgeon_patients]).sum()
+        surgeon_overtime_ok = scheduled_duration + patient.surgery_duration <= surgeon.max_surgery_time[day]
+        # Constraint H4: OT overtime
+        ot_patients = self.pas_matrix[day, :, patients_on_day, operating_theater_index]
+        ot_duration = np.apply_along_axis(
+            lambda x: x.surgery_duration, 0, self.patients[ot_patients]).sum()
+        ot_duration_ok = ot_duration + patient.surgery_duration <= operating_theater.availability[day]
+
+        if not surgeon_overtime_ok or not ot_duration_ok:
+            raise ValueError("Patient cannot be scheduled in this operating theater")
+
+        if assign:
+            self.pas_matrix[day:end_day, room_index, patient_index, operating_theater_index] = True
+        # TODO: Return the loss upon scheduling
 
     def schedule_nurse(self, shift, room_index, nurse_index, assign=False):
         nurse = self.indexer.lookup("nurses", nurse_index)
