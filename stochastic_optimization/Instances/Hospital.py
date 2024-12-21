@@ -99,13 +99,19 @@ class WorkingShift:
 
 
 class Nurse:
-    def __init__(self, id, skill_level, working_shifts, shift_types):
+    def __init__(self, id, skill_level, working_shifts, shift_types, days):
         self.id = id
         self.skill_level = skill_level
         self.working_shifts = []
+        self.available = np.zeros(days * len(shift_types), dtype=bool)
         for w in working_shifts:
             w["shift_types"] = shift_types
-            self.working_shifts.append(WorkingShift(**w))
+            w_obj = WorkingShift(**w)
+            self.working_shifts.append(w_obj)
+            self.available[w_obj.index] = True
+
+    def is_available(self, shift_index):
+        return self.available[shift_index]
 
     def __str__(self):
         return f"Nurse {self.id}"
@@ -222,10 +228,22 @@ class Hospital:
             axis=1)
         capacity_ok = np.all(n_patients_in_room <= room.capacity)
 
-        if gender_ok and compatible_ok and capacity_ok and admission_day_ok:
-            if assign:
-                self.pas_matrix[day:end_day, room_index, patient_index] = True
-        #TODO: Return the loss upon scheduling
+    def schedule_nurse(self, shift, room_index, nurse_index, assign=False):
+        nurse = self.indexer.lookup("nurses", nurse_index)
 
-    def schedule_nurse(self, shift, room_index, nurse_index):
-        pass
+        # Check if no nurse is assigned to the room
+        room_ok = not self.nra_matrix[shift, room_index, :].any()
+        if not room_ok:
+            raise ValueError("Room is already assigned to a nurse")
+        # Check if nurse is available
+        if not nurse.is_available(shift):
+            raise ValueError("Nurse is not available at this shift")
+
+        if assign:
+            self.nra_matrix[shift, room_index, nurse_index] = True
+        # TODO: Return the loss upon scheduling
+
+    def unschedule_nurse(self, shift, room_index, nurse_index):
+        # TODO: Consider adding checks on the fact that nurse is assigned to the room in that shift
+        self.nra_matrix[shift, room_index, nurse_index] = False
+        # TODO: Return the loss upon scheduling
