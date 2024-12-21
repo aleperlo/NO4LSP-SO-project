@@ -8,7 +8,7 @@ class Indexer:
         self.types = defaultdict(lambda: 0)
         self.indexer = defaultdict(lambda: {})
         self.reverse_indexer = defaultdict(lambda: {})
-    
+
     def get_index(self, type, obj):
         if type == "occupant":
             type = "patient"
@@ -17,12 +17,15 @@ class Indexer:
         self.indexer[type][index] = obj
         self.reverse_indexer[type][obj.id] = index
         return index
-    
+
     def lookup(self, type, index):
         return self.indexer[type][index]
-    
+
     def reverse_lookup(self, type, id):
         return self.reverse_indexer[type][id]
+
+    def id_lookup(self, type, id):
+        return self.lookup(type, self.reverse_lookup(type, id))
 
 
 class Room:
@@ -111,44 +114,51 @@ class Hospital:
         self.age_groups = json_data["age_groups"]
         self.weights = json_data['weights']
 
-        self.occupants = {}
-        self.patients = {}
-        self.surgeons = {}
-        self.operating_theaters = {}
-        self.rooms = {}
-        self.nurses = {}
+        self.occupants = []
+        self.patients = []
+        self.surgeons = []
+        self.operating_theaters = []
+        self.rooms = []
+        self.nurses = []
 
         for room_dict in json_data["rooms"]:
             room = Room(**room_dict)
-            self.rooms[room.id] = room
+            self.rooms.append(room)
             self.indexer.get_index("rooms", room)
+        self.rooms = np.array(self.rooms)
         for operating_theater_dict in json_data["operating_theaters"]:
             operating_theater = OperatingTheater(**operating_theater_dict)
-            self.operating_theaters[operating_theater.id] = operating_theater
+            self.operating_theaters.append(operating_theater)
             self.indexer.get_index("operating_theaters", operating_theater)
+        self.operating_theaters = np.array(self.operating_theaters)
         for occupant_dict in json_data["occupants"]:
             room_id = occupant_dict.pop("room_id")
-            room = self.rooms[room_id]
+            room = self.indexer.id_lookup("rooms", room_id)
             occupant = Occupant(room=room, **occupant_dict)
-            self.occupants[occupant.id] = occupant
+            self.occupants.append(occupant)
             self.indexer.get_index("occupants", occupant)
         for surgeon_dict in json_data["surgeons"]:
             surgeon = Surgeon(**surgeon_dict)
-            self.surgeons[surgeon.id] = surgeon
+            self.surgeons.append(surgeon)
             self.indexer.get_index("surgeons", surgeon)
+        self.surgeons = np.array(self.surgeons)
         for patient_dict in json_data["patients"]:
             surgeon_id = patient_dict.pop('surgeon_id')
-            surgeon = self.surgeons[surgeon_id]
+            surgeon = self.indexer.id_lookup("surgeons", surgeon_id)
             incompatible_room_ids = patient_dict.pop('incompatible_room_ids')
-            incompatible_rooms = [self.rooms[i] for i in incompatible_room_ids]
+            incompatible_rooms = [self.indexer.id_lookup(
+                "rooms", i) for i in incompatible_room_ids]
             patient = Patient(
                 surgeon=surgeon, incompatible_rooms=incompatible_rooms, **patient_dict)
-            self.patients[patient.id] = patient
+            self.patients.append(patient)
             self.indexer.get_index("patients", patient)
+        self.patients = np.array(self.occupants + self.patients)
         for nurse_dict in json_data["nurses"]:
+            nurse_dict["shift_types"] = self.shift_types
             nurse = Nurse(**nurse_dict)
-            self.nurses[nurse.id] = nurse
+            self.nurses.append(nurse)
             self.indexer.get_index("nurses", nurse)
+        self.nurses = np.array(self.nurses)
 
         # Create matrix for Patient Admission Scheduling (PAS) problem
         self.pas_size = (self.days, len(self.rooms), len(self.patients) + len(self.occupants))
