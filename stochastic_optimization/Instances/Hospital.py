@@ -224,21 +224,28 @@ class Hospital:
 
         for room_dict in json_data["rooms"]:
             room = Room(**room_dict)
-            np.append(self.rooms, room)
+            self.rooms = np.append(self.rooms, room)
             self.indexer.get_index("rooms", room)
+        # inserting dummy ot
+        self.operating_theaters = np.append(
+            self.operating_theaters, OperatingTheater("dummy", [0] * self.days)
+        )
+        self.indexer.get_index("operating_theaters", self.operating_theaters[-1])
         for operating_theater_dict in json_data["operating_theaters"]:
             operating_theater = OperatingTheater(**operating_theater_dict)
-            np.append(self.operating_theaters, operating_theater)
+            self.operating_theaters = np.append(
+                self.operating_theaters, operating_theater
+            )
             self.indexer.get_index("operating_theaters", operating_theater)
         for occupant_dict in json_data["occupants"]:
             room_id: str = occupant_dict.pop("room_id")
             room = self.indexer.id_lookup("rooms", room_id)
             occupant = Occupant(room=room, **occupant_dict)
-            np.append(self.occupants, occupant)
+            self.occupants = np.append(self.occupants, occupant)
             self.indexer.get_index("occupants", occupant)
         for surgeon_dict in json_data["surgeons"]:
             surgeon = Surgeon(**surgeon_dict)
-            np.append(self.surgeons, surgeon)
+            self.surgeons = np.append(self.surgeons, surgeon)
             self.indexer.get_index("surgeons", surgeon)
         for patient_dict in json_data["patients"]:
             surgeon_id = patient_dict.pop("surgeon_id")
@@ -250,13 +257,13 @@ class Hospital:
             patient = Patient(
                 surgeon=surgeon, incompatible_rooms=incompatible_rooms, **patient_dict
             )
-            np.append(self.patients, patient)
+            self.patients = np.append(self.patients, patient)
             self.indexer.get_index("patients", patient)
-        self.patients = np.append(self.patients, self.occupants)
+        self.patients = np.append(self.occupants, self.patients)
         for nurse_dict in json_data["nurses"]:
             nurse_dict["shift_types"] = self.shift_types
             nurse = Nurse(days=self.days, **nurse_dict)
-            np.append(self.nurses, nurse)
+            self.nurses = np.append(self.nurses, nurse)
             self.indexer.get_index("nurses", nurse)
 
         # Create matrix for Patient Admission Scheduling (PAS) problem
@@ -264,7 +271,7 @@ class Hospital:
         self.pas_size = (
             self.days,
             len(self.rooms),
-            len(self.patients) + len(self.occupants),
+            len(self.patients),
             len(self.operating_theaters),
         )
         self.pas_matrix = np.zeros(self.pas_size, dtype=bool)
@@ -284,6 +291,7 @@ class Hospital:
                 np.arange(0, patient.length_of_stay),
                 room_index,
                 patient_index,
+                0,
             )
             self.pas_matrix[coordinates] = True
 
