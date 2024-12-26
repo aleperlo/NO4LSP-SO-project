@@ -2,6 +2,7 @@ import json
 from collections import defaultdict
 from typing import List, Literal, Union
 import numpy as np
+import pprint
 
 
 class Room:
