@@ -149,8 +149,8 @@ class Indexer:
         ],
         obj: Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room],
     ):
-        if type == "occupant":
-            type = "patient"
+        if type == "occupants":
+            type = "patients"
         index = self.types[type]
         self.types[type] += 1
         self.indexer[type][index] = obj
@@ -169,6 +169,8 @@ class Indexer:
         ],
         index: int,
     ):
+        if type == "occupants":
+            type = "patients"
         return self.indexer[type][index]
 
     def reverse_lookup(
@@ -183,6 +185,8 @@ class Indexer:
         ],
         id: str,
     ):
+        if type == "occupants":
+            type = "patients"
         return self.reverse_indexer[type][id]
 
     def id_lookup(
