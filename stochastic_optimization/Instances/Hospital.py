@@ -282,6 +282,26 @@ class Hospital:
             )
             self.pas_matrix[coordinates] = True
 
+    def print(self):
+        pprint.pprint(
+            sorted(
+                [
+                    dict(zip(["day", "room", "patient", "ot"], pt))
+                    for pt in np.argwhere(self.pas_matrix)
+                ],
+                key=lambda pt: pt["day"],
+            )
+        )
+        pprint.pprint(
+            sorted(
+                [
+                    dict(zip(["shift", "room", "nurse"], ne))
+                    for ne in np.argwhere(self.nra_matrix)
+                ],
+                key=lambda ne: ne["shift"],
+            )
+        )
+
     def schedule_patient(
         self,
         day: int,
