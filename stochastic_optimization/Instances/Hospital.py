@@ -348,11 +348,10 @@ class Hospital:
         # PAS constraints
         # Constraint H1: No gender mix
         patients_same_room = np.any(
-            self.pas_matrix[day:end_day, room_index, :, :], axis=0
+            self.pas_matrix[day:end_day, room_index, :, :], axis=(0, 2)
         )
-        gender_ok = np.apply_along_axis(
-            lambda x: x.gender == patient.gender, 0, self.patients[patients_same_room]
-        ).all()
+        gender_fun = np.vectorize(lambda p: p.gender == patient.gender, otypes=[bool])
+        gender_ok = gender_fun(self.patients[patients_same_room]).all()
         # Constraint H2: Compatible rooms
         compatible_ok = room.id not in patient.incompatible_rooms
         # Constraint H7: Room capacity
@@ -364,23 +363,26 @@ class Hospital:
             raise ValueError("Patient cannot be scheduled in this room")
 
         # SCP constraints
-        patients_on_day = self.patients[self.pas_matrix[day, :, :, :].any(axis=1)]
+        patients_on_day = self.pas_matrix[day, :, :, :].any(axis=(0, 2))  # mask
         # Constraint H5: Surgeon overtime
-        surgeon_patients = np.apply_along_axis(
-            lambda x: x.surgeon.id == surgeon.id, 0, patients_on_day
-        )
-        scheduled_duration = np.apply_along_axis(
-            lambda x: x.surgery_duration, 0, self.patients[surgeon_patients]
-        ).sum()
+        scp_fun = np.vectorize(
+            lambda p: p.surgeon.id == surgeon.id if type(p) == Patient else False,
+            otypes=[bool],
+        )  # -> bool
+        surgeon_patients = scp_fun(self.patients[patients_on_day])  # mask
+        duration_fun = np.vectorize(
+            lambda p: p.surgery_duration, otypes=[int]
+        )  # -> number
+        scheduled_duration = duration_fun(
+            self.patients[patients_on_day][surgeon_patients]
+        ).sum()  # number
         surgeon_overtime_ok = (
             scheduled_duration + patient.surgery_duration
             <= surgeon.max_surgery_time[day]
         )
         # Constraint H4: OT overtime
-        ot_patients = self.pas_matrix[day, :, patients_on_day, operating_theater_index]
-        ot_duration = np.apply_along_axis(
-            lambda x: x.surgery_duration, 0, self.patients[ot_patients]
-        ).sum()
+        ot_patients = self.pas_matrix[day, :, :, operating_theater_index].any(axis=0)
+        ot_duration = duration_fun(self.patients[ot_patients]).sum()
         ot_duration_ok = (
             ot_duration + patient.surgery_duration
             <= operating_theater.availability[day]
