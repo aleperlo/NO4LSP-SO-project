@@ -95,7 +95,7 @@ while k < kmax && gradfk_norm >= tolgrad
         bt = bt + 1;
     end
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
-        disp("Armijo condition could not be satisfied!")
+        %disp("Armijo condition could not be satisfied!")
         alpha = alpha_min;
         fnew = fnew_min;
         xnew = xk + alpha * pk;
