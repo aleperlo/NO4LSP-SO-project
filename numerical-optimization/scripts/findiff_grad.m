@@ -1,4 +1,4 @@
-function [gradfx] = findiff_grad(f, x, h, type)
+function [gradfx] = findiff_grad(f, x, h, type, relative)
 %
 % function [gradf] = findiff_grad(f, x, h, type)
 %
@@ -21,6 +21,9 @@ gradfx = zeros(size(x));
 switch type
     case 'fw'
         for i=1:length(x)
+            if relative
+                h = h * abs(x(i));
+            end
             xh = x;
             xh(i) = xh(i) + h;
             gradfx(i) = (f(xh) - f(x))/ h;
@@ -31,6 +34,9 @@ switch type
         for i=1:length(x)
             xh_plus = x;
             xh_minus = x;
+            if relative
+                h = h * abs(x(i));
+            end
             xh_plus(i) = xh_plus(i) + h;
             xh_minus(i) = xh_minus(i) - h;
             gradfx(i) = (f(xh_plus) - f(xh_minus))/(2 * h);
@@ -40,6 +46,9 @@ switch type
         end
     otherwise % repeat the 'fw' case
         for i=1:length(x)
+            if relative
+                h = h * abs(x(i));
+            end
             xh = x;
             xh(i) = xh(i) + h;
             gradfx(i) = (f(xh) - f(x))/h;
