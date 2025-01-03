@@ -395,11 +395,15 @@ class Hospital:
         if not surgeon_overtime_ok or not ot_duration_ok:
             raise ValueError("Patient cannot be scheduled in this operating theater")
 
-        if assign:
+        self.pas_matrix[
+            day:end_day, room_index, patient_index, operating_theater_index
+        ] = True
+        penalty = self.compute_penalty()
+        if not assign:
             self.pas_matrix[
                 day:end_day, room_index, patient_index, operating_theater_index
-            ] = True
-        # TODO: Return the loss upon scheduling
+            ] = False
+        return penalty
 
     def schedule_nurse(
         self, shift: int, room_index: int, nurse_index: int, assign: bool = False
@@ -414,14 +418,19 @@ class Hospital:
         if not nurse.is_available(shift):
             raise ValueError("Nurse is not available at this shift")
 
-        if assign:
-            self.nra_matrix[shift, room_index, nurse_index] = True
-        # TODO: Return the loss upon scheduling
+        self.nra_matrix[shift, room_index, nurse_index] = True
+        penalty = self.compute_penalty()
+        if not assign:
+            self.nra_matrix[shift, room_index, nurse_index] = False
+        return penalty
 
-    def unschedule_nurse(self, shift: int, room_index: int, nurse_index: int):
+    def unschedule_nurse(self, shift: int, room_index: int, nurse_index: int, assign: bool = False):
         # TODO: Consider adding checks on the fact that nurse is assigned to the room in that shift
         self.nra_matrix[shift, room_index, nurse_index] = False
-        # TODO: Return the loss upon scheduling
+        penalty = self.compute_penalty()
+        if not assign:
+            self.nra_matrix[shift, room_index, nurse_index] = True
+        return penalty
 
     def compute_penalty(self):
         penalty = 0
