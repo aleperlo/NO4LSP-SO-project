@@ -368,7 +368,7 @@ class Hospital:
 
         # SCP constraints
         patients_on_day = self.pas_matrix[day, :, :, :].any(axis=(0, 2))  # mask
-        # Constraint H5: Surgeon overtime
+        # Constraint H3: Surgeon overtime
         scp_fun = np.vectorize(
             lambda p: p.surgeon.id == surgeon.id if type(p) == Patient else False,
             otypes=[bool],
