@@ -635,6 +635,10 @@ class Hospital:
 
         return penalty
 
+    def save_status(self):
+        self.best_nra_matrix = np.copy(self.nra_matrix)
+        self.best_pas_matrix = np.copy(self.pas_matrix)
+
     def apply_action(self, action, assign=False):
         if isinstance(action, PASAction):
             penalty = self.schedule_patient(action.day, action.room, action.patient, action.ot, assign)
