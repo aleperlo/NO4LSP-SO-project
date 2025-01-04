@@ -124,7 +124,7 @@ class Nurse:
 
     def is_available(self, shift_index: int):
         return self.available[shift_index]
-    
+
     def maximum_workload(self, shift_index: int):
         return self.working_shifts[shift_index].max_load
 
@@ -137,9 +137,11 @@ class Indexer:
         self.types: defaultdict[str, int] = defaultdict(lambda: 0)
         self.indexer: defaultdict[
             str,
-            dict[int, Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room]],
+            dict[int, Union[Patient, Occupant, Surgeon,
+                            Nurse, OperatingTheater, Room]],
         ] = defaultdict(lambda: {})
-        self.reverse_indexer: defaultdict[str, dict[str, int]] = defaultdict(lambda: {})
+        self.reverse_indexer: defaultdict[str,
+                                          dict[str, int]] = defaultdict(lambda: {})
 
     def get_index(
         self,
@@ -234,7 +236,8 @@ class Hospital:
         self.operating_theaters = np.append(
             self.operating_theaters, OperatingTheater("dummy", [0] * self.days)
         )
-        self.indexer.get_index("operating_theaters", self.operating_theaters[-1])
+        self.indexer.get_index("operating_theaters",
+                               self.operating_theaters[-1])
         for operating_theater_dict in json_data["operating_theaters"]:
             operating_theater = OperatingTheater(**operating_theater_dict)
             self.operating_theaters = np.append(
@@ -289,7 +292,8 @@ class Hospital:
 
         # Add occupants to PAS matrix
         for patient in self.occupants:
-            patient_index = self.indexer.reverse_lookup("occupants", patient.id)
+            patient_index = self.indexer.reverse_lookup(
+                "occupants", patient.id)
             room_index = self.indexer.reverse_lookup("rooms", patient.room.id)
             coordinates = (
                 np.arange(0, patient.length_of_stay),
@@ -354,7 +358,8 @@ class Hospital:
         patients_same_room = np.any(
             self.pas_matrix[day:end_day, room_index, :, :], axis=(0, 2)
         )
-        gender_fun = np.vectorize(lambda p: p.gender == patient.gender, otypes=[bool])
+        gender_fun = np.vectorize(
+            lambda p: p.gender == patient.gender, otypes=[bool])
         gender_ok = gender_fun(self.patients[patients_same_room]).all()
         # Constraint H2: Compatible rooms
         compatible_ok = room.id not in patient.incompatible_rooms
@@ -367,13 +372,16 @@ class Hospital:
             raise ValueError("Patient cannot be scheduled in this room")
 
         # SCP constraints
-        patients_on_day = self.pas_matrix[day, :, len(self.occupants):, :].any(axis=(0, 2))  # mask
+        patients_on_day = self.pas_matrix[day, :, len(
+            self.occupants):, :].any(axis=(0, 2))  # mask
         # Constraint H3: Surgeon overtime
         scp_fun = np.vectorize(
-            lambda p: p.surgeon.id == surgeon.id if type(p) == Patient else False,
+            lambda p: p.surgeon.id == surgeon.id if type(
+                p) == Patient else False,
             otypes=[bool],
         )  # -> bool
-        surgeon_patients = scp_fun(self.patients[len(self.occupants):][patients_on_day])  # mask
+        surgeon_patients = scp_fun(
+            self.patients[len(self.occupants):][patients_on_day])  # mask
         duration_fun = np.vectorize(
             lambda p: p.surgery_duration, otypes=[int]
         )  # -> number
@@ -385,15 +393,18 @@ class Hospital:
             <= surgeon.max_surgery_time[day]
         )
         # Constraint H4: OT overtime
-        ot_patients = self.pas_matrix[day, :, len(self.occupants):, operating_theater_index].any(axis=0)
-        ot_duration = duration_fun(self.patients[len(self.occupants):][ot_patients]).sum()
+        ot_patients = self.pas_matrix[day, :, len(
+            self.occupants):, operating_theater_index].any(axis=0)
+        ot_duration = duration_fun(
+            self.patients[len(self.occupants):][ot_patients]).sum()
         ot_duration_ok = (
             ot_duration + patient.surgery_duration
             <= operating_theater.availability[day]
         )
 
         if not surgeon_overtime_ok or not ot_duration_ok:
-            raise ValueError("Patient cannot be scheduled in this operating theater")
+            raise ValueError(
+                "Patient cannot be scheduled in this operating theater")
 
         self.pas_matrix[
             day:end_day, room_index, patient_index, operating_theater_index
@@ -431,7 +442,7 @@ class Hospital:
         if not assign:
             self.nra_matrix[shift, room_index, nurse_index] = True
         return penalty
-    
+
     def generate_initial_solution(self):
         mandatory_patients = []
         for patient in self.patients[len(self.occupants):]:
@@ -442,8 +453,10 @@ class Hospital:
                 for room_index, room in enumerate(self.rooms):
                     for ot_index, ot in enumerate(self.operating_theaters[1:]):
                         try:
-                            self.schedule_patient(day, room_index, self.indexer.reverse_lookup("patients", patient.id), ot_index+1, assign=True)
-                            print(f"Patient {patient.id} scheduled on day {day} in room {room.id} and OT {ot.id}")
+                            self.schedule_patient(day, room_index, self.indexer.reverse_lookup(
+                                "patients", patient.id), ot_index+1, assign=True)
+                            print(
+                                f"Patient {patient.id} scheduled on day {day} in room {room.id} and OT {ot.id}")
                         except ValueError as e:
                             pass
 
@@ -468,31 +481,39 @@ class Hospital:
         max_age = age_distribution.max(axis=-1)
         # Compute penalty for age group mix
         age_diff = max_age - min_age
-        penalty += age_diff[age_diff > 0].sum() * self.weights["room_mixed_age"]
+        penalty += age_diff[age_diff > 0].sum() * \
+            self.weights["room_mixed_age"]
 
         # Constraint S2: Minimum skill level
-        skill_level_shape = (self.days * len(self.shift_types), len(self.rooms), len(self.patients))
+        skill_level_shape = (self.days * len(self.shift_types),
+                             len(self.rooms), len(self.patients))
         # Compute required skill level for each day, room and patient
         required_skill_level = np.zeros(skill_level_shape, dtype=int)
         patient_day = assigned_patients.sum(axis=1) > 0
-        patient_day_repeated = np.repeat(patient_day, len(self.shift_types), axis=0)
+        patient_day_repeated = np.repeat(
+            patient_day, len(self.shift_types), axis=0)
         patient_mask = patient_day.sum(axis=0) > 0
         for patient in self.patients[patient_mask]:
             patient_index = self.indexer.reverse_lookup("patients", patient.id)
             shift_mask = patient_day_repeated[:, patient_index]
-            room_index = np.argmax(assigned_patients[:, :, patient_index].sum(axis = 0) > 0)
-            required_skill_level[shift_mask, room_index, patient_index] = patient.skill_level_required
+            room_index = np.argmax(
+                assigned_patients[:, :, patient_index].sum(axis=0) > 0)
+            required_skill_level[shift_mask, room_index,
+                                 patient_index] = patient.skill_level_required
         # Compute provided skill level for each day, room and patient
         provided_skill_level = np.zeros(skill_level_shape, dtype=int)
         shifts, rooms, nurses = np.nonzero(self.nra_matrix)
         skill_level_fun = np.vectorize(lambda n: n.skill_level, otypes=[int])
         if len(nurses) > 0:
-            provided_skill_level[shifts, rooms, :] = skill_level_fun(self.nurses[nurses])
+            provided_skill_level[shifts, rooms,
+                                 :] = skill_level_fun(self.nurses[nurses])
             skill_level_difference = required_skill_level - provided_skill_level
-            penalty += skill_level_difference[skill_level_difference > 0].sum() * self.weights["room_nurse_skill"]
-        
+            penalty += skill_level_difference[skill_level_difference >
+                                              0].sum() * self.weights["room_nurse_skill"]
+
         # Constraint S3: Continuity of care
-        repeated_assigned_patients = np.repeat(assigned_patients, len(self.shift_types), axis=0)
+        repeated_assigned_patients = np.repeat(
+            assigned_patients, len(self.shift_types), axis=0)
         shifts, rooms, patients = np.nonzero(repeated_assigned_patients)
         idx, nurse = np.nonzero(self.nra_matrix[shifts, rooms])
         nurse_value = np.zeros(shifts.shape, dtype=int) - 1
@@ -500,26 +521,33 @@ class Hospital:
         na_size = (self.days * len(self.shift_types), len(self.patients))
         nurse_assignments = np.zeros(na_size, dtype=int) - 1
         nurse_assignments[shifts, patients] = nurse_value
-        distinct_nurses = np.apply_along_axis(lambda x: len(np.unique(x)), 1, nurse_assignments) - 1
+        distinct_nurses = np.apply_along_axis(
+            lambda x: len(np.unique(x)), 1, nurse_assignments) - 1
         penalty += distinct_nurses.sum() * self.weights["continuity_of_care"]
-        
+
         # Constraint S4: Maximum workload
-        workload_shape = (self.days * len(self.shift_types), len(self.rooms), len(self.patients))
+        workload_shape = (self.days * len(self.shift_types),
+                          len(self.rooms), len(self.patients))
         # Compute workload for each day, room and patient
         required_workload_patient = np.zeros(workload_shape, dtype=int)
         for patient in self.patients[patient_mask]:
             patient_index = self.indexer.reverse_lookup("patients", patient.id)
             shift_mask = patient_day_repeated[:, patient_index]
-            room_index = np.argmax(assigned_patients[:, :, patient_index].sum(axis = 0) > 0)
-            required_workload_patient[shift_mask, room_index, patient_index] = patient.workload_produced
+            room_index = np.argmax(
+                assigned_patients[:, :, patient_index].sum(axis=0) > 0)
+            required_workload_patient[shift_mask, room_index,
+                                      patient_index] = patient.workload_produced
         required_workload_room = required_workload_patient.sum(axis=-1)
         # Compute provided workload for each day, room and patient
         provided_workload = np.zeros(required_workload_room.shape, dtype=int)
         shifts, rooms, nurses = np.nonzero(self.nra_matrix)
-        workload_fun = np.vectorize(lambda n, s: n.maximum_workload(s), otypes=[int])
-        provided_workload[shifts, rooms] = workload_fun(self.nurses[nurses], shifts)
+        workload_fun = np.vectorize(
+            lambda n, s: n.maximum_workload(s), otypes=[int])
+        provided_workload[shifts, rooms] = workload_fun(
+            self.nurses[nurses], shifts)
         workload_difference = required_workload_room - provided_workload
-        penalty += workload_difference[workload_difference > 0].sum() * self.weights["nurse_eccessive_workload"]
+        penalty += workload_difference[workload_difference >
+                                       0].sum() * self.weights["nurse_eccessive_workload"]
 
         # Constraint S5: Open OT
         patients_on_day = assigned_patients.sum(axis=1) > 0
@@ -527,19 +555,22 @@ class Hospital:
         admission_day = np.argmax(patients_on_day, axis=0)
         admission_day[np.all(patients_on_day == False, axis=0)] = -1
         # Get the index of the operating theater of the patients
-        patient_ot = self.pas_matrix[admission_day, :, np.arange(len(self.patients)), :].sum(axis=1).argmax(axis=1)
+        patient_ot = self.pas_matrix[admission_day, :, np.arange(
+            len(self.patients)), :].sum(axis=1).argmax(axis=1)
         patient_ot[np.all(patients_on_day == False, axis=0)] = -1
         # Compute the number of patients per operating theater per day
-        ot_patients = np.zeros((self.days, len(self.operating_theaters)), dtype=int)
+        ot_patients = np.zeros(
+            (self.days, len(self.operating_theaters)), dtype=int)
         for day, ot in zip(admission_day, patient_ot):
             if day != -1 and ot != -1:
                 ot_patients[day, ot] += 1
         ot_open = ot_patients[:, 1:]
         penalty += ot_open.sum() * self.weights["open_operating_theater"]
-        
+
         # Constraint S6: Surgeon transfer
-        surgeon_fun = np.vectorize(lambda p: self.indexer.reverse_lookup("surgeons", p.surgeon.id), otypes=[int])
-        surgeon_id = surgeon_fun(self.patients[len(self.occupants):]) 
+        surgeon_fun = np.vectorize(lambda p: self.indexer.reverse_lookup(
+            "surgeons", p.surgeon.id), otypes=[int])
+        surgeon_id = surgeon_fun(self.patients[len(self.occupants):])
         true_patient_ot = patient_ot[len(self.occupants):]
         true_admission_day = admission_day[len(self.occupants):]
         surgeon_ots_day = defaultdict(set)
@@ -548,14 +579,17 @@ class Hospital:
                 if (ot, day) not in surgeon_ots_day[surgeon]:
                     penalty += self.weights["surgeon_transfer"]
                     surgeon_ots_day[surgeon].add((ot, day))
-        
+
         # Constraint S7: Admission delay
-        release_fun = np.vectorize(lambda p: p.surgery_release_day, otypes=[int])
+        release_fun = np.vectorize(
+            lambda p: p.surgery_release_day, otypes=[int])
         release_day = release_fun(self.patients[len(self.occupants):])
-        delay = true_admission_day[true_admission_day >= 0] - release_day[true_admission_day >= 0]
+        delay = true_admission_day[true_admission_day >=
+                                   0] - release_day[true_admission_day >= 0]
         penalty += delay.sum() * self.weights["patient_delay"]
 
         # Constraint S8: Unscheduled patients
-        penalty += np.sum(~np.any(self.pas_matrix, axis=(0, 1, 3))) * self.weights["unscheduled_optional"]
+        penalty += np.sum(~np.any(self.pas_matrix, axis=(0, 1, 3))
+                          ) * self.weights["unscheduled_optional"]
 
         return penalty
