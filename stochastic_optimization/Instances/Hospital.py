@@ -367,26 +367,26 @@ class Hospital:
             raise ValueError("Patient cannot be scheduled in this room")
 
         # SCP constraints
-        patients_on_day = self.pas_matrix[day, :, :, :].any(axis=(0, 2))  # mask
+        patients_on_day = self.pas_matrix[day, :, len(self.occupants):, :].any(axis=(0, 2))  # mask
         # Constraint H3: Surgeon overtime
         scp_fun = np.vectorize(
             lambda p: p.surgeon.id == surgeon.id if type(p) == Patient else False,
             otypes=[bool],
         )  # -> bool
-        surgeon_patients = scp_fun(self.patients[patients_on_day])  # mask
+        surgeon_patients = scp_fun(self.patients[len(self.occupants):][patients_on_day])  # mask
         duration_fun = np.vectorize(
             lambda p: p.surgery_duration, otypes=[int]
         )  # -> number
         scheduled_duration = duration_fun(
-            self.patients[patients_on_day][surgeon_patients]
+            self.patients[len(self.occupants):][patients_on_day][surgeon_patients]
         ).sum()  # number
         surgeon_overtime_ok = (
             scheduled_duration + patient.surgery_duration
             <= surgeon.max_surgery_time[day]
         )
         # Constraint H4: OT overtime
-        ot_patients = self.pas_matrix[day, :, :, operating_theater_index].any(axis=0)
-        ot_duration = duration_fun(self.patients[ot_patients]).sum()
+        ot_patients = self.pas_matrix[day, :, len(self.occupants):, operating_theater_index].any(axis=0)
+        ot_duration = duration_fun(self.patients[len(self.occupants):][ot_patients]).sum()
         ot_duration_ok = (
             ot_duration + patient.surgery_duration
             <= operating_theater.availability[day]
