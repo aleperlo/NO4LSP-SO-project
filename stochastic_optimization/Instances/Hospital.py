@@ -392,7 +392,8 @@ class Hospital:
         if not admission_day_ok:
             raise ValueError("Patient cannot be scheduled on this day")
         # If patient is already scheduled, remove from PAS matrix
-        self.pas_matrix[:, :, patient_index, operating_theater_index] = False
+        old_schedule = self.pas_matrix[:, :, patient_index, :]
+        self.pas_matrix[:, :, patient_index, :] = False
 
         # PAS constraints
         # Constraint H1: No gender mix
@@ -427,7 +428,7 @@ class Hospital:
             lambda p: p.surgery_duration, otypes=[int]
         )  # -> number
         scheduled_duration = duration_fun(
-            self.patients[len(self.occupants):][patients_on_day][surgeon_patients]
+            self.patients[len(self.occupants)                          :][patients_on_day][surgeon_patients]
         ).sum()  # number
         surgeon_overtime_ok = (
             scheduled_duration + patient.surgery_duration
@@ -455,6 +456,7 @@ class Hospital:
             self.pas_matrix[
                 day:end_day, room_index, patient_index, operating_theater_index
             ] = False
+            self.pas_matrix[:, :, patient_index, :] = old_schedule
         return penalty
 
     def schedule_nurse(
