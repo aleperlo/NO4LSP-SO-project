@@ -431,6 +431,21 @@ class Hospital:
         if not assign:
             self.nra_matrix[shift, room_index, nurse_index] = True
         return penalty
+    
+    def generate_initial_solution(self):
+        mandatory_patients = []
+        for patient in self.patients[len(self.occupants):]:
+            if patient.mandatory:
+                mandatory_patients.append(patient)
+        for patient in mandatory_patients:
+            for day in range(patient.surgery_release_day, patient.surgery_due_day + 1):
+                for room_index, room in enumerate(self.rooms):
+                    for ot_index, ot in enumerate(self.operating_theaters[1:]):
+                        try:
+                            self.schedule_patient(day, room_index, self.indexer.reverse_lookup("patients", patient.id), ot_index+1, assign=True)
+                            print(f"Patient {patient.id} scheduled on day {day} in room {room.id} and OT {ot.id}")
+                        except ValueError as e:
+                            pass
 
     def compute_penalty(self):
         penalty = 0
@@ -471,9 +486,10 @@ class Hospital:
         provided_skill_level = np.zeros(skill_level_shape, dtype=int)
         shifts, rooms, nurses = np.nonzero(self.nra_matrix)
         skill_level_fun = np.vectorize(lambda n: n.skill_level, otypes=[int])
-        provided_skill_level[shifts, rooms, :] = skill_level_fun(self.nurses[nurses])
-        skill_level_difference = required_skill_level - provided_skill_level
-        penalty += skill_level_difference[skill_level_difference > 0].sum() * self.weights["room_nurse_skill"]
+        if len(nurses) > 0:
+            provided_skill_level[shifts, rooms, :] = skill_level_fun(self.nurses[nurses])
+            skill_level_difference = required_skill_level - provided_skill_level
+            penalty += skill_level_difference[skill_level_difference > 0].sum() * self.weights["room_nurse_skill"]
         
         # Constraint S3: Continuity of care
         repeated_assigned_patients = np.repeat(assigned_patients, len(self.shift_types), axis=0)
