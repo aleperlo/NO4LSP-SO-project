@@ -210,6 +210,47 @@ class Indexer:
         return self.lookup(type, self.reverse_lookup(type, id))
 
 
+class NeighboringAction:
+    def __init__(self):
+        pass
+
+
+class PASAction(NeighboringAction):
+    def __init__(self, day, room, patient, ot):
+        self.day = day
+        self.room = room
+        self.patient = patient
+        self.ot = ot
+
+    def __eq__(self, value):
+        if not isinstance(value, PASAction):
+            return False
+        return self.day == value.day and self.room == value.room and self.patient == value.patient and self.ot == value.ot
+
+
+class NRAActionSchedule(NeighboringAction):
+    def __init__(self, shift, room, nurse):
+        self.shift = shift
+        self.room = room
+        self.nurse = nurse
+
+    def __eq__(self, value):
+        if not isinstance(value, NRAActionSchedule):
+            return False
+        return self.shift == value.shift and self.room == value.room and self.nurse == value.nurse
+
+class NRAActionUnschedule(NeighboringAction):
+    def __init__(self, shift, room, nurse):
+        self.shift = shift
+        self.room = room
+        self.nurse = nurse
+
+    def __eq__(self, value):
+        if not isinstance(value, NRAActionUnschedule):
+            return False
+        return self.shift == value.shift and self.room == value.room and self.nurse == value.nurse
+
+
 class Hospital:
     def __init__(self, fp):
         self.indexer = Indexer()
@@ -592,4 +633,14 @@ class Hospital:
         penalty += np.sum(~np.any(self.pas_matrix, axis=(0, 1, 3))
                           ) * self.weights["unscheduled_optional"]
 
+        return penalty
+
+    def apply_action(self, action, assign=False):
+        if isinstance(action, PASAction):
+            penalty = self.schedule_patient(action.day, action.room, action.patient, action.ot, assign)
+        if isinstance(action, NRAActionSchedule):
+            self.unschedule_nurse(action.shift, action.room, action.nurse, assign)
+            penalty = self.schedule_nurse(action.shift, action.room, action.nurse, assign)
+        if isinstance(action, NRAActionUnschedule):
+            penalty = self.unschedule_nurse(action.shift, action.room, action.nurse, assign)
         return penalty
