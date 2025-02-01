@@ -1,4 +1,4 @@
-function [] = test(f, gradf, Hessf, initializer,...
+function [] = test(f, gradf, Hessf, initializer, codiags,...
     kmax, tolgrad, c1, rho, btmax, chol_maxit, beta, fterms, pcg_maxit)
 %
 % INPUTS
@@ -20,7 +20,7 @@ function [] = test(f, gradf, Hessf, initializer,...
 %
 % OUTPUTS
 %
-for i=3:5
+for i=[3, 4, 5]
     % Dimension of the problem
     n=10^i;
     % Initialization of the starting point
@@ -33,28 +33,26 @@ for i=3:5
         else
             x0_j = 2 * rand(n, 1) + x0 - 1;
         end
-        disp(['**** STARTING POINT: (', num2str(i), ', ', num2str(j), ') ****'])
-        disp('**** EXACT GRADIENT AND HESSIAN ****')
+        disp([9, '* STARTING POINT: (dim:1e', num2str(i), ', test point #', num2str(j), ')'])
+        disp([9, 9, '- EXACT GRADIENT AND HESSIAN ****'])
         % Exact gradient and Hessian
         run_optimization(x0_j, f, gradf, Hessf, beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit);
 
         % Finite difference gradient and Hessian for different values of h
-        % for k=2:2:12
-        %     h = 10^(-k);
+        for k=2:2:12
+            h = 10^(-k);
 
-        %     % Absolute
-        %     disp(['**** ABSOLUTE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
-        %     findiff_gradf = @(x) findiff_grad(f, x, h, 'fw', false);
-        %     run_optimization(x0_j, f, findiff_gradf, @(x) findiff_banded(findiff_gradf, x, h, 3, false), beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit);
+            % Absolute
+            disp([9, 9, '- ABSOLUTE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
+            findiff_gradf = @(x) findiff_grad(f, x, h, 'fw', false);
+            run_optimization(x0_j, f, findiff_gradf, @(x) findiff_banded(findiff_gradf, x, h, codiags, false), beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit);
 
-        %     % % Relative
-        %     % disp(['**** RELATIVE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
-        %     % run(x0_j, f, @(x) findiff_grad(f, x, h, 'fw', true ), @(x) findiff_banded(f, x, h, 3, true ), beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit);
+            % Relative
+            findiff_gradf = @(x) findiff_grad(f, x, h, 'fw', true);
+            disp([9, 9, '- RELATIVE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
+            run_optimization(x0_j, f, findiff_gradf, @(x) findiff_banded(findiff_gradf, x, h, codiags, true ), beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit);
 
-        % end
+        end
     end
 end
-
-
-
 end
