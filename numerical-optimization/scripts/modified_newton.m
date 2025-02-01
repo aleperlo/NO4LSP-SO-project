@@ -62,6 +62,7 @@ while k < kmax && gradfk_norm >= tolgrad
     B = chol_with_addition(Hessfk, beta, 5, max_chol_iter);
     % B = eigenvalue_modification(Hessfk);
     % B = modchol_ldlt(Hessfk);
+    % TODO Warning: Input tol may not be achievable by PCG - Try to use a bigger tolerance
     [pk, ~, ~, ~, ~] = pcg(Hessfk + B, -gradfk);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
