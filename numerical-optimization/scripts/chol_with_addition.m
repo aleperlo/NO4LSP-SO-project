@@ -13,7 +13,6 @@ n = sizes(1);
 for i = 1:max_iter
     try chol(A + tau*speye(n));
         if i > 1
-            disp(['Choosing tau ', num2str(tau), ' after iterations ', num2str(i), '.'])
         end
         break
     catch
