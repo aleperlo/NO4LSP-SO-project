@@ -8,13 +8,13 @@ Fx = F(x);
 for offset = 1:step
     % Allocate perturbation vector
     perturbation = zeros(n, 1);
-    for j = 1:step:n
-        if j+offset-1 <= n
-            % Add component j+i-1 to perturbation vector
+    for col = offset:step:n
+        if col <= n
+            % Add component j-1 to perturbation vector
             if relative
-                perturbation(j+offset-1) = h * abs(x(j+offset-1));
+                perturbation(col) = h * abs(x(col));
             else
-                perturbation(j+offset-1) = h;
+                perturbation(col) = h;
             end
         end
     end
