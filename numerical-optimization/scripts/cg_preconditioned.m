@@ -1,5 +1,5 @@
 function [xk, k, relres] = ...
-    cg(A, b, kmax, tol)
+    cg_preconditioned(A, b, kmax, tol, L)
 % function [xk, k, relres] = ...
 %     lab01_cg_linsys(A, b, x0, kmax, tol)
 %
@@ -13,8 +13,10 @@ function [xk, k, relres] = ...
 % tol : positive real value, tolerance for relative residual
 
 xk = zeros(size(b));
-rk = b - A * xk;
-pk = rk;
+rk = A * xk - b;
+wk = L \ rk;
+yk = L' \ wk;
+pk = -yk;
 
 k = 0;
 
@@ -30,12 +32,18 @@ while k < kmax && relres > tol
         % disp(['Stopped at iteration ', num2str(k)]);
         return
     end
-    alphak = (rk' * pk) / (pk' * zk);
+    alphak = (rk' * yk) / (pk' * zk);
     xk = xk + alphak * pk;
-    rk = rk - alphak * zk;
+    rk_new = rk + alphak * zk;
 
-    betak = -(rk' * zk) / (pk' * zk);
-    pk = rk + betak * pk;
+    wk = L \ rk_new;
+    yk_new = L' \ wk;
+
+    betak = (rk_new' * yk_new) / (rk' * yk);
+    pk = -yk_new + betak * pk;
+
+    rk = rk_new;
+    yk = yk_new;
 
     relres = norm(rk) / norm_b;
     k = k + 1;

@@ -32,7 +32,7 @@ function [xk, fk, gradfk_norm, k, xseq, btseq, pcgiterseq] = ...
 % pcgiterseq = 1-by-k vector where elements are the number of pcg
 % iterations at each optimization step.
 %
-
+n = length(x0);
 % Function handle for the armijo condition
 farmijo = @(fk, alpha, c1_gradfk_pk) ...
     fk + alpha * c1_gradfk_pk;
@@ -70,7 +70,15 @@ while k < kmax && gradfk_norm >= tolgrad
     % instead:
     % [pk, flagk, relresk, iterk, resveck] = pcg(Hessf(xk), ...
     % -gradfk, etak, pcg_maxit);
-    [pk, ~, iterk] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
+    % [pk, ~, iterk] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
+    Hk = Hessf(xk);
+    try
+        L = ichol(Hk);
+        [pk, ~, iterk] = cg_preconditioned(Hk, -gradfk, pcg_maxit, etak, L);
+    catch
+        % If the preconditioner fails, we will use the default one
+        [pk, ~, iterk] = cg(Hk, -gradfk, pcg_maxit, etak);
+    end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Reset the value of alpha
