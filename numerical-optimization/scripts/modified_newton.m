@@ -63,7 +63,10 @@ while k < kmax && gradfk_norm >= tolgrad
     % B = eigenvalue_modification(Hessfk);
     % B = modchol_ldlt(Hessfk);
     % TODO Warning: Input tol may not be achievable by PCG - Try to use a bigger tolerance
-    [pk, ~, ~, ~, ~] = pcg(Hessfk + B, -gradfk);
+    Hkm = Hessfk + B;
+    L = ichol(Hkm);
+    [pk, ~] = pcg(Hkm, -gradfk, 1e-6, 1000, L, L');
+    % [pk, ~, ~, ~, ~] = pcg(Hkm, -gradfk);
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Reset the value of alpha
