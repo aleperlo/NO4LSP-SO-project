@@ -9,9 +9,6 @@ file_path = os.path.join(data_dir, file_name)
 with open(file_path, "r") as fp:
     hospital = Hospital(fp)
 
-a1 = PASAction(2, 2, 3, 1)
-a2 = PASAction(3, 0, 2, 1)
-
 # hospital.generate_initial_solution()
 # print(hospital.compute_penalty())
 # hospital.print()
@@ -24,7 +21,8 @@ a2 = PASAction(3, 0, 2, 1)
 
 solver = Tabu(100, 1, hospital)
 hospital.print()
-solver.solve(1000)
+solver.solve(100)
 
 hospital.load_status()
 hospital.print()
+hospital.json_dump('stochastic_optimization/data/ihtc2024_test_dataset/test01_solution.json')

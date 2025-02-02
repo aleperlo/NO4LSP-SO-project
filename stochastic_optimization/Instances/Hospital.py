@@ -89,9 +89,17 @@ class Patient(Occupant):
         self.surgeon = surgeon
         self.incompatible_rooms = incompatible_rooms
         self.surgery_due_day = surgery_due_day
+        self.assignment = dict()
+        self.assignment["id"] = self.id
+        self.assignment["admission_day"] = "none"
 
     def __str__(self):
         return f"Patient {self.id}"
+
+    def set_assignment(self, admission_day, room, ot):
+        self.assignment["admission_day"] = admission_day
+        self.assignment["room"] = room
+        self.assignment["operating_theater"] = ot
 
 
 class WorkingShift:
@@ -118,11 +126,17 @@ class Nurse:
         self.skill_level = skill_level
         self.working_shifts = {}
         self.available = np.zeros(days * len(shift_types), dtype=bool)
+        self.assignment = dict()
+        self.assignment["id"] = self.id
+        self.assignment["assignments"] = []
         for w in working_shifts:
             w["shift_types"] = shift_types
             w_obj = WorkingShift(**w)
             self.working_shifts[w_obj.index] = w_obj
             self.available[w_obj.index] = True
+            self.assignment["assignments"].append(
+                {"day": w_obj.day, "shift": w_obj.shift, "rooms": []}
+            )
 
     def is_available(self, shift_index: int):
         return self.available[shift_index]
@@ -132,6 +146,18 @@ class Nurse:
 
     def __str__(self):
         return f"Nurse {self.id}"
+
+    def set_assignment(self, day, shift, room):
+        for assignment in self.assignment["assignments"]:
+            if assignment["day"] == day and assignment["shift"] == shift and room not in assignment["rooms"]:
+                assignment["rooms"].append(room)
+                break
+
+    def unset_assignment(self, day, shift, room):
+        for assignment in self.assignment["assignments"]:
+            if assignment["day"] == day and assignment["shift"] == shift and room in assignment["rooms"]:
+                assignment["rooms"].remove(room)
+                break
 
 
 class Indexer:
@@ -223,7 +249,7 @@ class PASAction(NeighboringAction):
         self.room = room
         self.patient = patient
         self.ot = ot
-    
+
     def __str__(self):
         return f"Admitted patient {self.patient}, day {self.day}, room {self.room}, OT {self.ot}"
 
@@ -238,7 +264,7 @@ class NRAActionSchedule(NeighboringAction):
         self.shift = shift
         self.room = room
         self.nurse = nurse
-    
+
     def __str__(self):
         return f"Scheduled nurse {self.nurse}, shift {self.shift}, room {self.room}"
 
@@ -247,12 +273,13 @@ class NRAActionSchedule(NeighboringAction):
             return False
         return self.shift == value.shift and self.room == value.room and self.nurse == value.nurse
 
+
 class NRAActionUnschedule(NeighboringAction):
     def __init__(self, shift, room, nurse):
         self.shift = shift
         self.room = room
         self.nurse = nurse
-    
+
     def __str__(self):
         return f"Unscheduled nurse {self.nurse}, shift {self.shift}, room {self.room}"
 
@@ -299,7 +326,8 @@ class Hospital:
         for occupant_dict in json_data["occupants"]:
             room_id: str = occupant_dict.pop("room_id")
             room = self.indexer.id_lookup("rooms", room_id)
-            occupant = Occupant(room=room, age_groups=self.age_groups, **occupant_dict)
+            occupant = Occupant(
+                room=room, age_groups=self.age_groups, **occupant_dict)
             self.occupants = np.append(self.occupants, occupant)
             self.indexer.get_index("occupants", occupant)
         for surgeon_dict in json_data["surgeons"]:
@@ -552,7 +580,8 @@ class Hospital:
             shift_mask = patient_day_repeated[:, patient_index]
             room_index = np.argmax(
                 assigned_patients[:, :, patient_index].sum(axis=0) > 0)
-            l = len(required_skill_level[shift_mask, room_index, patient_index])
+            l = len(required_skill_level[shift_mask,
+                    room_index, patient_index])
             required_skill_level[shift_mask, room_index,
                                  patient_index] = patient.skill_level_required[:l]
         # Compute provided skill level for each day, room and patient
@@ -561,7 +590,8 @@ class Hospital:
         skill_level_fun = np.vectorize(lambda n: n.skill_level, otypes=[int])
         if len(nurses) > 0:
             nurses_skill_levels = skill_level_fun(self.nurses[nurses])
-            nurses_skill_levels = nurses_skill_levels[:, np.newaxis].repeat(len(self.patients), axis=1)
+            nurses_skill_levels = nurses_skill_levels[:, np.newaxis].repeat(
+                len(self.patients), axis=1)
             provided_skill_level[shifts, rooms,
                                  :] = nurses_skill_levels
             skill_level_difference = required_skill_level - provided_skill_level
@@ -570,8 +600,10 @@ class Hospital:
             penalty += skill_level_difference[skill_level_difference >
                                               0].sum() * self.weights["room_nurse_skill"]
         else:
-            penalty += required_skill_level.sum() * self.weights["room_nurse_skill"]
-            penalty_dict["S2"] = required_skill_level.sum() * self.weights["room_nurse_skill"]
+            penalty += required_skill_level.sum() * \
+                self.weights["room_nurse_skill"]
+            penalty_dict["S2"] = required_skill_level.sum() * \
+                self.weights["room_nurse_skill"]
 
         # Constraint S3: Continuity of care
         repeated_assigned_patients = np.repeat(
@@ -586,7 +618,8 @@ class Hospital:
         distinct_nurses = np.apply_along_axis(
             lambda x: len(np.unique(x)), 1, nurse_assignments) - 1
         penalty += distinct_nurses.sum() * self.weights["continuity_of_care"]
-        penalty_dict["S3"] = distinct_nurses.sum() * self.weights["continuity_of_care"]
+        penalty_dict["S3"] = distinct_nurses.sum(
+        ) * self.weights["continuity_of_care"]
 
         # Constraint S4: Maximum workload
         workload_shape = (self.days * len(self.shift_types),
@@ -598,7 +631,8 @@ class Hospital:
             shift_mask = patient_day_repeated[:, patient_index]
             room_index = np.argmax(
                 assigned_patients[:, :, patient_index].sum(axis=0) > 0)
-            l = len(required_workload_patient[shift_mask, room_index, patient_index])
+            l = len(
+                required_workload_patient[shift_mask, room_index, patient_index])
             required_workload_patient[shift_mask, room_index,
                                       patient_index] = patient.workload_produced[:l]
         required_workload_room = required_workload_patient.sum(axis=-1)
@@ -632,7 +666,8 @@ class Hospital:
                 ot_patients[day, ot] += 1
         ot_open = ot_patients[:, 1:]
         penalty += ot_open.sum() * self.weights["open_operating_theater"]
-        penalty_dict["S5"] = ot_open.sum() * self.weights["open_operating_theater"]
+        penalty_dict["S5"] = ot_open.sum(
+        ) * self.weights["open_operating_theater"]
 
         # Constraint S6: Surgeon transfer
         surgeon_fun = np.vectorize(lambda p: self.indexer.reverse_lookup(
@@ -664,25 +699,42 @@ class Hospital:
         penalty += np.sum(~np.any(self.pas_matrix, axis=(0, 1, 3))
                           ) * self.weights["unscheduled_optional"]
         penalty_dict["S8"] = np.sum(~np.any(self.pas_matrix, axis=(0, 1, 3)
-                                         )) * self.weights["unscheduled_optional"]
+                                            )) * self.weights["unscheduled_optional"]
 
         return penalty, penalty_dict
 
     def save_status(self):
         self.best_nra_matrix = np.copy(self.nra_matrix)
         self.best_pas_matrix = np.copy(self.pas_matrix)
-    
+
     def load_status(self):
         self.nra_matrix = np.copy(self.best_nra_matrix)
         self.pas_matrix = np.copy(self.best_pas_matrix)
 
     def apply_action(self, action, assign=False):
         if isinstance(action, PASAction):
-            penalty, penalty_dict = self.schedule_patient(action.day, action.room, action.patient, action.ot, assign)
+            penalty, penalty_dict = self.schedule_patient(
+                action.day, action.room, action.patient, action.ot, assign)
+            room_id = self.indexer.lookup("rooms", action.room).id
+            ot_id = self.indexer.lookup("operating_theaters", action.ot).id
+            self.patients[action.patient].set_assignment(
+                action.day, room_id, ot_id)
         if isinstance(action, NRAActionSchedule):
-            penalty, penalty_dict = self.schedule_nurse(action.shift, action.room, action.nurse, assign)
+            penalty, penalty_dict = self.schedule_nurse(
+                action.shift, action.room, action.nurse, assign)
+            room_id = self.indexer.lookup("rooms", action.room).id
+            self.nurses[action.nurse].set_assignment(
+                action.shift // len(self.shift_types),
+                self.shift_types[action.shift % len(self.shift_types)],
+                room_id)
         if isinstance(action, NRAActionUnschedule):
-            penalty, penalty_dict = self.unschedule_nurse(action.shift, action.room, action.nurse, assign)
+            penalty, penalty_dict = self.unschedule_nurse(
+                action.shift, action.room, action.nurse, assign)
+            room_id = self.indexer.lookup("rooms", action.room).id
+            self.nurses[action.nurse].unset_assignment(
+                action.shift // len(self.shift_types),
+                self.shift_types[action.shift % len(self.shift_types)],
+                room_id)
         return penalty, penalty_dict
 
     def generate_patients_moves(self):
@@ -690,7 +742,8 @@ class Hospital:
         for patient in self.patients[len(self.occupants):]:
             # Declare as forbidden the action that leads to the current state
             patient_index = self.indexer.reverse_lookup("patients", patient.id)
-            days, rooms, ots = np.nonzero(self.pas_matrix[:, :, patient_index, :])
+            days, rooms, ots = np.nonzero(
+                self.pas_matrix[:, :, patient_index, :])
             forbidden_action = PASAction(-1, -1, -1, -1)
             if len(days) > 0:
                 fd, fr, ft = np.min(days), rooms[0], ots[0]
@@ -708,11 +761,12 @@ class Hospital:
                     if room_index in incompatible_rooms:
                         continue
                     for ot_index, ot in enumerate(self.operating_theaters[1:]):
-                        new_move = PASAction(day, room_index, patient_index, ot_index+1)
+                        new_move = PASAction(
+                            day, room_index, patient_index, ot_index+1)
                         if new_move != forbidden_action:
                             patient_moves.append(new_move)
         return patient_moves
-    
+
     def generate_nurses_moves(self):
         nurses_moves = []
         for nurse in self.nurses:
@@ -720,18 +774,33 @@ class Hospital:
             shifts, rooms = np.nonzero(self.nra_matrix[:, :, nurse_index])
             forbidden_actions = {(s, r) for s, r in zip(shifts, rooms)}
             for shift, room in zip(shifts, rooms):
-                new_unschedule_move = NRAActionUnschedule(shift, room, nurse_index)
+                new_unschedule_move = NRAActionUnschedule(
+                    shift, room, nurse_index)
                 nurses_moves.append(new_unschedule_move)
             for shift in nurse.working_shifts.values():
                 for room_id, room in enumerate(self.rooms):
                     if (shift.index, room_id) in forbidden_actions:
                         continue
-                    new_schedule_move = NRAActionSchedule(shift.index, room_id, nurse_index)
+                    new_schedule_move = NRAActionSchedule(
+                        shift.index, room_id, nurse_index)
                     nurses_moves.append(new_schedule_move)
         return nurses_moves
-    
+
     def get_neighboring_moves(self):
         moves = self.generate_patients_moves()
         nurses_moves = self.generate_nurses_moves()
         moves.extend(nurses_moves)
         return moves
+
+    def json_dump(self, filename):
+        data = {
+            "patients": [],
+            "nurses": []
+        }
+        for patient in self.patients:
+            if isinstance(patient, Patient):
+                data["patients"].append(patient.assignment)
+        for nurse in self.nurses:
+            data["nurses"].append(nurse.assignment)
+        with open(filename, "w") as outfile:
+            json.dump(data, outfile, indent=4)
