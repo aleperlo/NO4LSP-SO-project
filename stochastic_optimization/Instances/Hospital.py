@@ -161,6 +161,7 @@ class Nurse:
 
 
 class Indexer:
+    # TODO: check if indexing is consistent with operating theaters 
     def __init__(self):
         self.types: defaultdict[str, int] = defaultdict(lambda: 0)
         self.indexer: defaultdict[
@@ -439,6 +440,9 @@ class Hospital:
             axis=1
         )
         capacity_ok = np.all(n_patients_in_room <= room.capacity)
+        # Constraint H?: Nurse presence
+        # TODO: Implement nurse presence constraint
+        # TODO: - check if a nurse is scheduled in the room at that shift
         if not gender_ok or not compatible_ok or not capacity_ok:
             self.pas_matrix[:, :, patient_index, :] = old_schedule
             raise ValueError("Patient cannot be scheduled in this room")
@@ -491,7 +495,9 @@ class Hospital:
         self, shift: int, room_index: int, nurse_index: int, assign: bool = False
     ):
         nurse = self.indexer.lookup("nurses", nurse_index)
-
+        # TODO: It's ok if a nurse is already assigned to the room in that shift
+        # TODO: - change assignment of old nurse (both in matrix and in nurse object)
+        # TODO: - remove error if nurse is already assigned to the room
         # Check if no nurse is assigned to the room
         room_ok = not self.nra_matrix[shift, room_index, :].any()
         if not room_ok:
@@ -508,6 +514,7 @@ class Hospital:
 
     def unschedule_nurse(self, shift: int, room_index: int, nurse_index: int, assign: bool = False):
         # TODO: Consider adding checks on the fact that nurse is assigned to the room in that shift
+        # TODO: Allow unscheduling only if no patient is assigned to the room in that shift
         self.nra_matrix[shift, room_index, nurse_index] = False
         penalty, penalty_dict = self.compute_penalty()
         if not assign:
@@ -538,8 +545,10 @@ class Hospital:
                             scheduled = True
                         except ValueError as e:
                             pass
+        # TODO: Schedule nurses in rooms occupied by mandatory patients or occupants
 
     def compute_penalty(self):
+        # TODO: Check everything, compare to validation results
         penalty = 0
         penalty_dict = {}
 
