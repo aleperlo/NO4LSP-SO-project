@@ -55,7 +55,7 @@ for i=[3, 4, 5]
 
             % Absolute
             disp([9, 9, '- ABSOLUTE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
-            findiff_gradf = @(x) findiff_grad(f, x, h, 'fw', false);
+            findiff_gradf = @(x) findiff_grad(f, x, h, 'c', false);
             for pre = [0, 1]
                 [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
                     fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) findiff_banded(findiff_gradf, x, h, codiags, false), beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre);
@@ -65,7 +65,7 @@ for i=[3, 4, 5]
                 experiment = experiment+1;
             end
             % Relative
-            findiff_gradf = @(x) findiff_grad(f, x, h, 'fw', true);
+            findiff_gradf = @(x) findiff_grad(f, x, h, 'c', true);
             disp([9, 9, '- RELATIVE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
             for pre = [0, 1]
                 [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
