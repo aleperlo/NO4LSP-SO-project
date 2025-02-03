@@ -1,4 +1,4 @@
-function [xk, k, relres] = ...
+function [xk, k, relres, truncated] = ...
     cg(A, b, kmax, tol)
 % function [xk, k, relres] = ...
 %     lab01_cg_linsys(A, b, x0, kmax, tol)
@@ -16,6 +16,7 @@ xk = zeros(size(b));
 rk = b - A * xk;
 pk = rk;
 
+truncated = 0;
 k = 0;
 
 norm_b = norm(b);
@@ -27,6 +28,7 @@ while k < kmax && relres > tol
         if k == 0
             xk = xk + pk;
         end
+        truncated = 1;
         % disp(['Stopped at iteration ', num2str(k)]);
         return
     end
