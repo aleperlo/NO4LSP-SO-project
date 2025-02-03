@@ -1,6 +1,6 @@
-function [xk, fk, gradfk_norm, k, xseq, btseq] = ...
+function [xk, fk, gradfk_norm, k, T, xseq] = ...
     modified_newton(x0, f, gradf, Hessf, beta,...
-    kmax, tolgrad, c1, rho, btmax, max_chol_iter, logging)
+    kmax, tolgrad, c1, rho, btmax, max_chol_iter, preconditioning, logging)
 %
 %
 % INPUTS:
@@ -32,11 +32,15 @@ farmijo = @(fk, alpha, c1_gradfk_pk) ...
 % Initializations
 if logging
     xseq = zeros(length(x0), kmax);
-    btseq = zeros(1, kmax);
 else
     xseq = [];
-    btseq = [];
 end
+
+gradfkseq = zeros(1, kmax);
+fkseq = zeros(1, kmax);
+btseq = zeros(1, kmax);
+pcgiterseq = zeros(1, kmax);
+correctionseq = zeros(1, kmax);
 
 xk = x0;
 fk = f(xk);
@@ -59,14 +63,17 @@ while k < kmax && gradfk_norm >= tolgrad
     % pk = pcg(Hessf(xk), -gradfk);
     % If you want to silence the messages about "solution quality", use
     % instead:
-    B = chol_with_addition(Hessfk, beta, 5, max_chol_iter);
+    [B, tau] = chol_with_addition(Hessfk, beta, 5, max_chol_iter);
     % B = eigenvalue_modification(Hessfk);
     % B = modchol_ldlt(Hessfk);
     % TODO Warning: Input tol may not be achievable by PCG - Try to use a bigger tolerance
     Hkm = Hessfk + B;
-    L = ichol(Hkm);
-    [pk, ~] = pcg(Hkm, -gradfk, 1e-6, 1000, L, L');
-    % [pk, ~, ~, ~, ~] = pcg(Hkm, -gradfk);
+    if preconditioning
+        L = ichol(Hkm);
+        [pk, ~, ~, iterk, ~] = pcg(Hkm, -gradfk, 1e-6, 1000, L, L');
+    else
+        [pk, ~, ~, iterk, ~] = pcg(Hkm, -gradfk);
+    end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Reset the value of alpha
@@ -76,8 +83,6 @@ while k < kmax && gradfk_norm >= tolgrad
     xnew = xk + alpha * pk;
     % Compute the value of f in the candidate new xk
     fnew = f(xnew);
-    fnew_min = fnew;
-    alpha_min = alpha;
 
     c1_gradfk_pk = c1 * gradfk' * pk;
     bt = 0;
@@ -89,20 +94,13 @@ while k < kmax && gradfk_norm >= tolgrad
         % Update xnew and fnew w.r.t. the reduced alpha
         xnew = xk + alpha * pk;
         fnew = f(xnew);
-        % If fnew is the smallest value found so far, store it along with alpha
-        if fnew < fnew_min
-            fnew_min = fnew;
-            alpha_min = alpha;
-        end
 
         % Increase the counter by one
         bt = bt + 1;
     end
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
-        %disp("Armijo condition could not be satisfied!")
-        alpha = alpha_min;
-        fnew = fnew_min;
-        xnew = xk + alpha * pk;
+        disp("Armijo condition could not be satisfied!")
+        return
     end
 
     % Update xk, fk, gradfk_norm
@@ -116,19 +114,24 @@ while k < kmax && gradfk_norm >= tolgrad
     k = k + 1;
 
     if logging
-        % Store current xk in xseq
         xseq(:, k) = xk;
-        % Store bt iterations in btseq
-        btseq(k) = bt;
     end
+    gradfkseq(k) = gradfk_norm;
+    fkseq(k) = fk;
+    btseq(k) = bt;
+    pcgiterseq(k) = iterk;
+    correctionseq(k) = tau;
 end
 
+gradfkseq = gradfkseq(1:k);
+fkseq = fkseq(1:k);
+btseq = btseq(1:k);
+pcgiterseq = pcgiterseq(1:k);
+correctionseq = correctionseq(1:k);
+T = table(gradfkseq', fkseq', btseq', pcgiterseq', correctionseq', ...
+    'VariableNames', {'gradient_norm', 'function_value', 'backtrack', 'inner_iterations', 'correction'});
 if logging
-    % "Cut" xseq and btseq to the correct size
     xseq = xseq(:, 1:k);
-    btseq = btseq(1:k);
-    % "Add" x0 at the beginning of xseq (otherwise the first el. is x1)
-    xseq = [x0, xseq];
 end
 
 end
