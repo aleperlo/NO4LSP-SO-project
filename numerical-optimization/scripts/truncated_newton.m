@@ -1,6 +1,6 @@
-function [xk, fk, gradfk_norm, k, xseq, btseq, pcgiterseq] = ...
+function [xk, fk, gradfk_norm, k, T, xseq] = ...
     truncated_newton(x0, f, gradf, Hessf, ...
-    kmax, tolgrad, c1, rho, btmax, fterms, pcg_maxit, logging)
+    kmax, tolgrad, c1, rho, btmax, fterms, pcg_maxit, preconditioning, logging)
 %
 % Function that performs the Inexact Newton optimization method, using
 % backtracking strategy for the step-length selection.
@@ -39,14 +39,16 @@ farmijo = @(fk, alpha, c1_gradfk_pk) ...
 
 % Initializations
 if logging
-    xseq = zeros(length(x0), kmax);
-    btseq = zeros(1, kmax);
-    pcgiterseq = zeros(1, kmax);
+    xseq = zeros(n, kmax);
 else
     xseq = [];
-    btseq = [];
-    pcgiterseq = [];
 end
+
+gradfkseq = zeros(1, kmax);
+fkseq = zeros(1, kmax);
+btseq = zeros(1, kmax);
+pcgiterseq = zeros(1, kmax);
+truncatedseq = zeros(1, kmax);
 
 xk = x0;
 fk = f(xk);
@@ -72,12 +74,16 @@ while k < kmax && gradfk_norm >= tolgrad
     % -gradfk, etak, pcg_maxit);
     % [pk, ~, iterk] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
     Hk = Hessf(xk);
-    try
-        L = ichol(Hk);
-        [pk, ~, iterk] = cg_preconditioned(Hk, -gradfk, pcg_maxit, etak, L);
-    catch
-        % If the preconditioner fails, we will use the default one
-        [pk, ~, iterk] = cg(Hk, -gradfk, pcg_maxit, etak);
+    if preconditioning
+        try
+            L = ichol(Hk);
+            [pk, ~, iterk, truncated] = cg_preconditioned(Hk, -gradfk, pcg_maxit, etak, L);
+        catch
+            % If the preconditioner fails, we will use the default one
+            [pk, ~, iterk, truncated] = cg(Hk, -gradfk, pcg_maxit, etak);
+        end
+    else
+        [pk, ~, iterk] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -88,8 +94,6 @@ while k < kmax && gradfk_norm >= tolgrad
     xnew = xk + alpha * pk;
     % Compute the value of f in the candidate new xk
     fnew = f(xnew);
-    fnew_min = fnew;
-    alpha_min = alpha;
 
     c1_gradfk_pk = c1 * gradfk' * pk;
     bt = 0;
@@ -101,20 +105,13 @@ while k < kmax && gradfk_norm >= tolgrad
         % Update xnew and fnew w.r.t. the reduced alpha
         xnew = xk + alpha * pk;
         fnew = f(xnew);
-        % If fnew is the smallest value found so far, store it along with alpha
-        if fnew < fnew_min
-            fnew_min = fnew;
-            alpha_min = alpha;
-        end
 
         % Increase the counter by one
         bt = bt + 1;
     end
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
-        %disp('Armijo condition could not be satisfied!')
-        alpha = alpha_min;
-        fnew = fnew_min;
-        xnew = xk + alpha * pk;
+        disp('Armijo condition could not be satisfied!')
+        return
     end
 
     % Update xk, fk, gradfk_norm
@@ -127,21 +124,25 @@ while k < kmax && gradfk_norm >= tolgrad
     k = k + 1;
 
     if logging
-        % Store current xk in xseq
         xseq(:, k) = xk;
-        % Store bt iterations in btseq
-        btseq(k) = bt;
-        pcgiterseq(k) = iterk;
     end
+    gradfkseq(k) = gradfk_norm;
+    fkseq(k) = fk;
+    btseq(k) = bt;
+    pcgiterseq(k) = iterk;
+    truncatedseq(k) = truncated;
 end
 
+gradfkseq = gradfkseq(1:k);
+fkseq = fkseq(1:k);
+btseq = btseq(1:k);
+pcgiterseq = pcgiterseq(1:k);
+truncatedseq = truncatedseq(1:k);
+T = table(gradfkseq', fkseq', btseq', pcgiterseq', truncatedseq', ...
+    'VariableNames', {'gradient_norm', 'function_value', 'backtrack', 'inner_iterations', 'truncated'});
+
 if logging
-    % "Cut" xseq and btseq to the correct size
     xseq = xseq(:, 1:k);
-    btseq = btseq(1:k);
-    pcgiterseq = pcgiterseq(1:k);
-    % "Add" x0 at the beginning of xseq (otherwise the first el. is x1)
-    xseq = [x0, xseq];
 end
 
 end
