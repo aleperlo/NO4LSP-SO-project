@@ -19,7 +19,7 @@ for i = 1:length(fterms)
     codiags = 1;
     test(@(x) chained_rosenbrock(x), @(x) chained_rosenbrock_gradf(x),...
         @(x)chained_rosenbrock_Hessf(x), @(n) chained_rosenbrock_initializer(n), codiags,...
-        5000, 1e-6, 1e-4, 0.8, 100, 1000, 1e-3, fterm, 100);
+        5e4, 1e-6, 1e-4, 0.8, 100, 1000, 1e-3, fterm, 100, '../results/chained_rosenbrock/');
 
     % rng(seed);
     % disp('**** GENERALIZED BROYDEN *****')
