@@ -1,4 +1,4 @@
-function [xk, fk, gradfk_norm, k, T, xseq] = ...
+function [xk, fk, gradfk_norm, k, T, success, xseq] = ...
     truncated_newton(x0, f, gradf, Hessf, ...
     kmax, tolgrad, c1, rho, btmax, fterms, pcg_maxit, preconditioning, logging)
 %
@@ -43,6 +43,7 @@ if logging
 else
     xseq = [];
 end
+success = 1;
 
 gradfkseq = zeros(1, kmax);
 fkseq = zeros(1, kmax);
@@ -83,7 +84,7 @@ while k < kmax && gradfk_norm >= tolgrad
             [pk, ~, iterk, truncated] = cg(Hk, -gradfk, pcg_maxit, etak);
         end
     else
-        [pk, ~, iterk] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
+        [pk, ~, iterk, truncated] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
     end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -111,7 +112,8 @@ while k < kmax && gradfk_norm >= tolgrad
     end
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
         disp('Armijo condition could not be satisfied!')
-        return
+        success = 0;
+        break
     end
 
     % Update xk, fk, gradfk_norm
@@ -143,6 +145,10 @@ T = table(gradfkseq', fkseq', btseq', pcgiterseq', truncatedseq', ...
 
 if logging
     xseq = xseq(:, 1:k);
+end
+
+if k >= kmax && gradfk_norm >= tolgrad
+    success = 0;
 end
 
 end
