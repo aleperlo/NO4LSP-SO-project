@@ -42,6 +42,7 @@ fkseq = zeros(1, kmax);
 btseq = zeros(1, kmax);
 pcgiterseq = zeros(1, kmax);
 correctionseq = zeros(1, kmax);
+errornormseq = zeros(1, kmax);
 
 xk = x0;
 fk = f(xk);
@@ -104,7 +105,7 @@ while k < kmax && gradfk_norm >= tolgrad
         success = 0;
         break
     end
-
+    errornormseq(k+1) = norm(xnew - xk);
     % Update xk, fk, gradfk_norm
     xk = xnew;
     fk = fnew;
@@ -130,8 +131,9 @@ fkseq = fkseq(1:k);
 btseq = btseq(1:k);
 pcgiterseq = pcgiterseq(1:k);
 correctionseq = correctionseq(1:k);
-T = table(gradfkseq', fkseq', btseq', pcgiterseq', correctionseq', ...
-    'VariableNames', {'gradient_norm', 'function_value', 'backtrack', 'inner_iterations', 'correction'});
+errornormseq = errornormseq(1:k);
+T = table(gradfkseq', fkseq', btseq', pcgiterseq', correctionseq', errornormseq', ...
+    'VariableNames', {'gradient_norm', 'function_value', 'backtrack', 'inner_iterations', 'correction', 'error_norm'});
 if logging
     xseq = xseq(:, 1:k);
 end
