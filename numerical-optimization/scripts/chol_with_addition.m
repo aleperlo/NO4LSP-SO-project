@@ -1,4 +1,4 @@
-function [B] = chol_with_addition(A, beta, coeffient, max_iter)
+function [B, tau] = chol_with_addition(A, beta, coeffient, max_iter)
 
 mindiag = min(diag(A));
 if mindiag > 0
