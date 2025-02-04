@@ -3,7 +3,6 @@ function [JF] = findiff_banded(F, x, h, codiags, relative)
 n = length(x);
 step = 2*codiags + 1;
 Bin = zeros(n, step);
-Fx = F(x);
 
 for offset = 1:step
     % Allocate perturbation vector
@@ -19,11 +18,12 @@ for offset = 1:step
         end
     end
     Fx_p = F(x + perturbation);
-    temp = (Fx_p - Fx) ;
+    Fx_m = F(x - perturbation);
+    temp = Fx_p - Fx_m;
     for col = offset:step:n
         for row = col-codiags:col+codiags
             if row <= n && row > 0
-                Bin(row, row-col+codiags+1) = temp(row) ./ perturbation(col);
+                Bin(row, row-col+codiags+1) = temp(row) ./ (2*perturbation(col));
             end
         end
     end
