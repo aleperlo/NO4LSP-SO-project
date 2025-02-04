@@ -17,12 +17,13 @@ function [gradfx] = findiff_grad(f, x, h, type, relative)
 % of the gradient of f in x.
 
 gradfx = zeros(size(x));
+h0 = h;
 
 switch type
     case 'fw'
         for i=1:length(x)
             if relative
-                h = h * abs(x(i));
+                h = h0 * abs(x(i));
             end
             xh = x;
             xh(i) = xh(i) + h;
@@ -35,7 +36,7 @@ switch type
             xh_plus = x;
             xh_minus = x;
             if relative
-                h = h * abs(x(i));
+                h = h0 * abs(x(i));
             end
             xh_plus(i) = xh_plus(i) + h;
             xh_minus(i) = xh_minus(i) - h;
@@ -47,7 +48,7 @@ switch type
     otherwise % repeat the 'fw' case
         for i=1:length(x)
             if relative
-                h = h * abs(x(i));
+                h = h0 * abs(x(i));
             end
             xh = x;
             xh(i) = xh(i) + h;
