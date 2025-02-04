@@ -24,14 +24,14 @@ function [xk, fk, gradfk_norm, k, T, success, xseq] = ...
 % btseq = 1-by-k vector where elements are the number of backtracking
 % iterations at each optimization step.
 %
-
+n = length(x0);
 % Function handle for the armijo condition
 farmijo = @(fk, alpha, c1_gradfk_pk) ...
     fk + alpha * c1_gradfk_pk;
 
 % Initializations
 if logging
-    xseq = zeros(length(x0), kmax);
+    xseq = zeros(n, kmax);
 else
     xseq = [];
 end
@@ -51,8 +51,6 @@ k = 0;
 gradfk_norm = norm(gradfk);
 
 Hessfk = Hessf(xk);
-sizes = size(Hessfk);
-n = sizes(1);
 
 while k < kmax && gradfk_norm >= tolgrad
     % Compute the descent direction as solution of
@@ -65,7 +63,7 @@ while k < kmax && gradfk_norm >= tolgrad
     % pk = pcg(Hessf(xk), -gradfk);
     % If you want to silence the messages about "solution quality", use
     % instead:
-    [B, tau] = chol_with_addition(Hessfk, beta, 5, max_chol_iter);
+    [B, tau] = chol_with_addition(Hessfk, beta, 2, max_chol_iter);
     % B = eigenvalue_modification(Hessfk);
     % B = modchol_ldlt(Hessfk);
     % TODO Warning: Input tol may not be achievable by PCG - Try to use a bigger tolerance
