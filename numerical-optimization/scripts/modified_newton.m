@@ -1,6 +1,6 @@
 function [xk, fk, gradfk_norm, k, T, success, xseq] = ...
     modified_newton(x0, f, gradf, Hessf, beta,...
-    kmax, tolgrad, c1, rho, btmax, max_chol_iter, preconditioning, logging)
+    kmax, tolgrad, c1, rho, btmax, max_chol_iter, preconditioning, logging, modification_coeff)
 %
 %
 % INPUTS:
@@ -24,6 +24,10 @@ function [xk, fk, gradfk_norm, k, T, success, xseq] = ...
 % btseq = 1-by-k vector where elements are the number of backtracking
 % iterations at each optimization step.
 %
+if nargin < 14
+    modification_coeff = 2;
+end
+
 n = length(x0);
 % Function handle for the armijo condition
 farmijo = @(fk, alpha, c1_gradfk_pk) ...
@@ -63,14 +67,18 @@ while k < kmax && gradfk_norm >= tolgrad
     % pk = pcg(Hessf(xk), -gradfk);
     % If you want to silence the messages about "solution quality", use
     % instead:
-    [B, tau] = chol_with_addition(Hessfk, beta, 2, max_chol_iter);
+    [B, tau] = chol_with_addition(Hessfk, beta, modification_coeff, max_chol_iter);
     % B = eigenvalue_modification(Hessfk);
     % B = modchol_ldlt(Hessfk);
     % TODO Warning: Input tol may not be achievable by PCG - Try to use a bigger tolerance
     Hkm = Hessfk + B;
     if preconditioning
-        L = ichol(Hkm);
-        [pk, ~, ~, iterk, ~] = pcg(Hkm, -gradfk, 1e-6, 1000, L, L');
+        try
+            L = ichol(Hkm);
+            [pk, ~, ~, iterk, ~] = pcg(Hkm, -gradfk, 1e-6, 1000, L, L');
+        catch
+            [pk, ~, ~, iterk, ~] = pcg(Hkm, -gradfk);
+        end
     else
         [pk, ~, ~, iterk, ~] = pcg(Hkm, -gradfk);
     end

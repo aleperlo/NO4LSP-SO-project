@@ -1,13 +1,13 @@
 function [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
         fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0, f, gradf, Hessf, beta,...
-    kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre)
+    kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff)
 
 disp([9, 9, 9, 'MODIFIED NEWTON *****'])
 disp([9, 9, 9, 'PRECONDITIONING: ', num2str(pre)])
 tic;
 [~, fk_m, gradfk_norm_m, k_m, T_m, success_m, ~] = ...
     modified_newton(x0, f, gradf, Hessf, beta,...
-    kmax, tolgrad, c1, rho, btmax, chol_maxit, pre, false);
+    kmax, tolgrad, c1, rho, btmax, chol_maxit, pre, false, tau_coeff);
 time_m = toc;
 disp([9, 9, 9, 'f(xk): ', num2str(fk_m)])
 disp([9, 9, 9, 'gradfk_norm: ', num2str(gradfk_norm_m)])

@@ -19,7 +19,7 @@ for i = 1:max_iter
         tau = max(coeffient*tau, beta);
     end
 end
-if i == max_iter
+if i >= max_iter
     tau = 0;
     disp('Tau could not be found!')
 end
