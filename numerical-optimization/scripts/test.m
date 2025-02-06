@@ -1,4 +1,4 @@
-function [] = test(f, gradf, Hessf, initializer, codiags,...
+function [] = test(f, gradf, Hessf, initializer, gradf_fd, Hessf_fd, codiags,...
     kmax, tolgrad, c1, rho, btmax, chol_maxit, beta, fterms, pcg_maxit, root_dir, findiff, tau_coeff)
 %
 % INPUTS
@@ -60,21 +60,23 @@ for i=[3, 4, 5]
 
                 % Absolute
                 disp([9, 9, '- ABSOLUTE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
-                findiff_gradf = @(x) findiff_grad(f, x, h, 'c', false);
+                % findiff_gradf = @(x) findiff_grad(f, x, h, 'c', false);
+                findiff_gradf = @(x) gradf_fd(x, h, false);
                 for pre = [0, 1]
                     [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
-                        fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) banded_Hessf_approx(f, x, h, codiags, false), beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
+                        fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) Hessf_fd(x, h, false), beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
                     logger(root_dir, experiment, success_m, 0, pre, i, j, 0, h, 1, fk_m, gradfk_norm_m, k_m, T_m, time_m);
                     experiment = experiment+1;
                     logger(root_dir, experiment, success_t, 1, pre, i, j, 0, h, 1, fk_t, gradfk_norm_t, k_t, T_t, time_t);
                     experiment = experiment+1;
                 end
                 % Relative
-                findiff_gradf = @(x) findiff_grad(f, x, h, 'c', true);
+                % findiff_gradf = @(x) findiff_grad(f, x, h, 'c', true);
+                findiff_gradf = @(x) gradf_fd(x, h, true);
                 disp([9, 9, '- RELATIVE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
                 for pre = [0, 1]
                     [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
-                        fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) banded_Hessf_approx(f, x, h, codiags, true ), beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
+                        fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) Hessf_fd(x, h, true), beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
                     logger(root_dir, experiment, success_m, 0, pre, i, j, 0, h, 0, fk_m, gradfk_norm_m, k_m, T_m, time_m);
                     experiment = experiment+1;
                     logger(root_dir, experiment, success_t, 0, pre, i, j, 0, h, 0, fk_t, gradfk_norm_t, k_t, T_t, time_t);
