@@ -1,5 +1,5 @@
 function [] = test(f, gradf, Hessf, initializer, codiags,...
-    kmax, tolgrad, c1, rho, btmax, chol_maxit, beta, fterms, pcg_maxit, root_dir)
+    kmax, tolgrad, c1, rho, btmax, chol_maxit, beta, fterms, pcg_maxit, root_dir, findiff, tau_coeff)
 %
 % INPUTS
 % n = dimension of the problem;
@@ -25,6 +25,10 @@ if ~exist(root_dir, 'dir')
 end
 experiment = 1;
 
+if nargin < 16
+    findiff = false;
+end
+
 for i=[3, 4, 5]
     % Dimension of the problem
     n=10^i;
@@ -43,37 +47,39 @@ for i=[3, 4, 5]
         % Exact gradient and Hessian
         for pre = [0, 1]
             [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
-                fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, gradf, Hessf, beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre);
-            logger(root_dir, experiment, success_m, 0, i, j, 1, 0, 0, fk_m, gradfk_norm_m, k_m, T_m, time_m);
+                fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, gradf, Hessf, beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
+            logger(root_dir, experiment, success_m, 0, pre, i, j, 1, 0, 0, fk_m, gradfk_norm_m, k_m, T_m, time_m);
             experiment = experiment+1;
-            logger(root_dir, experiment, success_t, 1, i, j, 1, 0, 0, fk_t, gradfk_norm_t, k_t, T_t, time_t);
+            logger(root_dir, experiment, success_t, 1, pre, i, j, 1, 0, 0, fk_t, gradfk_norm_t, k_t, T_t, time_t);
             experiment = experiment+1;
         end
-        % Finite difference gradient and Hessian for different values of h
-        for k=2:2:12
-            h = 10^(-k);
+        if findiff
+            % Finite difference gradient and Hessian for different values of h
+            for k=2:2:12
+                h = 10^(-k);
 
-            % Absolute
-            disp([9, 9, '- ABSOLUTE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
-            findiff_gradf = @(x) findiff_grad(f, x, h, 'c', false);
-            for pre = [0, 1]
-                [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
-                    fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) findiff_banded(findiff_gradf, x, h, codiags, false), beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre);
-                logger(root_dir, experiment, success_m, 0, i, j, 0, h, 1, fk_m, gradfk_norm_m, k_m, T_m, time_m);
-                experiment = experiment+1;
-                logger(root_dir, experiment, success_t, 1, i, j, 0, h, 1, fk_t, gradfk_norm_t, k_t, T_t, time_t);
-                experiment = experiment+1;
-            end
-            % Relative
-            findiff_gradf = @(x) findiff_grad(f, x, h, 'c', true);
-            disp([9, 9, '- RELATIVE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
-            for pre = [0, 1]
-                [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
-                    fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) findiff_banded(findiff_gradf, x, h, codiags, true ), beta, kmax, tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre);
-                logger(root_dir, experiment, success_m, 0, i, j, 0, h, 0, fk_m, gradfk_norm_m, k_m, T_m, time_m);
-                experiment = experiment+1;
-                logger(root_dir, experiment, success_t, 0, i, j, 0, h, 0, fk_t, gradfk_norm_t, k_t, T_t, time_t);
-                experiment = experiment+1;
+                % Absolute
+                disp([9, 9, '- ABSOLUTE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
+                findiff_gradf = @(x) findiff_grad(f, x, h, 'c', false);
+                for pre = [0, 1]
+                    [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
+                        fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) banded_Hessf_approx(f, x, h, codiags, false), beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
+                    logger(root_dir, experiment, success_m, 0, pre, i, j, 0, h, 1, fk_m, gradfk_norm_m, k_m, T_m, time_m);
+                    experiment = experiment+1;
+                    logger(root_dir, experiment, success_t, 1, pre, i, j, 0, h, 1, fk_t, gradfk_norm_t, k_t, T_t, time_t);
+                    experiment = experiment+1;
+                end
+                % Relative
+                findiff_gradf = @(x) findiff_grad(f, x, h, 'c', true);
+                disp([9, 9, '- RELATIVE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
+                for pre = [0, 1]
+                    [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
+                        fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) banded_Hessf_approx(f, x, h, codiags, true ), beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
+                    logger(root_dir, experiment, success_m, 0, pre, i, j, 0, h, 0, fk_m, gradfk_norm_m, k_m, T_m, time_m);
+                    experiment = experiment+1;
+                    logger(root_dir, experiment, success_t, 0, pre, i, j, 0, h, 0, fk_t, gradfk_norm_t, k_t, T_t, time_t);
+                    experiment = experiment+1;
+                end
             end
         end
     end
