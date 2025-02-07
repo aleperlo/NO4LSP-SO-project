@@ -11,7 +11,7 @@ function [Hessf] = extended_rosenbrock_Hessf_fd(x, h, relative)
     F_even_diag = @(y) 1/2*10^2*(x(1:2:n).^2 - y).^2;
     F_diag = @(y) reshape([F_odd_diag(y(1:2:end)), F_even_diag(y(2:2:end))]', [], 1);
 
-    F_off = @(y) 1/2*10^2*(y(1:2:end).^2 - y(2:2:end)).^2 + 1/2*(y(1:2:end)).^2;
+    F_off = @(y) 1/2*10^2*(y(1:2:end).^2 - y(2:2:end)).^2 + 1/2*(y(1:2:end) - 1).^2;
     h_odd = zeros(n, 1);
     h_odd(1:2:n) = hs(1:2:n);
     h_even = zeros(n, 1);
