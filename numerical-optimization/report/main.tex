@@ -1,8 +1,18 @@
 \documentclass{article}
 
-\usepackage{import}
 \usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage[backend=biber]{biblatex}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\addbibresource{references.bib}
 \usepackage[a4paper, left=0.75in, right=0.75in, top=0.75in, bottom=1in]{geometry}
+
+\newcommand{\ap}[1]{{\color{red} AP: [#1]}}
+\newcommand{\mm}[1]{{\color{blue} MM: [#1]}}
+\newcommand{\gm}[1]{{\color{green} GM: [#1]}}
 
 \title{Numerical Optimization for Large Scale Problems\\
 \Large Assignment Report}
@@ -13,11 +23,17 @@
 
 \maketitle
 
-\import{src/}{abstract.tex}
+\input{src/00_abstract.tex}
 
 \tableofcontents
 
+\input{src/01_implementation_details.tex}
+\input{src/02_rosenbrock.tex}
+\input{src/03_extended_rosenbrock.tex}
+\input{src/04_generalized_broyden.tex}
+\input{src/05_banded_trigonometric.tex}
+\input{src/06_conclusions.tex}
 
-\section{Introduction}
+\printbibliography
 
 \end{document}

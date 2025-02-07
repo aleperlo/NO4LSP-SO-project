@@ -1,0 +1,59 @@
+\section{Introduction}
+\label{sec:implementation_details}
+
+In this section we will describe the implementation details of the algorithms used to solve the optimization problems, namely modified Newton method and truncated Newton method, focusing on the differences with respect to the standard Newton method.
+These methods will be tested against the Rosenbrock function and three test problems from \cite{test-problems-unconstrained}.
+The chosen test problems are the extended Rosenbrock function (problem 25), the generalized Broyden tridiagonal function (problem 32) and the banded trigonometric function (problem 16) and results are contained in sections \ref{sec:extended_rosenbrock_results}, \ref{sec:generalized_broyden_results} and \ref{sec:banded_trigonometric_results} respectively.
+
+\subsection{Modified Newton Method}
+
+The modified Newton method aims to enhance robustness of the standard Newton method by ensuring positive-definiteness of the Hessian matrix.
+At iteration $k$, it is necessary to check whether the Hessian matrix $H_k$ is positive definite: in case it is not, the matrix is modified by adding a matrix $B_k$ in order to ensure positive definiteness.
+A common choice for $B_k$ is a multiple of the identity matrix, i.e. $B_k = \tau_k I$ so that the whole spectrum of $H_k$ is shifted by $\tau_k$.
+Then we want to find the smallest $\tau_k$ such that $H_k + \tau_k I$ is positive definite, which is $-\lambda_{k,\,min} + \beta$ where $\lambda_{k,\,min}$ is the negative eigenvalue with the largest module.
+
+To avoid to have to compute $\lambda_{k,\,min}$, we adopted the \textit{Cholesky with Added Multiple of the Identity} algorithm outlined in \cite{nocedal-optimization} that consists in building a sequence of $\tau_k$ until the modified matrix is positive definite.
+The sequence is built starting from $\tau_k = \min_i h_{ii} + \beta$ where $\min_i h_{ii}$ is the smallest diagonal element of $H_k$.
+Then, at each iteration:
+\begin{enumerate}
+\item positive-definitess is assessed trying to perform a Cholesky factorization of $H_k + \tau_k I$;
+\item if the factorization is not successful, $\tau_k$ is increased by a factor $c$ and the process is repeated for a limited number of times $k_{chol,\,max}$.
+\end{enumerate}
+In all the experiments we choose $\beta = 10^{-3}$, \ap{check value for $k_{chol,\,max}$} $k_{chol,\,max} = 100$.
+A good value for the constant factor is $c=2$, but as we will discuss in section \ap{add reference} for the generalized Broyden tridiagonal function a larger value $c=5$ is beneficial.
+The method is endowed with a line search strategy with backtracking.
+
+\subsection{Truncated Newton method}
+
+The truncated Newton method aims to reduce the computational cost of the Newton method by adopting the following strategies:
+\begin{itemize}
+    \item the newton system $H_k p_k = -\nabla f(x_k)$ is solved approximately by means of an iterative method (i.e. conjugate gradient method), with a tolerance that depends on $\lVert \nabla f(x_k) \rVert$;
+    \item whenever a direction of negative curvature is found in the execution of the iterative method, the method is stopped and the direction is used as the search direction to prevent a non-negative curvature direction to be chosen in case of a non-positive definite $H_k$.
+\end{itemize}
+In all the experiments, we choose the tolerance for the iterative method at iteration $k$ to be 
+\[
+\eta_k = \min\{0.5,\, \sqrt{\lVert \nabla f(x_k) \rVert}\}
+\]
+that is a forcing term that is proven to yield a superlinear convergence rate.
+The method is endowed with a line search strategy with backtracking.
+
+\subsection{Finite differences}
+
+Experiments in subsequent sections will adopt both exact and finite differences gradient and Hessian to perform the optimization.
+When finite differences are adopted, the gradient will be estimated using centered finite differences
+\begin{equation}
+    \label{eq:findiff_gradient}
+    \frac{\partial f}{\partial x_k} \approx \frac{f(x + he_k) - f(x - he_k)}{2h}
+\end{equation}
+while the Hessian will be estimated using forward finite differences, using the following formula
+\begin{equation}
+    \label{eq:findiff_hessian}
+    \frac{\partial^2 f}{\partial x_k \partial x_j} \approx \frac{f(x + he_k + he_j) - f(x + he_k) - f(x + he_j) + f(x)}{h^2}
+\end{equation}
+where $e_k$ and $e_j$ are the $k$-th and the $j$-th canonical basis vectors respectively.
+Moreover, two different approaches will be adopted to choose the step size $h$: the first one will use a fixed step size while the second one will use a step size that depends on the current point $x$ and that is different for each component, defined as follows
+\[
+h_{k,\,i} = h \lvert x_{k,\,i} \rvert
+\]
+where $h_{k,\,i}$ is the increment for component $i$ at step $k$, $h$ is a relative step size and $x_{k,\,i}$ is the $i$-th component of the point at step $k$.
+Due to the large scale nature of the problems, the finite differences method is expected to be slower than the exact method, so ad-hoc implementations that will exploit the sparsity of the Hessian matrix and the separability of the specific functions will be used.
