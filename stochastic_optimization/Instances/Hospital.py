@@ -418,7 +418,7 @@ class PASActionSchedule(NeighboringAction):
         return f"Admitted patient {self.patient}, day {self.day}, room {self.room}, OT {self.ot}"
 
     def __eq__(self, value):
-        if not isinstance(value, PASAction):
+        if not isinstance(value, PASActionSchedule):
             return False
         return (
             self.day == value.day
@@ -463,7 +463,9 @@ class NRAActionSchedule(NeighboringAction):
         return f"Scheduled nurse {self.nurse}, shift {self.shift}, room {self.room}"
 
     def __eq__(self, value):
-        if not isinstance(value, NRAActionSchedule):
+        if not isinstance(value, NRAActionSchedule) and not isinstance(
+            value, NRAActionUnschedule
+        ):
             return False
         return (
             self.shift == value.shift
