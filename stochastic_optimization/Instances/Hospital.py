@@ -1,12 +1,21 @@
+from io import TextIOWrapper
 import json
 from collections import defaultdict
-from typing import List, Literal, Union
+from typing import List, Literal, Union, Tuple, Dict
 import numpy as np
-import pprint
+import copy
+
+prova = open("output.txt", "w")
 
 
 class Room:
     def __init__(self, id: str, capacity: int):
+        """Initialize the Room object
+
+        Args:
+            id (str): Room identifier
+            capacity (int): Room capacity, it is time independent
+        """
         self.id = id
         self.capacity = capacity
 
@@ -16,6 +25,12 @@ class Room:
 
 class OperatingTheater:
     def __init__(self, id: str, availability: List[int]):
+        """Initialize the Operating Theater object
+
+        Args:
+            id (str): Operating Theater identifier
+            availability (List[int]): Availability of the Operating Theater for each day, in minutes
+        """
         self.id = id
         self.availability = availability
 
@@ -25,6 +40,12 @@ class OperatingTheater:
 
 class Surgeon:
     def __init__(self, id: str, max_surgery_time: List[int]):
+        """Initialize the Surgeon object
+
+        Args:
+            id (str): Surgeon identifier
+            max_surgery_time (List[int]): Maximum surgery time for each day, in minutes
+        """
         self.id = id
         self.max_surgery_time = max_surgery_time
 
@@ -42,8 +63,20 @@ class Occupant:
         workload_produced: List[int],
         skill_level_required: List[int],
         room: Room,
-        age_groups: List[str]
+        age_groups: List[str],
     ):
+        """Initialize the Occupant object
+
+        Args:
+            id (str): Occupant identifier
+            gender (str): gender of the occupant
+            age_group (str): age group of the occupant
+            length_of_stay (int): length of stay of the occupant
+            workload_produced (List[int]): workload produced by the occupant for each shift
+            skill_level_required (List[int]): skill level required by the occupant for each shift
+            room (Room): room where the occupant is assigned
+            age_groups (List[str]): list of all age groups
+        """
         self.id = id
         self.gender = gender
         self.age_group = age_groups.index(age_group)
@@ -71,17 +104,34 @@ class Patient(Occupant):
         workload_produced: List[int],
         skill_level_required: List[int],
         surgery_due_day: Union[int, None] = None,
-        age_groups: List[str] = None
+        age_groups: List[str] = None,
     ):
+        """Initialize the Patient object
+
+        Args:
+            id (str): Patient identifier
+            mandatory (bool): establish if the patient is mandatory
+            gender (str): gender of the occupant
+            age_group (str): age group of the occupant
+            length_of_stay (int): length of stay of the occupant
+            surgery_release_day (int): earliest possible admission date for the patient
+            surgery_duration (int): surgery duration in minutes
+            surgeon (Surgeon): surgeon assigned to the patient
+            incompatible_rooms (List[Room]): list of rooms where the patient cannot be assigned
+            workload_produced (List[int]): workload produced by the patient for each shift
+            skill_level_required (List[int]): skill level required by the patient for each shift
+            surgery_due_day (Union[int, None], optional): latest possible admission date, provided only for mandatory patients. Defaults to None.
+            age_groups (List[str], optional): list of all age groups. Defaults to None.
+        """
         super().__init__(
-            id,
-            gender,
-            age_group,
-            length_of_stay,
-            workload_produced,
-            skill_level_required,
-            None,
-            age_groups
+            id=id,
+            gender=gender,
+            age_group=age_group,
+            length_of_stay=length_of_stay,
+            workload_produced=workload_produced,
+            skill_level_required=skill_level_required,
+            room=None,
+            age_groups=age_groups,
         )
         self.mandatory = mandatory
         self.surgery_release_day = surgery_release_day
@@ -96,14 +146,36 @@ class Patient(Occupant):
     def __str__(self):
         return f"Patient {self.id}"
 
-    def set_assignment(self, admission_day, room, ot):
+    def set_assignment(self, admission_day: int, room: str, ot: str):
+        """Save assignment information
+
+        Args:
+            admission_day (int): index of the day when the patient is admitted
+            room (str): id of the room where the patient is assigned
+            ot (str): id of the operating theater where the patient is assigned
+        """
+
         self.assignment["admission_day"] = admission_day
         self.assignment["room"] = room
         self.assignment["operating_theater"] = ot
 
+    def unset_assignment(self):
+        """Remove assignment information"""
+        self.assignment["admission_day"] = "none"
+        self.assignment.pop("room", None)
+        self.assignment.pop("operating_theater", None)
+
 
 class WorkingShift:
     def __init__(self, day: int, shift: str, max_load: int, shift_types: List[str]):
+        """Initialize the WorkingShift object
+
+        Args:
+            day (int): index of the day
+            shift (str): shift type
+            max_load (int): maximum workload for the shift
+            shift_types (List[str]): list of all shift types
+        """
         self.day = day
         self.shift = shift
         self.max_load = max_load
@@ -122,11 +194,22 @@ class Nurse:
         shift_types: List[str],
         days: int,
     ):
+        """Initialize the Nurse object
+
+        Args:
+            id (str): Nurse identifier
+            skill_level (int): skill level of the nurse
+            working_shifts (List[dict]): list of working shifts
+            shift_types (List[str]): list of all shift types
+            days (int): number of days
+        """
         self.id = id
         self.skill_level = skill_level
-        self.working_shifts = {}
+        self.working_shifts: defaultdict[int, WorkingShift] = defaultdict(lambda: None)
         self.available = np.zeros(days * len(shift_types), dtype=bool)
-        self.assignment = dict()
+        self.assignment: defaultdict[str, Union[str, List[dict]]] = defaultdict(
+            lambda: {}
+        )
         self.assignment["id"] = self.id
         self.assignment["assignments"] = []
         for w in working_shifts:
@@ -138,39 +221,75 @@ class Nurse:
                 {"day": w_obj.day, "shift": w_obj.shift, "rooms": []}
             )
 
-    def is_available(self, shift_index: int):
+    def is_available(self, shift_index: int) -> bool:
+        """Check if the nurse is available at the given shift
+
+        Args:
+            shift_index (int): index of the shift
+
+        Returns:
+            bool: True if the nurse is available, False otherwise
+        """
         return self.available[shift_index]
 
-    def maximum_workload(self, shift_index: int):
+    def maximum_workload(self, shift_index: int) -> int:
+        """Return the maximum workload for the given shift
+
+        Args:
+            shift_index (int): index of the shift
+
+        Returns:
+            int: maximum workload for the shift
+        """
         return self.working_shifts[shift_index].max_load
 
     def __str__(self):
         return f"Nurse {self.id}"
 
-    def set_assignment(self, day, shift, room):
+    def set_assignment(self, day: int, shift: str, room: str):
+        """Save assignment information
+
+        Args:
+            day (int): index of the day
+            shift (int): shift type
+            room (int): id of the room
+        """
         for assignment in self.assignment["assignments"]:
-            if assignment["day"] == day and assignment["shift"] == shift and room not in assignment["rooms"]:
+            if (
+                assignment["day"] == day
+                and assignment["shift"] == shift
+                and room not in assignment["rooms"]
+            ):
                 assignment["rooms"].append(room)
                 break
 
-    def unset_assignment(self, day, shift, room):
+    def unset_assignment(self, day: int, shift: str, room: str):
+        """Remove assignment information
+
+        Args:
+            day (int): index of the day
+            shift (str): shift type
+            room (str): id of the room
+        """
         for assignment in self.assignment["assignments"]:
-            if assignment["day"] == day and assignment["shift"] == shift and room in assignment["rooms"]:
+            if (
+                assignment["day"] == day
+                and assignment["shift"] == shift
+                and room in assignment["rooms"]
+            ):
                 assignment["rooms"].remove(room)
                 break
 
 
 class Indexer:
-    # TODO: check if indexing is consistent with operating theaters 
     def __init__(self):
+        """Initialize the Indexer object"""
         self.types: defaultdict[str, int] = defaultdict(lambda: 0)
         self.indexer: defaultdict[
             str,
-            dict[int, Union[Patient, Occupant, Surgeon,
-                            Nurse, OperatingTheater, Room]],
+            dict[int, Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room]],
         ] = defaultdict(lambda: {})
-        self.reverse_indexer: defaultdict[str,
-                                          dict[str, int]] = defaultdict(lambda: {})
+        self.reverse_indexer: defaultdict[str, dict[str, int]] = defaultdict(lambda: {})
 
     def get_index(
         self,
@@ -183,7 +302,16 @@ class Indexer:
             "rooms",
         ],
         obj: Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room],
-    ):
+    ) -> int:
+        """Insert the object in the indexer and return the corresponding index
+
+        Args:
+            type (Literal["patients", "occupants", "surgeons", "nurses", "operating_theaters", "rooms"]): category of the object
+            obj (Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room]): object to insert
+
+        Returns:
+            int: index of the object
+        """
         if type == "occupants":
             type = "patients"
         index = self.types[type]
@@ -203,7 +331,16 @@ class Indexer:
             "rooms",
         ],
         index: int,
-    ):
+    ) -> Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room]:
+        """Return the object given the type and the index
+
+        Args:
+            type (Literal["patients", "occupants", "surgeons", "nurses", "operating_theaters", "rooms"]): category of the object
+            index (int): index of the object
+
+        Returns:
+            Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room]: object
+        """
         if type == "occupants":
             type = "patients"
         return self.indexer[type][index]
@@ -219,7 +356,16 @@ class Indexer:
             "rooms",
         ],
         id: str,
-    ):
+    ) -> int:
+        """Return the index given the type and the id
+
+        Args:
+            type (Literal["patients", "occupants", "surgeons", "nurses", "operating_theaters", "rooms"]): category of the object
+            id (str): identifier of the object
+
+        Returns:
+            int: index of the object
+        """
         if type == "occupants":
             type = "patients"
         return self.reverse_indexer[type][id]
@@ -235,7 +381,16 @@ class Indexer:
             "rooms",
         ],
         id: str,
-    ):
+    ) -> Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room]:
+        """Return the object given the type and the id
+
+        Args:
+            type (Literal["patients", "occupants", "surgeons", "nurses", "operating_theaters", "rooms"]): category of the object
+            id (str): identifier of the object
+
+        Returns:
+            Union[Patient, Occupant, Surgeon, Nurse, OperatingTheater, Room]: object
+        """
         return self.lookup(type, self.reverse_lookup(type, id))
 
 
@@ -244,8 +399,16 @@ class NeighboringAction:
         pass
 
 
-class PASAction(NeighboringAction):
-    def __init__(self, day, room, patient, ot):
+class PASActionSchedule(NeighboringAction):
+    def __init__(self, day: int, room: int, patient: int, ot: int):
+        """Patient scheduling action
+
+        Args:
+            day (int): index of the day
+            room (int): index of the room
+            patient (int): index of the patient
+            ot (int): index of the operating theater
+        """
         self.day = day
         self.room = room
         self.patient = patient
@@ -257,11 +420,41 @@ class PASAction(NeighboringAction):
     def __eq__(self, value):
         if not isinstance(value, PASAction):
             return False
-        return self.day == value.day and self.room == value.room and self.patient == value.patient and self.ot == value.ot
+        return (
+            self.day == value.day
+            and self.room == value.room
+            and self.patient == value.patient
+            and self.ot == value.ot
+        )
+
+
+class PASActionUnschedule(NeighboringAction):
+    def __init__(self, patient: int):
+        """Patient unscheduling action
+
+        Args:
+            patient (int): index of the patient
+        """
+        self.patient = patient
+
+    def __str__(self):
+        return f"Unscheduled patient {self.patient}"
+
+    def __eq__(self, value):
+        if not isinstance(value, PASActionUnschedule):
+            return False
+        return self.patient == value.patient
 
 
 class NRAActionSchedule(NeighboringAction):
-    def __init__(self, shift, room, nurse):
+    def __init__(self, shift: int, room: int, nurse: int):
+        """Nurse scheduling action
+
+        Args:
+            shift (int): index of the shift
+            room (int): index of the room
+            nurse (int): index of the nurse
+        """
         self.shift = shift
         self.room = room
         self.nurse = nurse
@@ -276,7 +469,14 @@ class NRAActionSchedule(NeighboringAction):
 
 
 class NRAActionUnschedule(NeighboringAction):
-    def __init__(self, shift, room, nurse):
+    def __init__(self, shift: int, room: int, nurse: int):
+        """Nurse unscheduling action
+
+        Args:
+            shift (int): index of the shift
+            room (int): index of the room
+            nurse (int): index of the nurse
+        """
         self.shift = shift
         self.room = room
         self.nurse = nurse
@@ -291,7 +491,12 @@ class NRAActionUnschedule(NeighboringAction):
 
 
 class Hospital:
-    def __init__(self, fp):
+    def __init__(self, fp: TextIOWrapper):
+        """Initialize the Hospital object
+
+        Args:
+            fp (TextIOWrapper): file pointer to the JSON file containing the hospital data
+        """
         self.indexer = Indexer()
         json_data: dict[str, Union[int, str, dict]] = json.load(fp)
 
@@ -301,40 +506,46 @@ class Hospital:
         self.age_groups: List[str] = json_data["age_groups"]
         self.weights: dict[str, int] = json_data["weights"]
 
-        self.occupants = np.array([], dtype=Occupant)
-        self.patients = np.array([], dtype=Patient)
-        self.surgeons = np.array([], dtype=Surgeon)
-        self.operating_theaters = np.array([], dtype=OperatingTheater)
+        # Rooms
         self.rooms = np.array([], dtype=Room)
-        self.nurses = np.array([], dtype=Nurse)
-
         for room_dict in json_data["rooms"]:
             room = Room(**room_dict)
             self.rooms = np.append(self.rooms, room)
             self.indexer.get_index("rooms", room)
-        # inserting dummy ot
+
+        # Operating theaters (including dummy for occupants)
+        self.operating_theaters = np.array([], dtype=OperatingTheater)
         self.operating_theaters = np.append(
-            self.operating_theaters, OperatingTheater("dummy", [0] * self.days)
+            self.operating_theaters,
+            OperatingTheater(id="dummy", availability=[0] * self.days),
         )
-        self.indexer.get_index("operating_theaters",
-                               self.operating_theaters[-1])
+        self.indexer.get_index("operating_theaters", self.operating_theaters[-1])
         for operating_theater_dict in json_data["operating_theaters"]:
             operating_theater = OperatingTheater(**operating_theater_dict)
             self.operating_theaters = np.append(
                 self.operating_theaters, operating_theater
             )
             self.indexer.get_index("operating_theaters", operating_theater)
-        for occupant_dict in json_data["occupants"]:
-            room_id: str = occupant_dict.pop("room_id")
-            room = self.indexer.id_lookup("rooms", room_id)
-            occupant = Occupant(
-                room=room, age_groups=self.age_groups, **occupant_dict)
-            self.occupants = np.append(self.occupants, occupant)
-            self.indexer.get_index("occupants", occupant)
+
+        # Surgeons
+        self.surgeons = np.array([], dtype=Surgeon)
         for surgeon_dict in json_data["surgeons"]:
             surgeon = Surgeon(**surgeon_dict)
             self.surgeons = np.append(self.surgeons, surgeon)
             self.indexer.get_index("surgeons", surgeon)
+
+        # Occupants
+        self.occupants = np.array([], dtype=Occupant)
+        for occupant_dict in json_data["occupants"]:
+            room_id: str = occupant_dict.pop("room_id")
+            room = self.indexer.id_lookup("rooms", room_id)
+            occupant = Occupant(room=room, age_groups=self.age_groups, **occupant_dict)
+            self.occupants = np.append(self.occupants, occupant)
+            self.indexer.get_index("occupants", occupant)
+
+        # Patients
+        self.patients = np.array([], dtype=Patient)
+        self.patients = np.append(self.patients, self.occupants)
         for patient_dict in json_data["patients"]:
             surgeon_id = patient_dict.pop("surgeon_id")
             surgeon = self.indexer.id_lookup("surgeons", surgeon_id)
@@ -343,11 +554,16 @@ class Hospital:
                 self.indexer.id_lookup("rooms", i) for i in incompatible_room_ids
             ]
             patient = Patient(
-                surgeon=surgeon, incompatible_rooms=incompatible_rooms, age_groups=self.age_groups, **patient_dict
+                surgeon=surgeon,
+                incompatible_rooms=incompatible_rooms,
+                age_groups=self.age_groups,
+                **patient_dict,
             )
             self.patients = np.append(self.patients, patient)
             self.indexer.get_index("patients", patient)
-        self.patients = np.append(self.occupants, self.patients)
+
+        # Nurses
+        self.nurses = np.array([], dtype=Nurse)
         for nurse_dict in json_data["nurses"]:
             nurse_dict["shift_types"] = self.shift_types
             nurse = Nurse(days=self.days, **nurse_dict)
@@ -372,26 +588,43 @@ class Hospital:
         self.nra_matrix = np.zeros(self.nra_size, dtype=bool)
 
         # Add occupants to PAS matrix
-        for patient in self.occupants:
-            patient_index = self.indexer.reverse_lookup(
-                "occupants", patient.id)
-            room_index = self.indexer.reverse_lookup("rooms", patient.room.id)
+        for occupant in self.occupants:
+            occupant_index = self.indexer.reverse_lookup("occupants", occupant.id)
+            room_index = self.indexer.reverse_lookup("rooms", occupant.room.id)
             coordinates = (
-                np.arange(0, patient.length_of_stay),
+                np.arange(0, occupant.length_of_stay),
                 room_index,
-                patient_index,
+                occupant_index,
                 0,
             )
             self.pas_matrix[coordinates] = True
 
     def print(self):
+        """Print the current status of the hospital"""
+        # Patient Admission Scheduling and Surgical Case Planning
         for p in np.argwhere(self.pas_matrix):
-            for key, value in dict(zip(["day", "room", "patient", "ot"], p)).items():
-                print(f"PAS: {key}: {value}", end=" ")
+            for key, value in dict(
+                zip(["day", "rooms", "patients", "operating_theaters"], p)
+            ).items():
+                if key == "day":
+                    print(f"PAS: {key}: {value}", end=" ")
+                else:
+                    print(
+                        f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
+                        end=" ",
+                    )
             print()
+
+        # Nurse to Room Assignment
         for n in np.argwhere(self.nra_matrix):
-            for key, value in dict(zip(["shift", "room", "nurse"], n)).items():
-                print(f"NRA: {key}: {value}", end=" ")
+            for key, value in dict(zip(["shift", "rooms", "nurses"], n)).items():
+                if key == "shift":
+                    print(f"NRA: {key}: {value}", end=" ")
+                else:
+                    print(
+                        f"NRA: {key}: {self.indexer.lookup(type=key, index=value).id}",
+                        end=" ",
+                    )
             print()
 
     def schedule_patient(
@@ -401,18 +634,31 @@ class Hospital:
         patient_index: int,
         operating_theater_index: int,
         assign: bool = False,
-    ):
-        room = self.indexer.lookup("rooms", room_index)
-        patient = self.indexer.lookup("patients", patient_index)
+    ) -> Tuple[int, Dict[str, int]]:
+        """Schedule a patient in a room and operating theater for a given day
+
+        Args:
+            day (int): index of the day
+            room_index (int): index of the room
+            patient_index (int): index of the patient
+            operating_theater_index (int): index of the operating theater
+            assign (bool, optional): if True, the change is saved. Defaults to False.
+
+        Returns:
+            Tuple[int, Dict[str, int]]: overall penalty and individual penalties
+        """
+        # Information retrieval
+        room: Room = self.indexer.lookup("rooms", room_index)
+        patient: Patient = self.indexer.lookup("patients", patient_index)
         surgeon = patient.surgeon
-        operating_theater = self.indexer.lookup(
+        operating_theater: OperatingTheater = self.indexer.lookup(
             "operating_theaters", operating_theater_index
         )
-
         end_day = min(self.days, day + patient.length_of_stay)
 
-        if not isinstance(patient, Patient):
-            raise ValueError("Only patients can be scheduled")
+        # Check if patient is already scheduled
+        if self.pas_matrix[:, :, patient_index, :].any(axis=(0, 1, 2)):
+            raise ValueError("Patient is already scheduled")
 
         # Global constraints
         # Constraint H6: Admission day
@@ -493,7 +739,18 @@ class Hospital:
 
     def schedule_nurse(
         self, shift: int, room_index: int, nurse_index: int, assign: bool = False
-    ):
+    ) -> Tuple[int, Dict[str, int]]:
+        """Schedule a nurse in a room for a given shift
+
+        Args:
+            shift (int): index of the shift
+            room_index (int): index of the room
+            nurse_index (int): index of the nurse
+            assign (bool, optional): if True, save the change. Defaults to False.
+
+        Returns:
+            Tuple[int, Dict[str, int]]: overall penalty and individual penalties
+        """
         nurse = self.indexer.lookup("nurses", nurse_index)
         # TODO: It's ok if a nurse is already assigned to the room in that shift
         # TODO: - change assignment of old nurse (both in matrix and in nurse object)
@@ -512,9 +769,28 @@ class Hospital:
             self.nra_matrix[shift, room_index, nurse_index] = False
         return penalty, penalty_dict
 
-    def unschedule_nurse(self, shift: int, room_index: int, nurse_index: int, assign: bool = False):
-        # TODO: Consider adding checks on the fact that nurse is assigned to the room in that shift
-        # TODO: Allow unscheduling only if no patient is assigned to the room in that shift
+    def unschedule_nurse(
+        self, shift: int, room_index: int, nurse_index: int, assign: bool = False
+    ) -> Tuple[int, Dict[str, int]]:
+        """Unschedule a nurse
+
+        Args:
+            shift (int): index of the shift
+            room_index (int): index of the room
+            nurse_index (int): index of the nurse
+            assign (bool, optional): if True, save the change. Defaults to False.
+
+        Returns:
+            Tuple[int, Dict[str, int]]: overall penalty and individual penalties
+        """
+        if not self.nra_matrix[shift, room_index, nurse_index]:
+            raise ValueError("Nurse is not assigned to the room on this shift")
+
+        if self.pas_matrix[shift // len(self.shift_types), room_index, :, :].any(
+            axis=(0, 1)
+        ):
+            raise ValueError("Nurse is assigned to a patient")
+
         self.nra_matrix[shift, room_index, nurse_index] = False
         penalty, penalty_dict = self.compute_penalty()
         if not assign:
@@ -795,17 +1071,24 @@ class Hospital:
                     nurses_moves.append(new_schedule_move)
         return nurses_moves
 
-    def get_neighboring_moves(self):
+    def get_neighboring_moves(self) -> List[NeighboringAction]:
+        """Generate all possible neighboring moves
+
+        Returns:
+            List[NeighboringAction]: list of all possible neighboring moves
+        """
         moves = self.generate_patients_moves()
         nurses_moves = self.generate_nurses_moves()
         moves.extend(nurses_moves)
         return moves
 
-    def json_dump(self, filename):
-        data = {
-            "patients": [],
-            "nurses": []
-        }
+    def json_dump(self, filename: str):
+        """Dump the current status of the hospital in a JSON file
+
+        Args:
+            filename (str): name of the file where to save the data
+        """
+        data = {"patients": [], "nurses": []}
         for patient in self.patients:
             if isinstance(patient, Patient):
                 data["patients"].append(patient.assignment)
