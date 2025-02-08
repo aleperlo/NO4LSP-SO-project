@@ -465,7 +465,11 @@ class NRAActionSchedule(NeighboringAction):
     def __eq__(self, value):
         if not isinstance(value, NRAActionSchedule):
             return False
-        return self.shift == value.shift and self.room == value.room and self.nurse == value.nurse
+        return (
+            self.shift == value.shift
+            and self.room == value.room
+            and self.nurse == value.nurse
+        )
 
 
 class NRAActionUnschedule(NeighboringAction):
@@ -485,9 +489,16 @@ class NRAActionUnschedule(NeighboringAction):
         return f"Unscheduled nurse {self.nurse}, shift {self.shift}, room {self.room}"
 
     def __eq__(self, value):
-        if not isinstance(value, NRAActionUnschedule):
+        if not isinstance(value, NRAActionUnschedule) and not isinstance(
+            value, NRAActionSchedule
+        ):
             return False
-        return self.shift == value.shift and self.room == value.room and self.nurse == value.nurse
+        return (
+            # self.shift == value.shift
+            # and
+            self.room == value.room
+            and self.nurse == value.nurse
+        )
 
 
 class Hospital:
