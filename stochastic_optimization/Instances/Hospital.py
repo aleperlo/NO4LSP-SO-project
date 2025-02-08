@@ -5,8 +5,6 @@ from typing import List, Literal, Union, Tuple, Dict
 import numpy as np
 import copy
 
-prova = open("output.txt", "w")
-
 
 class Room:
     def __init__(self, id: str, capacity: int):
@@ -1073,9 +1071,6 @@ class Hospital:
                 print(
                     f"Patient {patient.id} scheduled on day {action.day} in room {room_id} and OT {ot_id}"
                 )
-                prova.write(
-                    f"Patient {patient.id} scheduled on day {action.day} in room {room_id} and OT {ot_id}"
-                )
 
         if isinstance(action, PASActionUnschedule):
             penalty, penalty_dict = self.unschedule_patient(action.patient, assign)
@@ -1084,7 +1079,6 @@ class Hospital:
                 patient.unset_assignment()
 
                 print(f"Patient {patient.id} unscheduled")
-                prova.write(f"Patient {patient.id} unscheduled")
 
         if isinstance(action, NRAActionSchedule):
             penalty, penalty_dict = self.schedule_nurse(
@@ -1100,9 +1094,6 @@ class Hospital:
                 )
 
                 print(
-                    f"Nurse {nurse.id} scheduled on shift {action.shift} in room {room_id}"
-                )
-                prova.write(
                     f"Nurse {nurse.id} scheduled on shift {action.shift} in room {room_id}"
                 )
 
@@ -1122,15 +1113,8 @@ class Hospital:
                 print(
                     f"Nurse {nurse.id} unscheduled on shift {action.shift} in room {room_id}"
                 )
-                prova.write(
-                    f"Nurse {nurse.id} unscheduled on shift {action.shift} in room {room_id}"
-                )
-
-        if action == None:
-            raise ValueError("No action provided")
 
         if assign:
-            prova.write(f"\t{n}) Penalty: {penalty}, penalties: {penalty_dict}\n\n")
             print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
 
         return penalty, penalty_dict
