@@ -79,7 +79,7 @@ for i=[3, 4, 5]
                         fk_t, gradfk_norm_t, k_t, T_t, time_t, success_t] = run_optimization(x0_j, f, findiff_gradf, @(x) Hessf_fd(x, h, true), beta, kmax(i), tolgrad, c1, rho, btmax, chol_maxit, fterms, pcg_maxit, pre, tau_coeff);
                     logger(root_dir, experiment, success_m, 0, pre, i, j, 0, h, 0, fk_m, gradfk_norm_m, k_m, T_m, time_m);
                     experiment = experiment+1;
-                    logger(root_dir, experiment, success_t, 0, pre, i, j, 0, h, 0, fk_t, gradfk_norm_t, k_t, T_t, time_t);
+                    logger(root_dir, experiment, success_t, 1, pre, i, j, 0, h, 0, fk_t, gradfk_norm_t, k_t, T_t, time_t);
                     experiment = experiment+1;
                 end
             end
