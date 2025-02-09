@@ -12,6 +12,7 @@ x_{k-1} -1, & k\mod 2 = 0
 \end{array} \right .
 \end{align}
 The minimum of the function is in a very flat valley which is easy to reach, but in practice it's harder to converge to a minimum, which makes the extended Rosenbrock function a challenging optimization problem.
+\ap{Add something to justify the choice of the constant for modified newton method}.
 
 \begin{figure}
     \centering
@@ -42,6 +43,31 @@ The Hessian of the extended Rosenbrock function is given by the following expres
     \end{array} \right .
 \end{equation}
 Notice that the Hessian is a sparse matrix, with only $n$ non-zero elements on the diagonal and $n/2$ non-zero elements on the first co-diagonal.
+
+Table \ref{tab:Modified_Newton_Extended_Rosenbrock_exact} shows the results for the Modified Newton method applied to the extended Rosenbrock function with exact gradient and Hessian.
+All attempts were successful, and the method converged in a small number of iterations, with a convergence rate that is close to 2 for all dimensions but $10^5$, where the convergence rate is smaller and close to 1.
+However, the time required to converge is significantly higher for the $10^5$-dimensional problem, which is expected due to the increased number of function evaluations required to compute the gradient and Hessian.
+We observe that being the number of iterations necessary to converge to the minimum of the function very low, the experimental convergence rate is not very reliable, as it is computed as the ratio between the number of iterations and the logarithm of the relative error.
+
+Table \ref{tab:Truncated_Newton_Extended_Rosenbrock_exact} shows the results for the Truncated Newton method applied to the extended Rosenbrock function with exact gradient and Hessian.
+All attempts were successful, and the method converged in a small number of iterations.
+The computed experimental convergence rate is not reliable at all, presumably due to the small number of iterations and truncations of the iterative solver used to solve the Newton system.
+Moreover, when preconditioning is not adopted we get a negative convergence rate since $\log \lVert e_k \rVert$ where $e_k$ is the error at iteration $k$ is not monotonic with respect to $k$, as shown in figure \ref{fig:extended_rosenbrock_error}.
+However, when preconditioning is adopted and $k$ is larger, i.e. for $n = 10^5$, the convergence rate is superlinear as expected from the truncated Newton method with a superlinear forcing term.
+
+Figure \ref{fig:extended_rosenbrock_error} shows the estimate of the error for the Modified Newton method and for the Truncated Newton method applied to the Extended Rosenbrock function with exact gradient and Hessian for $n=10^5$ when starting from random point 1:
+\begin{itemize}
+\item for the \textit{Modified Newton method}, in early iterates the estimated error is not monotonic, but it becomes monotonic after a few iterations regardless of preconditioning;
+\item for the \textit{Truncated Newton method}, in early iterates the estimated error is not monotonic, but it becomes monotonic after a few iterations, but only if preconditioning is adopted.
+\end{itemize}
+Both in the case of the Modified Newton method and the Truncated Newton method, preconditioning improves performance of the optimization algorithms both in terms of number of iterations and time required to converge.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/extended_rosenbrock_error.pdf}
+    \caption{Estimate of the error for Modified Newton method and for the Truncated Newton method applied to the Extended Rosenbrock function with exact gradient and Hessian for $n=10^5$, random point 1.}
+    \label{fig:extended_rosenbrock_error}
+\end{figure}
 
 \begin{table}
 \centering
@@ -118,6 +144,11 @@ After expanding the functions, the gradient and Hessian can be approximated as f
         0, & \text{otherwise}
     \end{array} \right .
 \end{align*}
+
+Tables \ref{tab:Modified_Newton_Extended_Rosenbrock_fd_abs} and \ref{tab:Modified_Newton_Extended_Rosenbrock_fd_rel} show the results for the Modified Newton method applied to the extended Rosenbrock function with absolute and relative finite differences respectively.
+All attempts were successful, and the method converged in a small number of iterations, with a convergence rate that is close to 2 for all dimensions, when a suitable choice of $h$ is made.
+On the contrary, when a poor choice of $h$ is made, the convergence rate is close to 1, which is expected since the convergence rate of the Newton method is 2: this happens when $h=10^{-2}$ or $h=10^{-4}$, both for the constant increment and the specific increment methodologies.
+
 \begin{table}
 \centering
 \caption{Results for Modified Newton method applied to Extended Rosenbrock with absolute finite differences, metrics are average metrics for succesful attempts.}

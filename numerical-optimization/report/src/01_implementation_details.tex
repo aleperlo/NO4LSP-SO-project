@@ -4,6 +4,7 @@
 In this section we will describe the implementation details of the algorithms used to solve the optimization problems, namely modified Newton method and truncated Newton method, focusing on the differences with respect to the standard Newton method.
 These methods will be tested against the Rosenbrock function and three test problems from \cite{test-problems-unconstrained}.
 The chosen test problems are the extended Rosenbrock function (problem 25), the generalized Broyden tridiagonal function (problem 32) and the banded trigonometric function (problem 16) and results are contained in sections \ref{sec:extended_rosenbrock_results}, \ref{sec:generalized_broyden_results} and \ref{sec:banded_trigonometric_results} respectively.
+\ap{Discuss how experiments are carried out, starting from 11 points, average metrics are reported.}
 
 \subsection{Modified Newton Method}
 
@@ -19,9 +20,10 @@ Then, at each iteration:
 \item positive-definitess is assessed trying to perform a Cholesky factorization of $H_k + \tau_k I$;
 \item if the factorization is not successful, $\tau_k$ is increased by a factor $c$ and the process is repeated for a limited number of times $k_{chol,\,max}$.
 \end{enumerate}
-In all the experiments we choose $\beta = 10^{-3}$, \ap{check value for $k_{chol,\,max}$} $k_{chol,\,max} = 100$.
-A good value for the constant factor is $c=2$, but as we will discuss in section \ap{add reference} for the generalized Broyden tridiagonal function a larger value $c=5$ is beneficial.
+In all the experiments we choose $\beta = 10^{-3}$, $k_{chol,\,max} = 100$.
+A good value for the constant factor is $c=2$, but as we will discuss in section \ref{sec:extended_rosenbrock_results} for the extended Rosenbrock function a larger value $c=5$ is beneficial.
 The method is endowed with a line search strategy with backtracking.
+We carry on experiments both with and without preconditioning, using the incomplete Cholesky factorization as preconditioner.
 
 \subsection{Truncated Newton method}
 
@@ -36,6 +38,7 @@ In all the experiments, we choose the tolerance for the iterative method at iter
 \]
 that is a forcing term that is proven to yield a superlinear convergence rate.
 The method is endowed with a line search strategy with backtracking.
+We carry on experiments both with and without preconditioning, using the incomplete Cholesky factorization as preconditioner for the Newton system whenever the Hessian matrix is positive definite.
 
 \subsection{Finite differences}
 
