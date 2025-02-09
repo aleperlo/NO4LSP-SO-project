@@ -5,6 +5,7 @@ In this section we will describe the implementation details of the algorithms us
 These methods will be tested against the Rosenbrock function and three test problems from \cite{test-problems-unconstrained}.
 The chosen test problems are the extended Rosenbrock function (problem 25), the generalized Broyden tridiagonal function (problem 32) and the banded trigonometric function (problem 16) and results are contained in sections \ref{sec:extended_rosenbrock_results}, \ref{sec:generalized_broyden_results} and \ref{sec:banded_trigonometric_results} respectively.
 \ap{Discuss how experiments are carried out, starting from 11 points, average metrics are reported.}
+\ap{Discuss convergence rate definition}.
 
 \subsection{Modified Newton Method}
 
@@ -32,7 +33,7 @@ The truncated Newton method aims to reduce the computational cost of the Newton 
     \item the newton system $H_k p_k = -\nabla f(x_k)$ is solved approximately by means of an iterative method (i.e. conjugate gradient method), with a tolerance that depends on $\lVert \nabla f(x_k) \rVert$;
     \item whenever a direction of negative curvature is found in the execution of the iterative method, the method is stopped and the direction is used as the search direction to prevent a non-negative curvature direction to be chosen in case of a non-positive definite $H_k$.
 \end{itemize}
-In all the experiments, we choose the tolerance for the iterative method at iteration $k$ to be 
+In all the experiments, we choose the relative tolerance for the iterative method at iteration $k$ to be 
 \[
 \eta_k = \min\{0.5,\, \sqrt{\lVert \nabla f(x_k) \rVert}\}
 \]

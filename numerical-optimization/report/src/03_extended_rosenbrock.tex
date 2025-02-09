@@ -22,6 +22,7 @@ The minimum of the function is in a very flat valley which is easy to reach, but
 \end{figure}
 
 \subsection{Exact gradient and Hessian}
+\label{subsec:extended_rosenbrock_exact}
 
 The gradient of the extended Rosenbrock function is given by the following expression,
 \begin{equation}
@@ -145,9 +146,11 @@ After expanding the functions, the gradient and Hessian can be approximated as f
     \end{array} \right .
 \end{align*}
 
-Tables \ref{tab:Modified_Newton_Extended_Rosenbrock_fd_abs} and \ref{tab:Modified_Newton_Extended_Rosenbrock_fd_rel} show the results for the Modified Newton method applied to the extended Rosenbrock function with absolute and relative finite differences respectively.
+Tables \ref{tab:Modified_Newton_Extended_Rosenbrock_fd_abs} and \ref{tab:Modified_Newton_Extended_Rosenbrock_fd_rel} show the results for the Modified Newton method applied to the extended Rosenbrock function with absolute and specific finite differences respectively.
 All attempts were successful, and the method converged in a small number of iterations, with a convergence rate that is close to 2 for all dimensions, when a suitable choice of $h$ is made.
 On the contrary, when a poor choice of $h$ is made, the convergence rate is close to 1, which is expected since the convergence rate of the Newton method is 2: this happens when $h=10^{-2}$ or $h=10^{-4}$, both for the constant increment and the specific increment methodologies.
+We notice that for a fixed dimension, performance improves as the stepsize $h$ (be it constant or specific) decreases, as expected, up to a certain point where reducing the stepsize does not result in any improvement (i.e. time and iterations do not significantly decrease).
+This plateau is reached sooner when preconditioning is adopted and when the dimension is lower.
 
 \begin{table}
 \centering
@@ -186,7 +189,7 @@ dimension & h &  &  &  &  &  &  &  &  \\
 
 \begin{table}
 \centering
-\caption{Results for Modified Newton method applied to Extended Rosenbrock with relative finite differences, metrics are average metrics for succesful attempts.}
+\caption{Results for Modified Newton method applied to Extended Rosenbrock with specific finite differences, metrics are average metrics for succesful attempts.}
 \label{tab:Modified_Newton_Extended_Rosenbrock_fd_rel}
 \begin{tabular}{rr|cc|cc|cc|cc}
 \toprule
@@ -218,6 +221,13 @@ dimension & h &  &  &  &  &  &  &  &  \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Tables \ref{tab:Truncated_Newton_Extended_Rosenbrock_fd_abs} and \ref{tab:Truncated_Newton_Extended_Rosenbrock_fd_rel} show the results for the Truncated Newton method applied to the extended Rosenbrock function with absolute and specific finite differences respectively.
+All attempts were successful, and the method converged in a small number of iterations, when a suitable choice of $h$ is made.
+A larger number of iterations is required when a poor choice of $h$ is made, namely when $h=10^{-2}$ or $h=10^{-4}$, both for the constant increment and the specific increment methodologies, yielding a convergence rate of 1.
+For smaller values of $h$, the estimate of the convergence rate is not reliable at all and considerations made in subsection \ref{subsec:extended_rosenbrock_exact} for the Truncated Newton method applied to the extended Rosenbrock function with exact gradient and Hessian apply here as well.
+The plateau in performance as the stepsize $h$ decreases is reached slower than in the case of the Modified Newton method, hinting that the Truncated Newton method highly benefits from a finer approximation of the derivatives.
+\ap{Consider adding a plot of the plateau in performance as the stepsize $h$ decreases for the Truncated Newton method and for the Modified Newton method.}
 
 \begin{table}
 \centering
@@ -256,7 +266,7 @@ dimension & h &  &  &  &  &  &  &  &  \\
 
 \begin{table}
 \centering
-\caption{Results for Truncated Newton method applied to Extended Rosenbrock with relative finite differences, metrics are average metrics for succesful attempts.}
+\caption{Results for Truncated Newton method applied to Extended Rosenbrock with specific finite differences, metrics are average metrics for succesful attempts.}
 \label{tab:Truncated_Newton_Extended_Rosenbrock_fd_rel}
 \begin{tabular}{rr|cc|cc|cc|cc}
 \toprule
