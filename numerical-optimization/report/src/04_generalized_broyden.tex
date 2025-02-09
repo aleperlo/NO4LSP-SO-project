@@ -50,7 +50,7 @@ F_{\textit{fd},\,k}(x) = \frac12 f_k^2(x) + \frac12 f_{k+1}^2(x) + \frac12 f_{k-
 The same procedure can be applied for the Hessian, considering that:
 \begin{itemize}
     \item function evaluations to compute entry $h_{k,k}$ differ only by $f_k$, $f_{k+1}$ and $f_{k-1}$;
-    \item function evaluation to compute entry $h_{k,k+1}$ differ only by $f_k$ and $f_{k+1}$;
+    \item function evaluations to compute entry $h_{k,k+1}$ differ only by $f_k$ and $f_{k+1}$;
     \item function evaluations to compute entry $h_{k,k+2}$ differ only by $f_{k-1}$.
 \end{itemize}
 Then to make function evaluations less expensive, we can define the functions $F_{\textit{fd},\,k,k}$, $F_{\textit{fd},\,k,k+1}$, $F_{\textit{fd},\,k,k+2}$, which can be plugged in \ref{eq:findiff_hessian} in place of $F$ yielding the same result to compute entries $h_{k,k}$, $h_{k,k+1}$ and $h_{k,k+2}$ respectively.
@@ -59,4 +59,4 @@ F_{\textit{fd},\,k,k}(x) &= \frac12 f_k^2(x) + \frac12 f_{k-1}^2(x) + \frac12 f_
 F_{\textit{fd},\,k,k+1}(x) &= \frac12 f_k^2(x) + \frac12 f_{k+1}^2(x)\\
 F_{\textit{fd},\,k,k+2}(x) &= \frac12 f_{k-1}^2(x)
 \end{align*}
-Carefully applying perturbations and properly defining some helper functions, computations for both gradient and Hessian can be vectorized, making the implementation efficient.
+When plugging the functions $F_{fd,\,k}$, $F_{fd,\,k,k}$, $F_{\textit{fd},\,k,k+1}$ and $F_{\textit{fd},\,k,k+2}$ into \ref{eq:findiff_gradient} and \ref{eq:findiff_hessian} it's convenient to expand them so that the computation of the gradient and Hessian is not subject to numerical cancellation as previously done for the extended Rosenbrock function in subsection \ref{subsec:extended_rosenbrock_findiff}.
