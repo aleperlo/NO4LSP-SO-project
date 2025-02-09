@@ -1,4 +1,5 @@
-from Instances.Hospital import Hospital
+from Instances.Hospital import Hospital, ActionError
+import copy
 
 class Tabu:
     def __init__(self, tabu_size: int, factor: float, hospital: Hospital):
@@ -16,8 +17,8 @@ class Tabu:
             next_penalty = float("inf")
             for neighboring_action in neighboring_actions:
                 try:
-                    p, _ = self.hospital.apply_action(neighboring_action, i)
-                except ValueError:
+                    p, _ = self.hospital.apply_action(neighboring_action)
+                except ActionError as e:
                     continue
                 if neighboring_action in self.tabu_list and p >= best_penalty * self.factor:
                     continue
@@ -26,7 +27,7 @@ class Tabu:
                     next_action = neighboring_action
             if next_action is None: # TODO
                 break
-            self.hospital.apply_action(next_action,i, assign=True)
+            self.hospital.apply_action(next_action, assign=True)
             current_penalty = next_penalty
             if current_penalty < best_penalty:
                 best_penalty = current_penalty
