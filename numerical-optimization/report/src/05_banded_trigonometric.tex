@@ -32,7 +32,14 @@ The Hessian of the banded trigonometric function is given by the following expre
 \end{array} \right .
 \end{equation}
 Notice that the Hessian is a diagonal matrix, which makes the optimization problem easier to solve.
-\ap{Make some considerations on the conditioning number of the Hessian.}
+However, the Hessian of the matrix has very distant eigenvalues due to the fact that the $i$-th diagonal entry is multiplied by $i$: the problem may become increasingly ill-conditioned as the dimension $n$ increases.
+Due to this fact, we only perform optimization with preconditioning.
+
+Table \ref{tab:Modified_Newton_Banded_Trigonometric_exact} shows the results for the \textit{Modified Newton method} applied to the banded trigonometric function with exact gradient and Hessian.
+Modified newton method converges for all points only when $n=10^3$, while attempts with $n=10^4$ and $n=10^5$ yield only one success each.
+This is due to the fact that being the problem badly scaled, in case of a non positive-definite Hessian matrix, the modification of the Hessian matrix may happen with a $\tau$ that is too large.
+This leads to a Hessian matrix that is too different from the original one, resulting in a poor descent direction.
+All failures happen because convergence has not been reached within $k_{\textit{max}} = 10^3$ iterations.
 
 \begin{table}
 \centering
@@ -48,6 +55,12 @@ Notice that the Hessian is a diagonal matrix, which makes the optimization probl
 \bottomrule
 \end{tabular}
 \end{table}
+
+Table \ref{tab:Truncated_Newton_Banded_Trigonometric_exact} shows the results for the \textit{Truncated Newton method} applied to the banded trigonometric function with exact gradient and Hessian.
+All attempts are succesful, and the method converges in a small number of iterations with a large experimental rate of convergence.
+So, when preconditioning is adopted, the Truncated Newton method is able to solve the problem efficiently unlike Modified Newton method.
+Probably adopting another matrix correction strategy that impacts less on the whole matrix, such as the one based on \textit{Modified Cholesky factorization} proposed in \cite{nocedal-optimization}, could lead to better results.
+\ap{Add something to show the distribution of $\tau$ in the banded trigonometric problem with respect the distribution of $\tau$ in other functions.}
 
 \begin{table}
 \centering
@@ -101,6 +114,14 @@ The approximation for the Hessian is obtained by applying the aforementioned tri
 \sin(2h) - 2\sin h \approx -h^3 + \mathcal{O}(h^5)
 \]
 To avoid numerical cancellation, it is necessary to substitute them with their Taylor expansions.
+
+Tables \ref{tab:Modified_Newton_Banded_Trigonometric_fd_abs} and \ref{tab:Modified_Newton_Banded_Trigonometric_fd_rel} show the results for the \textit{Modified Newton method} applied to the banded trigonometric function with absolute and specific finite differences, respectively.
+In terms of success rate, results are comparable to the ones obtained with exact gradient and Hessian.
+However, when specific finite differences are adopted, approximation with $h=10^{-2}$ and $h=10^{-4}$ give poor results, yieding respectively 0\% and 9\% success rate.
+On the other hand, when increments are constant, we get at least 9\% success rate for all dimensions, all increments.
+When absolute increment is adopted, all failures happen due to the fact that convergence has not been reached within $k_{\textit{max}} = 10^3$ iterations.
+When specific increment is adopted, most failures happen because the method does not converge within $k_{\textit{max}} = 10^3$ iterations, but in 3 cases over 61 failures for $n=10^4$ and in 4 cases over 61 failures for $n=10^5$, failure happens because Armijo condition can't be satisfied.
+We did not perform tuning on parameters $\rho$ and $c_1$ of the Armijo condition, since failures are probably due to the fact that the Hessian correction strategy is not suitable for a problem that is very ill-conditioned.
 
 \begin{table}
 \centering
@@ -166,6 +187,10 @@ dimension & h &  &  &  &  \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Tables \ref{tab:Truncated_Newton_Banded_Trigonometric_fd_abs} and \ref{tab:Truncated_Newton_Banded_Trigonometric_fd_rel} show the results for the \textit{Truncated Newton method} applied to the banded trigonometric function with absolute and specific finite differences, respectively.
+All attempts are succesful, and the method converges in a small number of iterations with a large experimental rate of convergence.
+The results are similar to the ones obtained with exact gradient and Hessian, confirming that the Truncated Newton method is a suitable algorithm to tackle the banded trigonometric problem optimization.
 
 \begin{table}
 \centering
