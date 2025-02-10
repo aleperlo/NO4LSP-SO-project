@@ -26,7 +26,7 @@ while k < kmax && relres > tol
     zk = A * pk;
     if pk' * zk <= 0
         if k == 0
-            xk = xk + pk;
+            xk = b;
         end
         truncated = 1;
         % disp(['Stopped at iteration ', num2str(k)]);
