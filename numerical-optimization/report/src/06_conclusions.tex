@@ -1,2 +1,8 @@
 \section{Conclusions}
 \label{sec:conclusions}
+
+Our experiments provide insights into the practical performance of Newton-type methods for large-scale unconstrained optimization problems. The Modified Newton Method, while robust, can suffer from inefficiencies when dealing with ill-conditioned Hessians, particularly in the banded trigonometric function.
+On the other hand, the Truncated Newton Method, which relies on iterative solutions to the Newton system, generally achieves better computational efficiency, particularly for high-dimensional problems.
+However, it is more sensitive to preconditioning, which significantly influences its convergence rate and stability.
+
+Finite difference approximations, though useful in the absence of exact derivatives, introduce additional computational costs and potential inaccuracies, particularly when the step size is not chosen carefully.
