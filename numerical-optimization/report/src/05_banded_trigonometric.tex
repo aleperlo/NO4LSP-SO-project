@@ -27,8 +27,9 @@ n\sin x_n - (n-1)\cos x_n, & k = n
 The Hessian of the banded trigonometric function is given by the following expression.
 \begin{equation}
 \frac{\partial^2 F}{\partial x_k \partial x_j} = \left \{ \begin{array}{ll}
-    k\cos x_k - 2\sin(x_k), & k = j \\
-    0, & \text{otherwise} \\
+    k\cos x_k - 2\sin(x_k), & 1\leq k = j < n \\
+    n\cos x_n + (n-1)\sin x_n, & k = j = n \\
+    0, & \text{otherwise}
 \end{array} \right .
 \end{equation}
 Notice that the Hessian is a diagonal matrix, which makes the optimization problem easier to solve.
@@ -38,7 +39,10 @@ Due to this fact, we only perform optimization with preconditioning.
 Table \ref{tab:Modified_Newton_Banded_Trigonometric_exact} shows the results for the \textit{Modified Newton method} applied to the banded trigonometric function with exact gradient and Hessian.
 Modified newton method converges for all points only when $n=10^3$, while attempts with $n=10^4$ and $n=10^5$ yield only one success each.
 This is due to the fact that being the problem badly scaled, in case of a non positive-definite Hessian matrix, the modification of the Hessian matrix may happen with a $\tau$ that is too large.
-This leads to a Hessian matrix that is too different from the original one, resulting in a poor descent direction.
+Figure \ref{fig:correction_comparison} compares the empirical cumulative distribution function of $\tau_k$ for the banded trigonometric problem and the extended Rosenbrock function with exact gradient and Hessian.
+One can notice that while for the extended Rosenbrock function the maximum value of the correction does not depend on the dimension, for the banded trigonometric problem the maximum value of the correction increases with the dimension.
+Moreover, as suggested by the factor $i$ that multiplies the $i$-th diagonal entry of the Hessian, the maximum correction needed for the dimension $10^n$ is close to $10^n$.
+While a correction of this magnitude is acceptable for $n=10^3$, it is not for larger values of $n$, leading to a Hessian matrix that is too different from the original one and resulting in a poor descent direction.
 All failures happen because convergence has not been reached within $k_{\textit{max}} = 10^3$ iterations.
 
 \begin{table}
@@ -56,11 +60,18 @@ All failures happen because convergence has not been reached within $k_{\textit{
 \end{tabular}
 \end{table}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/correction_comparison.pdf}
+    \caption{Emprirical cumulative distribution function of $\tau_k$ in banded trigonometric problem and extended Rosenbrock function with exact gradient and Hessian, considering all times a correction is needed across all runs. Dashed lines mark the values $10^3$, $10^4$ and $10^5$.}
+    \label{fig:correction_comparison}
+
+\end{figure}
+
 Table \ref{tab:Truncated_Newton_Banded_Trigonometric_exact} shows the results for the \textit{Truncated Newton method} applied to the banded trigonometric function with exact gradient and Hessian.
 All attempts are succesful, and the method converges in a small number of iterations with a large experimental rate of convergence.
 So, when preconditioning is adopted, the Truncated Newton method is able to solve the problem efficiently unlike Modified Newton method.
 Probably adopting another matrix correction strategy that impacts less on the whole matrix, such as the one based on \textit{Modified Cholesky factorization} proposed in \cite{nocedal-optimization}, could lead to better results.
-\ap{Add something to show the distribution of $\tau$ in the banded trigonometric problem with respect the distribution of $\tau$ in other functions.}
 
 \begin{table}
 \centering
