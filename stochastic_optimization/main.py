@@ -1,28 +1,24 @@
 import os
-from Instances.Hospital import Hospital
-from Solvers.Tabu import Tabu
-import numpy as np
-
-data_dir = "stochastic_optimization/data/ihtc2024_test_dataset"
-file_name = "test04.json"
-file_path = os.path.join(data_dir, file_name)
-
-hospital = Hospital(file_path)
-
+from Instances import Hospital
+from Solvers import Tabu
 
 # toy -> 40
 # 01 -> 200
 # 02 -> 200
 
+data_dir = "stochastic_optimization/data/ihtc2024_test_dataset"
+# for n in [1, 2, 3, 4]:
+file_name = f"toy.json"
+file_path = os.path.join(data_dir, file_name)
 
-solver = Tabu(200, 1, hospital)
-# # hospital.print()
-solver.solve(3000)
+hospital = Hospital(file_path)
 
-hospital.load_status()
-# hospital.print()
-print(hospital.compute_penalty())
+solver = Tabu(40, 1, hospital)
+penalty = solver.solve(500)
+
+print(penalty)
 hospital.json_dump(
-    "stochastic_optimization/data/sol.json"
+    f"stochastic_optimization/results/sol_toy.json",
+    f"stochastic_optimization/logs/toy.csv"
 )
 
