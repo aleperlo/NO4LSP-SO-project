@@ -4,8 +4,15 @@
 In this section we will describe the implementation details of the algorithms used to solve the optimization problems, namely modified Newton method and truncated Newton method, focusing on the differences with respect to the standard Newton method.
 These methods will be tested against the Rosenbrock function and three test problems from \cite{test-problems-unconstrained}.
 The chosen test problems are the extended Rosenbrock function (problem 25), the generalized Broyden tridiagonal function (problem 32) and the banded trigonometric function (problem 16) and results are contained in sections \ref{sec:extended_rosenbrock_results}, \ref{sec:generalized_broyden_results} and \ref{sec:banded_trigonometric_results} respectively.
-\ap{Discuss how experiments are carried out, starting from 11 points, average metrics are reported.}
-\ap{Discuss convergence rate definition}.
+
+The experiments were conducted using 11 points: a predefined starting point and 10 additional randomly generated points uniformly distributed in a hypercube around the initial guess. For each test function, we performed optimizations at problem dimensions $n = 10^3, 10^4, 10^5$. We implemented backtracking line search with a sufficient decrease condition, using standard parameters $\rho = 0.5$ and $c = 10^{-4}$, further tuning has not been necessary in any case. Each method was evaluated in terms of success rate, number of iterations to convergence, execution time, and experimental convergence rate.
+The experimental convergence rate was computed using the formula:
+\begin{equation}
+    q = \frac{\log(\|e_{k+1}\| / \|e_k\|)}{\log(\|e_k\| / \|e_{k-1}\|)}
+\end{equation}
+where $e_k$ denotes the error at iteration $k$.
+Error at iteration $k$ is approximated as the norm of the difference between the point at current iteration and the point at previous iteration, i.e. $\hat{e}_k = x_k - x_{k-1}$.
+For each experiment, we report average metrics over the successful runs, where a run is considered successful if the method converges within a maximum of $10^3$ iterations and Armijo condition is satisfied within $\textit{bt}_{\textit{max}} = 50$ backtracking attempts.
 
 \subsection{Modified Newton Method}
 
