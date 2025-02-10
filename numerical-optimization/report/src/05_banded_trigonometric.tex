@@ -1,10 +1,13 @@
 \section{Banded trigonometric function}
 \label{sec:banded_trigonometric_results}
 
-\[
+The banded trigonometric function is defined as follows.
+\begin{equation}
 f(x) = \sum_{i=1}^n i[(1-\cos x_i) + \sin x_{i-1} - \sin x_{i+1}]
-\]
-
+\end{equation}
+Figure \ref{fig:banded_trigonometric_surf} shows the surface plot of the 2-dimensional banded trigonometric function.
+It has a highly oscillatory landscape with multiple peaks and valleys due to its sinusoidal terms.
+This results in a mix of locally smooth and rapidly changing regions, making optimization sensitive to initialization and prone to multiple local minima.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{figures/banded_trigonometric_surf.pdf}
@@ -14,4 +17,220 @@ f(x) = \sum_{i=1}^n i[(1-\cos x_i) + \sin x_{i-1} - \sin x_{i+1}]
 
 \subsection{Exact gradient and Hessian}
 
+The gradient of the banded trigonometric function is given by the following expression.
+\begin{equation}
+\frac{\partial F}{\partial x_k} = \left \{ \begin{array}{ll}
+k\sin x_k + 2\cos x_k, & 1 \leq k < n \\
+n\sin x_n - (n-1)\cos x_n, & k = n
+\end{array} \right .
+\end{equation}
+The Hessian of the banded trigonometric function is given by the following expression.
+\begin{equation}
+\frac{\partial^2 F}{\partial x_k \partial x_j} = \left \{ \begin{array}{ll}
+    k\cos x_k - 2\sin(x_k), & k = j \\
+    0, & \text{otherwise} \\
+\end{array} \right .
+\end{equation}
+Notice that the Hessian is a diagonal matrix, which makes the optimization problem easier to solve.
+\ap{Make some considerations on the conditioning number of the Hessian.}
+
+\begin{table}
+\centering
+\caption{Results for Modified Newton method applied to Banded Trigonometric with exact gradient and hessian, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\label{tab:Modified_Newton_Banded_Trigonometric_exact}
+\begin{tabular}{r|cc|cc}
+\toprule
+    dimension & iterations & convergence rate & time & success rate \\
+\midrule
+3 & 14.273 & 2.782 & 0.018 & 1.00 \\
+4 & 7.000 & 2.946 & 0.021 & 0.09 \\
+5 & 7.000 & 2.946 & 0.115 & 0.09 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Results for Truncated Newton method applied to Banded Trigonometric with exact gradient and hessian, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\label{tab:Truncated_Newton_Banded_Trigonometric_exact}
+\begin{tabular}{r|cc|cc}
+\toprule
+    dimension & iterations & convergence rate & time & success rate \\
+\midrule
+3 & 14.273 & 2.790 & 0.009 & 1.00 \\
+4 & 20.818 & 2.714 & 0.028 & 1.00 \\
+5 & 25.273 & 2.774 & 0.302 & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Finite differences gradient and Hessian}
+
+When applying \ref{eq:findiff_gradient}, one can notice that the terms $F(x + he_k)$ and $F(x - he_k)$ only differ by summands with indices $i = k$ and $i = k \pm 1$.
+Then to make function evaluations less expensive, we can define the following function $F_{\textit{fd},\,k}$, that can be plugged in \ref{eq:findiff_gradient} in place of $F$ yielding the same result.
+\[
+F_{\textit{fd},\,k} = \sum_{i=k-1}^{k+1} i[(1-\cos x_i) + \sin x_{i-1} - \sin x_{i+1}]
+\]
+Some of the terms in $F_{fd,\,k}$ are constant and do not depend on $x_k$, so they will eventually subtract and we can further simplify the expression.
+\[
+F_{\textit{fd},\,k} = \left \{ \begin{array}{ll}
+    -k\cos x_k + 2\sin x_k, & 1 \leq k < n \\
+    n\cos x_n - (n-1)\sin x_n, & k = n
+\end{array} \right .
+\]
+The same procedure can be applied to the Hessian, considering that terms in \ref{eq:findiff_hessian} only differ by summands with indices $i = k$ and $i = k \pm 1$.
+When plugging the function $F_{\textit{fd},\,k}$ into \ref{eq:findiff_gradient} and \ref{eq:findiff_hessian} it's convenient to expand them so that the computation of the gradient and Hessian is not subject to numerical cancellation.
+After expanding the functions, the gradient and Hessian can be approximated as follows.
+\begin{align*}
+    \frac{\partial F}{\partial x_k} &\approx \left \{ \begin{array}{ll}
+        \frac{2k\sin x_k \sin h + 4\cos x_k \sin h}{2h}, & 1 \leq k < n \\
+        \frac{2n\sin x_n \sin h - 2(n-1)\cos x_k \sin h}{2h}, & k = n
+    \end{array} \right . \\
+    \frac{\partial^2 F}{\partial x_k^2} &\approx \left \{ \begin{array}{ll}
+        (k\cos x_k - 2\sin x_k) - h(k\sin x_k + 2\cos x_k), 
+        & 1 \leq k < n \\
+        (n\cos x_n - (n-1)\sin x_n) - h(n\sin x_n - (n-1)\cos x_n),
+        & k = n
+    \end{array} \right .
+\end{align*}
+The approximation for the gradient is obtained applying the trigonometric identities for the sum of angles.
+The approximation for the Hessian is obtained by applying the aforementioned trigonometric identities in order to isolate the following terms.
+\[
+\cos(2h) - 2\cos h \approx -1 - h^2 + \mathcal{O}(h^4),
+\qquad
+\sin(2h) - 2\sin h \approx -h^3 + \mathcal{O}(h^5)
+\]
+To avoid numerical cancellation, it is necessary to substitute them with their Taylor expansions.
+
+\begin{table}
+\centering
+\caption{Results for Modified Newton method applied to Banded Trigonometric with absolute finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\label{tab:Modified_Newton_Banded_Trigonometric_fd_abs}
+\begin{tabular}{rr|cccc}
+\toprule
+    &  & iterations & convergence rate & time & success rate \\
+dimension & h &  &  &  &  \\
+\midrule
+\multirow[t]{6}{*}{3} & 1e-02 & 14.818 & 2.548 & 0.010 & 1.00 \\
+    & 1e-04 & 14.545 & 2.807 & 0.007 & 1.00 \\
+    & 1e-06 & 14.091 & 2.842 & 0.006 & 1.00 \\
+    & 1e-08 & 14.182 & 2.575 & 0.006 & 1.00 \\
+    & 1e-10 & 13.364 & 2.630 & 0.006 & 1.00 \\
+    & 1e-12 & 13.909 & 2.695 & 0.006 & 1.00 \\
+\cline{1-6}
+\multirow[t]{6}{*}{4} & 1e-02 & 8.000 & 2.256 & 0.018 & 0.09 \\
+    & 1e-04 & 13.000 & 2.605 & 0.032 & 0.18 \\
+    & 1e-06 & 6.000 & 2.857 & 0.014 & 0.09 \\
+    & 1e-08 & 14.500 & 2.844 & 0.033 & 0.18 \\
+    & 1e-10 & 7.000 & 2.948 & 0.015 & 0.09 \\
+    & 1e-12 & 7.000 & 2.946 & 0.016 & 0.09 \\
+\cline{1-6}
+\multirow[t]{6}{*}{5} & 1e-02 & 8.000 & 2.256 & 0.123 & 0.09 \\
+    & 1e-04 & 8.000 & 2.951 & 0.129 & 0.09 \\
+    & 1e-06 & 6.000 & 2.856 & 0.100 & 0.09 \\
+    & 1e-08 & 6.000 & 2.749 & 0.098 & 0.09 \\
+    & 1e-10 & 7.000 & 2.948 & 0.108 & 0.09 \\
+    & 1e-12 & 7.000 & 2.946 & 0.117 & 0.09 \\
+\cline{1-6}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Results for Modified Newton method applied to Banded Trigonometric with specific finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\label{tab:Modified_Newton_Banded_Trigonometric_fd_rel}
+\begin{tabular}{rr|cccc}
+\toprule
+    &  & iterations & convergence rate & time & success rate \\
+dimension & h &  &  &  &  \\
+\midrule
+\multirow[t]{5}{*}{3} & 1e-04 & 9.000 & 1.074 & 0.018 & 0.09 \\
+    & 1e-06 & 16.600 & 1.104 & 0.007 & 0.91 \\
+    & 1e-08 & 13.636 & 2.582 & 0.006 & 1.00 \\
+    & 1e-10 & 13.455 & 2.636 & 0.006 & 1.00 \\
+    & 1e-12 & 13.818 & 2.377 & 0.006 & 1.00 \\
+\cline{1-6}
+\multirow[t]{5}{*}{4} & 1e-04 & 9.000 & 1.074 & 0.021 & 0.09 \\
+    & 1e-06 & 6.000 & 2.895 & 0.014 & 0.09 \\
+    & 1e-08 & 6.000 & 2.750 & 0.014 & 0.09 \\
+    & 1e-10 & 7.000 & 2.948 & 0.015 & 0.09 \\
+    & 1e-12 & 7.000 & 2.946 & 0.017 & 0.09 \\
+\cline{1-6}
+\multirow[t]{5}{*}{5} & 1e-04 & 13.000 & 1.001 & 0.201 & 0.09 \\
+    & 1e-06 & 6.000 & 2.894 & 0.121 & 0.09 \\
+    & 1e-08 & 6.000 & 2.749 & 0.107 & 0.09 \\
+    & 1e-10 & 7.000 & 2.948 & 0.111 & 0.09 \\
+    & 1e-12 & 7.000 & 2.946 & 0.121 & 0.09 \\
+\cline{1-6}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Results for Truncated Newton method applied to Banded Trigonometric with absolute finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\label{tab:Truncated_Newton_Banded_Trigonometric_fd_abs}
+\begin{tabular}{rr|cccc}
+\toprule
+    &  & iterations & convergence rate & time & success rate \\
+dimension & h &  &  &  &  \\
+\midrule
+\multirow[t]{6}{*}{3} & 1e-02 & 15.091 & 2.735 & 0.007 & 1.00 \\
+    & 1e-04 & 14.182 & 2.476 & 0.006 & 1.00 \\
+    & 1e-06 & 14.182 & 2.488 & 0.006 & 1.00 \\
+    & 1e-08 & 14.273 & 2.776 & 0.007 & 1.00 \\
+    & 1e-10 & 14.273 & 2.756 & 0.007 & 1.00 \\
+    & 1e-12 & 14.182 & 2.758 & 0.006 & 1.00 \\
+\cline{1-6}
+\multirow[t]{6}{*}{4} & 1e-02 & 19.545 & 2.709 & 0.034 & 1.00 \\
+    & 1e-04 & 19.818 & 2.609 & 0.037 & 1.00 \\
+    & 1e-06 & 20.727 & 2.665 & 0.034 & 1.00 \\
+    & 1e-08 & 21.364 & 2.740 & 0.036 & 1.00 \\
+    & 1e-10 & 20.636 & 2.731 & 0.033 & 1.00 \\
+    & 1e-12 & 20.455 & 2.729 & 0.034 & 1.00 \\
+\cline{1-6}
+\multirow[t]{6}{*}{5} & 1e-02 & 24.455 & 2.717 & 0.375 & 1.00 \\
+    & 1e-04 & 26.727 & 2.516 & 0.379 & 1.00 \\
+    & 1e-06 & 25.636 & 2.754 & 0.384 & 1.00 \\
+    & 1e-08 & 25.636 & 2.770 & 0.394 & 1.00 \\
+    & 1e-10 & 25.727 & 2.770 & 0.396 & 1.00 \\
+    & 1e-12 & 25.364 & 2.727 & 0.424 & 1.00 \\
+\cline{1-6}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Results for Truncated Newton method applied to Banded Trigonometric with specific finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\label{tab:Truncated_Newton_Banded_Trigonometric_fd_rel}
+\begin{tabular}{rr|cccc}
+\toprule
+    &  & iterations & convergence rate & time & success rate \\
+dimension & h &  &  &  &  \\
+\midrule
+\multirow[t]{6}{*}{3} & 1e-02 & 15.182 & 2.257 & 0.006 & 1.00 \\
+    & 1e-04 & 15.091 & 2.836 & 0.007 & 1.00 \\
+    & 1e-06 & 14.000 & 2.710 & 0.007 & 1.00 \\
+    & 1e-08 & 14.273 & 2.800 & 0.006 & 1.00 \\
+    & 1e-10 & 14.545 & 2.785 & 0.007 & 1.00 \\
+    & 1e-12 & 14.182 & 2.781 & 0.006 & 1.00 \\
+\cline{1-6}
+\multirow[t]{6}{*}{4} & 1e-02 & 19.273 & 2.159 & 0.033 & 1.00 \\
+    & 1e-04 & 20.182 & 2.668 & 0.034 & 1.00 \\
+    & 1e-06 & 20.636 & 2.790 & 0.035 & 1.00 \\
+    & 1e-08 & 21.000 & 2.666 & 0.035 & 1.00 \\
+    & 1e-10 & 20.727 & 2.647 & 0.033 & 1.00 \\
+    & 1e-12 & 20.182 & 2.746 & 0.033 & 1.00 \\
+\cline{1-6}
+\multirow[t]{6}{*}{5} & 1e-02 & 24.364 & 2.263 & 0.372 & 1.00 \\
+    & 1e-04 & 25.455 & 2.733 & 0.365 & 1.00 \\
+    & 1e-06 & 26.273 & 2.627 & 0.418 & 1.00 \\
+    & 1e-08 & 25.636 & 2.785 & 0.393 & 1.00 \\
+    & 1e-10 & 25.455 & 2.770 & 0.377 & 1.00 \\
+    & 1e-12 & 24.909 & 2.375 & 0.395 & 1.00 \\
+\cline{1-6}
+\bottomrule
+\end{tabular}
+\end{table}
