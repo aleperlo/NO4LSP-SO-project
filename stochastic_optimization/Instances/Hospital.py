@@ -1157,7 +1157,7 @@ class NRA:
                     )
             print()
 
-    def save(self) -> Tuple[NDArray, NDArray, NDArray]:
+    def save(self) -> Tuple[NDArray, NDArray, NDArray, NDArray]:
         """Save the current status of the NRA problem
 
         Returns:
