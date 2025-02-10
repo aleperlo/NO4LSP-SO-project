@@ -2,16 +2,71 @@
 
 \section{Code snippets}
 
+\lstdefinestyle{myMatlab}{
+    language=Octave, % Use MATLAB syntax highlighting
+    basicstyle=\ttfamily, % Monospace font
+    keywordstyle=\bfseries, % Bold keywords
+    commentstyle=\color{gray}, % Gray for comments
+    stringstyle=\color{blue}, % Blue for strings
+    numbers=left, % Line numbers on the left
+    numberstyle=\tiny\color{gray}, % Style for line numbers
+    stepnumber=1, % Number every line
+    numbersep=5pt, % Space between numbers and text
+    frame=single, % Single-line frame
+    rulecolor=\color{black}, % Frame color
+    tabsize=4, % Tab size
+    breaklines=true, % Enable line breaking
+    breakatwhitespace=true, % Break only at whitespace
+    showspaces=false, % Do not show spaces
+    showstringspaces=false, % Do not show spaces in strings
+}
+
+\lstset{style=myMatlab}
+
 \ap{TODO}
 
 \subsection{Code for method implementations}
+
+\subsubsection{Modified Newton method}
+
+\lstinputlisting[caption={Implementation of the Modified Newton method}]{../scripts/modified_newton.m}
+\lstinputlisting[caption={Implementation of \textit{Cholesky with added multiple of the identity}}]{../scripts/chol_with_addition.m}
+
+\subsubsection{Truncated Newton method}
+
+\lstinputlisting[caption={Implementation of the Truncated Newton method}]{../scripts/truncated_newton.m}
+\lstinputlisting[caption={Implementation of conjugate gradient method with truncation}]{../scripts/cg.m}
+\lstinputlisting[caption={Implementation of preconditioned conjugate gradient method with truncation}]{../scripts/cg_preconditioned.m}
 
 \subsection{Code for objective functions}
 
 \subsubsection{Extended Rosenbrock function}
 
+\lstinputlisting[caption={Extended Rosenbrock function}]{../scripts/extended_rosenbrock.m}
+\lstinputlisting[caption={Gradient of the Extended Rosenbrock function}]{../scripts/extended_rosenbrock_gradf.m}
+\lstinputlisting[caption={Hessian of the Extended Rosenbrock function}]{../scripts/extended_rosenbrock_Hessf.m}
+\lstinputlisting[caption={Approximated gradient of the Extended Rosenbrock function}]{../scripts/extended_rosenbrock_gradf_fd.m}
+\lstinputlisting[caption={Approximated Hessian of the Extended Rosenbrock function}]{../scripts/extended_rosenbrock_Hessf_fd.m}
+
 \subsubsection{Generalized Broyden tridiagonal function}
 
-\subsubsection{Banded trigonometric function}
+\lstinputlisting[caption={Generalized Broyden tridiagonal function}]{../scripts/extended_rosenbrock.m}
+\lstinputlisting[caption={Gradient of the generalized Broyden tridiagonal function}]{../scripts/generalized_broyden.m}
+\lstinputlisting[caption={Hessian of the generalized Broyden tridiagonal function}]{../scripts/generalized_broyden_Hessf.m}
+\lstinputlisting[caption={Approximated gradient of the generalized Broyden tridiagonal function}]{../scripts/generalized_broyden_gradf_fd.m}
+\lstinputlisting[caption={Approximated Hessian of the generalized Broyden tridiagonal function}]{../scripts/generalized_broyden_Hessf_fd.m}
+
+\subsubsection{Banded trigonometric problem}
+
+\lstinputlisting[caption={Banded trigonometric problem}]{../scripts/banded_trigonometric.m}
+\lstinputlisting[caption={Gradient of the banded trigonometric problem}]{../scripts/banded_trigonometric_gradf.m}
+\lstinputlisting[caption={Hessian of the banded trigonometric problem}]{../scripts/banded_trigonometric_Hessf.m}
+\lstinputlisting[caption={Approximated gradient of the banded trigonometric problem}]{../scripts/banded_trigonometric_gradf_fd.m}
+\lstinputlisting[caption={Approximated Hessian of the banded trigonometric problem}]{../scripts/banded_trigonometric_Hessf_fd.m}
 
 \subsection{Utility code for running experiments}
+
+\lstinputlisting[caption={Script to run all the experiments for all functions}]{../scripts/main.m}
+\lstinputlisting[caption={Script to run all the experiments for a given function}]{../scripts/test.m}
+\lstinputlisting[caption={Script to run experiments for a given configuration}]{../scripts/run_optimization.m}
+\lstinputlisting[caption={Logger to CSV files}]{../scripts/logger.m}
