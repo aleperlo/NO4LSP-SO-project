@@ -4,6 +4,7 @@ from typing import List, Literal, Union, Tuple, Dict
 import numpy as np
 from numpy.typing import NDArray
 import copy
+import pandas as pd
 
 
 class Room:
@@ -678,6 +679,29 @@ class Loader:
             nurses = np.append(nurses, nurse)
             self.indexer.get_index("nurses", nurse)
         return nurses
+
+
+class Logger:
+    def __init__(self):
+        """Initialize the Logger object"""
+        self.log = pd.DataFrame(columns=["penalty"])
+
+    def log_action(self, penalty: int, action:str):
+        """Log the action
+
+        Args:
+            penalty (int): penalty value
+            action (str): action description
+        """
+        self.log = pd.concat([self.log, pd.DataFrame({"penalty": [penalty]})])
+
+    def get_log(self, file_path: str):
+        """Print the log to csv file
+
+        Args:
+            file_path (str): path to the file
+        """
+        self.log.to_csv(file_path, index=True)
 
 
 class PAS:
@@ -1396,6 +1420,7 @@ class Hospital:
             fp (str): file path to the JSON file containing the hospital data
         """
         self.indexer = Indexer()
+        self.logger = Logger()
         self.loader = Loader(fp, self.indexer)
 
         self.days = self.loader.get_days()
@@ -1748,6 +1773,7 @@ class Hospital:
                 )
 
         if assign:
+            self.logger.log_action(penalty, str(action))
             print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
 
         return penalty, penalty_dict
@@ -1846,7 +1872,7 @@ class Hospital:
         moves.extend(nurses_moves)
         return moves
 
-    def json_dump(self, filename: str):
+    def json_dump(self, filename: str, log_filename: str = ""):
         """Dump the current status of the hospital in a JSON file
 
         Args:
@@ -1860,3 +1886,6 @@ class Hospital:
             data["nurses"].append(nurse.assignment)
         with open(filename, "w") as outfile:
             json.dump(data, outfile, indent=4)
+
+        if log_filename != "":
+            self.logger.get_log(log_filename)
