@@ -509,6 +509,7 @@ class NRAActionUnschedule(NeighboringAction):
             and self.nurse == value.nurse
         )
 
+
 class ActionError(Exception):
     def __init__(self, message: str = "Action error"):
         """Initialize the ActionError object
@@ -518,6 +519,7 @@ class ActionError(Exception):
         """
         self.message = message
         super().__init__(self.message)
+
 
 class Loader:
     def __init__(self, file_path: str, indexer: Indexer):
@@ -882,9 +884,9 @@ class PAS:
         Returns:
             NDArray: mask of scheduled patients
         """
-        return self.pas_matrix.any(axis=(0,1))
+        return self.pas_matrix.any(axis=(0, 1))
 
-    def penalty_age_mix(self, weight: int, age_groups:int) -> int:
+    def penalty_age_mix(self, weight: int, age_groups: int) -> int:
         """Compute the penalty for age mix
 
         Args:
@@ -1167,7 +1169,12 @@ class NRA:
         self.workload_matrix_copy = copy.deepcopy(self.workload_matrix)
         self.skill_matrix_copy = copy.deepcopy(self.skill_matrix)
         self.patient_matrix_copy = copy.deepcopy(self.patient_matrix)
-        return self.nra_matrix_copy, self.workload_matrix_copy, self.skill_matrix_copy, self.patient_matrix_copy
+        return (
+            self.nra_matrix_copy,
+            self.workload_matrix_copy,
+            self.skill_matrix_copy,
+            self.patient_matrix_copy,
+        )
 
     def restore(
         self,
@@ -1245,8 +1252,12 @@ class NRA:
             room_index,
             patient_index,
         )
-        self.workload_matrix[coordinates] = np.array(patient.workload_produced[:(end_day - day)*self.shifts])
-        self.skill_matrix[coordinates] = np.array(patient.skill_level_required[:(end_day - day)*self.shifts])
+        self.workload_matrix[coordinates] = np.array(
+            patient.workload_produced[: (end_day - day) * self.shifts]
+        )
+        self.skill_matrix[coordinates] = np.array(
+            patient.skill_level_required[: (end_day - day) * self.shifts]
+        )
         self.patient_matrix[coordinates] = True
 
     def unschedule_patient(self, patient_index: int):
@@ -1544,7 +1555,7 @@ class Hospital:
             self.pas.restore()
             self.scp.restore()
             self.nra.restore()
-            
+
         return penalty, penalty_dict
 
     def assign_nurse(
@@ -1608,14 +1619,16 @@ class Hospital:
         penalty_dict = {}
 
         # Constraint S1: Age group
-        penalty_dict["S1"] = self.pas.penalty_age_mix(self.weights["room_mixed_age"], len(self.age_groups))
+        penalty_dict["S1"] = self.pas.penalty_age_mix(
+            self.weights["room_mixed_age"], len(self.age_groups)
+        )
         penalty += penalty_dict["S1"]
 
-        # Constraint S2: Minimum skill level #TODO
+        # Constraint S2: Minimum skill level
         penalty_dict["S2"] = self.nra.penalty_skill(self.weights["room_nurse_skill"])
         penalty += penalty_dict["S2"]
 
-        # Constraint S3: Continuity of care #TODO
+        # Constraint S3: Continuity of care
         penalty_dict["S3"] = self.nra.penalty_continuity(
             self.weights["continuity_of_care"]
         )
@@ -1716,7 +1729,7 @@ class Hospital:
                 print(
                     f"Nurse {nurse.id} assigned on shift {action.shift} in room {room_id}"
                 )
-        
+
         if isinstance(action, NRAActionUnschedule):
             penalty, penalty_dict = self.unassign_nurse(
                 action.shift, action.room, action.nurse, assign
