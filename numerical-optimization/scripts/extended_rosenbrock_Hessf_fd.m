@@ -1,4 +1,4 @@
-function [Hessf] = extended_rosenbrock_Hessf_fd1(x, h, relative)
+function [Hessf] = extended_rosenbrock_Hessf_fd(x, h, relative)
     n = length(x);
     Bin = zeros(n, 3);
     if relative

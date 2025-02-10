@@ -1,4 +1,4 @@
-function [gradf] = generalized_broyden_gradf_fd1(x, h, relative)
+function [gradf] = generalized_broyden_gradf_fd(x, h, relative)
     n = length(x);
     if relative
         hs = h*abs(x);

@@ -1,4 +1,4 @@
-function [gradf] = extended_rosenbrock_gradf_fd1(x, h, relative)
+function [gradf] = extended_rosenbrock_gradf_fd(x, h, relative)
     n = length(x);
     if relative
         hs = h*abs(x);

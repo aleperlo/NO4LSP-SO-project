@@ -1,4 +1,4 @@
-function [Hessf] = generalized_broyden_Hessf_fd1(x, h, relative)
+function [Hessf] = generalized_broyden_Hessf_fd(x, h, relative)
 n = length(x);
 if relative
     hs = h*abs(x);
