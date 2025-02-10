@@ -1136,6 +1136,8 @@ class NRA:
         self.shifts = shifts
         # For each shift, keep track of the nurses assigned to each room
         self.nra_matrix = np.zeros((days * shifts, rooms, nurses), dtype=bool)
+        # For each shift, keep track of the patient assigned to each room
+        self.patient_matrix = np.zeros((days * shifts, rooms, patients), dtype=bool)
         # For each shift, keep track of the workload produced by each patient in each room
         self.workload_matrix = np.zeros((days * shifts, rooms, patients), dtype=int)
         # For each shift, keep track of the skill level required by each patient in each room
@@ -1159,18 +1161,20 @@ class NRA:
         """Save the current status of the NRA problem
 
         Returns:
-            Tuple[NDArray, NDArray, NDArray]: NRA matrix, workload matrix, skill matrix
+            Tuple[NDArray, NDArray, NDArray, NDArray]: NRA matrix, workload matrix, skill matrix, patient matrix
         """
         self.nra_matrix_copy = copy.deepcopy(self.nra_matrix)
         self.workload_matrix_copy = copy.deepcopy(self.workload_matrix)
         self.skill_matrix_copy = copy.deepcopy(self.skill_matrix)
-        return self.nra_matrix_copy, self.workload_matrix_copy, self.skill_matrix_copy
+        self.patient_matrix_copy = copy.deepcopy(self.patient_matrix)
+        return self.nra_matrix_copy, self.workload_matrix_copy, self.skill_matrix_copy, self.patient_matrix_copy
 
     def restore(
         self,
         nra_matrix: NDArray = None,
         workload_matrix: NDArray = None,
         skill_matrix: NDArray = None,
+        patient_matrix: NDArray = None,
     ):
         """Restore the NRA problem to the previous status
 
@@ -1178,19 +1182,23 @@ class NRA:
             nra_matrix (NDArray, optional): NRA matrix. Defaults to None.
             workload_matrix (NDArray, optional): workload matrix. Defaults to None.
             skill_matrix (NDArray, optional): skill matrix. Defaults to None.
+            patient_matrix (NDArray, optional): patient matrix. Defaults to None.
         """
         if (
             nra_matrix is not None
             and workload_matrix is not None
             and skill_matrix is not None
+            and patient_matrix is not None
         ):
             self.nra_matrix = copy.deepcopy(nra_matrix)
             self.workload_matrix = copy.deepcopy(workload_matrix)
             self.skill_matrix = copy.deepcopy(skill_matrix)
+            self.patient_matrix = copy.deepcopy(patient_matrix)
         else:
             self.nra_matrix = copy.deepcopy(self.nra_matrix_copy)
             self.workload_matrix = copy.deepcopy(self.workload_matrix_copy)
             self.skill_matrix = copy.deepcopy(self.skill_matrix_copy)
+            self.patient_matrix = copy.deepcopy(self.patient_matrix_copy)
 
     def add_occupants(self, occupants: NDArray):
         """Add occupants to the NRA matrix
@@ -1239,6 +1247,7 @@ class NRA:
         )
         self.workload_matrix[coordinates] = np.array(patient.workload_produced[:(end_day - day)*self.shifts])
         self.skill_matrix[coordinates] = np.array(patient.skill_level_required[:(end_day - day)*self.shifts])
+        self.patient_matrix[coordinates] = True
 
     def unschedule_patient(self, patient_index: int):
         """Unschedule the patient
@@ -1248,6 +1257,7 @@ class NRA:
         """
         self.workload_matrix[:, :, patient_index] = 0
         self.skill_matrix[:, :, patient_index] = 0
+        self.patient_matrix[:, :, patient_index] = False
 
     def assign_nurse(self, shift: int, room_index: int, nurse_index: int):
         """Assign the nurse to the room
@@ -1334,11 +1344,16 @@ class NRA:
             nurse_skill = self.indexer.lookup("nurses", nurse).skill_level
             if (diff := max_skill_level_per_room[shift, room] - nurse_skill) > 0:
                 penalty += diff
-
         return penalty * weight
 
     def penalty_continuity(self, weight: int) -> int:
-        return 0
+        penalty = 0
+        for patient in range(self.patient_matrix.shape[-1]):
+            if not self.patient_matrix[:, :, patient].any(axis=(0, 1)):
+                continue
+            shifts, rooms = np.nonzero(self.patient_matrix[:, :, patient])
+            penalty += self.nra_matrix[shifts, rooms[0], :].any(axis=0).sum()
+        return penalty * weight
 
     def penalty_workload(self, weight: int) -> int:
         """Compute the penalty for workload
@@ -1592,7 +1607,7 @@ class Hospital:
         penalty = 0
         penalty_dict = {}
 
-        # Constraint S1: Age group #TODO
+        # Constraint S1: Age group
         penalty_dict["S1"] = self.pas.penalty_age_mix(self.weights["room_mixed_age"], len(self.age_groups))
         penalty += penalty_dict["S1"]
 
