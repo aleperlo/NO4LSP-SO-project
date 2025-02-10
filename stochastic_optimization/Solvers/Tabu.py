@@ -26,6 +26,7 @@ class Tabu:
                     next_penalty = p
                     next_action = neighboring_action
             if next_action is None: # TODO
+                print(i)
                 break
             self.hospital.apply_action(next_action, assign=True)
             current_penalty = next_penalty
