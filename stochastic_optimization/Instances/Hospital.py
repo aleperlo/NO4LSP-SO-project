@@ -1773,7 +1773,7 @@ class Hospital:
 
         if assign:
             self.logger.log_action(penalty, str(action))
-            # print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
+            print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
 
         return penalty, penalty_dict
 
