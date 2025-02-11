@@ -1,0 +1,50 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage[backend=biber]{biblatex}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\addbibresource{references.bib}
+\usepackage[a4paper, left=0.75in, right=0.75in, top=0.75in, bottom=1in]{geometry}
+
+\begin{document}
+\begin{titlepage}
+    \centering \Large \textsc{Politecnico di Torino}
+    \\ \vspace{1.5cm} \textbf{
+        \Huge Stochastic Optimization}
+    \\ \vspace{1cm} \textbf{
+        \LARGE Assignment}
+    \vspace{1.5cm}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{img/polito.jpg}
+    \end{figure}
+
+    \vspace{1.5cm}
+
+    Maino, Giacomo - 338682 \\ Molinari, Mattia - 337194 \\ Perlo, Alessandro - 337131
+
+    \vspace{2cm}
+
+    A.A. 2024/2025
+\end{titlepage}
+
+
+\input{src/00_abstract.tex}
+\input{src/01_introduction.tex}
+\input{src/02_approach.tex}
+\input{src/03_results.tex}
+\input{src/04_discussion.tex}
+
+
+
+\printbibliography
+
+\end{document}
