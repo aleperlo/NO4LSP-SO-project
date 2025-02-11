@@ -1,2 +1,46 @@
 \begin{section}{Results}
-    \end{section}
+ The algorithm was tested with some provided instances, whose parameters are shown in Table \ref{tab:parameters} along with
+ the chose size for the tabu list. 
+ In all the instances, the algorithm was able to reach a solution where no hard constraint was violated,
+ with penalty values shown in Table \ref{tab:penalties}.
+
+ \begin{table}[]
+    \begin{tabular}{lllllllll}
+    \hline
+    \textbf{Instance} & \textbf{Days} & \textbf{Shifts} & \textbf{Occupants} & \textbf{Patients} & \textbf{\begin{tabular}[c]{@{}l@{}}Operating\\ Theaters\end{tabular}} & \textbf{Rooms} & \textbf{Nurses} & \textbf{Tabu List Size} \\ \hline
+    toy                    & $7$           & $3$             & $2$                & $7$               & $1$                         & $3$            & $11$            & $30$                    \\
+    $1$                    & $21$          & $3$             & $7$                & $42$              & $2$                         & $5$            & $13$            & $150$                   \\
+    $2$                    & $14$          & $3$             & $5$                & $37$              & $4$                         & $6$            & $17$            & $200$                   \\
+    $3$                    & $14$          & $3$             & $10$               & $45$              & $2$                         & $6$            & $14$            & $200$                   \\
+    $4$                    & $14$          & $3$             & $7$                & $54$              & $3$                         & $8$            & $19$            & $250$                   \\
+    $5$                    & $14$          & $3$             & $9$                & $62$              & $2$                         & $6$            & $15$            & $1$                     \\
+    $6$                    & $14$          & $3$             & $8$                & $110$             & $3$                         & $9$            & $20$            & $1$                     \\
+    $7$                    &               &                 &                    &                   &                             &                &                 & $1$                     \\
+    $8$                    &               &                 &                    &                   &                             &                &                 & $1$                     \\
+    $9$                    &               &                 &                    &                   &                             &                &                 & $1$                     \\
+    $10$                   & $1$           & $49444$         &                    &                   &                             &                &                 &                        
+    \end{tabular}
+    \caption{Test instances parameters and tabu list size.}
+    \label{tab:parameters}
+    \end{table}
+ \begin{table}[]
+     \begin{tabular}{llll}
+         \hline
+         \textbf{Test Instance} & \textbf{Starting penalty} & \textbf{Tabu Penalty} & \textbf{Proposed Penalty} \\ \hline
+         toy                    & $2100$                    & $256$                 & $292$                     \\
+         $1$                    & $1$                       & $4502$                & $3177$                    \\
+         $2$                    & $1$                       & $3749$                & $1583$                    \\
+         $3$                    & $1$                       & $12576$               & $10184$                   \\
+         $4$                    & $13501$                  & $1$                   & $2332$                    \\
+         $5$                    & $1$                       & $1$                   & $15713$                   \\
+         $6$                    & $1$                       & $1$                   & $17048$                   \\
+         $8$                    & $1$                       & $1$                   & $24947$                   \\
+         $9$                    & $1$                       & $1$                   & $20492$                   \\
+         $10$                   & $1$                       & $1$                   & $49444$
+     \end{tabular}
+     \caption{Penalty reached by the Tabu Search algorithm on the test instances, compared to the
+         penalties of the starting configuration and the competition proposed solution.}
+     \label{tab:penalties}
+ \end{table}
+
+\end{section}

@@ -3,11 +3,11 @@ from Instances import Hospital
 from Solvers import Tabu
 
 instances = [
-    # {"file": "toy", "max_iter": 400, "tabu_size": 30},
-    # {"file": "test01", "max_iter": 1000, "tabu_size": 150},
-    # {"file": "test02", "max_iter": 2500, "tabu_size": 200},
-    # {"file": "test03", "max_iter": 700, "tabu_size": 200},
-    {"file": "test04", "max_iter": 1200, "tabu_size": 250},
+    {"file": "toy", "max_iter": 2500, "tabu_size": 30},
+    {"file": "test01", "max_iter": 2500, "tabu_size": 150},
+    {"file": "test02", "max_iter": 2500, "tabu_size": 200},
+    {"file": "test03", "max_iter": 2500, "tabu_size": 200},
+    {"file": "test04", "max_iter": 2500, "tabu_size": 250},
     # {"file": "test05", "max_iter": 200, "tabu_size": 200},
     # {"file": "test06", "max_iter": 200, "tabu_size": 200},
     # {"file": "test07", "max_iter": 200, "tabu_size": 200},

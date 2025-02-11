@@ -974,14 +974,17 @@ class SCP:
 
     def print(self):
         """Print the current status of the PAS matrix"""
-        for p in np.argwhere(self.matrix):
-            for key, value in dict(
-                zip(["day", "patients", "surgeons", "operating_theaters"], p)
-            ).items():
-                    print(
-                        f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
-                        end=" ",
-                    )
+        # for p in np.argwhere(self.scp_matrix):
+        #     for key, value in dict(
+        #         zip(["day", "patients", "surgeons", "operating_theaters"], p)
+        #     ).items():
+        #         if key == "day":
+        #             print(f"PAS: {key}: {value}", end=" ")
+        #         else:
+        #             print(
+        #                 f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
+        #                 end=" ",
+        #             )
         print()
 
     def save(self) -> NDArray:
@@ -1113,8 +1116,9 @@ class SCP:
         Returns:
             int: penalty for surgeon transfers
         """
+        different_ots = self.scp_matrix[:, :, :, self.dummy_ot :].any(axis=1).sum(axis=-1)
         return (
-            self.scp_matrix[:, :, :, self.dummy_ot :].any(axis=1).sum(axis=(0, 1)).sum()
+            (different_ots[different_ots > 0] - 1).sum()
             * weight
         )
 
@@ -1324,8 +1328,20 @@ class NRA:
         """
         shifts, rooms = np.nonzero(self.nra_matrix[:, :, nurse_index])
         return shifts, rooms
+    
+    def check_room_covered_shift(self, shift: int, room_index: int) -> bool:
+        """Check if the room is covered by any nurse for the given shift
 
-    def check_room_covered(self, day: int, end_day: int, room_index: int) -> bool:
+        Args:
+            shift (int): index of the shift
+            room_index (int): index of the room
+
+        Returns:
+            bool: True if the room is covered by any nurse, False otherwise
+        """
+        return self.nra_matrix[shift, room_index, :].any()
+
+    def check_room_covered_day(self, day: int, end_day: int, room_index: int) -> bool:
         """Check if the room is covered for all shifts by any nurse
 
         Args:
@@ -1381,6 +1397,15 @@ class NRA:
         return penalty * weight
 
     def penalty_continuity(self, weight: int) -> int:
+        """Compute the penalty for continuity of care
+
+        Args:
+            weight (int): weight of the penalty
+
+        Returns:
+            int: penalty for continuity of care
+        """
+        
         penalty = 0
         for patient in range(self.patient_matrix.shape[-1]):
             if not self.patient_matrix[:, :, patient].any(axis=(0, 1)):
@@ -1519,7 +1544,7 @@ class Hospital:
         # Constraint H7: Room capacity
         capacity_ok = self.pas.check_room_capacity(day, end_day, room_index, room)
         # Constraint H8: Room coverage
-        room_covered_ok = self.nra.check_room_covered(day, end_day, room_index)
+        room_covered_ok = self.nra.check_room_covered_day(day, end_day, room_index)
 
         if not gender_ok or not compatible_ok or not capacity_ok or not room_covered_ok:
             raise ActionError("Patient cannot be scheduled in this room")
@@ -1600,7 +1625,11 @@ class Hospital:
         # Check if nurse is available
         if not nurse.is_available(shift):
             raise ActionError("Nurse is not available at this shift")
-
+        
+        # Check if room is already covered
+        if self.nra.check_room_covered_shift(shift, room_index):
+            raise ActionError("Room is already covered by a nurse")
+        
         self.nra.assign_nurse(shift, room_index, nurse_index)
         penalty, penalty_dict = self.compute_penalty()
         if not assign:

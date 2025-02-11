@@ -26,6 +26,7 @@ class Tabu:
         best_penalty, _ = self.hospital.compute_penalty()
         current_penalty = best_penalty
         for i in range(max_iter):
+            print(i)
             neighboring_actions = self.hospital.get_neighboring_moves()
             next_action = None
             next_penalty = float("inf")
