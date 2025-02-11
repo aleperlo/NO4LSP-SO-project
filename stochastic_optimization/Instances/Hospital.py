@@ -443,9 +443,7 @@ class PASActionUnschedule(NeighboringAction):
         return f"Unscheduled patient {self.patient}"
 
     def __eq__(self, value):
-        if not isinstance(
-            value, PASActionUnschedule
-        ):  # and not isinstance(PASActionSchedule):
+        if not isinstance(value, PASActionUnschedule):
             return False
         return (
             self.patient == value.patient
@@ -684,16 +682,18 @@ class Loader:
 class Logger:
     def __init__(self):
         """Initialize the Logger object"""
-        self.log = pd.DataFrame(columns=["penalty"])
+        self.penalties: List[str] = []
+        self.actions: List[str] = []
 
-    def log_action(self, penalty: int, action:str):
+    def log_action(self, penalty: int, action: str):
         """Log the action
 
         Args:
             penalty (int): penalty value
             action (str): action description
         """
-        self.log = pd.concat([self.log, pd.DataFrame({"penalty": [penalty]})])
+        self.penalties.append(penalty)
+        self.actions.append(action)
 
     def get_log(self, file_path: str):
         """Print the log to csv file
@@ -701,7 +701,9 @@ class Logger:
         Args:
             file_path (str): path to the file
         """
-        self.log.to_csv(file_path, index=True)
+        pd.DataFrame({"penalties": self.penalties, "actions": self.actions}).to_csv(
+            file_path, index=True
+        )
 
 
 class PAS:
@@ -971,18 +973,15 @@ class SCP:
         self.dummy_ot = dummy_ot
 
     def print(self):
-        # """Print the current status of the PAS matrix"""
-        # for p in np.argwhere(self.matrix):
-        #     for key, value in dict(
-        #         zip(["day", "rooms", "patients", "operating_theaters"], p)
-        #     ).items():
-        #         if key == "day":
-        #             print(f"PAS: {key}: {value}", end=" ")
-        #         else:
-        #             print(
-        #                 f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
-        #                 end=" ",
-        #             )
+        """Print the current status of the PAS matrix"""
+        for p in np.argwhere(self.matrix):
+            for key, value in dict(
+                zip(["day", "patients", "surgeons", "operating_theaters"], p)
+            ).items():
+                    print(
+                        f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
+                        end=" ",
+                    )
         print()
 
     def save(self) -> NDArray:
@@ -1726,9 +1725,9 @@ class Hospital:
                 patient: Patient = self.patients[action.patient]
                 patient.set_assignment(action.day, room_id, ot_id)
 
-                print(
-                    f"Patient {patient.id} scheduled on day {action.day} in room {room_id} and OT {ot_id}"
-                )
+                # print(
+                #     f"Patient {patient.id} scheduled on day {action.day} in room {room_id} and OT {ot_id}"
+                # )
 
         if isinstance(action, PASActionUnschedule):
             penalty, penalty_dict = self.unschedule_patient(action.patient, assign)
@@ -1736,7 +1735,7 @@ class Hospital:
                 patient: Patient = self.patients[action.patient]
                 patient.unset_assignment()
 
-                print(f"Patient {patient.id} unscheduled")
+                # print(f"Patient {patient.id} unscheduled")
 
         if isinstance(action, NRAActionSchedule):
             penalty, penalty_dict = self.assign_nurse(
@@ -1751,9 +1750,9 @@ class Hospital:
                     room_id,
                 )
 
-                print(
-                    f"Nurse {nurse.id} assigned on shift {action.shift} in room {room_id}"
-                )
+                # print(
+                #     f"Nurse {nurse.id} assigned on shift {action.shift} in room {room_id}"
+                # )
 
         if isinstance(action, NRAActionUnschedule):
             penalty, penalty_dict = self.unassign_nurse(
@@ -1768,13 +1767,13 @@ class Hospital:
                     room_id,
                 )
 
-                print(
-                    f"Nurse {nurse.id} unassigned on shift {action.shift} in room {room_id}"
-                )
+                # print(
+                #     f"Nurse {nurse.id} unassigned on shift {action.shift} in room {room_id}"
+                # )
 
         if assign:
             self.logger.log_action(penalty, str(action))
-            print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
+            # print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
 
         return penalty, penalty_dict
 
