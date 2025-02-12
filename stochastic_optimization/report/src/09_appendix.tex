@@ -1,6 +1,7 @@
 \appendix
 
-\section{Results}
+\section{Appendix}
+\subsection{Results}
 \begin{lstlisting}[caption={Toy}]
     Total violations = 0
 
@@ -73,44 +74,48 @@
     Total cost = 6524
 \end{lstlisting}
 
-\begin{lstlisting}
-    [caption={Test 05}]
-    VIOLATIONS: 
-RoomGenderMix.....................0
-PatientRoomCompatibility..........0
-SurgeonOvertime...................0
-OperatingTheaterOvertime..........0
-MandatoryUnscheduledPatients......1
-AdmissionDay......................0
-RoomCapacity......................0
-NursePresence.....................0
-UncoveredRoom.....................0
-Total violations = 1
-
-COSTS (weight X cost): 
-RoomAgeMix............................10 (  5 X   2)
-RoomSkillLevel........................10 (  1 X  10)
-ContinuityOfCare.....................795 (  5 X 159)
-ExcessiveNurseWorkload................70 (  1 X  70)
-OpenOperatingTheater.................210 ( 30 X   7)
-SurgeonTransfer........................0 ( 10 X   0)
-PatientDelay..........................30 (  5 X   6)
-ElectiveUnscheduledPatients........17200 (400 X  43)
-Total cost = 18325
-\end{lstlisting}
-
-\begin{lstlisting}
-    [caption={Test 06}]
+\begin{lstlisting}[caption={Test 06}]
     Total violations = 0
 
-COSTS (weight X cost): 
-RoomAgeMix............................45 (  5 X   9)
-RoomSkillLevel.......................115 (  1 X 115)
-ContinuityOfCare....................2170 (  5 X 434)
-ExcessiveNurseWorkload...............896 (  1 X 896)
-OpenOperatingTheater.................480 ( 30 X  16)
-SurgeonTransfer.......................50 ( 10 X   5)
-PatientDelay........................2110 ( 10 X 211)
-ElectiveUnscheduledPatients........19500 (500 X  39)
-Total cost = 25366
+    COSTS (weight X cost): 
+    RoomAgeMix............................45 (  5 X   9)
+    RoomSkillLevel.......................115 (  1 X 115)
+    ContinuityOfCare....................2170 (  5 X 434)
+    ExcessiveNurseWorkload...............896 (  1 X 896)
+    OpenOperatingTheater.................480 ( 30 X  16)
+    SurgeonTransfer.......................50 ( 10 X   5)
+    PatientDelay........................2110 ( 10 X 211)
+    ElectiveUnscheduledPatients........19500 (500 X  39)
+    Total cost = 25366
 \end{lstlisting}
+\newpage
+\subsection{Plots}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/toy.pdf}
+        \caption{Toy.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test01.pdf}
+        \caption{Test $01$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test02.pdf}
+        \caption{Test $02$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test03.pdf}
+        \caption{Test $03$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test04.pdf}
+        \caption{Test $04$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test06.pdf}
+        \caption{Test $06$.}
+    \end{subfigure}
+    \caption{Costs of the solution found by the Tabu Search algorithm on the test instances.}
+    \label{fig:plot}
+\end{figure}
