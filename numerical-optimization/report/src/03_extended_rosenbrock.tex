@@ -12,7 +12,7 @@ x_{k-1} -1, & k\mod 2 = 0
 \end{array} \right .
 \end{align}
 The minimum of the function is in a very flat valley which is easy to reach, but in practice it's harder to converge to a minimum, which makes the extended Rosenbrock function a challenging optimization problem.
-\ap{Add something to justify the choice of the constant for modified newton method}.
+For convergence to happen for some points for $n=10^4$, it has been necessary to adopt a higher constant factor $c=5$ for the modification of the Hessian in the Modified Newton method, as the default value $c=2$ was not enough to ensure convergence.
 
 \begin{figure}
     \centering
