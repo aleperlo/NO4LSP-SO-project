@@ -1,0 +1,2501 @@
+,penalties,actions
+0,55500,"Scheduled nurse 0, shift 1, room 0"
+1,55500,"Scheduled nurse 0, shift 1, room 2"
+2,55500,"Scheduled nurse 0, shift 1, room 3"
+3,55500,"Scheduled nurse 0, shift 1, room 5"
+4,55500,"Scheduled nurse 0, shift 1, room 6"
+5,55500,"Scheduled nurse 0, shift 1, room 7"
+6,55500,"Scheduled nurse 0, shift 4, room 0"
+7,55500,"Scheduled nurse 0, shift 4, room 1"
+8,55500,"Scheduled nurse 0, shift 4, room 2"
+9,55500,"Scheduled nurse 0, shift 4, room 3"
+10,55500,"Scheduled nurse 0, shift 4, room 4"
+11,55500,"Scheduled nurse 0, shift 4, room 5"
+12,55500,"Scheduled nurse 0, shift 4, room 6"
+13,55500,"Scheduled nurse 0, shift 4, room 7"
+14,55500,"Scheduled nurse 0, shift 4, room 8"
+15,55500,"Scheduled nurse 0, shift 10, room 0"
+16,55500,"Scheduled nurse 0, shift 10, room 2"
+17,55500,"Scheduled nurse 0, shift 10, room 3"
+18,55500,"Scheduled nurse 0, shift 10, room 4"
+19,55500,"Scheduled nurse 0, shift 10, room 5"
+20,55500,"Scheduled nurse 0, shift 10, room 6"
+21,55500,"Scheduled nurse 0, shift 10, room 7"
+22,55500,"Scheduled nurse 0, shift 10, room 8"
+23,55500,"Scheduled nurse 0, shift 13, room 1"
+24,55500,"Scheduled nurse 0, shift 13, room 2"
+25,55500,"Scheduled nurse 0, shift 13, room 3"
+26,55500,"Scheduled nurse 0, shift 13, room 4"
+27,55500,"Scheduled nurse 0, shift 13, room 5"
+28,55500,"Scheduled nurse 0, shift 13, room 6"
+29,55500,"Scheduled nurse 0, shift 13, room 7"
+30,55500,"Scheduled nurse 0, shift 13, room 8"
+31,55500,"Scheduled nurse 0, shift 16, room 0"
+32,55500,"Scheduled nurse 0, shift 16, room 1"
+33,55500,"Scheduled nurse 0, shift 16, room 2"
+34,55500,"Scheduled nurse 0, shift 16, room 3"
+35,55500,"Scheduled nurse 0, shift 16, room 4"
+36,55500,"Scheduled nurse 0, shift 16, room 5"
+37,55500,"Scheduled nurse 0, shift 16, room 6"
+38,55500,"Scheduled nurse 0, shift 16, room 7"
+39,55500,"Scheduled nurse 0, shift 16, room 8"
+40,55500,"Scheduled nurse 0, shift 20, room 0"
+41,55500,"Scheduled nurse 0, shift 20, room 1"
+42,55500,"Scheduled nurse 0, shift 20, room 2"
+43,55500,"Scheduled nurse 0, shift 20, room 3"
+44,55500,"Scheduled nurse 0, shift 20, room 4"
+45,55500,"Scheduled nurse 0, shift 20, room 5"
+46,55500,"Scheduled nurse 0, shift 20, room 6"
+47,55500,"Scheduled nurse 0, shift 20, room 7"
+48,55500,"Scheduled nurse 0, shift 20, room 8"
+49,55500,"Scheduled nurse 0, shift 23, room 0"
+50,55500,"Scheduled nurse 0, shift 23, room 1"
+51,55500,"Scheduled nurse 0, shift 23, room 2"
+52,55500,"Scheduled nurse 0, shift 23, room 3"
+53,55500,"Scheduled nurse 0, shift 23, room 4"
+54,55500,"Scheduled nurse 0, shift 23, room 5"
+55,55500,"Scheduled nurse 0, shift 23, room 6"
+56,55500,"Scheduled nurse 0, shift 23, room 7"
+57,55500,"Scheduled nurse 0, shift 23, room 8"
+58,55500,"Scheduled nurse 0, shift 26, room 0"
+59,55500,"Scheduled nurse 0, shift 26, room 1"
+60,55500,"Scheduled nurse 0, shift 26, room 2"
+61,55500,"Scheduled nurse 0, shift 26, room 3"
+62,55500,"Scheduled nurse 0, shift 26, room 4"
+63,55500,"Scheduled nurse 0, shift 26, room 5"
+64,55500,"Scheduled nurse 0, shift 26, room 6"
+65,55500,"Scheduled nurse 0, shift 26, room 7"
+66,55500,"Scheduled nurse 0, shift 26, room 8"
+67,55500,"Scheduled nurse 0, shift 30, room 0"
+68,55500,"Scheduled nurse 0, shift 30, room 1"
+69,55500,"Scheduled nurse 0, shift 30, room 2"
+70,55500,"Scheduled nurse 0, shift 30, room 3"
+71,55500,"Scheduled nurse 0, shift 30, room 4"
+72,55500,"Scheduled nurse 0, shift 30, room 5"
+73,55500,"Scheduled nurse 0, shift 30, room 6"
+74,55500,"Scheduled nurse 0, shift 30, room 7"
+75,55500,"Scheduled nurse 0, shift 30, room 8"
+76,55500,"Scheduled nurse 0, shift 34, room 0"
+77,55500,"Scheduled nurse 0, shift 34, room 1"
+78,55500,"Scheduled nurse 0, shift 34, room 2"
+79,55500,"Scheduled nurse 0, shift 34, room 3"
+80,55500,"Scheduled nurse 0, shift 34, room 4"
+81,55500,"Scheduled nurse 0, shift 34, room 5"
+82,55500,"Scheduled nurse 0, shift 34, room 6"
+83,55500,"Scheduled nurse 0, shift 34, room 7"
+84,55500,"Scheduled nurse 0, shift 34, room 8"
+85,55500,"Scheduled nurse 0, shift 37, room 0"
+86,55500,"Scheduled nurse 0, shift 37, room 1"
+87,55500,"Scheduled nurse 0, shift 37, room 2"
+88,55500,"Scheduled nurse 0, shift 37, room 3"
+89,55500,"Scheduled nurse 0, shift 37, room 4"
+90,55500,"Scheduled nurse 0, shift 37, room 5"
+91,55500,"Scheduled nurse 0, shift 37, room 6"
+92,55500,"Scheduled nurse 0, shift 37, room 7"
+93,55500,"Scheduled nurse 0, shift 37, room 8"
+94,55500,"Scheduled nurse 0, shift 40, room 0"
+95,55500,"Scheduled nurse 0, shift 40, room 1"
+96,55500,"Scheduled nurse 0, shift 40, room 2"
+97,55500,"Scheduled nurse 0, shift 40, room 3"
+98,55500,"Scheduled nurse 0, shift 40, room 4"
+99,55500,"Scheduled nurse 0, shift 40, room 5"
+100,55500,"Scheduled nurse 0, shift 40, room 6"
+101,55500,"Scheduled nurse 0, shift 40, room 7"
+102,55500,"Scheduled nurse 0, shift 40, room 8"
+103,55500,"Scheduled nurse 1, shift 5, room 0"
+104,55500,"Scheduled nurse 1, shift 5, room 1"
+105,55500,"Scheduled nurse 1, shift 5, room 2"
+106,55500,"Scheduled nurse 1, shift 5, room 3"
+107,55500,"Scheduled nurse 1, shift 5, room 4"
+108,55500,"Scheduled nurse 1, shift 5, room 5"
+109,55500,"Scheduled nurse 1, shift 5, room 6"
+110,55500,"Scheduled nurse 1, shift 5, room 7"
+111,55500,"Scheduled nurse 1, shift 5, room 8"
+112,55500,"Scheduled nurse 1, shift 8, room 0"
+113,55500,"Scheduled nurse 1, shift 8, room 1"
+114,55500,"Scheduled nurse 1, shift 8, room 2"
+115,55500,"Scheduled nurse 1, shift 8, room 3"
+116,55500,"Scheduled nurse 1, shift 8, room 4"
+117,55500,"Scheduled nurse 1, shift 8, room 5"
+118,55500,"Scheduled nurse 1, shift 8, room 6"
+119,55500,"Scheduled nurse 1, shift 8, room 7"
+120,55500,"Scheduled nurse 1, shift 8, room 8"
+121,55500,"Scheduled nurse 1, shift 11, room 0"
+122,55500,"Scheduled nurse 1, shift 11, room 1"
+123,55500,"Scheduled nurse 1, shift 11, room 2"
+124,55500,"Scheduled nurse 1, shift 11, room 3"
+125,55500,"Scheduled nurse 1, shift 11, room 4"
+126,55500,"Scheduled nurse 1, shift 11, room 5"
+127,55500,"Scheduled nurse 1, shift 11, room 6"
+128,55500,"Scheduled nurse 1, shift 11, room 7"
+129,55500,"Scheduled nurse 1, shift 11, room 8"
+130,55500,"Scheduled nurse 1, shift 17, room 0"
+131,55500,"Scheduled nurse 1, shift 17, room 1"
+132,55500,"Scheduled nurse 1, shift 17, room 2"
+133,55500,"Scheduled nurse 1, shift 17, room 3"
+134,55500,"Scheduled nurse 1, shift 17, room 4"
+135,55500,"Scheduled nurse 1, shift 17, room 5"
+136,55500,"Scheduled nurse 1, shift 17, room 6"
+137,55500,"Scheduled nurse 1, shift 17, room 7"
+138,55500,"Scheduled nurse 1, shift 17, room 8"
+139,55500,"Scheduled nurse 1, shift 21, room 0"
+140,55500,"Scheduled nurse 1, shift 21, room 1"
+141,55500,"Scheduled nurse 1, shift 21, room 2"
+142,55500,"Scheduled nurse 1, shift 21, room 3"
+143,55500,"Scheduled nurse 1, shift 21, room 4"
+144,55500,"Scheduled nurse 1, shift 21, room 5"
+145,55500,"Scheduled nurse 1, shift 21, room 6"
+146,55500,"Scheduled nurse 1, shift 21, room 7"
+147,55500,"Scheduled nurse 1, shift 21, room 8"
+148,55500,"Scheduled nurse 1, shift 25, room 0"
+149,55500,"Scheduled nurse 1, shift 25, room 1"
+150,55500,"Scheduled nurse 1, shift 25, room 2"
+151,55500,"Scheduled nurse 1, shift 25, room 3"
+152,55500,"Scheduled nurse 1, shift 25, room 4"
+153,55500,"Scheduled nurse 1, shift 25, room 5"
+154,55500,"Scheduled nurse 1, shift 25, room 6"
+155,55500,"Scheduled nurse 1, shift 25, room 7"
+156,55500,"Scheduled nurse 1, shift 25, room 8"
+157,55500,"Scheduled nurse 1, shift 28, room 0"
+158,55500,"Scheduled nurse 1, shift 28, room 1"
+159,55500,"Scheduled nurse 1, shift 28, room 2"
+160,55500,"Scheduled nurse 1, shift 28, room 3"
+161,55500,"Scheduled nurse 1, shift 28, room 4"
+162,55500,"Scheduled nurse 1, shift 28, room 5"
+163,55500,"Scheduled nurse 1, shift 28, room 6"
+164,55500,"Scheduled nurse 1, shift 28, room 7"
+165,55500,"Scheduled nurse 1, shift 28, room 8"
+166,55500,"Scheduled nurse 1, shift 32, room 0"
+167,55500,"Scheduled nurse 1, shift 32, room 1"
+168,55500,"Scheduled nurse 1, shift 32, room 2"
+169,55500,"Scheduled nurse 1, shift 32, room 3"
+170,55500,"Scheduled nurse 1, shift 32, room 4"
+171,55500,"Scheduled nurse 1, shift 32, room 5"
+172,55500,"Scheduled nurse 1, shift 32, room 6"
+173,55500,"Scheduled nurse 1, shift 32, room 7"
+174,55500,"Scheduled nurse 1, shift 32, room 8"
+175,55500,"Scheduled nurse 1, shift 35, room 0"
+176,55500,"Scheduled nurse 1, shift 35, room 1"
+177,55500,"Scheduled nurse 1, shift 35, room 2"
+178,55500,"Scheduled nurse 1, shift 35, room 3"
+179,55500,"Scheduled nurse 1, shift 35, room 4"
+180,55500,"Scheduled nurse 1, shift 35, room 5"
+181,55500,"Scheduled nurse 1, shift 35, room 6"
+182,55500,"Scheduled nurse 1, shift 35, room 7"
+183,55500,"Scheduled nurse 1, shift 35, room 8"
+184,55500,"Scheduled nurse 1, shift 38, room 0"
+185,55500,"Scheduled nurse 1, shift 38, room 1"
+186,55500,"Scheduled nurse 1, shift 38, room 2"
+187,55500,"Scheduled nurse 1, shift 38, room 3"
+188,55500,"Scheduled nurse 1, shift 38, room 4"
+189,55500,"Scheduled nurse 1, shift 38, room 5"
+190,55500,"Scheduled nurse 1, shift 38, room 6"
+191,55500,"Scheduled nurse 1, shift 38, room 7"
+192,55500,"Scheduled nurse 1, shift 38, room 8"
+193,55500,"Scheduled nurse 2, shift 2, room 0"
+194,55500,"Scheduled nurse 2, shift 2, room 1"
+195,55500,"Scheduled nurse 2, shift 2, room 2"
+196,55500,"Scheduled nurse 2, shift 2, room 3"
+197,55500,"Scheduled nurse 2, shift 2, room 4"
+198,55500,"Scheduled nurse 2, shift 2, room 5"
+199,55500,"Scheduled nurse 2, shift 2, room 6"
+200,55500,"Scheduled nurse 2, shift 2, room 7"
+201,55500,"Scheduled nurse 2, shift 2, room 8"
+202,55500,"Scheduled nurse 2, shift 15, room 0"
+203,55500,"Scheduled nurse 2, shift 15, room 1"
+204,55500,"Scheduled nurse 2, shift 15, room 2"
+205,55500,"Scheduled nurse 2, shift 15, room 3"
+206,55500,"Scheduled nurse 2, shift 15, room 4"
+207,55500,"Scheduled nurse 2, shift 15, room 5"
+208,55500,"Scheduled nurse 2, shift 15, room 6"
+209,55500,"Scheduled nurse 2, shift 15, room 7"
+210,55500,"Scheduled nurse 2, shift 15, room 8"
+211,55500,"Scheduled nurse 2, shift 19, room 0"
+212,55500,"Scheduled nurse 2, shift 19, room 1"
+213,55500,"Scheduled nurse 2, shift 19, room 2"
+214,55500,"Scheduled nurse 2, shift 19, room 3"
+215,55500,"Scheduled nurse 2, shift 19, room 4"
+216,55500,"Scheduled nurse 2, shift 19, room 5"
+217,55500,"Scheduled nurse 2, shift 19, room 6"
+218,55500,"Scheduled nurse 2, shift 19, room 7"
+219,55500,"Scheduled nurse 2, shift 19, room 8"
+220,55500,"Scheduled nurse 2, shift 22, room 0"
+221,55500,"Scheduled nurse 2, shift 22, room 1"
+222,55500,"Scheduled nurse 2, shift 22, room 2"
+223,55500,"Scheduled nurse 2, shift 22, room 3"
+224,55500,"Scheduled nurse 2, shift 22, room 4"
+225,55500,"Scheduled nurse 2, shift 22, room 5"
+226,55500,"Scheduled nurse 2, shift 22, room 6"
+227,55500,"Scheduled nurse 2, shift 22, room 7"
+228,55500,"Scheduled nurse 2, shift 22, room 8"
+229,55500,"Scheduled nurse 2, shift 31, room 0"
+230,55500,"Scheduled nurse 2, shift 31, room 1"
+231,55500,"Scheduled nurse 2, shift 31, room 2"
+232,55500,"Scheduled nurse 2, shift 31, room 3"
+233,55500,"Scheduled nurse 2, shift 31, room 4"
+234,55500,"Scheduled nurse 2, shift 31, room 5"
+235,55500,"Scheduled nurse 2, shift 31, room 6"
+236,55500,"Scheduled nurse 2, shift 31, room 7"
+237,55500,"Scheduled nurse 2, shift 31, room 8"
+238,55500,"Scheduled nurse 3, shift 7, room 0"
+239,55500,"Scheduled nurse 3, shift 7, room 1"
+240,55500,"Scheduled nurse 3, shift 7, room 2"
+241,55500,"Scheduled nurse 3, shift 7, room 3"
+242,55500,"Scheduled nurse 3, shift 7, room 4"
+243,55500,"Scheduled nurse 3, shift 7, room 5"
+244,55500,"Scheduled nurse 3, shift 7, room 6"
+245,55500,"Scheduled nurse 3, shift 7, room 7"
+246,55500,"Scheduled nurse 3, shift 7, room 8"
+247,55500,"Scheduled nurse 3, shift 10, room 1"
+248,55500,"Scheduled nurse 3, shift 14, room 0"
+249,55500,"Scheduled nurse 3, shift 14, room 1"
+250,55500,"Scheduled nurse 3, shift 14, room 2"
+251,55500,"Scheduled nurse 3, shift 14, room 3"
+252,55500,"Scheduled nurse 3, shift 14, room 4"
+253,55500,"Scheduled nurse 3, shift 14, room 5"
+254,55500,"Scheduled nurse 3, shift 14, room 6"
+255,55500,"Scheduled nurse 3, shift 14, room 7"
+256,55500,"Scheduled nurse 3, shift 14, room 8"
+257,55500,"Scheduled nurse 4, shift 29, room 0"
+258,55500,"Scheduled nurse 4, shift 29, room 1"
+259,55500,"Scheduled nurse 4, shift 29, room 2"
+260,55500,"Scheduled nurse 4, shift 29, room 3"
+261,55500,"Scheduled nurse 4, shift 29, room 4"
+262,55500,"Scheduled nurse 4, shift 29, room 5"
+263,55500,"Scheduled nurse 4, shift 29, room 6"
+264,55500,"Scheduled nurse 4, shift 29, room 7"
+265,55500,"Scheduled nurse 4, shift 29, room 8"
+266,55500,"Scheduled nurse 5, shift 1, room 1"
+267,55500,"Scheduled nurse 5, shift 1, room 4"
+268,55500,"Scheduled nurse 5, shift 1, room 8"
+269,55500,"Scheduled nurse 5, shift 6, room 0"
+270,55500,"Scheduled nurse 5, shift 6, room 1"
+271,55500,"Scheduled nurse 5, shift 6, room 2"
+272,55500,"Scheduled nurse 5, shift 6, room 3"
+273,55500,"Scheduled nurse 5, shift 6, room 4"
+274,55500,"Scheduled nurse 5, shift 6, room 5"
+275,55500,"Scheduled nurse 5, shift 6, room 6"
+276,55500,"Scheduled nurse 5, shift 6, room 7"
+277,55500,"Scheduled nurse 5, shift 6, room 8"
+278,55500,"Scheduled nurse 5, shift 13, room 0"
+279,55500,"Scheduled nurse 5, shift 24, room 0"
+280,55500,"Scheduled nurse 5, shift 24, room 1"
+281,55500,"Scheduled nurse 5, shift 24, room 2"
+282,55500,"Scheduled nurse 5, shift 24, room 3"
+283,55500,"Scheduled nurse 5, shift 24, room 4"
+284,55500,"Scheduled nurse 5, shift 24, room 5"
+285,55500,"Scheduled nurse 5, shift 24, room 6"
+286,55500,"Scheduled nurse 5, shift 24, room 7"
+287,55500,"Scheduled nurse 5, shift 24, room 8"
+288,55500,"Scheduled nurse 5, shift 27, room 0"
+289,55056,"Admitted patient 32, day 7, room 0, OT 1"
+290,54612,"Admitted patient 107, day 9, room 0, OT 1"
+291,54217,"Admitted patient 19, day 8, room 0, OT 1"
+292,54217,"Scheduled nurse 5, shift 27, room 1"
+293,53745,"Admitted patient 92, day 7, room 1, OT 1"
+294,53310,"Admitted patient 75, day 7, room 1, OT 1"
+295,53310,"Scheduled nurse 5, shift 27, room 2"
+296,52887,"Admitted patient 79, day 8, room 2, OT 1"
+297,52887,"Scheduled nurse 5, shift 27, room 3"
+298,52457,"Admitted patient 47, day 8, room 3, OT 1"
+299,52048,"Admitted patient 63, day 8, room 3, OT 1"
+300,52048,"Scheduled nurse 5, shift 27, room 4"
+301,52048,"Scheduled nurse 5, shift 27, room 5"
+302,52048,"Scheduled nurse 5, shift 27, room 6"
+303,52048,"Scheduled nurse 5, shift 27, room 7"
+304,52048,"Scheduled nurse 5, shift 27, room 8"
+305,52048,"Scheduled nurse 5, shift 36, room 0"
+306,52048,"Scheduled nurse 5, shift 36, room 1"
+307,52048,"Scheduled nurse 5, shift 36, room 2"
+308,52048,"Scheduled nurse 5, shift 36, room 3"
+309,52048,"Scheduled nurse 5, shift 36, room 4"
+310,52048,"Scheduled nurse 5, shift 36, room 5"
+311,52048,"Scheduled nurse 5, shift 36, room 6"
+312,52048,"Scheduled nurse 5, shift 36, room 7"
+313,52048,"Scheduled nurse 5, shift 36, room 8"
+314,52048,"Scheduled nurse 5, shift 39, room 0"
+315,52048,"Scheduled nurse 5, shift 39, room 1"
+316,52048,"Scheduled nurse 5, shift 39, room 2"
+317,52048,"Scheduled nurse 5, shift 39, room 3"
+318,52048,"Scheduled nurse 5, shift 39, room 4"
+319,52048,"Scheduled nurse 5, shift 39, room 5"
+320,52048,"Scheduled nurse 5, shift 39, room 6"
+321,52048,"Scheduled nurse 5, shift 39, room 7"
+322,52048,"Scheduled nurse 5, shift 39, room 8"
+323,52048,"Scheduled nurse 6, shift 18, room 1"
+324,52048,"Scheduled nurse 6, shift 18, room 2"
+325,51603,"Admitted patient 51, day 6, room 2, OT 1"
+326,51150,"Admitted patient 95, day 6, room 2, OT 1"
+327,51150,"Scheduled nurse 6, shift 18, room 3"
+328,51150,"Scheduled nurse 6, shift 18, room 4"
+329,50702,"Admitted patient 102, day 6, room 4, OT 1"
+330,50702,"Scheduled nurse 6, shift 18, room 5"
+331,50702,"Scheduled nurse 6, shift 18, room 6"
+332,50702,"Scheduled nurse 6, shift 18, room 7"
+333,50702,"Scheduled nurse 6, shift 18, room 8"
+334,50702,"Scheduled nurse 7, shift 18, room 0"
+335,50702,"Scheduled nurse 7, shift 41, room 0"
+336,50252,"Admitted patient 109, day 12, room 0, OT 1"
+337,49853,"Admitted patient 23, day 12, room 0, OT 1"
+338,49463,"Admitted patient 12, day 12, room 0, OT 1"
+339,49463,"Scheduled nurse 7, shift 41, room 1"
+340,48994,"Admitted patient 70, day 12, room 1, OT 1"
+341,48584,"Admitted patient 21, day 13, room 1, OT 1"
+342,48584,"Scheduled nurse 7, shift 41, room 2"
+343,48139,"Admitted patient 39, day 13, room 2, OT 1"
+344,47740,"Admitted patient 116, day 12, room 2, OT 1"
+345,47346,"Admitted patient 55, day 13, room 2, OT 1"
+346,47346,"Scheduled nurse 7, shift 41, room 3"
+347,46957,"Admitted patient 67, day 12, room 3, OT 1"
+348,46582,"Admitted patient 65, day 13, room 3, OT 1"
+349,46582,"Scheduled nurse 7, shift 41, room 4"
+350,46217,"Admitted patient 17, day 13, room 4, OT 1"
+351,45883,"Admitted patient 71, day 13, room 4, OT 2"
+352,45528,"Admitted patient 16, day 13, room 4, OT 2"
+353,45528,"Scheduled nurse 7, shift 41, room 5"
+354,45153,"Admitted patient 93, day 13, room 5, OT 2"
+355,45153,"Scheduled nurse 7, shift 41, room 6"
+356,44799,"Admitted patient 98, day 13, room 6, OT 2"
+357,44799,"Scheduled nurse 7, shift 41, room 7"
+358,44799,"Scheduled nurse 7, shift 41, room 8"
+359,44799,"Scheduled nurse 8, shift 9, room 0"
+360,44799,"Scheduled nurse 8, shift 9, room 1"
+361,44799,"Scheduled nurse 8, shift 9, room 2"
+362,44799,"Scheduled nurse 8, shift 9, room 3"
+363,44799,"Scheduled nurse 8, shift 9, room 4"
+364,44799,"Scheduled nurse 8, shift 9, room 5"
+365,44799,"Scheduled nurse 8, shift 9, room 6"
+366,44799,"Scheduled nurse 8, shift 9, room 7"
+367,44799,"Scheduled nurse 8, shift 9, room 8"
+368,44799,"Scheduled nurse 8, shift 12, room 0"
+369,44360,"Admitted patient 66, day 3, room 0, OT 1"
+370,43891,"Admitted patient 101, day 3, room 0, OT 1"
+371,43891,"Scheduled nurse 8, shift 12, room 1"
+372,43447,"Admitted patient 22, day 3, room 1, OT 1"
+373,43007,"Admitted patient 30, day 4, room 1, OT 1"
+374,43007,"Scheduled nurse 8, shift 12, room 2"
+375,42538,"Admitted patient 20, day 4, room 2, OT 1"
+376,42084,"Admitted patient 64, day 3, room 2, OT 1"
+377,41654,"Admitted patient 81, day 3, room 2, OT 1"
+378,41654,"Scheduled nurse 8, shift 12, room 3"
+379,41206,"Admitted patient 13, day 3, room 3, OT 1"
+380,41206,"Scheduled nurse 8, shift 12, room 4"
+381,40778,"Admitted patient 15, day 4, room 4, OT 1"
+382,40778,"Scheduled nurse 8, shift 12, room 5"
+383,40358,"Admitted patient 57, day 4, room 5, OT 1"
+384,40358,"Scheduled nurse 8, shift 12, room 6"
+385,39925,"Admitted patient 58, day 2, room 6, OT 1"
+386,39499,"Admitted patient 84, day 3, room 6, OT 2"
+387,39090,"Admitted patient 86, day 4, room 6, OT 2"
+388,39090,"Scheduled nurse 8, shift 12, room 7"
+389,38635,"Admitted patient 111, day 4, room 7, OT 2"
+390,38191,"Admitted patient 24, day 2, room 7, OT 1"
+391,38191,"Scheduled nurse 8, shift 12, room 8"
+392,37729,"Admitted patient 44, day 3, room 8, OT 1"
+393,37276,"Admitted patient 43, day 3, room 8, OT 2"
+394,37276,"Scheduled nurse 9, shift 3, room 0"
+395,37276,"Unscheduled nurse 0, shift 34, room 0"
+396,37276,"Unscheduled nurse 0, shift 30, room 1"
+397,37276,"Unscheduled nurse 0, shift 4, room 2"
+398,37276,"Unscheduled nurse 0, shift 23, room 3"
+399,37276,"Unscheduled nurse 0, shift 4, room 4"
+400,37276,"Unscheduled nurse 0, shift 30, room 5"
+401,37276,"Unscheduled nurse 0, shift 4, room 6"
+402,37276,"Unscheduled nurse 0, shift 30, room 7"
+403,37276,"Unscheduled nurse 0, shift 30, room 8"
+404,37276,"Scheduled nurse 5, shift 30, room 1"
+405,37276,"Scheduled nurse 5, shift 30, room 5"
+406,37276,"Scheduled nurse 5, shift 30, room 7"
+407,37276,"Scheduled nurse 5, shift 30, room 8"
+408,37276,"Scheduled nurse 7, shift 23, room 3"
+409,37276,"Scheduled nurse 8, shift 4, room 2"
+410,37276,"Scheduled nurse 8, shift 4, room 4"
+411,37276,"Scheduled nurse 8, shift 4, room 6"
+412,37276,"Scheduled nurse 9, shift 3, room 1"
+413,37276,"Scheduled nurse 9, shift 3, room 2"
+414,37276,"Scheduled nurse 9, shift 3, room 3"
+415,37276,"Scheduled nurse 9, shift 3, room 4"
+416,37276,"Scheduled nurse 9, shift 3, room 5"
+417,37276,"Scheduled nurse 9, shift 3, room 6"
+418,37276,"Scheduled nurse 9, shift 3, room 7"
+419,37276,"Scheduled nurse 9, shift 3, room 8"
+420,37276,"Scheduled nurse 9, shift 34, room 0"
+421,37276,"Scheduled nurse 10, shift 0, room 0"
+422,37276,"Scheduled nurse 10, shift 0, room 1"
+423,37276,"Scheduled nurse 10, shift 0, room 2"
+424,37276,"Scheduled nurse 10, shift 0, room 4"
+425,37276,"Scheduled nurse 10, shift 0, room 5"
+426,37276,"Scheduled nurse 10, shift 0, room 6"
+427,37276,"Scheduled nurse 10, shift 0, room 7"
+428,37276,"Scheduled nurse 10, shift 0, room 8"
+429,37276,"Scheduled nurse 10, shift 33, room 0"
+430,37276,"Scheduled nurse 10, shift 33, room 1"
+431,37276,"Scheduled nurse 10, shift 33, room 2"
+432,37276,"Scheduled nurse 10, shift 33, room 3"
+433,36833,"Admitted patient 26, day 10, room 3, OT 1"
+434,36833,"Scheduled nurse 10, shift 33, room 4"
+435,36364,"Admitted patient 105, day 8, room 4, OT 1"
+436,36364,"Scheduled nurse 10, shift 33, room 5"
+437,35896,"Admitted patient 115, day 9, room 5, OT 1"
+438,35896,"Scheduled nurse 10, shift 33, room 6"
+439,35896,"Scheduled nurse 10, shift 33, room 7"
+440,35518,"Admitted patient 56, day 10, room 7, OT 1"
+441,35144,"Admitted patient 76, day 11, room 7, OT 1"
+442,35144,"Scheduled nurse 10, shift 33, room 8"
+443,35144,"Scheduled nurse 12, shift 0, room 3"
+444,35498,Unscheduled patient 98
+445,35090,"Admitted patient 98, day 0, room 3, OT 1"
+446,35445,Unscheduled patient 16
+447,34996,"Admitted patient 16, day 2, room 4, OT 1"
+448,35361,Unscheduled patient 17
+449,34896,"Admitted patient 17, day 2, room 4, OT 1"
+450,35261,Unscheduled patient 65
+451,34867,"Admitted patient 65, day 10, room 5, OT 1"
+452,35241,Unscheduled patient 71
+453,34857,"Admitted patient 71, day 11, room 4, OT 1"
+454,35202,Unscheduled patient 93
+455,34820,"Admitted patient 93, day 11, room 6, OT 1"
+456,35199,Unscheduled patient 56
+457,34819,"Admitted patient 56, day 10, room 6, OT 1"
+458,35199,Unscheduled patient 56
+459,34821,"Admitted patient 56, day 10, room 8, OT 1"
+460,35199,Unscheduled patient 56
+461,34824,"Admitted patient 56, day 11, room 6, OT 1"
+462,35199,Unscheduled patient 56
+463,34826,"Admitted patient 56, day 11, room 7, OT 1"
+464,35199,Unscheduled patient 56
+465,34826,"Admitted patient 56, day 11, room 8, OT 1"
+466,35199,Unscheduled patient 56
+467,34859,"Admitted patient 56, day 10, room 6, OT 2"
+468,35199,Unscheduled patient 56
+469,34859,"Admitted patient 56, day 10, room 6, OT 3"
+470,35199,Unscheduled patient 56
+471,34860,"Admitted patient 56, day 10, room 7, OT 2"
+472,35199,Unscheduled patient 56
+473,34860,"Admitted patient 56, day 10, room 7, OT 3"
+474,35199,Unscheduled patient 56
+475,34861,"Admitted patient 56, day 10, room 8, OT 2"
+476,35199,Unscheduled patient 56
+477,34861,"Admitted patient 56, day 10, room 8, OT 3"
+478,35199,Unscheduled patient 56
+479,34864,"Admitted patient 56, day 11, room 6, OT 2"
+480,35199,Unscheduled patient 56
+481,34864,"Admitted patient 56, day 11, room 6, OT 3"
+482,35199,Unscheduled patient 56
+483,34864,"Admitted patient 56, day 13, room 5, OT 2"
+484,35199,Unscheduled patient 56
+485,34864,"Admitted patient 56, day 13, room 5, OT 3"
+486,34864,"Unscheduled nurse 1, shift 32, room 1"
+487,34864,"Unscheduled nurse 1, shift 5, room 2"
+488,34864,"Unscheduled nurse 1, shift 35, room 0"
+489,34864,"Unscheduled nurse 1, shift 5, room 4"
+490,34864,"Scheduled nurse 2, shift 5, room 2"
+491,34864,"Unscheduled nurse 1, shift 5, room 6"
+492,34864,"Unscheduled nurse 1, shift 32, room 7"
+493,34864,"Unscheduled nurse 1, shift 8, room 8"
+494,34864,"Scheduled nurse 2, shift 5, room 4"
+495,34864,"Scheduled nurse 2, shift 5, room 6"
+496,34864,"Scheduled nurse 2, shift 8, room 8"
+497,34864,"Scheduled nurse 3, shift 32, room 1"
+498,34864,"Scheduled nurse 3, shift 32, room 7"
+499,34864,"Scheduled nurse 4, shift 35, room 0"
+500,35199,Unscheduled patient 56
+501,34864,"Admitted patient 56, day 13, room 6, OT 2"
+502,35199,Unscheduled patient 56
+503,34864,"Admitted patient 56, day 13, room 6, OT 3"
+504,35199,Unscheduled patient 56
+505,34864,"Admitted patient 56, day 13, room 7, OT 2"
+506,35199,Unscheduled patient 56
+507,34864,"Admitted patient 56, day 13, room 7, OT 3"
+508,35199,Unscheduled patient 56
+509,34864,"Admitted patient 56, day 13, room 8, OT 2"
+510,35199,Unscheduled patient 56
+511,34864,"Admitted patient 56, day 13, room 8, OT 3"
+512,35199,Unscheduled patient 56
+513,34866,"Admitted patient 56, day 11, room 7, OT 2"
+514,35199,Unscheduled patient 56
+515,34866,"Admitted patient 56, day 11, room 7, OT 3"
+516,35199,Unscheduled patient 56
+517,34866,"Admitted patient 56, day 11, room 8, OT 2"
+518,35199,Unscheduled patient 56
+519,34866,"Admitted patient 56, day 11, room 8, OT 3"
+520,35199,Unscheduled patient 56
+521,35581,Unscheduled patient 93
+522,35193,"Admitted patient 93, day 10, room 6, OT 1"
+523,35577,Unscheduled patient 71
+524,35182,"Admitted patient 71, day 10, room 8, OT 1"
+525,34809,"Admitted patient 56, day 11, room 6, OT 1"
+526,35197,Unscheduled patient 93
+527,34812,"Admitted patient 93, day 10, room 7, OT 1"
+528,35197,Unscheduled patient 93
+529,34814,"Admitted patient 93, day 11, room 7, OT 1"
+530,35197,Unscheduled patient 93
+531,34822,"Admitted patient 93, day 13, room 4, OT 1"
+532,34822,"Unscheduled nurse 2, shift 31, room 1"
+533,34822,"Scheduled nurse 12, shift 31, room 1"
+534,35197,Unscheduled patient 93
+535,34822,"Admitted patient 93, day 13, room 5, OT 1"
+536,35197,Unscheduled patient 93
+537,34822,"Admitted patient 93, day 13, room 6, OT 1"
+538,34822,"Unscheduled nurse 2, shift 31, room 7"
+539,34822,"Scheduled nurse 12, shift 31, room 7"
+540,35197,Unscheduled patient 93
+541,34822,"Admitted patient 93, day 13, room 7, OT 1"
+542,35197,Unscheduled patient 93
+543,34822,"Admitted patient 93, day 13, room 8, OT 1"
+544,35197,Unscheduled patient 93
+545,34849,"Admitted patient 93, day 10, room 6, OT 2"
+546,35197,Unscheduled patient 93
+547,34849,"Admitted patient 93, day 10, room 6, OT 3"
+548,35197,Unscheduled patient 93
+549,34852,"Admitted patient 93, day 10, room 7, OT 2"
+550,35197,Unscheduled patient 93
+551,34852,"Admitted patient 93, day 10, room 7, OT 3"
+552,34852,"Unscheduled nurse 3, shift 7, room 2"
+553,34852,"Scheduled nurse 10, shift 7, room 2"
+554,35197,Unscheduled patient 93
+555,34852,"Admitted patient 93, day 13, room 4, OT 2"
+556,35197,Unscheduled patient 93
+557,34852,"Admitted patient 93, day 13, room 4, OT 3"
+558,34852,"Unscheduled nurse 3, shift 7, room 8"
+559,34852,"Scheduled nurse 10, shift 7, room 8"
+560,35197,Unscheduled patient 93
+561,34852,"Admitted patient 93, day 13, room 5, OT 3"
+562,35197,Unscheduled patient 93
+563,34852,"Admitted patient 93, day 13, room 6, OT 2"
+564,35197,Unscheduled patient 93
+565,34852,"Admitted patient 93, day 13, room 6, OT 3"
+566,34852,"Unscheduled nurse 4, shift 29, room 8"
+567,34852,"Scheduled nurse 8, shift 29, room 8"
+568,35197,Unscheduled patient 93
+569,34852,"Admitted patient 93, day 13, room 7, OT 2"
+570,35197,Unscheduled patient 93
+571,34852,"Admitted patient 93, day 13, room 7, OT 3"
+572,35197,Unscheduled patient 93
+573,34852,"Admitted patient 93, day 13, room 8, OT 2"
+574,35197,Unscheduled patient 93
+575,34852,"Admitted patient 93, day 13, room 8, OT 3"
+576,35197,Unscheduled patient 93
+577,34853,"Admitted patient 93, day 11, room 6, OT 2"
+578,35197,Unscheduled patient 93
+579,34853,"Admitted patient 93, day 11, room 6, OT 3"
+580,35197,Unscheduled patient 93
+581,34854,"Admitted patient 93, day 11, room 7, OT 2"
+582,35197,Unscheduled patient 93
+583,34854,"Admitted patient 93, day 11, room 7, OT 3"
+584,35197,Unscheduled patient 93
+585,35587,Unscheduled patient 12
+586,35189,"Admitted patient 12, day 10, room 6, OT 1"
+587,34804,"Admitted patient 93, day 11, room 6, OT 1"
+588,35194,Unscheduled patient 67
+589,34796,"Admitted patient 67, day 10, room 3, OT 1"
+590,35190,Unscheduled patient 55
+591,34772,"Admitted patient 55, day 9, room 8, OT 1"
+592,35166,Unscheduled patient 65
+593,34774,"Admitted patient 65, day 10, room 4, OT 1"
+594,35166,Unscheduled patient 65
+595,34782,"Admitted patient 65, day 10, room 1, OT 1"
+596,35166,Unscheduled patient 65
+597,34782,"Admitted patient 65, day 11, room 5, OT 1"
+598,35166,Unscheduled patient 65
+599,34783,"Admitted patient 65, day 11, room 2, OT 1"
+600,35166,Unscheduled patient 65
+601,34783,"Admitted patient 65, day 11, room 4, OT 1"
+602,35166,Unscheduled patient 65
+603,34786,"Admitted patient 65, day 12, room 2, OT 1"
+604,35166,Unscheduled patient 65
+605,34786,"Admitted patient 65, day 12, room 4, OT 1"
+606,35166,Unscheduled patient 65
+607,34786,"Admitted patient 65, day 12, room 5, OT 1"
+608,35166,Unscheduled patient 65
+609,34791,"Admitted patient 65, day 13, room 2, OT 1"
+610,35166,Unscheduled patient 65
+611,34791,"Admitted patient 65, day 13, room 4, OT 1"
+612,35166,Unscheduled patient 65
+613,34791,"Admitted patient 65, day 13, room 5, OT 1"
+614,35166,Unscheduled patient 65
+615,34791,"Admitted patient 65, day 13, room 8, OT 1"
+616,35166,Unscheduled patient 65
+617,34812,"Admitted patient 65, day 10, room 5, OT 2"
+618,34812,"Unscheduled nurse 5, shift 6, room 2"
+619,34812,"Unscheduled nurse 5, shift 36, room 4"
+620,34812,"Scheduled nurse 6, shift 6, room 2"
+621,34812,"Scheduled nurse 8, shift 36, room 4"
+622,35166,Unscheduled patient 65
+623,34812,"Admitted patient 65, day 10, room 5, OT 3"
+624,35166,Unscheduled patient 65
+625,34814,"Admitted patient 65, day 10, room 4, OT 2"
+626,35166,Unscheduled patient 65
+627,34814,"Admitted patient 65, day 10, room 4, OT 3"
+628,35166,Unscheduled patient 65
+629,34821,"Admitted patient 65, day 13, room 2, OT 2"
+630,35166,Unscheduled patient 65
+631,34821,"Admitted patient 65, day 13, room 2, OT 3"
+632,35166,Unscheduled patient 65
+633,34821,"Admitted patient 65, day 13, room 3, OT 2"
+634,35166,Unscheduled patient 65
+635,34821,"Admitted patient 65, day 13, room 3, OT 3"
+636,35166,Unscheduled patient 65
+637,34821,"Admitted patient 65, day 13, room 4, OT 2"
+638,35166,Unscheduled patient 65
+639,34821,"Admitted patient 65, day 13, room 4, OT 3"
+640,35166,Unscheduled patient 65
+641,34821,"Admitted patient 65, day 13, room 5, OT 2"
+642,35166,Unscheduled patient 65
+643,34821,"Admitted patient 65, day 13, room 5, OT 3"
+644,35166,Unscheduled patient 65
+645,34821,"Admitted patient 65, day 13, room 8, OT 2"
+646,35166,Unscheduled patient 65
+647,34821,"Admitted patient 65, day 13, room 8, OT 3"
+648,35166,Unscheduled patient 65
+649,34791,"Admitted patient 65, day 13, room 3, OT 1"
+650,34791,"Unscheduled nurse 7, shift 41, room 4"
+651,34791,"Scheduled nurse 11, shift 41, room 4"
+652,35186,Unscheduled patient 71
+653,34791,"Admitted patient 71, day 10, room 5, OT 1"
+654,34791,"Unscheduled nurse 7, shift 41, room 5"
+655,34791,"Scheduled nurse 11, shift 41, room 5"
+656,35186,Unscheduled patient 71
+657,34792,"Admitted patient 71, day 10, room 4, OT 1"
+658,35186,Unscheduled patient 71
+659,34801,"Admitted patient 71, day 11, room 5, OT 1"
+660,34801,"Unscheduled nurse 7, shift 41, room 8"
+661,34801,"Scheduled nurse 11, shift 41, room 8"
+662,35186,Unscheduled patient 71
+663,34802,"Admitted patient 71, day 11, room 8, OT 1"
+664,35186,Unscheduled patient 71
+665,34803,"Admitted patient 71, day 11, room 2, OT 1"
+666,35186,Unscheduled patient 71
+667,34806,"Admitted patient 71, day 12, room 2, OT 1"
+668,35186,Unscheduled patient 71
+669,34807,"Admitted patient 71, day 12, room 5, OT 1"
+670,35186,Unscheduled patient 71
+671,34807,"Admitted patient 71, day 12, room 8, OT 1"
+672,35186,Unscheduled patient 71
+673,34812,"Admitted patient 71, day 12, room 4, OT 1"
+674,35186,Unscheduled patient 71
+675,34812,"Admitted patient 71, day 13, room 2, OT 1"
+676,35186,Unscheduled patient 71
+677,34812,"Admitted patient 71, day 13, room 4, OT 1"
+678,35186,Unscheduled patient 71
+679,34812,"Admitted patient 71, day 13, room 5, OT 1"
+680,35186,Unscheduled patient 71
+681,34812,"Admitted patient 71, day 13, room 8, OT 1"
+682,35186,Unscheduled patient 71
+683,34831,"Admitted patient 71, day 10, room 5, OT 2"
+684,35186,Unscheduled patient 71
+685,34831,"Admitted patient 71, day 10, room 5, OT 3"
+686,35186,Unscheduled patient 71
+687,34831,"Admitted patient 71, day 10, room 8, OT 2"
+688,35186,Unscheduled patient 71
+689,34831,"Admitted patient 71, day 10, room 8, OT 3"
+690,35186,Unscheduled patient 71
+691,34832,"Admitted patient 71, day 10, room 4, OT 2"
+692,35186,Unscheduled patient 71
+693,34832,"Admitted patient 71, day 10, room 4, OT 3"
+694,35186,Unscheduled patient 71
+695,34841,"Admitted patient 71, day 11, room 5, OT 2"
+696,35186,Unscheduled patient 71
+697,34841,"Admitted patient 71, day 11, room 5, OT 3"
+698,34841,"Unscheduled nurse 0, shift 34, room 1"
+699,34841,"Unscheduled nurse 0, shift 34, room 2"
+700,34841,"Unscheduled nurse 0, shift 37, room 4"
+701,34841,"Scheduled nurse 2, shift 37, room 4"
+702,34841,"Scheduled nurse 9, shift 34, room 1"
+703,34841,"Scheduled nurse 9, shift 34, room 2"
+704,34841,"Unscheduled nurse 0, shift 40, room 8"
+705,34841,"Scheduled nurse 2, shift 40, room 8"
+706,34841,"Unscheduled nurse 5, shift 30, room 1"
+707,34841,"Scheduled nurse 0, shift 30, room 1"
+708,34841,"Unscheduled nurse 5, shift 6, room 8"
+709,34841,"Unscheduled nurse 5, shift 30, room 7"
+710,34841,"Scheduled nurse 0, shift 30, room 7"
+711,34841,"Scheduled nurse 6, shift 6, room 8"
+712,34841,"Unscheduled nurse 8, shift 4, room 2"
+713,34841,"Scheduled nurse 0, shift 4, room 2"
+714,34841,"Unscheduled nurse 8, shift 4, room 6"
+715,34841,"Scheduled nurse 0, shift 4, room 6"
+716,34841,"Unscheduled nurse 9, shift 3, room 4"
+717,34841,"Scheduled nurse 10, shift 3, room 4"
+718,34841,"Unscheduled nurse 9, shift 3, room 6"
+719,34841,"Scheduled nurse 10, shift 3, room 6"
+720,35186,Unscheduled patient 71
+721,34846,"Admitted patient 71, day 12, room 2, OT 2"
+722,34846,"Unscheduled nurse 0, shift 40, room 5"
+723,34846,"Scheduled nurse 2, shift 40, room 5"
+724,34846,"Unscheduled nurse 5, shift 39, room 5"
+725,34846,"Unscheduled nurse 9, shift 34, room 0"
+726,34846,"Scheduled nurse 0, shift 34, room 0"
+727,34846,"Scheduled nurse 10, shift 39, room 5"
+728,35186,Unscheduled patient 71
+729,34846,"Admitted patient 71, day 12, room 2, OT 3"
+730,34846,"Unscheduled nurse 10, shift 33, room 0"
+731,34846,"Unscheduled nurse 10, shift 33, room 1"
+732,34846,"Scheduled nurse 15, shift 33, room 0"
+733,34846,"Scheduled nurse 15, shift 33, room 1"
+734,35186,Unscheduled patient 71
+735,34847,"Admitted patient 71, day 11, room 2, OT 2"
+736,35186,Unscheduled patient 71
+737,34847,"Admitted patient 71, day 11, room 2, OT 3"
+738,35186,Unscheduled patient 71
+739,34847,"Admitted patient 71, day 11, room 8, OT 2"
+740,35186,Unscheduled patient 71
+741,34847,"Admitted patient 71, day 11, room 8, OT 3"
+742,35186,Unscheduled patient 71
+743,34851,"Admitted patient 71, day 13, room 8, OT 2"
+744,35186,Unscheduled patient 71
+745,34851,"Admitted patient 71, day 13, room 8, OT 3"
+746,35186,Unscheduled patient 71
+747,34852,"Admitted patient 71, day 11, room 4, OT 2"
+748,35186,Unscheduled patient 71
+749,34852,"Admitted patient 71, day 11, room 4, OT 3"
+750,35186,Unscheduled patient 71
+751,34852,"Admitted patient 71, day 12, room 8, OT 2"
+752,35186,Unscheduled patient 71
+753,34852,"Admitted patient 71, day 12, room 8, OT 3"
+754,35186,Unscheduled patient 71
+755,34812,"Admitted patient 71, day 11, room 4, OT 1"
+756,35187,Unscheduled patient 65
+757,34793,"Admitted patient 65, day 10, room 5, OT 1"
+758,35191,Unscheduled patient 67
+759,34792,"Admitted patient 67, day 10, room 8, OT 1"
+760,34792,"Unscheduled nurse 0, shift 40, room 3"
+761,34792,"Scheduled nurse 2, shift 40, room 3"
+762,34792,"Unscheduled nurse 5, shift 39, room 3"
+763,34792,"Unscheduled nurse 7, shift 41, room 3"
+764,34792,"Scheduled nurse 10, shift 39, room 3"
+765,34792,"Scheduled nurse 11, shift 41, room 3"
+766,35167,Unscheduled patient 56
+767,34794,"Admitted patient 56, day 11, room 7, OT 1"
+768,35167,Unscheduled patient 56
+769,34797,"Admitted patient 56, day 11, room 0, OT 1"
+770,35167,Unscheduled patient 56
+771,34802,"Admitted patient 56, day 13, room 0, OT 1"
+772,35167,Unscheduled patient 56
+773,34802,"Admitted patient 56, day 13, room 6, OT 1"
+774,35167,Unscheduled patient 56
+775,34802,"Admitted patient 56, day 13, room 7, OT 1"
+776,35167,Unscheduled patient 56
+777,34803,"Admitted patient 56, day 13, room 3, OT 1"
+778,35167,Unscheduled patient 56
+779,34803,"Admitted patient 56, day 13, room 5, OT 1"
+780,35167,Unscheduled patient 56
+781,34832,"Admitted patient 56, day 11, room 6, OT 2"
+782,35167,Unscheduled patient 56
+783,34832,"Admitted patient 56, day 11, room 6, OT 3"
+784,35167,Unscheduled patient 56
+785,34832,"Admitted patient 56, day 13, room 0, OT 2"
+786,35167,Unscheduled patient 56
+787,34832,"Admitted patient 56, day 13, room 0, OT 3"
+788,34832,"Unscheduled nurse 1, shift 8, room 2"
+789,34832,"Unscheduled nurse 1, shift 35, room 1"
+790,34832,"Scheduled nurse 2, shift 8, room 2"
+791,34832,"Scheduled nurse 4, shift 35, room 1"
+792,35167,Unscheduled patient 56
+793,34833,"Admitted patient 56, day 13, room 3, OT 2"
+794,35167,Unscheduled patient 56
+795,34833,"Admitted patient 56, day 13, room 3, OT 3"
+796,34833,"Unscheduled nurse 2, shift 5, room 6"
+797,34833,"Scheduled nurse 1, shift 5, room 6"
+798,34833,"Unscheduled nurse 3, shift 32, room 1"
+799,34833,"Scheduled nurse 1, shift 32, room 1"
+800,34833,"Unscheduled nurse 3, shift 32, room 7"
+801,34833,"Scheduled nurse 1, shift 32, room 7"
+802,34833,"Unscheduled nurse 4, shift 35, room 0"
+803,34833,"Scheduled nurse 1, shift 35, room 0"
+804,35167,Unscheduled patient 56
+805,34832,"Admitted patient 56, day 11, room 0, OT 2"
+806,35167,Unscheduled patient 56
+807,34832,"Admitted patient 56, day 11, room 0, OT 3"
+808,35167,Unscheduled patient 56
+809,34832,"Admitted patient 56, day 13, room 6, OT 2"
+810,35167,Unscheduled patient 56
+811,34832,"Admitted patient 56, day 13, room 6, OT 3"
+812,35167,Unscheduled patient 56
+813,34832,"Admitted patient 56, day 13, room 7, OT 2"
+814,35167,Unscheduled patient 56
+815,34832,"Admitted patient 56, day 13, room 7, OT 3"
+816,35167,Unscheduled patient 56
+817,34833,"Admitted patient 56, day 13, room 5, OT 2"
+818,35167,Unscheduled patient 56
+819,34833,"Admitted patient 56, day 13, room 5, OT 3"
+820,35167,Unscheduled patient 56
+821,34834,"Admitted patient 56, day 11, room 7, OT 2"
+822,35167,Unscheduled patient 56
+823,34834,"Admitted patient 56, day 11, room 7, OT 3"
+824,35167,Unscheduled patient 56
+825,35541,Unscheduled patient 71
+826,35147,"Admitted patient 71, day 10, room 3, OT 1"
+827,34772,"Admitted patient 56, day 11, room 6, OT 1"
+828,34772,"Unscheduled nurse 1, shift 38, room 4"
+829,34772,"Scheduled nurse 4, shift 38, room 4"
+830,35157,Unscheduled patient 93
+831,34773,"Admitted patient 93, day 11, room 0, OT 1"
+832,35157,Unscheduled patient 93
+833,34774,"Admitted patient 93, day 11, room 7, OT 1"
+834,34774,"Unscheduled nurse 12, shift 31, room 1"
+835,34774,"Scheduled nurse 2, shift 31, room 1"
+836,35157,Unscheduled patient 93
+837,34777,"Admitted patient 93, day 12, room 0, OT 1"
+838,35157,Unscheduled patient 93
+839,34777,"Admitted patient 93, day 12, room 6, OT 1"
+840,34777,"Unscheduled nurse 12, shift 31, room 7"
+841,34777,"Scheduled nurse 2, shift 31, room 7"
+842,35157,Unscheduled patient 93
+843,34778,"Admitted patient 93, day 12, room 7, OT 1"
+844,35157,Unscheduled patient 93
+845,34782,"Admitted patient 93, day 13, room 0, OT 1"
+846,35157,Unscheduled patient 93
+847,34782,"Admitted patient 93, day 13, room 4, OT 1"
+848,35157,Unscheduled patient 93
+849,34782,"Admitted patient 93, day 13, room 6, OT 1"
+850,35157,Unscheduled patient 93
+851,34782,"Admitted patient 93, day 13, room 7, OT 1"
+852,35157,Unscheduled patient 93
+853,34783,"Admitted patient 93, day 13, room 3, OT 1"
+854,34783,"Unscheduled nurse 10, shift 7, room 2"
+855,34783,"Scheduled nurse 3, shift 7, room 2"
+856,35157,Unscheduled patient 93
+857,34783,"Admitted patient 93, day 13, room 5, OT 1"
+858,35157,Unscheduled patient 93
+859,34788,"Admitted patient 93, day 12, room 4, OT 1"
+860,34788,"Unscheduled nurse 10, shift 7, room 8"
+861,34788,"Scheduled nurse 3, shift 7, room 8"
+862,35157,Unscheduled patient 93
+863,34812,"Admitted patient 93, day 13, room 0, OT 2"
+864,35157,Unscheduled patient 93
+865,34812,"Admitted patient 93, day 13, room 0, OT 3"
+866,35157,Unscheduled patient 93
+867,34812,"Admitted patient 93, day 13, room 4, OT 2"
+868,35157,Unscheduled patient 93
+869,34812,"Admitted patient 93, day 13, room 4, OT 3"
+870,35157,Unscheduled patient 93
+871,34812,"Admitted patient 93, day 13, room 6, OT 2"
+872,35157,Unscheduled patient 93
+873,34812,"Admitted patient 93, day 13, room 6, OT 3"
+874,35157,Unscheduled patient 93
+875,34812,"Admitted patient 93, day 13, room 7, OT 2"
+876,35157,Unscheduled patient 93
+877,34812,"Admitted patient 93, day 13, room 7, OT 3"
+878,35157,Unscheduled patient 93
+879,34812,"Admitted patient 93, day 11, room 6, OT 2"
+880,35157,Unscheduled patient 93
+881,34812,"Admitted patient 93, day 11, room 6, OT 3"
+882,35157,Unscheduled patient 93
+883,34813,"Admitted patient 93, day 11, room 0, OT 2"
+884,35157,Unscheduled patient 93
+885,34813,"Admitted patient 93, day 11, room 0, OT 3"
+886,35157,Unscheduled patient 93
+887,34813,"Admitted patient 93, day 13, room 3, OT 2"
+888,35157,Unscheduled patient 93
+889,34772,"Admitted patient 93, day 11, room 6, OT 1"
+890,35166,Unscheduled patient 71
+891,34786,"Admitted patient 71, day 11, room 3, OT 1"
+892,35166,Unscheduled patient 71
+893,34792,"Admitted patient 71, day 13, room 3, OT 1"
+894,35166,Unscheduled patient 71
+895,34796,"Admitted patient 71, day 12, room 3, OT 1"
+896,35166,Unscheduled patient 71
+897,34812,"Admitted patient 71, day 10, room 3, OT 2"
+898,35166,Unscheduled patient 71
+899,34812,"Admitted patient 71, day 10, room 3, OT 3"
+900,35166,Unscheduled patient 71
+901,34822,"Admitted patient 71, day 13, room 2, OT 2"
+902,35166,Unscheduled patient 71
+903,34822,"Admitted patient 71, day 13, room 2, OT 3"
+904,35166,Unscheduled patient 71
+905,34822,"Admitted patient 71, day 13, room 3, OT 2"
+906,35166,Unscheduled patient 71
+907,34822,"Admitted patient 71, day 13, room 3, OT 3"
+908,35166,Unscheduled patient 71
+909,34822,"Admitted patient 71, day 13, room 4, OT 2"
+910,35166,Unscheduled patient 71
+911,34822,"Admitted patient 71, day 13, room 4, OT 3"
+912,35166,Unscheduled patient 71
+913,34822,"Admitted patient 71, day 13, room 5, OT 2"
+914,35166,Unscheduled patient 71
+915,34822,"Admitted patient 71, day 13, room 5, OT 3"
+916,35166,Unscheduled patient 71
+917,34826,"Admitted patient 71, day 11, room 3, OT 2"
+918,35166,Unscheduled patient 71
+919,34826,"Admitted patient 71, day 11, room 3, OT 3"
+920,34826,"Unscheduled nurse 5, shift 39, room 4"
+921,34826,"Unscheduled nurse 6, shift 6, room 2"
+922,34826,"Scheduled nurse 5, shift 6, room 2"
+923,34826,"Unscheduled nurse 8, shift 4, room 4"
+924,34826,"Scheduled nurse 0, shift 4, room 4"
+925,34826,"Scheduled nurse 10, shift 39, room 4"
+926,35166,Unscheduled patient 71
+927,34836,"Admitted patient 71, day 12, room 3, OT 2"
+928,35166,Unscheduled patient 71
+929,34836,"Admitted patient 71, day 12, room 3, OT 3"
+930,35166,Unscheduled patient 71
+931,34836,"Admitted patient 71, day 12, room 4, OT 2"
+932,35166,Unscheduled patient 71
+933,34836,"Admitted patient 71, day 12, room 4, OT 3"
+934,35166,Unscheduled patient 71
+935,35560,Unscheduled patient 65
+936,35166,"Admitted patient 65, day 10, room 3, OT 1"
+937,34771,"Admitted patient 71, day 10, room 5, OT 1"
+938,35165,Unscheduled patient 65
+939,34777,"Admitted patient 65, day 10, room 4, OT 1"
+940,35165,Unscheduled patient 65
+941,34785,"Admitted patient 65, day 11, room 3, OT 1"
+942,35165,Unscheduled patient 65
+943,34785,"Admitted patient 65, day 12, room 2, OT 1"
+944,35165,Unscheduled patient 65
+945,34786,"Admitted patient 65, day 10, room 1, OT 1"
+946,35165,Unscheduled patient 65
+947,34787,"Admitted patient 65, day 11, room 2, OT 1"
+948,35165,Unscheduled patient 65
+949,34790,"Admitted patient 65, day 13, room 2, OT 1"
+950,35165,Unscheduled patient 65
+951,34790,"Admitted patient 65, day 13, room 8, OT 1"
+952,34790,"Unscheduled nurse 11, shift 41, room 4"
+953,34790,"Scheduled nurse 7, shift 41, room 4"
+954,35165,Unscheduled patient 65
+955,34791,"Admitted patient 65, day 13, room 3, OT 1"
+956,34791,"Unscheduled nurse 11, shift 41, room 5"
+957,34791,"Scheduled nurse 7, shift 41, room 5"
+958,35186,Unscheduled patient 71
+959,34797,"Admitted patient 71, day 10, room 4, OT 1"
+960,35186,Unscheduled patient 71
+961,34806,"Admitted patient 71, day 11, room 5, OT 1"
+962,35205,Unscheduled patient 12
+963,34806,"Admitted patient 12, day 10, room 6, OT 1"
+964,35186,Unscheduled patient 71
+965,34857,"Admitted patient 71, day 12, room 5, OT 2"
+966,35186,Unscheduled patient 71
+967,34807,"Admitted patient 71, day 11, room 2, OT 1"
+968,35186,Unscheduled patient 71
+969,34806,"Admitted patient 71, day 12, room 2, OT 1"
+970,35186,Unscheduled patient 71
+971,34817,"Admitted patient 71, day 12, room 5, OT 1"
+972,35186,Unscheduled patient 71
+973,34857,"Admitted patient 71, day 12, room 5, OT 3"
+974,35186,Unscheduled patient 71
+975,34816,"Admitted patient 71, day 12, room 4, OT 1"
+976,35186,Unscheduled patient 71
+977,34812,"Admitted patient 71, day 13, room 2, OT 1"
+978,35186,Unscheduled patient 71
+979,34813,"Admitted patient 71, day 13, room 4, OT 1"
+980,35186,Unscheduled patient 71
+981,34812,"Admitted patient 71, day 13, room 5, OT 1"
+982,35186,Unscheduled patient 71
+983,34811,"Admitted patient 71, day 13, room 8, OT 1"
+984,35186,Unscheduled patient 71
+985,34831,"Admitted patient 71, day 10, room 5, OT 2"
+986,35186,Unscheduled patient 71
+987,34831,"Admitted patient 71, day 10, room 5, OT 3"
+988,35186,Unscheduled patient 71
+989,35585,Unscheduled patient 23
+990,35177,"Admitted patient 23, day 10, room 7, OT 1"
+991,35576,Unscheduled patient 67
+992,35177,"Admitted patient 67, day 10, room 3, OT 1"
+993,34782,"Admitted patient 71, day 10, room 8, OT 1"
+994,34782,"Unscheduled nurse 11, shift 41, room 8"
+995,34782,"Scheduled nurse 7, shift 41, room 8"
+996,35177,Unscheduled patient 71
+997,34798,"Admitted patient 71, day 11, room 8, OT 1"
+998,35177,Unscheduled patient 71
+999,34803,"Admitted patient 71, day 12, room 8, OT 1"
+1000,35177,Unscheduled patient 71
+1001,34822,"Admitted patient 71, day 10, room 8, OT 2"
+1002,34822,"Unscheduled nurse 2, shift 5, room 4"
+1003,34822,"Scheduled nurse 1, shift 5, room 4"
+1004,34822,"Unscheduled nurse 9, shift 3, room 2"
+1005,34822,"Unscheduled nurse 9, shift 34, room 1"
+1006,34822,"Scheduled nurse 0, shift 34, room 1"
+1007,34822,"Unscheduled nurse 2, shift 8, room 8"
+1008,34822,"Scheduled nurse 1, shift 8, room 8"
+1009,34822,"Unscheduled nurse 5, shift 39, room 8"
+1010,34822,"Scheduled nurse 10, shift 3, room 2"
+1011,34822,"Scheduled nurse 10, shift 39, room 8"
+1012,34822,"Unscheduled nurse 6, shift 6, room 8"
+1013,34822,"Scheduled nurse 5, shift 6, room 8"
+1014,34822,"Unscheduled nurse 0, shift 4, room 2"
+1015,34822,"Scheduled nurse 8, shift 4, room 2"
+1016,34822,"Unscheduled nurse 0, shift 4, room 6"
+1017,34822,"Scheduled nurse 8, shift 4, room 6"
+1018,35177,Unscheduled patient 71
+1019,34822,"Admitted patient 71, day 10, room 8, OT 3"
+1020,34822,"Unscheduled nurse 10, shift 3, room 6"
+1021,34822,"Scheduled nurse 9, shift 3, room 6"
+1022,35177,Unscheduled patient 71
+1023,34828,"Admitted patient 71, day 10, room 4, OT 2"
+1024,34828,"Unscheduled nurse 2, shift 40, room 5"
+1025,34828,"Scheduled nurse 0, shift 40, room 5"
+1026,35177,Unscheduled patient 71
+1027,34828,"Admitted patient 71, day 10, room 4, OT 3"
+1028,34828,"Unscheduled nurse 0, shift 34, room 0"
+1029,34828,"Scheduled nurse 9, shift 34, room 0"
+1030,34828,"Unscheduled nurse 10, shift 39, room 5"
+1031,34828,"Scheduled nurse 5, shift 39, room 5"
+1032,35177,Unscheduled patient 71
+1033,34832,"Admitted patient 71, day 11, room 5, OT 2"
+1034,34832,"Unscheduled nurse 15, shift 33, room 0"
+1035,34832,"Scheduled nurse 10, shift 33, room 0"
+1036,34832,"Unscheduled nurse 15, shift 33, room 1"
+1037,34832,"Scheduled nurse 10, shift 33, room 1"
+1038,35177,Unscheduled patient 71
+1039,34832,"Admitted patient 71, day 11, room 5, OT 3"
+1040,35177,Unscheduled patient 71
+1041,34837,"Admitted patient 71, day 12, room 2, OT 2"
+1042,35177,Unscheduled patient 71
+1043,34837,"Admitted patient 71, day 12, room 2, OT 3"
+1044,35177,Unscheduled patient 71
+1045,34838,"Admitted patient 71, day 11, room 2, OT 2"
+1046,35177,Unscheduled patient 71
+1047,34838,"Admitted patient 71, day 11, room 2, OT 3"
+1048,35177,Unscheduled patient 71
+1049,34838,"Admitted patient 71, day 11, room 8, OT 2"
+1050,35177,Unscheduled patient 71
+1051,34838,"Admitted patient 71, day 11, room 8, OT 3"
+1052,35177,Unscheduled patient 71
+1053,34843,"Admitted patient 71, day 11, room 4, OT 2"
+1054,35177,Unscheduled patient 71
+1055,34843,"Admitted patient 71, day 11, room 4, OT 3"
+1056,35177,Unscheduled patient 71
+1057,34803,"Admitted patient 71, day 11, room 4, OT 1"
+1058,35177,Unscheduled patient 65
+1059,34783,"Admitted patient 65, day 10, room 5, OT 1"
+1060,35182,Unscheduled patient 67
+1061,34783,"Admitted patient 67, day 10, room 8, OT 1"
+1062,34783,"Unscheduled nurse 2, shift 40, room 3"
+1063,34783,"Scheduled nurse 0, shift 40, room 3"
+1064,35182,Unscheduled patient 116
+1065,34772,"Admitted patient 116, day 10, room 3, OT 1"
+1066,35177,Unscheduled patient 76
+1067,34772,"Admitted patient 76, day 11, room 7, OT 1"
+1068,35147,Unscheduled patient 56
+1069,34777,"Admitted patient 56, day 12, room 0, OT 1"
+1070,35147,Unscheduled patient 56
+1071,34777,"Admitted patient 56, day 12, room 6, OT 1"
+1072,35147,Unscheduled patient 56
+1073,34779,"Admitted patient 56, day 11, room 0, OT 1"
+1074,35147,Unscheduled patient 56
+1075,34782,"Admitted patient 56, day 13, room 0, OT 1"
+1076,35147,Unscheduled patient 56
+1077,34782,"Admitted patient 56, day 13, room 6, OT 1"
+1078,35147,Unscheduled patient 56
+1079,34817,"Admitted patient 56, day 12, room 0, OT 2"
+1080,35147,Unscheduled patient 56
+1081,34782,"Admitted patient 56, day 13, room 5, OT 1"
+1082,35147,Unscheduled patient 56
+1083,34812,"Admitted patient 56, day 11, room 6, OT 2"
+1084,35147,Unscheduled patient 56
+1085,34812,"Admitted patient 56, day 11, room 6, OT 3"
+1086,35147,Unscheduled patient 56
+1087,34812,"Admitted patient 56, day 13, room 0, OT 2"
+1088,35147,Unscheduled patient 56
+1089,34812,"Admitted patient 56, day 13, room 0, OT 3"
+1090,34812,"Unscheduled nurse 1, shift 35, room 2"
+1091,34812,"Unscheduled nurse 2, shift 5, room 2"
+1092,34812,"Scheduled nurse 1, shift 5, room 2"
+1093,34812,"Unscheduled nurse 4, shift 35, room 1"
+1094,34812,"Scheduled nurse 1, shift 35, room 1"
+1095,34812,"Scheduled nurse 4, shift 35, room 2"
+1096,35147,Unscheduled patient 56
+1097,34817,"Admitted patient 56, day 12, room 0, OT 3"
+1098,34817,"Unscheduled nurse 1, shift 5, room 6"
+1099,34817,"Scheduled nurse 2, shift 5, room 6"
+1100,35147,Unscheduled patient 56
+1101,34817,"Admitted patient 56, day 12, room 6, OT 2"
+1102,35147,Unscheduled patient 56
+1103,34817,"Admitted patient 56, day 12, room 6, OT 3"
+1104,34817,"Unscheduled nurse 1, shift 35, room 0"
+1105,34817,"Scheduled nurse 4, shift 35, room 0"
+1106,35147,Unscheduled patient 56
+1107,34824,"Admitted patient 56, day 11, room 0, OT 2"
+1108,35147,Unscheduled patient 56
+1109,34824,"Admitted patient 56, day 11, room 0, OT 3"
+1110,35147,Unscheduled patient 56
+1111,34812,"Admitted patient 56, day 13, room 6, OT 2"
+1112,35147,Unscheduled patient 56
+1113,34812,"Admitted patient 56, day 13, room 6, OT 3"
+1114,35147,Unscheduled patient 56
+1115,35555,Unscheduled patient 23
+1116,35152,"Admitted patient 23, day 11, room 7, OT 1"
+1117,35152,"Unscheduled nurse 0, shift 30, room 7"
+1118,34817,"Admitted patient 56, day 13, room 5, OT 2"
+1119,34817,"Unscheduled nurse 1, shift 32, room 7"
+1120,34817,"Scheduled nurse 3, shift 32, room 7"
+1121,34817,"Scheduled nurse 5, shift 30, room 7"
+1122,35152,Unscheduled patient 56
+1123,34817,"Admitted patient 56, day 13, room 5, OT 3"
+1124,35152,Unscheduled patient 56
+1125,35555,Unscheduled patient 23
+1126,35156,"Admitted patient 23, day 12, room 0, OT 1"
+1127,34783,"Admitted patient 56, day 11, room 7, OT 1"
+1128,35156,Unscheduled patient 56
+1129,34781,"Admitted patient 56, day 11, room 6, OT 1"
+1130,35155,Unscheduled patient 71
+1131,34766,"Admitted patient 71, day 10, room 4, OT 1"
+1132,35151,Unscheduled patient 93
+1133,34778,"Admitted patient 93, day 11, room 0, OT 1"
+1134,35151,Unscheduled patient 93
+1135,34768,"Admitted patient 93, day 11, room 7, OT 1"
+1136,34768,"Unscheduled nurse 2, shift 31, room 1"
+1137,34768,"Scheduled nurse 12, shift 31, room 1"
+1138,35151,Unscheduled patient 93
+1139,34771,"Admitted patient 93, day 12, room 0, OT 1"
+1140,35151,Unscheduled patient 93
+1141,34771,"Admitted patient 93, day 12, room 6, OT 1"
+1142,34771,"Unscheduled nurse 2, shift 31, room 7"
+1143,34771,"Scheduled nurse 12, shift 31, room 7"
+1144,35151,Unscheduled patient 93
+1145,34772,"Admitted patient 93, day 12, room 7, OT 1"
+1146,35151,Unscheduled patient 93
+1147,34776,"Admitted patient 93, day 13, room 0, OT 1"
+1148,35151,Unscheduled patient 93
+1149,34777,"Admitted patient 93, day 13, room 4, OT 1"
+1150,35151,Unscheduled patient 93
+1151,34776,"Admitted patient 93, day 13, room 6, OT 1"
+1152,35151,Unscheduled patient 93
+1153,34776,"Admitted patient 93, day 13, room 7, OT 1"
+1154,35151,Unscheduled patient 93
+1155,34806,"Admitted patient 93, day 13, room 5, OT 2"
+1156,34806,"Unscheduled nurse 3, shift 7, room 2"
+1157,34806,"Scheduled nurse 10, shift 7, room 2"
+1158,35151,Unscheduled patient 93
+1159,34776,"Admitted patient 93, day 13, room 5, OT 1"
+1160,35151,Unscheduled patient 93
+1161,34806,"Admitted patient 93, day 13, room 5, OT 3"
+1162,34806,"Unscheduled nurse 3, shift 7, room 8"
+1163,34806,"Scheduled nurse 10, shift 7, room 8"
+1164,35151,Unscheduled patient 93
+1165,34806,"Admitted patient 93, day 13, room 0, OT 2"
+1166,35151,Unscheduled patient 93
+1167,34806,"Admitted patient 93, day 13, room 0, OT 3"
+1168,35151,Unscheduled patient 93
+1169,34807,"Admitted patient 93, day 13, room 4, OT 2"
+1170,35151,Unscheduled patient 93
+1171,34807,"Admitted patient 93, day 13, room 4, OT 3"
+1172,35151,Unscheduled patient 93
+1173,34806,"Admitted patient 93, day 13, room 6, OT 2"
+1174,35151,Unscheduled patient 93
+1175,34806,"Admitted patient 93, day 13, room 6, OT 3"
+1176,35151,Unscheduled patient 93
+1177,34806,"Admitted patient 93, day 13, room 7, OT 2"
+1178,35151,Unscheduled patient 93
+1179,34806,"Admitted patient 93, day 13, room 7, OT 3"
+1180,35151,Unscheduled patient 93
+1181,34806,"Admitted patient 93, day 11, room 6, OT 2"
+1182,35151,Unscheduled patient 93
+1183,34806,"Admitted patient 93, day 11, room 6, OT 3"
+1184,35151,Unscheduled patient 93
+1185,34808,"Admitted patient 93, day 11, room 7, OT 2"
+1186,35151,Unscheduled patient 93
+1187,34808,"Admitted patient 93, day 11, room 7, OT 3"
+1188,35151,Unscheduled patient 93
+1189,34811,"Admitted patient 93, day 12, room 0, OT 2"
+1190,35151,Unscheduled patient 93
+1191,34766,"Admitted patient 93, day 11, room 6, OT 1"
+1192,35174,Unscheduled patient 98
+1193,34766,"Admitted patient 98, day 0, room 3, OT 1"
+1194,35175,Unscheduled patient 63
+1195,34731,"Admitted patient 63, day 1, room 0, OT 1"
+1196,35141,Unscheduled patient 116
+1197,34673,"Admitted patient 91, day 8, room 3, OT 1"
+1198,34274,"Admitted patient 116, day 12, room 2, OT 1"
+1199,34274,"Unscheduled nurse 10, shift 39, room 3"
+1200,34274,"Scheduled nurse 5, shift 39, room 3"
+1201,34274,"Unscheduled nurse 11, shift 41, room 3"
+1202,34274,"Scheduled nurse 7, shift 41, room 3"
+1203,34692,Unscheduled patient 55
+1204,34274,"Admitted patient 55, day 9, room 8, OT 1"
+1205,34694,Unscheduled patient 57
+1206,34255,"Admitted patient 57, day 2, room 5, OT 1"
+1207,34255,"Unscheduled nurse 1, shift 25, room 5"
+1208,34255,"Scheduled nurse 2, shift 25, room 5"
+1209,34678,Unscheduled patient 79
+1210,34254,"Admitted patient 79, day 8, room 6, OT 1"
+1211,34678,Unscheduled patient 79
+1212,34255,"Admitted patient 79, day 8, room 2, OT 1"
+1213,34680,Unscheduled patient 19
+1214,34255,"Admitted patient 19, day 8, room 0, OT 1"
+1215,34685,Unscheduled patient 15
+1216,34227,"Admitted patient 15, day 1, room 4, OT 1"
+1217,34657,Unscheduled patient 47
+1218,34227,"Admitted patient 47, day 8, room 3, OT 1"
+1219,34657,Unscheduled patient 81
+1220,34202,"Admitted patient 81, day 1, room 2, OT 1"
+1221,34637,Unscheduled patient 75
+1222,34202,"Admitted patient 75, day 7, room 1, OT 1"
+1223,34641,Unscheduled patient 57
+1224,34204,"Admitted patient 57, day 1, room 5, OT 1"
+1225,34204,"Unscheduled nurse 0, shift 40, room 4"
+1226,34204,"Scheduled nurse 2, shift 40, room 4"
+1227,34204,"Unscheduled nurse 10, shift 39, room 4"
+1228,34204,"Scheduled nurse 5, shift 39, room 4"
+1229,34641,Unscheduled patient 57
+1230,34220,"Admitted patient 57, day 4, room 5, OT 1"
+1231,34659,Unscheduled patient 86
+1232,34210,"Admitted patient 86, day 4, room 6, OT 1"
+1233,34637,Unscheduled patient 111
+1234,34210,"Admitted patient 111, day 4, room 7, OT 2"
+1235,34650,Unscheduled patient 13
+1236,34200,"Admitted patient 13, day 3, room 3, OT 2"
+1237,34594,Unscheduled patient 65
+1238,34210,"Admitted patient 65, day 11, room 5, OT 1"
+1239,34594,Unscheduled patient 65
+1240,34205,"Admitted patient 65, day 10, room 4, OT 1"
+1241,34594,Unscheduled patient 65
+1242,34214,"Admitted patient 65, day 12, room 3, OT 1"
+1243,34594,Unscheduled patient 65
+1244,34214,"Admitted patient 65, day 12, room 2, OT 1"
+1245,34594,Unscheduled patient 65
+1246,34206,"Admitted patient 65, day 10, room 1, OT 1"
+1247,34594,Unscheduled patient 65
+1248,34214,"Admitted patient 65, day 12, room 5, OT 1"
+1249,34594,Unscheduled patient 65
+1250,34219,"Admitted patient 65, day 12, room 4, OT 1"
+1251,34594,Unscheduled patient 65
+1252,34219,"Admitted patient 65, day 13, room 2, OT 1"
+1253,34594,Unscheduled patient 65
+1254,34219,"Admitted patient 65, day 13, room 4, OT 1"
+1255,34594,Unscheduled patient 65
+1256,34219,"Admitted patient 65, day 13, room 3, OT 1"
+1257,34219,"Unscheduled nurse 7, shift 41, room 4"
+1258,34219,"Unscheduled nurse 7, shift 41, room 5"
+1259,34219,"Scheduled nurse 11, shift 41, room 4"
+1260,34219,"Scheduled nurse 11, shift 41, room 5"
+1261,34608,Unscheduled patient 71
+1262,34213,"Admitted patient 71, day 10, room 5, OT 1"
+1263,34213,"Unscheduled nurse 4, shift 38, room 4"
+1264,34213,"Scheduled nurse 1, shift 38, room 4"
+1265,34213,"Unscheduled nurse 8, shift 36, room 4"
+1266,34213,"Scheduled nurse 5, shift 36, room 4"
+1267,34608,Unscheduled patient 71
+1268,34223,"Admitted patient 71, day 11, room 5, OT 1"
+1269,34608,Unscheduled patient 71
+1270,34228,"Admitted patient 71, day 12, room 2, OT 1"
+1271,34608,Unscheduled patient 71
+1272,34228,"Admitted patient 71, day 12, room 3, OT 1"
+1273,34608,Unscheduled patient 71
+1274,34229,"Admitted patient 71, day 12, room 5, OT 1"
+1275,34608,Unscheduled patient 71
+1276,34228,"Admitted patient 71, day 12, room 4, OT 1"
+1277,34608,Unscheduled patient 71
+1278,34234,"Admitted patient 71, day 11, room 2, OT 1"
+1279,34608,Unscheduled patient 71
+1280,34233,"Admitted patient 71, day 13, room 4, OT 1"
+1281,34608,Unscheduled patient 71
+1282,34234,"Admitted patient 71, day 13, room 2, OT 1"
+1283,34608,Unscheduled patient 71
+1284,34234,"Admitted patient 71, day 13, room 3, OT 1"
+1285,34608,Unscheduled patient 71
+1286,34234,"Admitted patient 71, day 13, room 5, OT 1"
+1287,34608,Unscheduled patient 71
+1288,34234,"Admitted patient 71, day 13, room 8, OT 1"
+1289,34608,Unscheduled patient 71
+1290,34253,"Admitted patient 71, day 10, room 5, OT 2"
+1291,34608,Unscheduled patient 71
+1292,34253,"Admitted patient 71, day 10, room 5, OT 3"
+1293,34608,Unscheduled patient 71
+1294,34268,"Admitted patient 71, day 12, room 3, OT 2"
+1295,34608,Unscheduled patient 71
+1296,34268,"Admitted patient 71, day 12, room 3, OT 3"
+1297,34608,Unscheduled patient 71
+1298,34268,"Admitted patient 71, day 12, room 4, OT 2"
+1299,34608,Unscheduled patient 71
+1300,34268,"Admitted patient 71, day 12, room 4, OT 3"
+1301,34608,Unscheduled patient 71
+1302,34269,"Admitted patient 71, day 12, room 5, OT 2"
+1303,34608,Unscheduled patient 71
+1304,34269,"Admitted patient 71, day 12, room 5, OT 3"
+1305,34269,"Unscheduled nurse 9, shift 34, room 2"
+1306,34269,"Scheduled nurse 0, shift 34, room 2"
+1307,34269,"Unscheduled nurse 0, shift 30, room 1"
+1308,34269,"Scheduled nurse 5, shift 30, room 1"
+1309,34269,"Unscheduled nurse 1, shift 8, room 8"
+1310,34269,"Scheduled nurse 2, shift 8, room 8"
+1311,34608,Unscheduled patient 71
+1312,34273,"Admitted patient 71, day 13, room 4, OT 2"
+1313,34608,Unscheduled patient 71
+1314,34273,"Admitted patient 71, day 13, room 4, OT 3"
+1315,34273,"Unscheduled nurse 5, shift 6, room 8"
+1316,34273,"Scheduled nurse 6, shift 6, room 8"
+1317,34608,Unscheduled patient 71
+1318,34274,"Admitted patient 71, day 13, room 2, OT 2"
+1319,34274,"Unscheduled nurse 8, shift 4, room 6"
+1320,34274,"Scheduled nurse 0, shift 4, room 6"
+1321,34608,Unscheduled patient 71
+1322,34274,"Admitted patient 71, day 13, room 2, OT 3"
+1323,34274,"Unscheduled nurse 9, shift 3, room 6"
+1324,34274,"Scheduled nurse 10, shift 3, room 6"
+1325,34608,Unscheduled patient 71
+1326,34254,"Admitted patient 71, day 10, room 4, OT 2"
+1327,34254,"Unscheduled nurse 0, shift 40, room 5"
+1328,34254,"Scheduled nurse 2, shift 40, room 5"
+1329,34608,Unscheduled patient 71
+1330,34254,"Admitted patient 71, day 10, room 4, OT 3"
+1331,34254,"Unscheduled nurse 9, shift 34, room 0"
+1332,34254,"Scheduled nurse 0, shift 34, room 0"
+1333,34254,"Unscheduled nurse 5, shift 39, room 5"
+1334,34254,"Scheduled nurse 10, shift 39, room 5"
+1335,34608,Unscheduled patient 71
+1336,34268,"Admitted patient 71, day 11, room 5, OT 2"
+1337,34268,"Unscheduled nurse 10, shift 33, room 0"
+1338,34268,"Unscheduled nurse 10, shift 33, room 1"
+1339,34268,"Scheduled nurse 15, shift 33, room 0"
+1340,34268,"Scheduled nurse 15, shift 33, room 1"
+1341,34608,Unscheduled patient 71
+1342,34268,"Admitted patient 71, day 11, room 5, OT 3"
+1343,34608,Unscheduled patient 71
+1344,34268,"Admitted patient 71, day 12, room 2, OT 2"
+1345,34608,Unscheduled patient 71
+1346,34268,"Admitted patient 71, day 12, room 2, OT 3"
+1347,34608,Unscheduled patient 71
+1348,34270,"Admitted patient 71, day 11, room 2, OT 2"
+1349,34608,Unscheduled patient 71
+1350,34270,"Admitted patient 71, day 11, room 2, OT 3"
+1351,34608,Unscheduled patient 71
+1352,34274,"Admitted patient 71, day 13, room 3, OT 2"
+1353,34608,Unscheduled patient 71
+1354,34269,"Admitted patient 71, day 11, room 4, OT 2"
+1355,34608,Unscheduled patient 71
+1356,34269,"Admitted patient 71, day 11, room 4, OT 3"
+1357,34608,Unscheduled patient 71
+1358,34229,"Admitted patient 71, day 11, room 4, OT 1"
+1359,34604,Unscheduled patient 65
+1360,34210,"Admitted patient 65, day 10, room 5, OT 1"
+1361,34609,Unscheduled patient 12
+1362,34210,"Admitted patient 12, day 10, room 6, OT 1"
+1363,34609,Unscheduled patient 23
+1364,34205,"Admitted patient 23, day 10, room 7, OT 1"
+1365,34205,"Unscheduled nurse 0, shift 40, room 3"
+1366,34205,"Scheduled nurse 2, shift 40, room 3"
+1367,34604,Unscheduled patient 67
+1368,34205,"Admitted patient 67, day 10, room 4, OT 1"
+1369,34205,"Unscheduled nurse 7, shift 41, room 8"
+1370,34205,"Scheduled nurse 11, shift 41, room 8"
+1371,34580,Unscheduled patient 56
+1372,34210,"Admitted patient 56, day 12, room 0, OT 1"
+1373,34580,Unscheduled patient 56
+1374,34210,"Admitted patient 56, day 12, room 6, OT 1"
+1375,34580,Unscheduled patient 56
+1376,34211,"Admitted patient 56, day 11, room 0, OT 1"
+1377,34580,Unscheduled patient 56
+1378,34215,"Admitted patient 56, day 13, room 0, OT 1"
+1379,34580,Unscheduled patient 56
+1380,34215,"Admitted patient 56, day 13, room 3, OT 1"
+1381,34580,Unscheduled patient 56
+1382,34215,"Admitted patient 56, day 13, room 6, OT 1"
+1383,34580,Unscheduled patient 56
+1384,34216,"Admitted patient 56, day 13, room 5, OT 1"
+1385,34580,Unscheduled patient 56
+1386,34216,"Admitted patient 56, day 13, room 8, OT 1"
+1387,34580,Unscheduled patient 56
+1388,34245,"Admitted patient 56, day 11, room 6, OT 2"
+1389,34580,Unscheduled patient 56
+1390,34245,"Admitted patient 56, day 11, room 6, OT 3"
+1391,34580,Unscheduled patient 56
+1392,34245,"Admitted patient 56, day 13, room 0, OT 2"
+1393,34580,Unscheduled patient 56
+1394,34245,"Admitted patient 56, day 13, room 0, OT 3"
+1395,34245,"Unscheduled nurse 1, shift 32, room 1"
+1396,34245,"Scheduled nurse 3, shift 32, room 1"
+1397,34245,"Unscheduled nurse 4, shift 35, room 2"
+1398,34245,"Scheduled nurse 1, shift 35, room 2"
+1399,34580,Unscheduled patient 56
+1400,34245,"Admitted patient 56, day 13, room 3, OT 2"
+1401,34245,"Unscheduled nurse 2, shift 5, room 6"
+1402,34245,"Scheduled nurse 1, shift 5, room 6"
+1403,34580,Unscheduled patient 56
+1404,34245,"Admitted patient 56, day 13, room 3, OT 3"
+1405,34580,Unscheduled patient 56
+1406,34246,"Admitted patient 56, day 13, room 8, OT 2"
+1407,34246,"Unscheduled nurse 4, shift 35, room 0"
+1408,34246,"Scheduled nurse 1, shift 35, room 0"
+1409,34580,Unscheduled patient 56
+1410,34246,"Admitted patient 56, day 11, room 0, OT 2"
+1411,34580,Unscheduled patient 56
+1412,34245,"Admitted patient 56, day 13, room 6, OT 2"
+1413,34580,Unscheduled patient 56
+1414,34245,"Admitted patient 56, day 13, room 6, OT 3"
+1415,34580,Unscheduled patient 56
+1416,34246,"Admitted patient 56, day 11, room 0, OT 3"
+1417,34580,Unscheduled patient 56
+1418,34246,"Admitted patient 56, day 13, room 8, OT 3"
+1419,34580,Unscheduled patient 56
+1420,34246,"Admitted patient 56, day 13, room 5, OT 2"
+1421,34645,Unscheduled patient 67
+1422,34246,"Admitted patient 67, day 10, room 8, OT 1"
+1423,34580,Unscheduled patient 56
+1424,34246,"Admitted patient 56, day 13, room 5, OT 3"
+1425,34580,Unscheduled patient 56
+1426,34250,"Admitted patient 56, day 12, room 0, OT 2"
+1427,34580,Unscheduled patient 56
+1428,34250,"Admitted patient 56, day 12, room 0, OT 3"
+1429,34580,Unscheduled patient 56
+1430,34205,"Admitted patient 56, day 11, room 6, OT 1"
+1431,34584,Unscheduled patient 71
+1432,34239,"Admitted patient 71, day 13, room 3, OT 3"
+1433,34584,Unscheduled patient 71
+1434,34240,"Admitted patient 71, day 13, room 5, OT 2"
+1435,34584,Unscheduled patient 71
+1436,34240,"Admitted patient 71, day 13, room 5, OT 3"
+1437,34584,Unscheduled patient 71
+1438,34240,"Admitted patient 71, day 13, room 8, OT 2"
+1439,34240,"Unscheduled nurse 12, shift 31, room 1"
+1440,34240,"Scheduled nurse 2, shift 31, room 1"
+1441,34584,Unscheduled patient 71
+1442,34240,"Admitted patient 71, day 13, room 8, OT 3"
+1443,34584,Unscheduled patient 71
+1444,34969,Unscheduled patient 93
+1445,34586,"Admitted patient 93, day 11, room 0, OT 1"
+1446,34969,Unscheduled patient 93
+1447,34589,"Admitted patient 93, day 12, room 4, OT 1"
+1448,34969,Unscheduled patient 93
+1449,34589,"Admitted patient 93, day 12, room 6, OT 1"
+1450,34969,Unscheduled patient 93
+1451,34590,"Admitted patient 93, day 12, room 0, OT 1"
+1452,34969,Unscheduled patient 93
+1453,34594,"Admitted patient 93, day 13, room 0, OT 1"
+1454,34969,Unscheduled patient 93
+1455,34594,"Admitted patient 93, day 13, room 3, OT 1"
+1456,34969,Unscheduled patient 93
+1457,34594,"Admitted patient 93, day 13, room 4, OT 1"
+1458,34594,"Unscheduled nurse 10, shift 33, room 2"
+1459,34594,"Scheduled nurse 15, shift 33, room 2"
+1460,34969,Unscheduled patient 93
+1461,34594,"Admitted patient 93, day 13, room 6, OT 1"
+1462,34969,Unscheduled patient 93
+1463,34595,"Admitted patient 93, day 13, room 5, OT 1"
+1464,34595,"Unscheduled nurse 10, shift 7, room 8"
+1465,34595,"Scheduled nurse 3, shift 7, room 8"
+1466,34969,Unscheduled patient 93
+1467,34624,"Admitted patient 93, day 13, room 0, OT 2"
+1468,34969,Unscheduled patient 93
+1469,34624,"Admitted patient 93, day 13, room 0, OT 3"
+1470,34969,Unscheduled patient 93
+1471,34624,"Admitted patient 93, day 13, room 3, OT 2"
+1472,34969,Unscheduled patient 93
+1473,34624,"Admitted patient 93, day 13, room 3, OT 3"
+1474,34969,Unscheduled patient 93
+1475,34624,"Admitted patient 93, day 13, room 4, OT 2"
+1476,34969,Unscheduled patient 93
+1477,34624,"Admitted patient 93, day 13, room 4, OT 3"
+1478,34969,Unscheduled patient 93
+1479,34624,"Admitted patient 93, day 13, room 6, OT 2"
+1480,34969,Unscheduled patient 93
+1481,34624,"Admitted patient 93, day 13, room 6, OT 3"
+1482,34969,Unscheduled patient 93
+1483,34624,"Admitted patient 93, day 11, room 6, OT 2"
+1484,34969,Unscheduled patient 93
+1485,34624,"Admitted patient 93, day 11, room 6, OT 3"
+1486,34969,Unscheduled patient 93
+1487,34625,"Admitted patient 93, day 13, room 5, OT 2"
+1488,34969,Unscheduled patient 93
+1489,34625,"Admitted patient 93, day 13, room 5, OT 3"
+1490,34969,Unscheduled patient 93
+1491,34626,"Admitted patient 93, day 11, room 0, OT 2"
+1492,34969,Unscheduled patient 93
+1493,34584,"Admitted patient 93, day 11, room 6, OT 1"
+1494,34983,Unscheduled patient 116
+1495,34570,"Admitted patient 116, day 9, room 4, OT 1"
+1496,34186,"Admitted patient 71, day 11, room 2, OT 1"
+1497,34590,Unscheduled patient 23
+1498,34183,"Admitted patient 23, day 10, room 0, OT 1"
+1499,34183,"Unscheduled nurse 3, shift 32, room 7"
+1500,34183,"Scheduled nurse 1, shift 32, room 7"
+1501,34183,"Unscheduled nurse 5, shift 30, room 7"
+1502,34183,"Scheduled nurse 0, shift 30, room 7"
+1503,34183,"Unscheduled nurse 5, shift 39, room 3"
+1504,34183,"Unscheduled nurse 7, shift 41, room 3"
+1505,34183,"Scheduled nurse 10, shift 39, room 3"
+1506,34183,"Scheduled nurse 11, shift 41, room 3"
+1507,34183,"Unscheduled nurse 12, shift 31, room 7"
+1508,34183,"Scheduled nurse 2, shift 31, room 7"
+1509,34586,Unscheduled patient 76
+1510,34183,"Admitted patient 76, day 11, room 7, OT 1"
+1511,34590,Unscheduled patient 23
+1512,34182,"Admitted patient 23, day 10, room 7, OT 1"
+1513,34590,Unscheduled patient 98
+1514,34182,"Admitted patient 98, day 0, room 3, OT 1"
+1515,34595,Unscheduled patient 116
+1516,34186,"Admitted patient 116, day 10, room 4, OT 1"
+1517,34595,Unscheduled patient 116
+1518,34195,"Admitted patient 116, day 12, room 4, OT 1"
+1519,34595,Unscheduled patient 116
+1520,34196,"Admitted patient 116, day 12, room 2, OT 1"
+1521,34614,Unscheduled patient 55
+1522,34196,"Admitted patient 55, day 9, room 8, OT 1"
+1523,34617,Unscheduled patient 57
+1524,34178,"Admitted patient 57, day 2, room 5, OT 1"
+1525,34601,Unscheduled patient 79
+1526,34127,"Admitted patient 79, day 3, room 2, OT 2"
+1527,34127,"Unscheduled nurse 2, shift 31, room 2"
+1528,34127,"Unscheduled nurse 2, shift 37, room 4"
+1529,34127,"Scheduled nurse 0, shift 37, room 4"
+1530,34127,"Unscheduled nurse 5, shift 27, room 2"
+1531,34127,"Scheduled nurse 7, shift 27, room 2"
+1532,34127,"Scheduled nurse 12, shift 31, room 2"
+1533,34552,Unscheduled patient 19
+1534,34127,"Admitted patient 19, day 8, room 0, OT 1"
+1535,34554,Unscheduled patient 111
+1536,34097,"Admitted patient 111, day 4, room 7, OT 1"
+1537,34527,Unscheduled patient 47
+1538,34097,"Admitted patient 47, day 8, room 3, OT 1"
+1539,34491,Unscheduled patient 65
+1540,34097,"Admitted patient 65, day 10, room 2, OT 1"
+1541,34491,Unscheduled patient 65
+1542,34099,"Admitted patient 65, day 10, room 4, OT 1"
+1543,34491,Unscheduled patient 65
+1544,34111,"Admitted patient 65, day 11, room 5, OT 1"
+1545,34491,Unscheduled patient 65
+1546,34112,"Admitted patient 65, day 11, room 4, OT 1"
+1547,34491,Unscheduled patient 65
+1548,34106,"Admitted patient 65, day 10, room 1, OT 1"
+1549,34491,Unscheduled patient 65
+1550,34117,"Admitted patient 65, day 13, room 5, OT 1"
+1551,34491,Unscheduled patient 65
+1552,34116,"Admitted patient 65, day 12, room 4, OT 1"
+1553,34491,Unscheduled patient 65
+1554,34117,"Admitted patient 65, day 13, room 8, OT 1"
+1555,34491,Unscheduled patient 65
+1556,34116,"Admitted patient 65, day 13, room 4, OT 1"
+1557,34491,Unscheduled patient 65
+1558,34117,"Admitted patient 65, day 13, room 3, OT 1"
+1559,34552,Unscheduled patient 75
+1560,34117,"Admitted patient 75, day 7, room 1, OT 1"
+1561,34117,"Unscheduled nurse 11, shift 41, room 4"
+1562,34117,"Scheduled nurse 7, shift 41, room 4"
+1563,34117,"Unscheduled nurse 11, shift 41, room 5"
+1564,34117,"Scheduled nurse 7, shift 41, room 5"
+1565,34117,"Unscheduled nurse 1, shift 38, room 4"
+1566,34117,"Scheduled nurse 4, shift 38, room 4"
+1567,34117,"Unscheduled nurse 5, shift 36, room 4"
+1568,34117,"Scheduled nurse 8, shift 36, room 4"
+1569,34556,Unscheduled patient 57
+1570,34119,"Admitted patient 57, day 1, room 5, OT 1"
+1571,34119,"Unscheduled nurse 1, shift 21, room 5"
+1572,34119,"Scheduled nurse 4, shift 21, room 5"
+1573,34556,Unscheduled patient 57
+1574,34159,"Admitted patient 57, day 1, room 5, OT 2"
+1575,34556,Unscheduled patient 57
+1576,34159,"Admitted patient 57, day 1, room 5, OT 3"
+1577,34556,Unscheduled patient 57
+1578,34162,"Admitted patient 57, day 2, room 5, OT 2"
+1579,34556,Unscheduled patient 57
+1580,34162,"Admitted patient 57, day 2, room 5, OT 3"
+1581,34546,Unscheduled patient 71
+1582,34151,"Admitted patient 71, day 10, room 5, OT 1"
+1583,34545,Unscheduled patient 57
+1584,34164,"Admitted patient 57, day 4, room 5, OT 2"
+1585,34545,Unscheduled patient 57
+1586,34164,"Admitted patient 57, day 4, room 5, OT 3"
+1587,34545,Unscheduled patient 57
+1588,34171,"Admitted patient 57, day 11, room 2, OT 1"
+1589,34171,"Unscheduled nurse 6, shift 18, room 5"
+1590,34171,"Scheduled nurse 7, shift 18, room 5"
+1591,34545,Unscheduled patient 57
+1592,34175,"Admitted patient 57, day 12, room 2, OT 1"
+1593,34545,Unscheduled patient 57
+1594,34211,"Admitted patient 57, day 11, room 2, OT 2"
+1595,34545,Unscheduled patient 57
+1596,34211,"Admitted patient 57, day 11, room 2, OT 3"
+1597,34545,Unscheduled patient 57
+1598,34215,"Admitted patient 57, day 12, room 2, OT 2"
+1599,34545,Unscheduled patient 57
+1600,34215,"Admitted patient 57, day 12, room 2, OT 3"
+1601,34545,Unscheduled patient 57
+1602,34940,Unscheduled patient 71
+1603,34480,"Admitted patient 71, day 2, room 5, OT 1"
+1604,34101,"Admitted patient 57, day 10, room 5, OT 1"
+1605,34480,Unscheduled patient 57
+1606,34102,"Admitted patient 57, day 10, room 2, OT 1"
+1607,34480,Unscheduled patient 57
+1608,34111,"Admitted patient 57, day 11, room 5, OT 1"
+1609,34111,"Unscheduled nurse 0, shift 30, room 2"
+1610,34111,"Unscheduled nurse 0, shift 34, room 1"
+1611,34111,"Unscheduled nurse 2, shift 8, room 8"
+1612,34111,"Scheduled nurse 1, shift 8, room 8"
+1613,34111,"Unscheduled nurse 5, shift 30, room 1"
+1614,34111,"Scheduled nurse 0, shift 30, room 1"
+1615,34111,"Scheduled nurse 5, shift 30, room 2"
+1616,34111,"Scheduled nurse 9, shift 34, room 1"
+1617,34111,"Unscheduled nurse 6, shift 6, room 8"
+1618,34111,"Scheduled nurse 5, shift 6, room 8"
+1619,34480,Unscheduled patient 57
+1620,34121,"Admitted patient 57, day 12, room 5, OT 1"
+1621,34121,"Unscheduled nurse 0, shift 4, room 6"
+1622,34121,"Scheduled nurse 8, shift 4, room 6"
+1623,34480,Unscheduled patient 57
+1624,34141,"Admitted patient 57, day 10, room 2, OT 2"
+1625,34141,"Unscheduled nurse 10, shift 3, room 6"
+1626,34141,"Scheduled nurse 9, shift 3, room 6"
+1627,34480,Unscheduled patient 57
+1628,34141,"Admitted patient 57, day 10, room 2, OT 3"
+1629,34141,"Unscheduled nurse 0, shift 16, room 5"
+1630,34141,"Unscheduled nurse 2, shift 15, room 5"
+1631,34141,"Scheduled nurse 8, shift 15, room 5"
+1632,34141,"Scheduled nurse 9, shift 16, room 5"
+1633,34141,"Unscheduled nurse 0, shift 34, room 0"
+1634,34141,"Unscheduled nurse 5, shift 24, room 5"
+1635,34141,"Scheduled nurse 9, shift 34, room 0"
+1636,34141,"Unscheduled nurse 10, shift 39, room 5"
+1637,34141,"Scheduled nurse 5, shift 39, room 5"
+1638,34141,"Scheduled nurse 11, shift 24, room 5"
+1639,34480,Unscheduled patient 57
+1640,34140,"Admitted patient 57, day 10, room 5, OT 2"
+1641,34140,"Unscheduled nurse 15, shift 33, room 0"
+1642,34140,"Scheduled nurse 10, shift 33, room 0"
+1643,34140,"Unscheduled nurse 15, shift 33, room 1"
+1644,34140,"Scheduled nurse 10, shift 33, room 1"
+1645,34480,Unscheduled patient 57
+1646,34140,"Admitted patient 57, day 10, room 5, OT 3"
+1647,34480,Unscheduled patient 57
+1648,34150,"Admitted patient 57, day 11, room 5, OT 2"
+1649,34480,Unscheduled patient 57
+1650,34150,"Admitted patient 57, day 11, room 5, OT 3"
+1651,34480,Unscheduled patient 57
+1652,34156,"Admitted patient 57, day 12, room 5, OT 2"
+1653,34480,Unscheduled patient 57
+1654,34156,"Admitted patient 57, day 12, room 5, OT 3"
+1655,34480,Unscheduled patient 57
+1656,34920,Unscheduled patient 21
+1657,34450,"Admitted patient 21, day 9, room 5, OT 1"
+1658,34071,"Admitted patient 57, day 10, room 2, OT 1"
+1659,34515,Unscheduled patient 22
+1660,34051,"Admitted patient 22, day 0, room 0, OT 1"
+1661,34425,Unscheduled patient 65
+1662,33951,"Admitted patient 65, day 2, room 1, OT 1"
+1663,34350,Unscheduled patient 12
+1664,33951,"Admitted patient 12, day 10, room 6, OT 1"
+1665,34366,Unscheduled patient 39
+1666,33911,"Admitted patient 39, day 11, room 2, OT 1"
+1667,33911,"Unscheduled nurse 2, shift 40, room 3"
+1668,33911,"Scheduled nurse 0, shift 40, room 3"
+1669,34310,Unscheduled patient 67
+1670,33922,"Admitted patient 67, day 10, room 4, OT 1"
+1671,33922,"Unscheduled nurse 11, shift 41, room 8"
+1672,33922,"Scheduled nurse 7, shift 41, room 8"
+1673,34297,Unscheduled patient 56
+1674,33927,"Admitted patient 56, day 12, room 0, OT 1"
+1675,34297,Unscheduled patient 56
+1676,33927,"Admitted patient 56, day 12, room 6, OT 1"
+1677,34297,Unscheduled patient 56
+1678,33929,"Admitted patient 56, day 11, room 0, OT 1"
+1679,34297,Unscheduled patient 56
+1680,33962,"Admitted patient 56, day 13, room 0, OT 1"
+1681,34297,Unscheduled patient 56
+1682,33963,"Admitted patient 56, day 13, room 3, OT 1"
+1683,34297,Unscheduled patient 56
+1684,33962,"Admitted patient 56, day 13, room 6, OT 1"
+1685,34297,Unscheduled patient 56
+1686,33962,"Admitted patient 56, day 13, room 5, OT 1"
+1687,34297,Unscheduled patient 56
+1688,33963,"Admitted patient 56, day 13, room 8, OT 1"
+1689,34297,Unscheduled patient 56
+1690,33962,"Admitted patient 56, day 11, room 6, OT 2"
+1691,34297,Unscheduled patient 56
+1692,33962,"Admitted patient 56, day 11, room 6, OT 3"
+1693,34297,Unscheduled patient 56
+1694,33962,"Admitted patient 56, day 13, room 0, OT 2"
+1695,34297,Unscheduled patient 56
+1696,33962,"Admitted patient 56, day 13, room 0, OT 3"
+1697,33962,"Unscheduled nurse 1, shift 35, room 1"
+1698,33962,"Unscheduled nurse 3, shift 32, room 1"
+1699,33962,"Unscheduled nurse 1, shift 28, room 2"
+1700,33962,"Scheduled nurse 1, shift 32, room 1"
+1701,33962,"Scheduled nurse 2, shift 28, room 2"
+1702,33962,"Unscheduled nurse 4, shift 29, room 2"
+1703,33962,"Unscheduled nurse 1, shift 5, room 6"
+1704,33962,"Scheduled nurse 2, shift 5, room 6"
+1705,33962,"Scheduled nurse 4, shift 35, room 1"
+1706,33962,"Scheduled nurse 8, shift 29, room 2"
+1707,34297,Unscheduled patient 56
+1708,33963,"Admitted patient 56, day 13, room 3, OT 2"
+1709,33963,"Unscheduled nurse 1, shift 35, room 0"
+1710,33963,"Scheduled nurse 4, shift 35, room 0"
+1711,34297,Unscheduled patient 56
+1712,33963,"Admitted patient 56, day 13, room 3, OT 3"
+1713,34297,Unscheduled patient 56
+1714,33962,"Admitted patient 56, day 13, room 6, OT 2"
+1715,34297,Unscheduled patient 56
+1716,33962,"Admitted patient 56, day 13, room 6, OT 3"
+1717,34297,Unscheduled patient 56
+1718,33963,"Admitted patient 56, day 13, room 8, OT 2"
+1719,34297,Unscheduled patient 56
+1720,33963,"Admitted patient 56, day 13, room 8, OT 3"
+1721,34297,Unscheduled patient 56
+1722,33962,"Admitted patient 56, day 13, room 5, OT 2"
+1723,34350,Unscheduled patient 67
+1724,33951,"Admitted patient 67, day 10, room 8, OT 1"
+1725,34286,Unscheduled patient 56
+1726,33926,"Admitted patient 56, day 12, room 4, OT 1"
+1727,34286,Unscheduled patient 56
+1728,33951,"Admitted patient 56, day 13, room 4, OT 1"
+1729,34286,Unscheduled patient 56
+1730,33951,"Admitted patient 56, day 13, room 4, OT 2"
+1731,34286,Unscheduled patient 56
+1732,33911,"Admitted patient 56, day 11, room 6, OT 1"
+1733,34355,Unscheduled patient 24
+1734,33902,"Admitted patient 24, day 0, room 7, OT 1"
+1735,34350,Unscheduled patient 16
+1736,33891,"Admitted patient 16, day 1, room 4, OT 1"
+1737,34339,Unscheduled patient 102
+1738,33891,"Admitted patient 102, day 6, room 4, OT 1"
+1739,34340,Unscheduled patient 86
+1740,33876,"Admitted patient 86, day 3, room 6, OT 1"
+1741,33876,"Unscheduled nurse 2, shift 31, room 1"
+1742,33876,"Scheduled nurse 12, shift 31, room 1"
+1743,34326,Unscheduled patient 13
+1744,33876,"Admitted patient 13, day 3, room 3, OT 2"
+1745,34261,Unscheduled patient 93
+1746,33889,"Admitted patient 93, day 11, room 0, OT 1"
+1747,34261,Unscheduled patient 93
+1748,33891,"Admitted patient 93, day 12, room 4, OT 1"
+1749,34261,Unscheduled patient 93
+1750,33881,"Admitted patient 93, day 12, room 6, OT 1"
+1751,34261,Unscheduled patient 93
+1752,33882,"Admitted patient 93, day 12, room 0, OT 1"
+1753,34261,Unscheduled patient 93
+1754,33916,"Admitted patient 93, day 13, room 0, OT 1"
+1755,34261,Unscheduled patient 93
+1756,33917,"Admitted patient 93, day 13, room 3, OT 1"
+1757,34261,Unscheduled patient 93
+1758,33916,"Admitted patient 93, day 13, room 4, OT 1"
+1759,34369,Unscheduled patient 24
+1760,33919,"Admitted patient 24, day 1, room 7, OT 1"
+1761,34264,Unscheduled patient 93
+1762,33919,"Admitted patient 93, day 13, room 6, OT 1"
+1763,34264,Unscheduled patient 93
+1764,33919,"Admitted patient 93, day 13, room 5, OT 1"
+1765,34369,Unscheduled patient 24
+1766,33925,"Admitted patient 24, day 2, room 7, OT 1"
+1767,33925,"Unscheduled nurse 3, shift 7, room 8"
+1768,33925,"Scheduled nurse 10, shift 7, room 8"
+1769,34270,Unscheduled patient 93
+1770,33925,"Admitted patient 93, day 13, room 0, OT 2"
+1771,34270,Unscheduled patient 93
+1772,33925,"Admitted patient 93, day 13, room 0, OT 3"
+1773,34270,Unscheduled patient 93
+1774,33926,"Admitted patient 93, day 13, room 3, OT 2"
+1775,34270,Unscheduled patient 93
+1776,33925,"Admitted patient 93, day 13, room 4, OT 2"
+1777,34270,Unscheduled patient 93
+1778,33925,"Admitted patient 93, day 13, room 4, OT 3"
+1779,34270,Unscheduled patient 93
+1780,33925,"Admitted patient 93, day 13, room 6, OT 2"
+1781,34270,Unscheduled patient 93
+1782,33925,"Admitted patient 93, day 13, room 6, OT 3"
+1783,34270,Unscheduled patient 93
+1784,33925,"Admitted patient 93, day 11, room 6, OT 2"
+1785,34270,Unscheduled patient 93
+1786,33925,"Admitted patient 93, day 11, room 6, OT 3"
+1787,34270,Unscheduled patient 93
+1788,33925,"Admitted patient 93, day 13, room 5, OT 2"
+1789,34270,Unscheduled patient 93
+1790,33925,"Admitted patient 93, day 13, room 5, OT 3"
+1791,34270,Unscheduled patient 93
+1792,33926,"Admitted patient 93, day 13, room 3, OT 3"
+1793,34270,Unscheduled patient 93
+1794,33885,"Admitted patient 93, day 11, room 6, OT 1"
+1795,34285,Unscheduled patient 116
+1796,33875,"Admitted patient 116, day 10, room 2, OT 1"
+1797,34285,Unscheduled patient 116
+1798,33876,"Admitted patient 116, day 9, room 2, OT 1"
+1799,34284,Unscheduled patient 23
+1800,33885,"Admitted patient 23, day 12, room 0, OT 1"
+1801,33885,"Unscheduled nurse 1, shift 32, room 7"
+1802,33885,"Scheduled nurse 3, shift 32, room 7"
+1803,33885,"Unscheduled nurse 0, shift 30, room 7"
+1804,33885,"Scheduled nurse 5, shift 30, room 7"
+1805,34284,Unscheduled patient 23
+1806,33885,"Admitted patient 23, day 12, room 7, OT 1"
+1807,33885,"Unscheduled nurse 10, shift 39, room 3"
+1808,33885,"Scheduled nurse 5, shift 39, room 3"
+1809,33885,"Unscheduled nurse 2, shift 31, room 7"
+1810,33885,"Unscheduled nurse 11, shift 41, room 3"
+1811,33885,"Scheduled nurse 7, shift 41, room 3"
+1812,33885,"Scheduled nurse 12, shift 31, room 7"
+1813,34284,Unscheduled patient 23
+1814,33880,"Admitted patient 23, day 10, room 7, OT 1"
+1815,34285,Unscheduled patient 76
+1816,33880,"Admitted patient 76, day 11, room 7, OT 1"
+1817,34289,Unscheduled patient 116
+1818,33881,"Admitted patient 116, day 9, room 4, OT 1"
+1819,34289,Unscheduled patient 116
+1820,33889,"Admitted patient 116, day 12, room 3, OT 1"
+1821,34289,Unscheduled patient 116
+1822,33889,"Admitted patient 116, day 12, room 2, OT 1"
+1823,34307,Unscheduled patient 55
+1824,33889,"Admitted patient 55, day 9, room 8, OT 1"
+1825,34327,Unscheduled patient 98
+1826,33889,"Admitted patient 98, day 0, room 3, OT 1"
+1827,34343,Unscheduled patient 95
+1828,33889,"Admitted patient 95, day 6, room 2, OT 1"
+1829,33889,"Unscheduled nurse 2, shift 40, room 4"
+1830,33889,"Unscheduled nurse 0, shift 37, room 4"
+1831,33889,"Scheduled nurse 0, shift 40, room 4"
+1832,33889,"Scheduled nurse 2, shift 37, room 4"
+1833,33889,"Unscheduled nurse 7, shift 27, room 2"
+1834,33889,"Scheduled nurse 5, shift 27, room 2"
+1835,34314,Unscheduled patient 19
+1836,33889,"Admitted patient 19, day 8, room 0, OT 1"
+1837,34344,Unscheduled patient 39
+1838,33906,"Admitted patient 39, day 11, room 4, OT 1"
+1839,34336,Unscheduled patient 47
+1840,33906,"Admitted patient 47, day 8, room 3, OT 1"
+1841,34344,Unscheduled patient 39
+1842,33911,"Admitted patient 39, day 11, room 1, OT 1"
+1843,34344,Unscheduled patient 39
+1844,33929,"Admitted patient 39, day 11, room 2, OT 2"
+1845,34344,Unscheduled patient 39
+1846,33929,"Admitted patient 39, day 11, room 2, OT 3"
+1847,34344,Unscheduled patient 39
+1848,33929,"Admitted patient 39, day 13, room 2, OT 1"
+1849,34384,Unscheduled patient 64
+1850,33925,"Admitted patient 64, day 1, room 2, OT 1"
+1851,34370,Unscheduled patient 81
+1852,33921,"Admitted patient 81, day 0, room 6, OT 1"
+1853,34370,Unscheduled patient 81
+1854,33925,"Admitted patient 81, day 1, room 2, OT 1"
+1855,34382,Unscheduled patient 84
+1856,33925,"Admitted patient 84, day 3, room 6, OT 2"
+1857,34382,Unscheduled patient 111
+1858,33925,"Admitted patient 111, day 4, room 7, OT 1"
+1859,34383,Unscheduled patient 15
+1860,33925,"Admitted patient 15, day 1, room 4, OT 1"
+1861,34360,Unscheduled patient 75
+1862,33925,"Admitted patient 75, day 7, room 1, OT 1"
+1863,33925,"Unscheduled nurse 7, shift 41, room 4"
+1864,33925,"Scheduled nurse 11, shift 41, room 4"
+1865,34384,Unscheduled patient 16
+1866,33936,"Admitted patient 16, day 2, room 4, OT 1"
+1867,33936,"Unscheduled nurse 4, shift 38, room 4"
+1868,33936,"Scheduled nurse 1, shift 38, room 4"
+1869,33936,"Unscheduled nurse 5, shift 39, room 4"
+1870,33936,"Unscheduled nurse 8, shift 36, room 4"
+1871,33936,"Scheduled nurse 5, shift 36, room 4"
+1872,33936,"Unscheduled nurse 1, shift 17, room 5"
+1873,33936,"Scheduled nurse 3, shift 17, room 5"
+1874,33936,"Unscheduled nurse 4, shift 21, room 5"
+1875,33936,"Scheduled nurse 1, shift 21, room 5"
+1876,33936,"Scheduled nurse 10, shift 39, room 4"
+1877,34395,Unscheduled patient 64
+1878,33940,"Admitted patient 64, day 3, room 2, OT 1"
+1879,34400,Unscheduled patient 71
+1880,33956,"Admitted patient 71, day 4, room 5, OT 1"
+1881,34400,Unscheduled patient 71
+1882,33980,"Admitted patient 71, day 2, room 5, OT 2"
+1883,34400,Unscheduled patient 71
+1884,33980,"Admitted patient 71, day 2, room 5, OT 3"
+1885,34400,Unscheduled patient 71
+1886,33996,"Admitted patient 71, day 4, room 5, OT 2"
+1887,34400,Unscheduled patient 71
+1888,33996,"Admitted patient 71, day 4, room 5, OT 3"
+1889,34400,Unscheduled patient 71
+1890,34020,"Admitted patient 71, day 12, room 3, OT 1"
+1891,34020,"Unscheduled nurse 7, shift 18, room 5"
+1892,34020,"Scheduled nurse 6, shift 18, room 5"
+1893,34400,Unscheduled patient 71
+1894,34021,"Admitted patient 71, day 11, room 4, OT 1"
+1895,34400,Unscheduled patient 71
+1896,34025,"Admitted patient 71, day 13, room 5, OT 1"
+1897,34400,Unscheduled patient 71
+1898,34026,"Admitted patient 71, day 12, room 5, OT 1"
+1899,34400,Unscheduled patient 71
+1900,34026,"Admitted patient 71, day 13, room 3, OT 1"
+1901,34400,Unscheduled patient 71
+1902,34026,"Admitted patient 71, day 13, room 8, OT 1"
+1903,34400,Unscheduled patient 71
+1904,33940,"Admitted patient 71, day 2, room 5, OT 1"
+1905,34403,Unscheduled patient 43
+1906,33940,"Admitted patient 43, day 3, room 8, OT 2"
+1907,34404,Unscheduled patient 22
+1908,33980,"Admitted patient 22, day 0, room 0, OT 2"
+1909,34359,Unscheduled patient 57
+1910,33985,"Admitted patient 57, day 11, room 2, OT 1"
+1911,33985,"Unscheduled nurse 12, shift 31, room 2"
+1912,33985,"Scheduled nurse 2, shift 31, room 2"
+1913,33985,"Unscheduled nurse 1, shift 8, room 8"
+1914,33985,"Scheduled nurse 2, shift 8, room 8"
+1915,33985,"Unscheduled nurse 0, shift 30, room 1"
+1916,33985,"Scheduled nurse 5, shift 30, room 1"
+1917,33985,"Unscheduled nurse 9, shift 34, room 1"
+1918,33985,"Scheduled nurse 0, shift 34, room 1"
+1919,33985,"Unscheduled nurse 5, shift 6, room 8"
+1920,33985,"Scheduled nurse 6, shift 6, room 8"
+1921,34359,Unscheduled patient 57
+1922,33989,"Admitted patient 57, day 12, room 2, OT 1"
+1923,33989,"Unscheduled nurse 0, shift 34, room 2"
+1924,33989,"Unscheduled nurse 8, shift 4, room 6"
+1925,33989,"Scheduled nurse 0, shift 4, room 6"
+1926,33989,"Scheduled nurse 9, shift 34, room 2"
+1927,33989,"Unscheduled nurse 9, shift 3, room 6"
+1928,33989,"Scheduled nurse 10, shift 3, room 6"
+1929,33989,"Unscheduled nurse 15, shift 33, room 2"
+1930,33989,"Unscheduled nurse 0, shift 20, room 5"
+1931,33989,"Unscheduled nurse 2, shift 19, room 5"
+1932,33989,"Unscheduled nurse 8, shift 15, room 5"
+1933,33989,"Scheduled nurse 2, shift 15, room 5"
+1934,33989,"Unscheduled nurse 9, shift 16, room 5"
+1935,33989,"Scheduled nurse 0, shift 16, room 5"
+1936,33989,"Scheduled nurse 9, shift 19, room 5"
+1937,33989,"Unscheduled nurse 9, shift 34, room 0"
+1938,33989,"Scheduled nurse 0, shift 34, room 0"
+1939,33989,"Unscheduled nurse 5, shift 39, room 5"
+1940,33989,"Scheduled nurse 10, shift 33, room 2"
+1941,33989,"Scheduled nurse 10, shift 39, room 5"
+1942,33989,"Unscheduled nurse 11, shift 24, room 5"
+1943,33989,"Scheduled nurse 5, shift 24, room 5"
+1944,33989,"Unscheduled nurse 10, shift 33, room 0"
+1945,33989,"Unscheduled nurse 10, shift 33, room 1"
+1946,33989,"Scheduled nurse 13, shift 20, room 5"
+1947,33989,"Scheduled nurse 15, shift 33, room 0"
+1948,33989,"Scheduled nurse 15, shift 33, room 1"
+1949,34359,Unscheduled patient 57
+1950,34000,"Admitted patient 57, day 12, room 5, OT 1"
+1951,34359,Unscheduled patient 57
+1952,34025,"Admitted patient 57, day 10, room 2, OT 2"
+1953,34359,Unscheduled patient 57
+1954,34025,"Admitted patient 57, day 10, room 2, OT 3"
+1955,34359,Unscheduled patient 57
+1956,34029,"Admitted patient 57, day 12, room 2, OT 2"
+1957,34359,Unscheduled patient 57
+1958,34029,"Admitted patient 57, day 12, room 2, OT 3"
+1959,34359,Unscheduled patient 57
+1960,33985,"Admitted patient 57, day 10, room 2, OT 1"
+1961,34409,Unscheduled patient 22
+1962,33945,"Admitted patient 22, day 0, room 0, OT 1"
+1963,34409,Unscheduled patient 58
+1964,33945,"Admitted patient 58, day 2, room 6, OT 1"
+1965,34344,Unscheduled patient 12
+1966,33945,"Admitted patient 12, day 10, room 6, OT 1"
+1967,34360,Unscheduled patient 39
+1968,33911,"Admitted patient 39, day 11, room 2, OT 1"
+1969,33911,"Unscheduled nurse 0, shift 40, room 3"
+1970,33911,"Scheduled nurse 2, shift 40, room 3"
+1971,34310,Unscheduled patient 67
+1972,33912,"Admitted patient 67, day 10, room 4, OT 1"
+1973,33912,"Unscheduled nurse 7, shift 41, room 8"
+1974,33912,"Scheduled nurse 11, shift 41, room 8"
+1975,34287,Unscheduled patient 56
+1976,33917,"Admitted patient 56, day 12, room 0, OT 1"
+1977,34287,Unscheduled patient 56
+1978,33917,"Admitted patient 56, day 12, room 6, OT 1"
+1979,34287,Unscheduled patient 56
+1980,33918,"Admitted patient 56, day 11, room 0, OT 1"
+1981,34287,Unscheduled patient 56
+1982,33952,"Admitted patient 56, day 13, room 0, OT 1"
+1983,34287,Unscheduled patient 56
+1984,33952,"Admitted patient 56, day 13, room 3, OT 1"
+1985,34287,Unscheduled patient 56
+1986,33952,"Admitted patient 56, day 13, room 6, OT 1"
+1987,34287,Unscheduled patient 56
+1988,33953,"Admitted patient 56, day 13, room 5, OT 1"
+1989,34287,Unscheduled patient 56
+1990,33953,"Admitted patient 56, day 13, room 5, OT 3"
+1991,34287,Unscheduled patient 56
+1992,33952,"Admitted patient 56, day 11, room 6, OT 2"
+1993,34287,Unscheduled patient 56
+1994,33952,"Admitted patient 56, day 11, room 6, OT 3"
+1995,34287,Unscheduled patient 56
+1996,33952,"Admitted patient 56, day 13, room 0, OT 2"
+1997,34287,Unscheduled patient 56
+1998,33952,"Admitted patient 56, day 13, room 0, OT 3"
+1999,34416,Unscheduled patient 86
+2000,33962,"Admitted patient 86, day 3, room 6, OT 2"
+2001,33962,"Unscheduled nurse 1, shift 32, room 1"
+2002,33962,"Scheduled nurse 3, shift 32, room 1"
+2003,34416,Unscheduled patient 86
+2004,33967,"Admitted patient 86, day 4, room 6, OT 1"
+2005,33967,"Unscheduled nurse 2, shift 5, room 6"
+2006,33967,"Scheduled nurse 1, shift 5, room 6"
+2007,33967,"Unscheduled nurse 4, shift 35, room 1"
+2008,33967,"Scheduled nurse 1, shift 35, room 1"
+2009,33967,"Unscheduled nurse 8, shift 29, room 2"
+2010,33967,"Scheduled nurse 4, shift 29, room 2"
+2011,33967,"Unscheduled nurse 4, shift 35, room 0"
+2012,33967,"Scheduled nurse 1, shift 35, room 0"
+2013,34302,Unscheduled patient 56
+2014,33967,"Admitted patient 56, day 13, room 3, OT 2"
+2015,34302,Unscheduled patient 56
+2016,33967,"Admitted patient 56, day 13, room 3, OT 3"
+2017,34302,Unscheduled patient 56
+2018,33967,"Admitted patient 56, day 13, room 6, OT 2"
+2019,34302,Unscheduled patient 56
+2020,33967,"Admitted patient 56, day 13, room 6, OT 3"
+2021,34302,Unscheduled patient 56
+2022,33968,"Admitted patient 56, day 11, room 0, OT 2"
+2023,34302,Unscheduled patient 56
+2024,33968,"Admitted patient 56, day 11, room 0, OT 3"
+2025,34302,Unscheduled patient 56
+2026,33968,"Admitted patient 56, day 13, room 5, OT 2"
+2027,34302,Unscheduled patient 56
+2028,33968,"Admitted patient 56, day 13, room 8, OT 1"
+2029,34302,Unscheduled patient 56
+2030,33968,"Admitted patient 56, day 13, room 8, OT 2"
+2031,34302,Unscheduled patient 56
+2032,33968,"Admitted patient 56, day 13, room 8, OT 3"
+2033,34302,Unscheduled patient 56
+2034,33927,"Admitted patient 56, day 11, room 6, OT 1"
+2035,34325,Unscheduled patient 67
+2036,33926,"Admitted patient 67, day 10, room 8, OT 1"
+2037,34370,Unscheduled patient 24
+2038,33917,"Admitted patient 24, day 0, room 7, OT 1"
+2039,34365,Unscheduled patient 16
+2040,33906,"Admitted patient 16, day 1, room 4, OT 1"
+2041,34354,Unscheduled patient 102
+2042,33906,"Admitted patient 102, day 6, room 4, OT 1"
+2043,33906,"Unscheduled nurse 12, shift 31, room 1"
+2044,33906,"Scheduled nurse 2, shift 31, room 1"
+2045,34355,Unscheduled patient 86
+2046,33891,"Admitted patient 86, day 3, room 6, OT 1"
+2047,34276,Unscheduled patient 93
+2048,33893,"Admitted patient 93, day 11, room 0, OT 1"
+2049,34276,Unscheduled patient 93
+2050,33907,"Admitted patient 93, day 12, room 4, OT 1"
+2051,34276,Unscheduled patient 93
+2052,33896,"Admitted patient 93, day 12, room 6, OT 1"
+2053,34276,Unscheduled patient 93
+2054,33897,"Admitted patient 93, day 12, room 0, OT 1"
+2055,34276,Unscheduled patient 93
+2056,33931,"Admitted patient 93, day 13, room 0, OT 1"
+2057,34276,Unscheduled patient 93
+2058,33931,"Admitted patient 93, day 13, room 3, OT 1"
+2059,34276,Unscheduled patient 93
+2060,33932,"Admitted patient 93, day 13, room 4, OT 1"
+2061,34382,Unscheduled patient 13
+2062,33932,"Admitted patient 13, day 3, room 3, OT 2"
+2063,34276,Unscheduled patient 93
+2064,33931,"Admitted patient 93, day 13, room 6, OT 1"
+2065,34276,Unscheduled patient 93
+2066,33932,"Admitted patient 93, day 13, room 5, OT 1"
+2067,34385,Unscheduled patient 24
+2068,33935,"Admitted patient 24, day 1, room 7, OT 1"
+2069,33935,"Unscheduled nurse 10, shift 7, room 8"
+2070,33935,"Scheduled nurse 3, shift 7, room 8"
+2071,34279,Unscheduled patient 93
+2072,33934,"Admitted patient 93, day 13, room 0, OT 2"
+2073,34279,Unscheduled patient 93
+2074,33934,"Admitted patient 93, day 13, room 0, OT 3"
+2075,34279,Unscheduled patient 93
+2076,33934,"Admitted patient 93, day 13, room 3, OT 2"
+2077,34279,Unscheduled patient 93
+2078,33935,"Admitted patient 93, day 13, room 4, OT 2"
+2079,34279,Unscheduled patient 93
+2080,33935,"Admitted patient 93, day 13, room 4, OT 3"
+2081,34279,Unscheduled patient 93
+2082,33934,"Admitted patient 93, day 13, room 6, OT 2"
+2083,34279,Unscheduled patient 93
+2084,33934,"Admitted patient 93, day 13, room 6, OT 3"
+2085,34279,Unscheduled patient 93
+2086,33934,"Admitted patient 93, day 11, room 6, OT 2"
+2087,34279,Unscheduled patient 93
+2088,33934,"Admitted patient 93, day 11, room 6, OT 3"
+2089,34279,Unscheduled patient 93
+2090,33935,"Admitted patient 93, day 13, room 5, OT 2"
+2091,34279,Unscheduled patient 93
+2092,33935,"Admitted patient 93, day 13, room 5, OT 3"
+2093,34279,Unscheduled patient 93
+2094,33934,"Admitted patient 93, day 13, room 3, OT 3"
+2095,34279,Unscheduled patient 93
+2096,33894,"Admitted patient 93, day 11, room 6, OT 1"
+2097,34294,Unscheduled patient 116
+2098,33885,"Admitted patient 116, day 10, room 4, OT 1"
+2099,34294,Unscheduled patient 116
+2100,33884,"Admitted patient 116, day 9, room 2, OT 1"
+2101,34288,Unscheduled patient 23
+2102,33881,"Admitted patient 23, day 10, room 0, OT 1"
+2103,33881,"Unscheduled nurse 3, shift 32, room 7"
+2104,33881,"Scheduled nurse 1, shift 32, room 7"
+2105,33881,"Unscheduled nurse 5, shift 30, room 7"
+2106,33881,"Scheduled nurse 0, shift 30, room 7"
+2107,34288,Unscheduled patient 23
+2108,33889,"Admitted patient 23, day 12, room 0, OT 1"
+2109,33889,"Unscheduled nurse 5, shift 39, room 3"
+2110,33889,"Scheduled nurse 10, shift 39, room 3"
+2111,34288,Unscheduled patient 23
+2112,33889,"Admitted patient 23, day 12, room 7, OT 1"
+2113,33889,"Unscheduled nurse 7, shift 41, room 3"
+2114,33889,"Scheduled nurse 11, shift 41, room 3"
+2115,33889,"Unscheduled nurse 12, shift 31, room 7"
+2116,33889,"Scheduled nurse 2, shift 31, room 7"
+2117,34288,Unscheduled patient 23
+2118,33880,"Admitted patient 23, day 10, room 7, OT 1"
+2119,34285,Unscheduled patient 76
+2120,33880,"Admitted patient 76, day 11, room 7, OT 1"
+2121,34290,Unscheduled patient 116
+2122,33878,"Admitted patient 116, day 9, room 4, OT 1"
+2123,34290,Unscheduled patient 116
+2124,33885,"Admitted patient 116, day 10, room 2, OT 1"
+2125,34290,Unscheduled patient 116
+2126,33890,"Admitted patient 116, day 12, room 2, OT 1"
+2127,34308,Unscheduled patient 55
+2128,33890,"Admitted patient 55, day 9, room 8, OT 1"
+2129,34328,Unscheduled patient 98
+2130,33890,"Admitted patient 98, day 0, room 3, OT 1"
+2131,34340,Unscheduled patient 24
+2132,33896,"Admitted patient 24, day 2, room 7, OT 1"
+2133,33896,"Unscheduled nurse 0, shift 40, room 4"
+2134,33896,"Unscheduled nurse 2, shift 37, room 4"
+2135,33896,"Scheduled nurse 0, shift 37, room 4"
+2136,33896,"Scheduled nurse 2, shift 40, room 4"
+2137,33896,"Unscheduled nurse 5, shift 27, room 2"
+2138,33896,"Scheduled nurse 7, shift 27, room 2"
+2139,34321,Unscheduled patient 19
+2140,33896,"Admitted patient 19, day 8, room 0, OT 1"
+2141,34326,Unscheduled patient 47
+2142,33896,"Admitted patient 47, day 8, room 3, OT 1"
+2143,34345,Unscheduled patient 39
+2144,33898,"Admitted patient 39, day 11, room 4, OT 1"
+2145,34345,Unscheduled patient 39
+2146,33901,"Admitted patient 39, day 11, room 1, OT 1"
+2147,34345,Unscheduled patient 39
+2148,33930,"Admitted patient 39, day 13, room 2, OT 2"
+2149,34345,Unscheduled patient 39
+2150,33930,"Admitted patient 39, day 13, room 2, OT 1"
+2151,34384,Unscheduled patient 95
+2152,33930,"Admitted patient 95, day 6, room 2, OT 1"
+2153,34385,Unscheduled patient 64
+2154,33926,"Admitted patient 64, day 1, room 2, OT 1"
+2155,34371,Unscheduled patient 81
+2156,33912,"Admitted patient 81, day 0, room 6, OT 1"
+2157,34369,Unscheduled patient 84
+2158,33912,"Admitted patient 84, day 3, room 6, OT 2"
+2159,34369,Unscheduled patient 111
+2160,33912,"Admitted patient 111, day 4, room 7, OT 1"
+2161,34370,Unscheduled patient 15
+2162,33912,"Admitted patient 15, day 1, room 4, OT 1"
+2163,34347,Unscheduled patient 75
+2164,33912,"Admitted patient 75, day 7, room 1, OT 1"
+2165,33912,"Unscheduled nurse 11, shift 41, room 4"
+2166,33912,"Scheduled nurse 7, shift 41, room 4"
+2167,34371,Unscheduled patient 16
+2168,33923,"Admitted patient 16, day 2, room 4, OT 1"
+2169,33923,"Unscheduled nurse 1, shift 38, room 4"
+2170,33923,"Scheduled nurse 4, shift 38, room 4"
+2171,34382,Unscheduled patient 81
+2172,33937,"Admitted patient 81, day 1, room 2, OT 1"
+2173,33937,"Unscheduled nurse 5, shift 36, room 4"
+2174,33937,"Unscheduled nurse 3, shift 17, room 5"
+2175,33937,"Scheduled nurse 1, shift 17, room 5"
+2176,33937,"Scheduled nurse 8, shift 36, room 4"
+2177,33937,"Unscheduled nurse 10, shift 39, room 4"
+2178,33937,"Scheduled nurse 5, shift 39, room 4"
+2179,34396,Unscheduled patient 64
+2180,33941,"Admitted patient 64, day 3, room 2, OT 1"
+2181,34401,Unscheduled patient 71
+2182,33967,"Admitted patient 71, day 4, room 5, OT 1"
+2183,34401,Unscheduled patient 71
+2184,33981,"Admitted patient 71, day 2, room 5, OT 2"
+2185,34401,Unscheduled patient 71
+2186,33981,"Admitted patient 71, day 2, room 5, OT 3"
+2187,34401,Unscheduled patient 71
+2188,34007,"Admitted patient 71, day 4, room 5, OT 2"
+2189,34401,Unscheduled patient 71
+2190,34007,"Admitted patient 71, day 4, room 5, OT 3"
+2191,34401,Unscheduled patient 71
+2192,34026,"Admitted patient 71, day 13, room 4, OT 1"
+2193,34026,"Unscheduled nurse 6, shift 18, room 5"
+2194,34026,"Scheduled nurse 7, shift 18, room 5"
+2195,34401,Unscheduled patient 71
+2196,34031,"Admitted patient 71, day 12, room 3, OT 1"
+2197,34401,Unscheduled patient 71
+2198,34027,"Admitted patient 71, day 13, room 5, OT 1"
+2199,34401,Unscheduled patient 71
+2200,34032,"Admitted patient 71, day 11, room 4, OT 1"
+2201,34401,Unscheduled patient 71
+2202,34027,"Admitted patient 71, day 13, room 3, OT 1"
+2203,34401,Unscheduled patient 71
+2204,34027,"Admitted patient 71, day 13, room 8, OT 1"
+2205,34401,Unscheduled patient 71
+2206,33941,"Admitted patient 71, day 2, room 5, OT 1"
+2207,34404,Unscheduled patient 43
+2208,33941,"Admitted patient 43, day 3, room 8, OT 2"
+2209,34405,Unscheduled patient 22
+2210,33981,"Admitted patient 22, day 0, room 0, OT 2"
+2211,34355,Unscheduled patient 57
+2212,33986,"Admitted patient 57, day 11, room 2, OT 1"
+2213,33986,"Unscheduled nurse 1, shift 32, room 2"
+2214,33986,"Unscheduled nurse 2, shift 28, room 2"
+2215,33986,"Scheduled nurse 1, shift 28, room 2"
+2216,33986,"Unscheduled nurse 2, shift 8, room 8"
+2217,33986,"Scheduled nurse 1, shift 8, room 8"
+2218,33986,"Scheduled nurse 3, shift 32, room 2"
+2219,33986,"Unscheduled nurse 0, shift 34, room 1"
+2220,33986,"Unscheduled nurse 5, shift 30, room 1"
+2221,33986,"Scheduled nurse 0, shift 30, room 1"
+2222,33986,"Unscheduled nurse 6, shift 6, room 8"
+2223,33986,"Scheduled nurse 5, shift 6, room 8"
+2224,33986,"Scheduled nurse 9, shift 34, room 1"
+2225,34355,Unscheduled patient 57
+2226,33985,"Admitted patient 57, day 12, room 2, OT 1"
+2227,33985,"Unscheduled nurse 0, shift 4, room 6"
+2228,33985,"Scheduled nurse 8, shift 4, room 6"
+2229,33985,"Unscheduled nurse 9, shift 34, room 2"
+2230,33985,"Scheduled nurse 0, shift 34, room 2"
+2231,33985,"Unscheduled nurse 10, shift 3, room 6"
+2232,33985,"Scheduled nurse 9, shift 3, room 6"
+2233,34450,Unscheduled patient 17
+2234,33980,"Admitted patient 17, day 1, room 4, OT 1"
+2235,33980,"Unscheduled nurse 2, shift 15, room 5"
+2236,33980,"Unscheduled nurse 0, shift 16, room 5"
+2237,33980,"Scheduled nurse 8, shift 15, room 5"
+2238,33980,"Scheduled nurse 9, shift 16, room 5"
+2239,33980,"Unscheduled nurse 0, shift 34, room 0"
+2240,33980,"Scheduled nurse 9, shift 34, room 0"
+2241,33980,"Unscheduled nurse 10, shift 33, room 2"
+2242,33980,"Unscheduled nurse 10, shift 39, room 5"
+2243,33980,"Scheduled nurse 5, shift 39, room 5"
+2244,33980,"Scheduled nurse 15, shift 33, room 2"
+2245,34445,Unscheduled patient 44
+2246,33980,"Admitted patient 44, day 3, room 8, OT 1"
+2247,33980,"Unscheduled nurse 13, shift 20, room 5"
+2248,33980,"Scheduled nurse 0, shift 20, room 5"
+2249,33980,"Unscheduled nurse 15, shift 33, room 0"
+2250,33980,"Scheduled nurse 10, shift 33, room 0"
+2251,33980,"Unscheduled nurse 15, shift 33, room 1"
+2252,33980,"Scheduled nurse 10, shift 33, room 1"
+2253,34350,Unscheduled patient 57
+2254,33986,"Admitted patient 57, day 12, room 5, OT 1"
+2255,34350,Unscheduled patient 57
+2256,34016,"Admitted patient 57, day 10, room 2, OT 2"
+2257,34350,Unscheduled patient 57
+2258,34016,"Admitted patient 57, day 10, room 2, OT 3"
+2259,34350,Unscheduled patient 57
+2260,34016,"Admitted patient 57, day 11, room 2, OT 2"
+2261,34350,Unscheduled patient 57
+2262,33976,"Admitted patient 57, day 10, room 2, OT 1"
+2263,34400,Unscheduled patient 22
+2264,33936,"Admitted patient 22, day 0, room 0, OT 1"
+2265,34400,Unscheduled patient 58
+2266,33936,"Admitted patient 58, day 2, room 6, OT 1"
+2267,34335,Unscheduled patient 12
+2268,33936,"Admitted patient 12, day 10, room 6, OT 1"
+2269,34351,Unscheduled patient 39
+2270,33896,"Admitted patient 39, day 11, room 2, OT 1"
+2271,33896,"Unscheduled nurse 2, shift 40, room 3"
+2272,33896,"Scheduled nurse 0, shift 40, room 3"
+2273,34295,Unscheduled patient 67
+2274,33846,"Admitted patient 67, day 4, room 4, OT 1"
+2275,33846,"Unscheduled nurse 11, shift 41, room 8"
+2276,33846,"Scheduled nurse 7, shift 41, room 8"
+2277,34221,Unscheduled patient 56
+2278,33851,"Admitted patient 56, day 12, room 0, OT 1"
+2279,34221,Unscheduled patient 56
+2280,33851,"Admitted patient 56, day 12, room 6, OT 1"
+2281,34221,Unscheduled patient 56
+2282,33853,"Admitted patient 56, day 11, room 0, OT 1"
+2283,34221,Unscheduled patient 56
+2284,33861,"Admitted patient 56, day 12, room 4, OT 1"
+2285,34221,Unscheduled patient 56
+2286,33886,"Admitted patient 56, day 13, room 0, OT 1"
+2287,34221,Unscheduled patient 56
+2288,33886,"Admitted patient 56, day 13, room 4, OT 1"
+2289,34221,Unscheduled patient 56
+2290,33886,"Admitted patient 56, day 13, room 4, OT 2"
+2291,34221,Unscheduled patient 56
+2292,33886,"Admitted patient 56, day 13, room 4, OT 3"
+2293,34221,Unscheduled patient 56
+2294,33886,"Admitted patient 56, day 11, room 6, OT 2"
+2295,34221,Unscheduled patient 56
+2296,33886,"Admitted patient 56, day 11, room 6, OT 3"
+2297,34221,Unscheduled patient 56
+2298,33886,"Admitted patient 56, day 13, room 0, OT 2"
+2299,34221,Unscheduled patient 56
+2300,33886,"Admitted patient 56, day 13, room 0, OT 3"
+2301,34335,Unscheduled patient 67
+2302,33926,"Admitted patient 67, day 4, room 4, OT 2"
+2303,33926,"Unscheduled nurse 3, shift 32, room 1"
+2304,33926,"Scheduled nurse 1, shift 32, room 1"
+2305,34335,Unscheduled patient 67
+2306,33926,"Admitted patient 67, day 4, room 4, OT 3"
+2307,33926,"Unscheduled nurse 1, shift 5, room 6"
+2308,33926,"Scheduled nurse 2, shift 5, room 6"
+2309,34335,Unscheduled patient 67
+2310,33946,"Admitted patient 67, day 11, room 8, OT 1"
+2311,33946,"Unscheduled nurse 4, shift 29, room 2"
+2312,33946,"Scheduled nurse 8, shift 29, room 2"
+2313,33946,"Unscheduled nurse 1, shift 35, room 0"
+2314,33946,"Scheduled nurse 4, shift 35, room 0"
+2315,34281,Unscheduled patient 56
+2316,33946,"Admitted patient 56, day 13, room 5, OT 1"
+2317,34281,Unscheduled patient 56
+2318,33946,"Admitted patient 56, day 13, room 5, OT 3"
+2319,34281,Unscheduled patient 56
+2320,33946,"Admitted patient 56, day 13, room 6, OT 1"
+2321,34281,Unscheduled patient 56
+2322,33946,"Admitted patient 56, day 13, room 6, OT 2"
+2323,34281,Unscheduled patient 56
+2324,33946,"Admitted patient 56, day 13, room 6, OT 3"
+2325,34281,Unscheduled patient 56
+2326,33947,"Admitted patient 56, day 13, room 3, OT 1"
+2327,34281,Unscheduled patient 56
+2328,33946,"Admitted patient 56, day 13, room 5, OT 2"
+2329,34281,Unscheduled patient 56
+2330,33947,"Admitted patient 56, day 13, room 3, OT 2"
+2331,34281,Unscheduled patient 56
+2332,33947,"Admitted patient 56, day 13, room 3, OT 3"
+2333,34281,Unscheduled patient 56
+2334,33951,"Admitted patient 56, day 12, room 0, OT 2"
+2335,34281,Unscheduled patient 56
+2336,33951,"Admitted patient 56, day 12, room 0, OT 3"
+2337,34281,Unscheduled patient 56
+2338,33951,"Admitted patient 56, day 12, room 6, OT 2"
+2339,34281,Unscheduled patient 56
+2340,33951,"Admitted patient 56, day 12, room 6, OT 3"
+2341,34281,Unscheduled patient 56
+2342,33958,"Admitted patient 56, day 11, room 0, OT 2"
+2343,34281,Unscheduled patient 56
+2344,33958,"Admitted patient 56, day 11, room 0, OT 3"
+2345,33958,"Unscheduled nurse 2, shift 31, room 1"
+2346,33958,"Scheduled nurse 12, shift 31, room 1"
+2347,34281,Unscheduled patient 56
+2348,33961,"Admitted patient 56, day 12, room 4, OT 2"
+2349,34281,Unscheduled patient 56
+2350,33961,"Admitted patient 56, day 12, room 4, OT 3"
+2351,34281,Unscheduled patient 56
+2352,34665,Unscheduled patient 93
+2353,34285,"Admitted patient 93, day 12, room 6, OT 1"
+2354,33911,"Admitted patient 56, day 11, room 6, OT 1"
+2355,34291,Unscheduled patient 93
+2356,33912,"Admitted patient 93, day 12, room 0, OT 1"
+2357,34291,Unscheduled patient 93
+2358,33921,"Admitted patient 93, day 12, room 4, OT 1"
+2359,34291,Unscheduled patient 93
+2360,33946,"Admitted patient 93, day 13, room 0, OT 1"
+2361,34291,Unscheduled patient 93
+2362,33946,"Admitted patient 93, day 13, room 4, OT 1"
+2363,34335,Unscheduled patient 67
+2364,33936,"Admitted patient 67, day 10, room 8, OT 1"
+2365,34281,Unscheduled patient 93
+2366,33909,"Admitted patient 93, day 11, room 0, OT 1"
+2367,34281,Unscheduled patient 93
+2368,33936,"Admitted patient 93, day 13, room 5, OT 1"
+2369,34380,Unscheduled patient 24
+2370,33927,"Admitted patient 24, day 0, room 7, OT 1"
+2371,33927,"Unscheduled nurse 3, shift 7, room 8"
+2372,33927,"Scheduled nurse 10, shift 7, room 8"
+2373,34272,Unscheduled patient 93
+2374,33927,"Admitted patient 93, day 13, room 0, OT 2"
+2375,34272,Unscheduled patient 93
+2376,33927,"Admitted patient 93, day 13, room 0, OT 3"
+2377,34272,Unscheduled patient 93
+2378,33927,"Admitted patient 93, day 13, room 6, OT 1"
+2379,34272,Unscheduled patient 93
+2380,33927,"Admitted patient 93, day 13, room 4, OT 2"
+2381,34272,Unscheduled patient 93
+2382,33927,"Admitted patient 93, day 13, room 4, OT 3"
+2383,34272,Unscheduled patient 93
+2384,33927,"Admitted patient 93, day 13, room 6, OT 2"
+2385,34272,Unscheduled patient 93
+2386,33927,"Admitted patient 93, day 13, room 6, OT 3"
+2387,34272,Unscheduled patient 93
+2388,33927,"Admitted patient 93, day 11, room 6, OT 2"
+2389,34272,Unscheduled patient 93
+2390,33927,"Admitted patient 93, day 11, room 6, OT 3"
+2391,34272,Unscheduled patient 93
+2392,33927,"Admitted patient 93, day 13, room 5, OT 2"
+2393,34272,Unscheduled patient 93
+2394,33927,"Admitted patient 93, day 13, room 5, OT 3"
+2395,34272,Unscheduled patient 93
+2396,33928,"Admitted patient 93, day 13, room 3, OT 1"
+2397,34272,Unscheduled patient 93
+2398,33887,"Admitted patient 93, day 11, room 6, OT 1"
+2399,34287,Unscheduled patient 116
+2400,33828,"Admitted patient 116, day 4, room 4, OT 1"
+2401,34276,Unscheduled patient 102
+2402,33828,"Admitted patient 102, day 6, room 4, OT 1"
+2403,34236,Unscheduled patient 23
+2404,33838,"Admitted patient 23, day 10, room 0, OT 1"
+2405,33838,"Unscheduled nurse 1, shift 32, room 7"
+2406,33838,"Scheduled nurse 3, shift 32, room 7"
+2407,33838,"Unscheduled nurse 0, shift 30, room 7"
+2408,33838,"Scheduled nurse 5, shift 30, room 7"
+2409,34236,Unscheduled patient 23
+2410,33837,"Admitted patient 23, day 12, room 0, OT 1"
+2411,33837,"Unscheduled nurse 10, shift 39, room 3"
+2412,33837,"Scheduled nurse 5, shift 39, room 3"
+2413,34236,Unscheduled patient 23
+2414,33837,"Admitted patient 23, day 12, room 7, OT 1"
+2415,33837,"Unscheduled nurse 11, shift 41, room 3"
+2416,33837,"Scheduled nurse 7, shift 41, room 3"
+2417,33837,"Unscheduled nurse 2, shift 31, room 7"
+2418,33837,"Scheduled nurse 12, shift 31, room 7"
+2419,34236,Unscheduled patient 23
+2420,33832,"Admitted patient 23, day 10, room 7, OT 1"
+2421,34237,Unscheduled patient 76
+2422,33832,"Admitted patient 76, day 11, room 7, OT 1"
+2423,34281,Unscheduled patient 16
+2424,33821,"Admitted patient 16, day 1, room 4, OT 1"
+2425,34271,Unscheduled patient 13
+2426,33821,"Admitted patient 13, day 3, room 3, OT 2"
+2427,34274,Unscheduled patient 24
+2428,33824,"Admitted patient 24, day 1, room 7, OT 1"
+2429,34242,Unscheduled patient 55
+2430,33824,"Admitted patient 55, day 9, room 8, OT 1"
+2431,34262,Unscheduled patient 98
+2432,33824,"Admitted patient 98, day 0, room 3, OT 1"
+2433,34274,Unscheduled patient 24
+2434,33830,"Admitted patient 24, day 2, room 7, OT 1"
+2435,34289,Unscheduled patient 116
+2436,33870,"Admitted patient 116, day 4, room 4, OT 2"
+2437,33870,"Unscheduled nurse 0, shift 37, room 4"
+2438,33870,"Scheduled nurse 2, shift 37, room 4"
+2439,33870,"Unscheduled nurse 7, shift 27, room 2"
+2440,33870,"Scheduled nurse 5, shift 27, room 2"
+2441,34289,Unscheduled patient 116
+2442,33870,"Admitted patient 116, day 4, room 4, OT 3"
+2443,34289,Unscheduled patient 116
+2444,33881,"Admitted patient 116, day 9, room 2, OT 1"
+2445,34289,Unscheduled patient 116
+2446,33881,"Admitted patient 116, day 9, room 4, OT 1"
+2447,34289,Unscheduled patient 116
+2448,33884,"Admitted patient 116, day 10, room 2, OT 1"
+2449,34289,Unscheduled patient 116
+2450,33889,"Admitted patient 116, day 12, room 2, OT 1"
+2451,34314,Unscheduled patient 19
+2452,33889,"Admitted patient 19, day 8, room 0, OT 1"
+2453,34319,Unscheduled patient 47
+2454,33854,"Admitted patient 47, day 4, room 4, OT 1"
+2455,34308,Unscheduled patient 95
+2456,33854,"Admitted patient 95, day 6, room 2, OT 1"
+2457,34309,Unscheduled patient 39
+2458,33870,"Admitted patient 39, day 11, room 4, OT 1"
+2459,34309,Unscheduled patient 39
+2460,33871,"Admitted patient 39, day 11, room 1, OT 1"
+2461,34309,Unscheduled patient 39
+2462,33894,"Admitted patient 39, day 11, room 2, OT 2"
+2463,34309,Unscheduled patient 39
+2464,33894,"Admitted patient 39, day 11, room 2, OT 3"
+2465,34309,Unscheduled patient 39
+2466,33894,"Admitted patient 39, day 13, room 2, OT 1"
+2467,33894,"Unscheduled nurse 7, shift 41, room 4"
+2468,33894,"Scheduled nurse 11, shift 41, room 4"
+2469,34329,Unscheduled patient 75
+2470,33894,"Admitted patient 75, day 7, room 1, OT 1"
+2471,33894,"Unscheduled nurse 4, shift 38, room 4"
+2472,33894,"Scheduled nurse 1, shift 38, room 4"
+2473,34349,Unscheduled patient 64
+2474,33890,"Admitted patient 64, day 1, room 2, OT 1"
+2475,34335,Unscheduled patient 81
+2476,33886,"Admitted patient 81, day 0, room 6, OT 1"
+2477,33886,"Unscheduled nurse 1, shift 17, room 5"
+2478,33886,"Scheduled nurse 3, shift 17, room 5"
+2479,33886,"Unscheduled nurse 5, shift 39, room 4"
+2480,33886,"Unscheduled nurse 8, shift 36, room 4"
+2481,33886,"Scheduled nurse 5, shift 36, room 4"
+2482,33886,"Scheduled nurse 10, shift 39, room 4"
+2483,34335,Unscheduled patient 81
+2484,33890,"Admitted patient 81, day 1, room 2, OT 1"
+2485,34347,Unscheduled patient 84
+2486,33890,"Admitted patient 84, day 3, room 6, OT 2"
+2487,34347,Unscheduled patient 111
+2488,33890,"Admitted patient 111, day 4, room 7, OT 1"
+2489,34348,Unscheduled patient 15
+2490,33890,"Admitted patient 15, day 1, room 4, OT 1"
+2491,34349,Unscheduled patient 64
+2492,33894,"Admitted patient 64, day 3, room 2, OT 1"
+2493,34354,Unscheduled patient 16
+2494,33905,"Admitted patient 16, day 2, room 4, OT 1"
+2495,33905,"Unscheduled nurse 7, shift 18, room 5"
+2496,33905,"Scheduled nurse 6, shift 18, room 5"
+2497,34365,Unscheduled patient 71
+2498,33945,"Admitted patient 71, day 2, room 5, OT 2"
+2499,34365,Unscheduled patient 71

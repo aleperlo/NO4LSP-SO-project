@@ -734,7 +734,7 @@ class PAS:
                     print(f"PAS: {key}: {value}", end=" ")
                 else:
                     print(
-                        f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
+                        f"{key}: {self.indexer.lookup(type=key, index=value).id}",
                         end=" ",
                     )
             print()
@@ -974,18 +974,18 @@ class SCP:
 
     def print(self):
         """Print the current status of the PAS matrix"""
-        # for p in np.argwhere(self.scp_matrix):
-        #     for key, value in dict(
-        #         zip(["day", "patients", "surgeons", "operating_theaters"], p)
-        #     ).items():
-        #         if key == "day":
-        #             print(f"PAS: {key}: {value}", end=" ")
-        #         else:
-        #             print(
-        #                 f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
-        #                 end=" ",
-        #             )
-        print()
+        for p in np.argwhere(self.scp_matrix):
+            for key, value in dict(
+                zip(["day", "patients", "surgeons", "operating_theaters"], p)
+            ).items():
+                if key == "day":
+                    print(f"SCP: {key}: {value}", end=" ")
+                else:
+                    print(
+                        f"{key}: {self.indexer.lookup(type=key, index=value).id}",
+                        end=" ",
+                    )
+            print()
 
     def save(self) -> NDArray:
         """Save the current status of the SCP problem
@@ -1116,11 +1116,10 @@ class SCP:
         Returns:
             int: penalty for surgeon transfers
         """
-        different_ots = self.scp_matrix[:, :, :, self.dummy_ot :].any(axis=1).sum(axis=-1)
-        return (
-            (different_ots[different_ots > 0] - 1).sum()
-            * weight
+        different_ots = (
+            self.scp_matrix[:, :, :, self.dummy_ot :].any(axis=1).sum(axis=-1)
         )
+        return (different_ots[different_ots > 0] - 1).sum() * weight
 
     def penalty_delay(self, weight: int) -> int:
         """Compute the penalty for patient delays
@@ -1181,7 +1180,7 @@ class NRA:
                     print(f"NRA: {key}: {value}", end=" ")
                 else:
                     print(
-                        f"NRA: {key}: {self.indexer.lookup(type=key, index=value).id}",
+                        f"{key}: {self.indexer.lookup(type=key, index=value).id}",
                         end=" ",
                     )
             print()
@@ -1328,7 +1327,7 @@ class NRA:
         """
         shifts, rooms = np.nonzero(self.nra_matrix[:, :, nurse_index])
         return shifts, rooms
-    
+
     def check_room_covered_shift(self, shift: int, room_index: int) -> bool:
         """Check if the room is covered by any nurse for the given shift
 
@@ -1405,7 +1404,7 @@ class NRA:
         Returns:
             int: penalty for continuity of care
         """
-        
+
         penalty = 0
         for patient in range(self.patient_matrix.shape[-1]):
             if not self.patient_matrix[:, :, patient].any(axis=(0, 1)):
@@ -1625,11 +1624,11 @@ class Hospital:
         # Check if nurse is available
         if not nurse.is_available(shift):
             raise ActionError("Nurse is not available at this shift")
-        
+
         # Check if room is already covered
         if self.nra.check_room_covered_shift(shift, room_index):
             raise ActionError("Room is already covered by a nurse")
-        
+
         self.nra.assign_nurse(shift, room_index, nurse_index)
         penalty, penalty_dict = self.compute_penalty()
         if not assign:
@@ -1729,7 +1728,12 @@ class Hospital:
         self.nurses = np.copy(self.best_nurses)
         self.pas.restore(self.pas_status)
         self.scp.restore(self.scp_status)
-        self.nra.restore(self.nra_status)
+        self.nra.restore(
+            self.nra_status[0],
+            self.nra_status[1],
+            self.nra_status[2],
+            self.nra_status[3],
+        )
 
     def apply_action(
         self, action: NeighboringAction, assign: bool = False
@@ -1802,7 +1806,7 @@ class Hospital:
 
         if assign:
             self.logger.log_action(penalty, str(action))
-            print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
+            # print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
 
         return penalty, penalty_dict
 
