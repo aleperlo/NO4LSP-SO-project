@@ -14,6 +14,8 @@ This results in a mix of locally smooth and rapidly changing regions, making opt
     \caption{Surface plot of the 2-dimensional banded trigonometric function}
     \label{fig:banded_trigonometric_surf}
 \end{figure}
+The optimization runs for the banded trigonometric function were conducted using a high value for the Armijo condition parameter $c_1 = 10^{-2}$ while the other parameters were kept the same as in the previous experiments.
+This was necessary since when running the modified Newton method, the too small required decrease led to stagnation.
 
 \subsection{Exact gradient and Hessian}
 
@@ -37,25 +39,26 @@ However, the Hessian of the matrix has very distant eigenvalues due to the fact 
 Due to this fact, we only perform optimization with preconditioning.
 
 Table \ref{tab:Modified_Newton_Banded_Trigonometric_exact} shows the results for the \textit{Modified Newton method} applied to the banded trigonometric function with exact gradient and Hessian.
-Modified newton method converges for all points only when $n=10^3$, while attempts with $n=10^4$ and $n=10^5$ yield only one success each.
-This is due to the fact that being the problem badly scaled, in case of a non positive-definite Hessian matrix, the modification of the Hessian matrix may happen with a $\tau$ that is too large.
+Modified newton method converges for all points when $n=10^3$ or $n=10^4$, while attempts with $n=10^5$ yield only one success corresponding to the suggested starting point.
+When problem dimension is $n=10^5$, attempts with randomly initialized points do not converge within $k_{\textit{max}} = 10^3$ iterations.
+This may be due to the fact that being the problem badly scaled, in case of a non positive-definite Hessian matrix, the modification of the Hessian matrix may happen with a $\tau$ that is too large.
 Figure \ref{fig:correction_comparison} compares the empirical cumulative distribution function of $\tau_k$ for the banded trigonometric problem and the extended Rosenbrock function with exact gradient and Hessian.
 One can notice that while for the extended Rosenbrock function the maximum value of the correction does not depend on the dimension, for the banded trigonometric problem the maximum value of the correction increases with the dimension.
 Moreover, as suggested by the factor $i$ that multiplies the $i$-th diagonal entry of the Hessian, the maximum correction needed for the dimension $10^n$ is close to $10^n$.
-While a correction of this magnitude is acceptable for $n=10^3$, it is not for larger values of $n$, leading to a Hessian matrix that is too different from the original one and resulting in a poor descent direction.
+While a correction of this magnitude is acceptable for $n=10^3$ or $n=10^4$, it is not for larger values of $n$, leading to a Hessian matrix that is too different from the original one and resulting in a poor descent direction.
 All failures happen because convergence has not been reached within $k_{\textit{max}} = 10^3$ iterations.
 
 \begin{table}
 \centering
 \caption{Results for Modified Newton method applied to Banded Trigonometric with exact gradient and hessian, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
 \label{tab:Modified_Newton_Banded_Trigonometric_exact}
-\begin{tabular}{r|cc|cc}
+\begin{tabular}{r|cccc}
 \toprule
-    dimension & iterations & convergence rate & time & success rate \\
+dimension & iterations & convergence rate & time & success rate \\
 \midrule
-3 & 14.273 & 2.782 & 0.018 & 1.00 \\
-4 & 7.000 & 2.946 & 0.021 & 0.09 \\
-5 & 7.000 & 2.946 & 0.115 & 0.09 \\
+3 & 27.273 & 2.593 & 0.025 & 1.00 \\
+4 & 51.545 & 2.749 & 0.150 & 1.00 \\
+5 & 7.000 & 2.946 & 0.092 & 0.09 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -65,7 +68,6 @@ All failures happen because convergence has not been reached within $k_{\textit{
     \includegraphics[width=0.9\textwidth]{figures/correction_comparison.pdf}
     \caption{Emprirical cumulative distribution function of $\tau_k$ in banded trigonometric problem and extended Rosenbrock function with exact gradient and Hessian, considering all times a correction is needed across all runs. Dashed lines mark the values $10^3$, $10^4$ and $10^5$.}
     \label{fig:correction_comparison}
-
 \end{figure}
 
 Table \ref{tab:Truncated_Newton_Banded_Trigonometric_exact} shows the results for the \textit{Truncated Newton method} applied to the banded trigonometric function with exact gradient and Hessian.
@@ -79,11 +81,11 @@ Probably adopting another matrix correction strategy that impacts less on the wh
 \label{tab:Truncated_Newton_Banded_Trigonometric_exact}
 \begin{tabular}{r|cc|cc}
 \toprule
-    dimension & iterations & convergence rate & time & success rate \\
+dimension & iterations & convergence rate & time & success rate \\
 \midrule
-3 & 14.273 & 2.790 & 0.009 & 1.00 \\
-4 & 20.818 & 2.714 & 0.028 & 1.00 \\
-5 & 25.273 & 2.774 & 0.302 & 1.00 \\
+3 & 14.091 & 2.811 & 0.009 & 1.00 \\
+4 & 20.455 & 2.743 & 0.028 & 1.00 \\
+5 & 25.000 & 2.776 & 0.301 & 1.00 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -128,41 +130,40 @@ To avoid numerical cancellation, it is necessary to substitute them with their T
 
 Tables \ref{tab:Modified_Newton_Banded_Trigonometric_fd_abs} and \ref{tab:Modified_Newton_Banded_Trigonometric_fd_rel} show the results for the \textit{Modified Newton method} applied to the banded trigonometric function with absolute and specific finite differences, respectively.
 In terms of success rate, results are comparable to the ones obtained with exact gradient and Hessian.
-However, when specific finite differences are adopted, approximation with $h=10^{-2}$ and $h=10^{-4}$ give poor results, yieding respectively 0\% and 9\% success rate.
-On the other hand, when increments are constant, we get at least 9\% success rate for all dimensions, all increments.
+However, when specific finite differences are adopted, approximation with $h=10^{-2}$, $h=10^{-4}$ and $h=10^{-6}$ give poor results, with success rate for $h=10^{-2}$ being 0\% for all dimension.
+On the other hand, when increments are constant, we get at least 9\% success rate for all dimensions, all increments and 100\% success rate when $n=10^{4}$ or $n=10^{5}$.
 When absolute increment is adopted, all failures happen due to the fact that convergence has not been reached within $k_{\textit{max}} = 10^3$ iterations.
-When specific increment is adopted, most failures happen because the method does not converge within $k_{\textit{max}} = 10^3$ iterations, but in 3 cases over 61 failures for $n=10^4$ and in 4 cases over 61 failures for $n=10^5$, failure happens because Armijo condition can't be satisfied.
-We did not perform tuning on parameters $\rho$ and $c_1$ of the Armijo condition, since failures are probably due to the fact that the Hessian correction strategy is not suitable for a problem that is very ill-conditioned.
+When specific increment is adopted, most failures happen because the method does not converge within $k_{\textit{max}} = 10^3$ iterations, but in 1 case over 18 failures for $n=10^{3}$, 4 cases over 24 failures for $n=10^4$ and in 3 cases over 61 failures for $n=10^5$, failure happens because Armijo condition can't be satisfied.
 
 \begin{table}
 \centering
-\caption{Results for Modified Newton method applied to Banded Trigonometric with absolute finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\caption{Results for Modified Newton method applied to Banded Trigonometric with finite differences and constant increment, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
 \label{tab:Modified_Newton_Banded_Trigonometric_fd_abs}
 \begin{tabular}{rr|cccc}
 \toprule
     &  & iterations & convergence rate & time & success rate \\
 dimension & h &  &  &  &  \\
 \midrule
-\multirow[t]{6}{*}{3} & 1e-02 & 14.818 & 2.548 & 0.010 & 1.00 \\
-    & 1e-04 & 14.545 & 2.807 & 0.007 & 1.00 \\
-    & 1e-06 & 14.091 & 2.842 & 0.006 & 1.00 \\
-    & 1e-08 & 14.182 & 2.575 & 0.006 & 1.00 \\
-    & 1e-10 & 13.364 & 2.630 & 0.006 & 1.00 \\
-    & 1e-12 & 13.909 & 2.695 & 0.006 & 1.00 \\
+\multirow[t]{6}{*}{3} & 1e-02 & 27.364 & 2.676 & 0.018 & 1.00 \\
+    & 1e-04 & 27.545 & 2.743 & 0.014 & 1.00 \\
+    & 1e-06 & 25.909 & 2.807 & 0.013 & 1.00 \\
+    & 1e-08 & 27.818 & 2.467 & 0.015 & 1.00 \\
+    & 1e-10 & 27.182 & 2.770 & 0.014 & 1.00 \\
+    & 1e-12 & 27.182 & 2.817 & 0.015 & 1.00 \\
 \cline{1-6}
-\multirow[t]{6}{*}{4} & 1e-02 & 8.000 & 2.256 & 0.018 & 0.09 \\
-    & 1e-04 & 13.000 & 2.605 & 0.032 & 0.18 \\
-    & 1e-06 & 6.000 & 2.857 & 0.014 & 0.09 \\
-    & 1e-08 & 14.500 & 2.844 & 0.033 & 0.18 \\
-    & 1e-10 & 7.000 & 2.948 & 0.015 & 0.09 \\
-    & 1e-12 & 7.000 & 2.946 & 0.016 & 0.09 \\
+\multirow[t]{6}{*}{4} & 1e-02 & 60.818 & 2.661 & 0.179 & 1.00 \\
+    & 1e-04 & 50.091 & 2.626 & 0.149 & 1.00 \\
+    & 1e-06 & 54.364 & 2.831 & 0.161 & 1.00 \\
+    & 1e-08 & 49.091 & 2.770 & 0.152 & 1.00 \\
+    & 1e-10 & 51.364 & 2.767 & 0.149 & 1.00 \\
+    & 1e-12 & 51.909 & 2.516 & 0.157 & 1.00 \\
 \cline{1-6}
-\multirow[t]{6}{*}{5} & 1e-02 & 8.000 & 2.256 & 0.123 & 0.09 \\
-    & 1e-04 & 8.000 & 2.951 & 0.129 & 0.09 \\
-    & 1e-06 & 6.000 & 2.856 & 0.100 & 0.09 \\
-    & 1e-08 & 6.000 & 2.749 & 0.098 & 0.09 \\
-    & 1e-10 & 7.000 & 2.948 & 0.108 & 0.09 \\
-    & 1e-12 & 7.000 & 2.946 & 0.117 & 0.09 \\
+\multirow[t]{6}{*}{5} & 1e-02 & 9.000 & 2.705 & 0.129 & 0.09 \\
+    & 1e-04 & 8.000 & 2.828 & 0.113 & 0.09 \\
+    & 1e-06 & 6.000 & 2.856 & 0.085 & 0.09 \\
+    & 1e-08 & 6.000 & 2.749 & 0.088 & 0.09 \\
+    & 1e-10 & 7.000 & 2.948 & 0.098 & 0.09 \\
+    & 1e-12 & 7.000 & 2.946 & 0.099 & 0.09 \\
 \cline{1-6}
 \bottomrule
 \end{tabular}
@@ -170,30 +171,30 @@ dimension & h &  &  &  &  \\
 
 \begin{table}
 \centering
-\caption{Results for Modified Newton method applied to Banded Trigonometric with specific finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\caption{Results for Modified Newton method applied to Banded Trigonometric with finite differences and specific increment, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
 \label{tab:Modified_Newton_Banded_Trigonometric_fd_rel}
 \begin{tabular}{rr|cccc}
 \toprule
     &  & iterations & convergence rate & time & success rate \\
 dimension & h &  &  &  &  \\
 \midrule
-\multirow[t]{5}{*}{3} & 1e-04 & 9.000 & 1.074 & 0.018 & 0.09 \\
-    & 1e-06 & 16.600 & 1.104 & 0.007 & 0.91 \\
-    & 1e-08 & 13.636 & 2.582 & 0.006 & 1.00 \\
-    & 1e-10 & 13.455 & 2.636 & 0.006 & 1.00 \\
-    & 1e-12 & 13.818 & 2.377 & 0.006 & 1.00 \\
+\multirow[t]{5}{*}{3} & 1e-04 & 162.000 & 0.984 & 0.050 & 0.36 \\
+    & 1e-06 & 26.818 & 2.389 & 0.014 & 1.00 \\
+    & 1e-08 & 27.000 & 2.610 & 0.015 & 1.00 \\
+    & 1e-10 & 27.091 & 2.597 & 0.014 & 1.00 \\
+    & 1e-12 & 27.273 & 2.820 & 0.015 & 1.00 \\
 \cline{1-6}
-\multirow[t]{5}{*}{4} & 1e-04 & 9.000 & 1.074 & 0.021 & 0.09 \\
-    & 1e-06 & 6.000 & 2.895 & 0.014 & 0.09 \\
-    & 1e-08 & 6.000 & 2.750 & 0.014 & 0.09 \\
-    & 1e-10 & 7.000 & 2.948 & 0.015 & 0.09 \\
-    & 1e-12 & 7.000 & 2.946 & 0.017 & 0.09 \\
+\multirow[t]{5}{*}{4} & 1e-04 & 9.000 & 0.973 & 0.018 & 0.09 \\
+    & 1e-06 & 55.875 & inf & 0.161 & 0.73 \\
+    & 1e-08 & 50.636 & 2.791 & 0.152 & 1.00 \\
+    & 1e-10 & 51.091 & 2.617 & 0.152 & 1.00 \\
+    & 1e-12 & 51.273 & 2.684 & 0.152 & 1.00 \\
 \cline{1-6}
-\multirow[t]{5}{*}{5} & 1e-04 & 13.000 & 1.001 & 0.201 & 0.09 \\
-    & 1e-06 & 6.000 & 2.894 & 0.121 & 0.09 \\
-    & 1e-08 & 6.000 & 2.749 & 0.107 & 0.09 \\
-    & 1e-10 & 7.000 & 2.948 & 0.111 & 0.09 \\
-    & 1e-12 & 7.000 & 2.946 & 0.121 & 0.09 \\
+\multirow[t]{5}{*}{5} & 1e-04 & 9.000 & 1.074 & 0.128 & 0.09 \\
+    & 1e-06 & 6.000 & 2.894 & 0.083 & 0.09 \\
+    & 1e-08 & 6.000 & 2.749 & 0.085 & 0.09 \\
+    & 1e-10 & 7.000 & 2.948 & 0.095 & 0.09 \\
+    & 1e-12 & 7.000 & 2.946 & 0.098 & 0.09 \\
 \cline{1-6}
 \bottomrule
 \end{tabular}
@@ -205,33 +206,33 @@ The results are similar to the ones obtained with exact gradient and Hessian, co
 
 \begin{table}
 \centering
-\caption{Results for Truncated Newton method applied to Banded Trigonometric with absolute finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\caption{Results for Truncated Newton method applied to Banded Trigonometric with finite differences and constant increment, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
 \label{tab:Truncated_Newton_Banded_Trigonometric_fd_abs}
 \begin{tabular}{rr|cccc}
 \toprule
     &  & iterations & convergence rate & time & success rate \\
 dimension & h &  &  &  &  \\
 \midrule
-\multirow[t]{6}{*}{3} & 1e-02 & 15.091 & 2.735 & 0.007 & 1.00 \\
-    & 1e-04 & 14.182 & 2.476 & 0.006 & 1.00 \\
-    & 1e-06 & 14.182 & 2.488 & 0.006 & 1.00 \\
-    & 1e-08 & 14.273 & 2.776 & 0.007 & 1.00 \\
-    & 1e-10 & 14.273 & 2.756 & 0.007 & 1.00 \\
-    & 1e-12 & 14.182 & 2.758 & 0.006 & 1.00 \\
+\multirow[t]{6}{*}{3} & 1e-02 & 14.909 & 2.723 & 0.007 & 1.00 \\
+    & 1e-04 & 14.091 & 2.615 & 0.006 & 1.00 \\
+    & 1e-06 & 14.091 & 2.531 & 0.005 & 1.00 \\
+    & 1e-08 & 14.091 & 2.770 & 0.006 & 1.00 \\
+    & 1e-10 & 14.000 & 2.794 & 0.005 & 1.00 \\
+    & 1e-12 & 14.000 & 2.779 & 0.006 & 1.00 \\
 \cline{1-6}
-\multirow[t]{6}{*}{4} & 1e-02 & 19.545 & 2.709 & 0.034 & 1.00 \\
-    & 1e-04 & 19.818 & 2.609 & 0.037 & 1.00 \\
-    & 1e-06 & 20.727 & 2.665 & 0.034 & 1.00 \\
-    & 1e-08 & 21.364 & 2.740 & 0.036 & 1.00 \\
-    & 1e-10 & 20.636 & 2.731 & 0.033 & 1.00 \\
-    & 1e-12 & 20.455 & 2.729 & 0.034 & 1.00 \\
+\multirow[t]{6}{*}{4} & 1e-02 & 19.091 & 2.595 & 0.028 & 1.00 \\
+    & 1e-04 & 19.364 & 2.587 & 0.028 & 1.00 \\
+    & 1e-06 & 20.091 & 2.646 & 0.028 & 1.00 \\
+    & 1e-08 & 20.636 & 2.741 & 0.030 & 1.00 \\
+    & 1e-10 & 20.364 & 2.798 & 0.028 & 1.00 \\
+    & 1e-12 & 20.455 & 2.758 & 0.028 & 1.00 \\
 \cline{1-6}
-\multirow[t]{6}{*}{5} & 1e-02 & 24.455 & 2.717 & 0.375 & 1.00 \\
-    & 1e-04 & 26.727 & 2.516 & 0.379 & 1.00 \\
-    & 1e-06 & 25.636 & 2.754 & 0.384 & 1.00 \\
-    & 1e-08 & 25.636 & 2.770 & 0.394 & 1.00 \\
-    & 1e-10 & 25.727 & 2.770 & 0.396 & 1.00 \\
-    & 1e-12 & 25.364 & 2.727 & 0.424 & 1.00 \\
+\multirow[t]{6}{*}{5} & 1e-02 & 23.000 & 2.471 & 0.301 & 0.91 \\
+    & 1e-04 & 25.909 & 2.648 & 0.315 & 1.00 \\
+    & 1e-06 & 25.727 & 2.612 & 0.327 & 1.00 \\
+    & 1e-08 & 25.636 & 2.762 & 0.313 & 1.00 \\
+    & 1e-10 & 25.364 & 2.754 & 0.312 & 1.00 \\
+    & 1e-12 & 25.273 & 2.699 & 0.311 & 1.00 \\
 \cline{1-6}
 \bottomrule
 \end{tabular}
@@ -239,33 +240,33 @@ dimension & h &  &  &  &  \\
 
 \begin{table}
 \centering
-\caption{Results for Truncated Newton method applied to Banded Trigonometric with specific finite differences, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
+\caption{Results for Truncated Newton method applied to Banded Trigonometric with finite differences and specific increment, metrics are average metrics for succesful attempts. Results are given only with preconditioning adopted.}
 \label{tab:Truncated_Newton_Banded_Trigonometric_fd_rel}
 \begin{tabular}{rr|cccc}
 \toprule
     &  & iterations & convergence rate & time & success rate \\
 dimension & h &  &  &  &  \\
 \midrule
-\multirow[t]{6}{*}{3} & 1e-02 & 15.182 & 2.257 & 0.006 & 1.00 \\
-    & 1e-04 & 15.091 & 2.836 & 0.007 & 1.00 \\
-    & 1e-06 & 14.000 & 2.710 & 0.007 & 1.00 \\
-    & 1e-08 & 14.273 & 2.800 & 0.006 & 1.00 \\
-    & 1e-10 & 14.545 & 2.785 & 0.007 & 1.00 \\
-    & 1e-12 & 14.182 & 2.781 & 0.006 & 1.00 \\
+\multirow[t]{6}{*}{3} & 1e-02 & 15.000 & 2.251 & 0.005 & 1.00 \\
+    & 1e-04 & 15.091 & 2.860 & 0.006 & 1.00 \\
+    & 1e-06 & 13.818 & 2.534 & 0.006 & 1.00 \\
+    & 1e-08 & 13.818 & 2.609 & 0.006 & 1.00 \\
+    & 1e-10 & 14.000 & 2.795 & 0.006 & 1.00 \\
+    & 1e-12 & 14.000 & 2.803 & 0.006 & 1.00 \\
 \cline{1-6}
-\multirow[t]{6}{*}{4} & 1e-02 & 19.273 & 2.159 & 0.033 & 1.00 \\
-    & 1e-04 & 20.182 & 2.668 & 0.034 & 1.00 \\
-    & 1e-06 & 20.636 & 2.790 & 0.035 & 1.00 \\
-    & 1e-08 & 21.000 & 2.666 & 0.035 & 1.00 \\
-    & 1e-10 & 20.727 & 2.647 & 0.033 & 1.00 \\
-    & 1e-12 & 20.182 & 2.746 & 0.033 & 1.00 \\
+\multirow[t]{6}{*}{4} & 1e-02 & 19.909 & 2.118 & 0.027 & 1.00 \\
+    & 1e-04 & 19.182 & 2.666 & 0.026 & 1.00 \\
+    & 1e-06 & 20.455 & 2.851 & 0.028 & 1.00 \\
+    & 1e-08 & 20.182 & 2.650 & 0.028 & 1.00 \\
+    & 1e-10 & 19.818 & 2.811 & 0.027 & 1.00 \\
+    & 1e-12 & 19.909 & 2.699 & 0.027 & 1.00 \\
 \cline{1-6}
-\multirow[t]{6}{*}{5} & 1e-02 & 24.364 & 2.263 & 0.372 & 1.00 \\
-    & 1e-04 & 25.455 & 2.733 & 0.365 & 1.00 \\
-    & 1e-06 & 26.273 & 2.627 & 0.418 & 1.00 \\
-    & 1e-08 & 25.636 & 2.785 & 0.393 & 1.00 \\
-    & 1e-10 & 25.455 & 2.770 & 0.377 & 1.00 \\
-    & 1e-12 & 24.909 & 2.375 & 0.395 & 1.00 \\
+\multirow[t]{6}{*}{5} & 1e-02 & 24.273 & 2.351 & 0.313 & 1.00 \\
+    & 1e-04 & 25.364 & 2.715 & 0.295 & 1.00 \\
+    & 1e-06 & 26.455 & 2.748 & 0.315 & 1.00 \\
+    & 1e-08 & 25.364 & 2.717 & 0.321 & 1.00 \\
+    & 1e-10 & 25.455 & 2.713 & 0.315 & 1.00 \\
+    & 1e-12 & 25.091 & 2.549 & 0.308 & 1.00 \\
 \cline{1-6}
 \bottomrule
 \end{tabular}
