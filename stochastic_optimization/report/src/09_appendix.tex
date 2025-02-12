@@ -1,0 +1,121 @@
+\appendix
+
+\section{Appendix}
+\subsection{Results}
+\begin{lstlisting}[caption={Toy}]
+    Total violations = 0
+
+    COSTS (weight X cost): 
+    RoomAgeMix.............................5 (  5 X   1)
+    RoomSkillLevel........................27 (  1 X  27)
+    ContinuityOfCare......................53 (  1 X  53)
+    ExcessiveNurseWorkload.................4 (  1 X   4)
+    OpenOperatingTheater.................100 ( 50 X   2)
+    SurgeonTransfer........................0 (  5 X   0)
+    PatientDelay..........................80 ( 10 X   8)
+    ElectiveUnscheduledPatients............0 (300 X   0)
+    Total cost = 269
+\end{lstlisting}
+\begin{lstlisting}[caption={Test 01}]
+
+    Total violations = 0
+    
+    COSTS (weight X cost): 
+    RoomAgeMix............................85 (  5 X  17)
+    RoomSkillLevel.......................122 (  1 X 122)
+    ContinuityOfCare....................1160 (  5 X 232)
+    ExcessiveNurseWorkload...............183 (  1 X 183)
+    OpenOperatingTheater.................360 ( 30 X  12)
+    SurgeonTransfer........................1 (  1 X   1)
+    PatientDelay.........................715 (  5 X 143)
+    ElectiveUnscheduledPatients.........1350 (150 X   9)
+    Total cost = 3976
+\end{lstlisting}
+\begin{lstlisting}   [caption={Test 02}]
+    Total violations = 0
+    
+    COSTS (weight X cost): 
+    RoomAgeMix............................80 (  5 X  16)
+    RoomSkillLevel.......................136 (  1 X 136)
+    ContinuityOfCare.....................223 (  1 X 223)
+    ExcessiveNurseWorkload...............459 (  1 X 459)
+    OpenOperatingTheater.................130 ( 10 X  13)
+    SurgeonTransfer........................0 ( 10 X   0)
+    PatientDelay.........................715 (  5 X 143)
+    ElectiveUnscheduledPatients..........700 (350 X   2)
+    Total cost = 2443
+\end{lstlisting}
+\begin{lstlisting} [caption={Test 03}]
+    Total violations = 0
+    
+    COSTS (weight X cost): 
+    RoomAgeMix............................10 (  1 X  10)
+    RoomSkillLevel........................29 (  1 X  29)
+    ContinuityOfCare.....................630 (  5 X 126)
+    ExcessiveNurseWorkload...............650 ( 10 X  65)
+    OpenOperatingTheater..................50 ( 10 X   5)
+    SurgeonTransfer........................0 (  5 X   0)
+    PatientDelay.........................105 ( 15 X   7)
+    ElectiveUnscheduledPatients........10150 (350 X  29)
+    Total cost = 11624
+\end{lstlisting}
+\begin{lstlisting}   [caption={Test 04}]
+    Total violations = 0
+    
+    COSTS (weight X cost): 
+    RoomAgeMix............................16 (  1 X  16)
+    RoomSkillLevel.......................750 (  5 X 150)
+    ContinuityOfCare.....................326 (  1 X 326)
+    ExcessiveNurseWorkload..............3465 (  5 X 693)
+    OpenOperatingTheater.................150 ( 10 X  15)
+    SurgeonTransfer........................7 (  1 X   7)
+    PatientDelay........................1310 ( 10 X 131)
+    ElectiveUnscheduledPatients..........500 (250 X   2)
+    Total cost = 6524
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Test 06}]
+    Total violations = 0
+
+    COSTS (weight X cost): 
+    RoomAgeMix............................45 (  5 X   9)
+    RoomSkillLevel.......................115 (  1 X 115)
+    ContinuityOfCare....................2170 (  5 X 434)
+    ExcessiveNurseWorkload...............896 (  1 X 896)
+    OpenOperatingTheater.................480 ( 30 X  16)
+    SurgeonTransfer.......................50 ( 10 X   5)
+    PatientDelay........................2110 ( 10 X 211)
+    ElectiveUnscheduledPatients........19500 (500 X  39)
+    Total cost = 25366
+\end{lstlisting}
+\newpage
+\subsection{Plots}
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/toy.pdf}
+        \caption{Toy.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test01.pdf}
+        \caption{Test $01$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test02.pdf}
+        \caption{Test $02$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test03.pdf}
+        \caption{Test $03$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test04.pdf}
+        \caption{Test $04$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../logs/test06.pdf}
+        \caption{Test $06$.}
+    \end{subfigure}
+    \caption{Costs of the solution found by the Tabu Search algorithm on the test instances.}
+    \label{fig:plot}
+\end{figure}

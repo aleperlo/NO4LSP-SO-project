@@ -1,0 +1,22 @@
+\begin{section}
+ {Discussion}
+ The proposed approach performances are overall satisfactory, with the algorithm being able to find a solution
+ guaranteeing no hard constraint violation in all the tested instances. The penalty values reached by TS
+ are sometimes competitive with the precomputed solutions, but are generally higher, especially for the
+ larger problems.
+
+ Focusing on the first instances, we notice that they achieve great results in term of patient scheduling,
+ with an high percentage of penalty due to
+ non minimization of nurses soft constraints like continuity of care. As mentioned before, this happens
+ when the tabu list size is too large: however, in this cases, tests performed with smaller tabu list size
+ did not lead to better results, but to a higher penalty value or even violation of hard constraints.
+ One possible solution to this issue could be to implement the possibility for nurse substitution,
+ without the need to free up the room and remove the assigned nurse beforehand: this would allow the algorithm
+ to maintain stability and optimize nurse assignment in a more effective way. It is worth mentioning, however,
+ that this would require a more complex neighborhood definition and a more sophisticated tabu list management,
+ since the algorithm would need to consider the possibility of swapping nurses between rooms and shifts.
+ As a matter of fact, a bad management of this feature could lead to the algorithm cycling between nurses interchange,
+ significantly worsening the performances.
+ For this reasons, an implementation of this kind would surely translate in a more complex and slower algorithm.
+
+\end{section}

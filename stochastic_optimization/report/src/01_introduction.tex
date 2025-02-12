@@ -1,0 +1,50 @@
+\begin{section}{Problem Overview}
+ Integrated healthcare scheduling involves the coordination of resources
+ across multiple services within a unified healthcare system. Its primary
+ goal is to streamline and optimize patient flow throughout various departments
+ and facilities within the hospital. The advantages of integrated healthcare
+ optimization are numerous, including an enhanced patient experience, increased
+ operational efficiency, and better utilization of resources across the entire
+ hospital network.
+
+ The \textit{Integrated Healthcare Timetabling Problem} (IHTP) \cite{ihtc2024} transpose the
+ aforementioned concept into a combinatorial optimization problem, bringing together
+ three distinct operational challenges:
+ Patient-to-Room Assignment (PRA), Nurse-to-Patient Assignment (NPA) and
+ Surgical Case Planning (SCP).
+ More precisely, the IHTP requires to establish \textit{(i)} the date of admission for patients,
+ \textit{(ii)} the room where they are admitted and \textit{(iii)} operating theater where they are operated,
+ \textit{(iii)} the room nurses are assigned to during each shift.
+ The problem is subject to several constraints, specific to a sub-problem or arising from their interaction.
+ The constraints are the following:
+ \begin{itemize}
+     \item \textit{Hard Constraints}, which must be satisfied at all costs:
+           \begin{itemize}
+               \item No gender mixing in rooms;
+               \item Patients can be assigned only to a compatible room;
+               \item Surgeon cannot work overtime;
+               \item Operating theaters capacity cannot be exceeded;
+               \item Mandatory patients need to be assigned during the provided period;
+               \item Patients cannot be scheduled before their release date;
+               \item Room capacity cannot be exceeded;
+               \item Rooms with patients assigned must be covered.
+           \end{itemize}
+     \item \textit{Soft Constraints}, which can be violated at the cost of a penalty:
+           \begin{itemize}
+               \item Age groups mixing in rooms;
+               \item Nurses require a minimum skill level to cover a certain patient.
+               \item Continuity of care for patients from nurses;
+               \item Nurses have a maximum workload during a shift;
+               \item Number of open operating theaters per day should be minimized;
+               \item Number of surgeon transfer between operating theaters should be minimized;
+               \item Patients should be admitted the earliest possible;
+               \item Number of unscheduled non-mandatory patients should be minimized.
+           \end{itemize}
+ \end{itemize}
+
+ Given a test instance, all the information required are provided,
+ including pre-admitted occupants, patients, nurses, surgeons,
+ operating theaters, rooms, shifts, scheduling dimension in days and penalty weights for soft constraints.
+
+
+\end{section}

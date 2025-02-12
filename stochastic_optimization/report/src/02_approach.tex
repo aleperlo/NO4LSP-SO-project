@@ -1,0 +1,175 @@
+\begin{section}
+ {Approach}
+ The proposed approach involves the application of the \textit{Tabu Search} (TS) algorithm, which is
+ it is a local search method that aims to find the global optimum of a combinatorial optimization problem. \cite{ts}
+
+
+ The main idea behind TS is to enhance local search performances by relaxing its rules: in particular,
+ worsening moves can be accepted if no improving move is available, which prevent from getting stuck in local optima,
+ and previously-visited solutions are discouraged, which prevent cycles.
+ This last aspect is
+ implemented storing moves in a queue, called \textit{tabu list}, the dimension of which needs to be tuned.
+ In order to mitigate the constraints introduced bu the list, the algorithm also includes the possibility
+ to accept forbidden moves when they met a certain \textit{aspiration criterion}, for example if they lead to
+ a better solution than the current one.
+
+ The algorithm is the following:
+\begin{lstlisting}[language=c]
+    algorithm TabuSearch(S, maxIter, f, neighborhoods, aspirationCriteria):
+    // INPUT
+    //    S = the search space
+    //    maxIter = the maximal number of iterations
+    //    f = the objective function
+    //    neighborhoods = the definition of neighborhoods
+    //    aspirationCriteria = the aspiration criteria
+    // OUTPUT
+    //    The best solution found
+
+    Choose the initial candidate solution s in S
+    s* <- s  // Initialize the best-so-far solution
+    k <- 1
+
+    while k <= maxIter:
+        // Sample the allowed neighbors of s
+        Generate a sample V(s, k) of the allowed solutions in N(s, k)
+        // s' in V(s, k) iff (s' not in T) or (a(k, s') = true)
+
+        Set s to the best solution in V(s, k)
+
+        // Update the best-so-far if necessary
+        if f(s) < f(s*):
+            s* <- s
+
+        Update T
+
+        // Start another iteration
+        k <- k + 1
+
+    return s*
+\end{lstlisting}
+
+
+ The next paragraphs will discuss the main aspects that need to be addressed in order to adapt TS to IHTP.
+
+
+ \begin{subsection}
+     {Solution Representation}
+     The current status of the problem is represented by
+     three main data structures:
+     \begin{itemize}
+         \item \textit{Patient Admission and Scheduling (PAS)}:
+               boolean array of size $n_{\text{days}} \times n_{\text{rooms}} \times n_{\text{patients}}$.
+               For each patient, it indicates which room they are assigned to during all the days of recovery.
+         \item \textit{Surgical Case Planning (SCP)}:
+               boolean array of size $n_{\text{days}} \times n_{\text{patients}} \times n_{\text{surgeons}} \times n_{\text{operating theaters}}$.
+               For each patient, it indicates the day of admission (i.e. surgery) along with the predetermined surgeon and the chosen operating theater.
+         \item \textit{Nurse-to-Room Assignment (NRA)}:
+               boolean array of size $n_{\text{shifts}} \times n_{\text{rooms}} \times n_{\text{nurses}}$.
+               For each nurse, it indicates which room they are assigned to during each shift.
+     \end{itemize}
+     In order to lower computational time of certain soft constraints, two other structures are used:
+     \textit{Workload} and \textit{Skill level}, both arrays of size $n_{\text{shifts}} \times n_{\text{rooms}} \times n_{\text{patients}}$,
+     storing the workload and skill level required by a patient assigned to a room during a certain shift.
+ \end{subsection}
+
+ \begin{subsection}
+     {Starting Point}
+     As already mentioned, a test instance start with some patients already admitted to the hospital, called occupants.
+     This configuration clearly is an unstable status of the problem, since no hard constraint is guaranteed to be satisfied.
+     With these premises, two approaches can be considered in order to generate a starting point: create a stable configuration from scratch
+     using advanced and exhaustive combinatorial techniques, which is a very complex task both
+     in terms of time and space complexity and would partly defy the purpose of this work;
+     otherwise, accept the unstable configuration as it is and let TS
+     find a stable solution by opportunely tuning its behavior.
+     The second approach is the one that has been chosen, since it is more efficient and allows to fully grasp
+     the potential of the algorithm. The steps taken to direct the algorithm in a direction of stability are presented
+     in the next paragraphs.
+
+ \end{subsection}
+
+ \begin{subsection}
+     {Neighborhood Definition}
+     Given the nature of the problem and the constraints involved,
+     the type of moves performed by the algorithm are the following:
+     \begin{itemize}
+         \item Patient
+               \begin{itemize}
+                   \item Scheduling: for a patient, admit them to a room on a day and establish the operating theater.
+                   \item Unscheduling: for a patient, remove them complexly from the schedule.
+               \end{itemize}
+         \item Nurse
+               \begin{itemize}
+                   \item  Assignment: for a nurse, assign them to a room during a shift.
+                   \item Unassignment: for a nurse, remove them from an assigned room during a shift.
+               \end{itemize}
+     \end{itemize}
+     The neighborhood is defined as the set of all possible moves that can be performed
+     on the current solution, meaning that for each of the aforementioned types of moves
+     all the possible combinations of patients, rooms, days, operating theaters, nurses and shifts are considered.
+     Obviously, moves effectively considered are those that do not violate hard constraints and do not destabilize the solution.
+     Moreover, given that the current status of the problem is not guaranteed to be stable, the neighborhood
+     needs to be ulteriorly filtered if necessary: more precisely, when there are still non-admitted mandatory patients,
+     these have priority over the others and scheduling regarding optional patients is ignored.
+
+
+     Since TS operates comparing the current moves with the ones stored in the tabu list, it is also necessary to
+     define a way to compare two moves. For patient moves, the comparison is performed by checking
+     the type and all the parameters involved (i.e. patient, room, day, operating theater),
+     meaning that only the same exact action is considered tabu.
+     For nurse moves, on the other hand, equality is asymmetric and comparison follows these rules:
+     when considering an assignment, it can only be equal to an assignment with the same parameters (i.e. nurse, room, shift),
+     so an exact copy;
+     when considering an unassignment, it can be equal to both an assignment or unassignment with equal nurse and room,
+     independently of the shift.
+     The reason behind this choice is that the nurses assignment is a vital part of the schedule,
+     since room coverage needs to be granted in order to admit patients:
+     the strategy is to force the algorithm in a direction where nurses are more likely to be assigned and avoids the situation
+     where nurses are assigned and unassigned multiple times consecutively just because the shift changes.
+
+     As a consequence of all these choices, we expect the optimization to be more stable for hard constraint satisfaction, specifically mandatory patients admission
+     and room coverage, but less effective in minimizing soft constraints focusing on nurses.
+
+
+ \end{subsection}
+
+ \begin{subsection}
+     {Tabu List Size}
+     The tabu list size is a crucial parameter of the algorithm, depending
+     both on the problem dimension and the neighborhood definition we established.
+     A small tabu list size can lead to cycling and getting stuck to a local space, while a large one can
+     slow down the algorithm and make it less effective.
+
+     In our case, TS evaluates moves and performances based on a
+     the penalty of the soft constraints, moreover it has been adapted to consider
+     the hard constraints as well. As a consequence,
+     the two previous edge cases translates as follows:
+     \begin{itemize}
+         \item Small tabu list: the algorithm tends to reaccept previous moves and
+               performs a small set of actions, more precisely nurses assignment and unassignment.
+               In other words, TS focus more on penalty optimization and get stuck in a local space where
+               the best action at each step is to assign or unassign a nurse, which slightly improves the penalty
+               or keeps it constant. This is not desirable, since the hard constraints are not guaranteed to be satisfied.
+         \item Large tabu list: the algorithm tends to avoid previous moves and explores a larger space,
+               performing patient scheduling. However, patient unschedule
+               actions remain tabu for a long time preventing TS to free up a room, which means
+               the current nurse assigned to it is stuck and cannot be exchanged with a
+               better nurse in terms of soft constraints.
+               This is not desirable as well, since the penalty is not minimized.
+
+     \end{itemize}
+     These cases are the extremes of the spectrum,
+     but evidence well how the tabu list size is the key parameter in order to
+     opportunely balance the algorithm and avoid having
+     hard constraints violated, nor them prevailing over the soft ones.
+
+
+ \end{subsection}
+
+ \begin{subsection}
+     {Aspiration Criterion}
+     In this case, the aspiration criterion is used to accept forbidden moves when they lead to
+     a better solution than the best overall one found so far.
+
+
+ \end{subsection}
+\end{section}

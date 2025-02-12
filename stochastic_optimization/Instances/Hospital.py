@@ -443,9 +443,7 @@ class PASActionUnschedule(NeighboringAction):
         return f"Unscheduled patient {self.patient}"
 
     def __eq__(self, value):
-        if not isinstance(
-            value, PASActionUnschedule
-        ):  # and not isinstance(PASActionSchedule):
+        if not isinstance(value, PASActionUnschedule):
             return False
         return (
             self.patient == value.patient
@@ -684,16 +682,18 @@ class Loader:
 class Logger:
     def __init__(self):
         """Initialize the Logger object"""
-        self.log = pd.DataFrame(columns=["penalty"])
+        self.penalties: List[str] = []
+        self.actions: List[str] = []
 
-    def log_action(self, penalty: int, action:str):
+    def log_action(self, penalty: int, action: str):
         """Log the action
 
         Args:
             penalty (int): penalty value
             action (str): action description
         """
-        self.log = pd.concat([self.log, pd.DataFrame({"penalty": [penalty]})])
+        self.penalties.append(penalty)
+        self.actions.append(action)
 
     def get_log(self, file_path: str):
         """Print the log to csv file
@@ -701,7 +701,9 @@ class Logger:
         Args:
             file_path (str): path to the file
         """
-        self.log.to_csv(file_path, index=True)
+        pd.DataFrame({"penalties": self.penalties, "actions": self.actions}).to_csv(
+            file_path, index=True
+        )
 
 
 class PAS:
@@ -732,7 +734,7 @@ class PAS:
                     print(f"PAS: {key}: {value}", end=" ")
                 else:
                     print(
-                        f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
+                        f"{key}: {self.indexer.lookup(type=key, index=value).id}",
                         end=" ",
                     )
             print()
@@ -971,19 +973,19 @@ class SCP:
         self.dummy_ot = dummy_ot
 
     def print(self):
-        # """Print the current status of the PAS matrix"""
-        # for p in np.argwhere(self.matrix):
-        #     for key, value in dict(
-        #         zip(["day", "rooms", "patients", "operating_theaters"], p)
-        #     ).items():
-        #         if key == "day":
-        #             print(f"PAS: {key}: {value}", end=" ")
-        #         else:
-        #             print(
-        #                 f"PAS: {key}: {self.indexer.lookup(type=key, index=value).id}",
-        #                 end=" ",
-        #             )
-        print()
+        """Print the current status of the PAS matrix"""
+        for p in np.argwhere(self.scp_matrix):
+            for key, value in dict(
+                zip(["day", "patients", "surgeons", "operating_theaters"], p)
+            ).items():
+                if key == "day":
+                    print(f"SCP: {key}: {value}", end=" ")
+                else:
+                    print(
+                        f"{key}: {self.indexer.lookup(type=key, index=value).id}",
+                        end=" ",
+                    )
+            print()
 
     def save(self) -> NDArray:
         """Save the current status of the SCP problem
@@ -1114,10 +1116,10 @@ class SCP:
         Returns:
             int: penalty for surgeon transfers
         """
-        return (
-            self.scp_matrix[:, :, :, self.dummy_ot :].any(axis=1).sum(axis=(0, 1)).sum()
-            * weight
+        different_ots = (
+            self.scp_matrix[:, :, :, self.dummy_ot :].any(axis=1).sum(axis=-1)
         )
+        return (different_ots[different_ots > 0] - 1).sum() * weight
 
     def penalty_delay(self, weight: int) -> int:
         """Compute the penalty for patient delays
@@ -1178,7 +1180,7 @@ class NRA:
                     print(f"NRA: {key}: {value}", end=" ")
                 else:
                     print(
-                        f"NRA: {key}: {self.indexer.lookup(type=key, index=value).id}",
+                        f"{key}: {self.indexer.lookup(type=key, index=value).id}",
                         end=" ",
                     )
             print()
@@ -1326,7 +1328,19 @@ class NRA:
         shifts, rooms = np.nonzero(self.nra_matrix[:, :, nurse_index])
         return shifts, rooms
 
-    def check_room_covered(self, day: int, end_day: int, room_index: int) -> bool:
+    def check_room_covered_shift(self, shift: int, room_index: int) -> bool:
+        """Check if the room is covered by any nurse for the given shift
+
+        Args:
+            shift (int): index of the shift
+            room_index (int): index of the room
+
+        Returns:
+            bool: True if the room is covered by any nurse, False otherwise
+        """
+        return self.nra_matrix[shift, room_index, :].any()
+
+    def check_room_covered_day(self, day: int, end_day: int, room_index: int) -> bool:
         """Check if the room is covered for all shifts by any nurse
 
         Args:
@@ -1382,6 +1396,15 @@ class NRA:
         return penalty * weight
 
     def penalty_continuity(self, weight: int) -> int:
+        """Compute the penalty for continuity of care
+
+        Args:
+            weight (int): weight of the penalty
+
+        Returns:
+            int: penalty for continuity of care
+        """
+
         penalty = 0
         for patient in range(self.patient_matrix.shape[-1]):
             if not self.patient_matrix[:, :, patient].any(axis=(0, 1)):
@@ -1520,7 +1543,7 @@ class Hospital:
         # Constraint H7: Room capacity
         capacity_ok = self.pas.check_room_capacity(day, end_day, room_index, room)
         # Constraint H8: Room coverage
-        room_covered_ok = self.nra.check_room_covered(day, end_day, room_index)
+        room_covered_ok = self.nra.check_room_covered_day(day, end_day, room_index)
 
         if not gender_ok or not compatible_ok or not capacity_ok or not room_covered_ok:
             raise ActionError("Patient cannot be scheduled in this room")
@@ -1601,6 +1624,10 @@ class Hospital:
         # Check if nurse is available
         if not nurse.is_available(shift):
             raise ActionError("Nurse is not available at this shift")
+
+        # Check if room is already covered
+        if self.nra.check_room_covered_shift(shift, room_index):
+            raise ActionError("Room is already covered by a nurse")
 
         self.nra.assign_nurse(shift, room_index, nurse_index)
         penalty, penalty_dict = self.compute_penalty()
@@ -1701,7 +1728,12 @@ class Hospital:
         self.nurses = np.copy(self.best_nurses)
         self.pas.restore(self.pas_status)
         self.scp.restore(self.scp_status)
-        self.nra.restore(self.nra_status)
+        self.nra.restore(
+            self.nra_status[0],
+            self.nra_status[1],
+            self.nra_status[2],
+            self.nra_status[3],
+        )
 
     def apply_action(
         self, action: NeighboringAction, assign: bool = False
@@ -1726,9 +1758,9 @@ class Hospital:
                 patient: Patient = self.patients[action.patient]
                 patient.set_assignment(action.day, room_id, ot_id)
 
-                print(
-                    f"Patient {patient.id} scheduled on day {action.day} in room {room_id} and OT {ot_id}"
-                )
+                # print(
+                #     f"Patient {patient.id} scheduled on day {action.day} in room {room_id} and OT {ot_id}"
+                # )
 
         if isinstance(action, PASActionUnschedule):
             penalty, penalty_dict = self.unschedule_patient(action.patient, assign)
@@ -1736,7 +1768,7 @@ class Hospital:
                 patient: Patient = self.patients[action.patient]
                 patient.unset_assignment()
 
-                print(f"Patient {patient.id} unscheduled")
+                # print(f"Patient {patient.id} unscheduled")
 
         if isinstance(action, NRAActionSchedule):
             penalty, penalty_dict = self.assign_nurse(
@@ -1751,9 +1783,9 @@ class Hospital:
                     room_id,
                 )
 
-                print(
-                    f"Nurse {nurse.id} assigned on shift {action.shift} in room {room_id}"
-                )
+                # print(
+                #     f"Nurse {nurse.id} assigned on shift {action.shift} in room {room_id}"
+                # )
 
         if isinstance(action, NRAActionUnschedule):
             penalty, penalty_dict = self.unassign_nurse(
@@ -1768,13 +1800,13 @@ class Hospital:
                     room_id,
                 )
 
-                print(
-                    f"Nurse {nurse.id} unassigned on shift {action.shift} in room {room_id}"
-                )
+                # print(
+                #     f"Nurse {nurse.id} unassigned on shift {action.shift} in room {room_id}"
+                # )
 
         if assign:
             self.logger.log_action(penalty, str(action))
-            print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
+            # print(f"\tPenalty: {penalty}, penalties: {penalty_dict}", end="\n\n")
 
         return penalty, penalty_dict
 

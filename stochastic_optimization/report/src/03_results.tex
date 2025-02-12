@@ -1,0 +1,40 @@
+\begin{section}{Results}
+ The algorithm was tested with some provided instances, whose parameters are shown in Table \ref{tab:parameters} along with
+ the chose size for the tabu list.
+ In all the instances, the algorithm was able to reach a solution where no hard constraint was violated,
+ with penalty values shown in Table \ref{tab:penalties}.
+
+
+ \begin{table}[h]
+     \centering
+     \begin{tabular}{lllllllll}
+         \hline
+         \textbf{Instance} & \textbf{Days} & \textbf{Shifts} & \textbf{Occupants} & \textbf{Patients} & \textbf{\begin{tabular}[c]{@{}l@{}}Operating\\ Theaters\end{tabular}} & \textbf{Rooms} & \textbf{Nurses} & \textbf{Tabu List Size} \\ \hline
+         toy               & $7$           & $3$             & $2$                & $7$               & $1$                                                                   & $3$            & $11$            & $30$                    \\
+         $1$               & $21$          & $3$             & $7$                & $42$              & $2$                                                                   & $5$            & $13$            & $150$                   \\
+         $2$               & $14$          & $3$             & $5$                & $37$              & $4$                                                                   & $6$            & $17$            & $200$                   \\
+         $3$               & $14$          & $3$             & $10$               & $45$              & $2$                                                                   & $6$            & $14$            & $200$                   \\
+         $4$               & $14$          & $3$             & $7$                & $54$              & $3$                                                                   & $8$            & $19$            & $250$                   \\
+         $6$               & $14$          & $3$             & $8$                & $110$             & $3$                                                                   & $9$            & $20$            & $300$                     \\
+     \end{tabular}
+     \caption{Test instances parameters and tabu list size.}
+     \label{tab:parameters}
+ \end{table}
+ \begin{table}[h]
+     \centering
+     \begin{tabular}{llll}
+         \hline
+         \textbf{Test Instance} & \textbf{Starting penalty} & \textbf{Tabu Penalty} & \textbf{Proposed Penalty} \\ \hline
+         toy                    & $2100$                       & $269$                 & $292$                     \\
+         $1$                    & $6350$                       & $3976$                & $3177$                    \\
+         $2$                    & $12950$                       & $2443$                & $1583$                    \\
+         $3$                    & $15758$                       & $11624$               & $10184$                   \\
+         $4$                    & $13501$                       & $6524$                & $2332$                    \\
+         $6$                    & $55500$                       & $25366$               & $17048$                   \\
+     \end{tabular}
+     \caption{Penalty reached by the Tabu Search algorithm on the test instances, compared to the
+         penalties of the starting configuration and the competition proposed solution.}
+     \label{tab:penalties}
+ \end{table}
+
+\end{section}
