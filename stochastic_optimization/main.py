@@ -8,8 +8,7 @@ instances = [
     # {"file": "test02", "max_iter": 2500, "tabu_size": 200},
     # {"file": "test03", "max_iter": 2500, "tabu_size": 200},
     # {"file": "test04", "max_iter": 2500, "tabu_size": 250},
-    # {"file": "test05", "max_iter": 2500, "tabu_size": 200},
-    {"file": "test06", "max_iter": 2500, "tabu_size": 400},
+    # {"file": "test06", "max_iter": 5000, "tabu_size": 300},
 ]
 
 
