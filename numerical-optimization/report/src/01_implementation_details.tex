@@ -31,7 +31,7 @@ Then, at each iteration:
 In all the experiments we choose $\beta = 10^{-3}$, $k_{chol,\,max} = 100$.
 A good value for the constant factor is $c=2$, but as we will discuss in section \ref{sec:extended_rosenbrock_results} for the extended Rosenbrock function a larger value $c=5$ is beneficial.
 The method is endowed with a line search strategy with backtracking.
-We carry on experiments both with and without preconditioning, using the incomplete Cholesky factorization as preconditioner.
+We carry on experiments both with and without preconditioning when solving the Newton system with conjugate gradient method, using the incomplete Cholesky factorization as preconditioner.
 
 \subsection{Truncated Newton method}
 
@@ -46,7 +46,7 @@ In all the experiments, we choose the relative tolerance for the iterative metho
 \]
 that is a forcing term that is proven to yield a superlinear convergence rate.
 The method is endowed with a line search strategy with backtracking.
-We carry on experiments both with and without preconditioning, using the incomplete Cholesky factorization as preconditioner for the Newton system whenever the Hessian matrix is positive definite.
+We carry on experiments both with and without preconditioning when solving the Newton system with conjugate gradient method, using the incomplete Cholesky factorization as preconditioner for the Newton system whenever the Hessian matrix is positive definite.
 
 \subsection{Finite differences}
 
