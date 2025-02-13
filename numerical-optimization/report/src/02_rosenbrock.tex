@@ -10,7 +10,7 @@ We test the algorithms on the Rosenbrock function with two different starting po
 Both methods converge to the global minimum in both cases, but the Modified Newton method converges faster than the Truncated Newton method. The results are summarized in Table~\ref{tab:rosenbrock_results}.
 \begin{itemize}
     \item For the starting point $x_0^{(1)} = (1.2, 1.2)$, the Modified Newton method converges in a number of iterations that is comparable to the Truncated Newton method: this is expected since the starting point is close to the minimum, so the Newton system is solved accurately.
-    \item For the starting point $x_0^{(2)} = (-1.2, 1)$, the Modified Newton method converges in fewer iterations than the Truncated Newton method: this is expected since the starting point is far from the minimum, so the Newton system is solved approximately in the first steps: this lead to a very slow progress in the first iterations of the Truncated Newton method.
+    \item For the starting point $x_0^{(2)} = (-1.2, 1)$, the Modified Newton method converges in fewer iterations than the Truncated Newton method: this is expected since the starting point is far from the minimum, so the Newton system is solved approximately in the first steps: this leads to a very slow progress in the first iterations of the Truncated Newton method.
 \end{itemize}
 In both cases, despite the fact that the Truncated Newton method requires more iterations, its execution time is comparable or even lower than Modified Newton method.
 This is due to the fact that the Truncated Newton method requires less computational effort per iteration.
