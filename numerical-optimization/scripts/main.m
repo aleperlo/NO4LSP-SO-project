@@ -6,8 +6,6 @@ load('data/forcing_terms.mat');
 % Seed for reproducibility
 seed = min([331794 337131 338682]);
 
-% //TODO rosenbrock
-
 fterm = @(k, gradf) fterms_suplin(k, gradf);
 kmax = dictionary([3, 4, 5], [1e3, 1e3, 1e3]);
 modified_coeffs = [5, 2, 2];

@@ -1,29 +1,32 @@
 function [xk, fk, gradfk_norm, k, T, success, xseq] = ...
     modified_newton(x0, f, gradf, Hessf, beta,...
     kmax, tolgrad, c1, rho, btmax, max_chol_iter, preconditioning, logging, modification_coeff)
-%
-%
-% INPUTS:
-% x0 = n-dimensional column vector;
-% f = function handle that describes a function R^n->R;
-% gradf = function handle that describes the gradient of f;
-% Hessf = function handle that describes the Hessian of f;
-% kmax = maximum number of iterations permitted;
-% tolgrad = value used as stopping criterion w.r.t. the norm of the gradient;
-% c1 = the factor of the Armijo condition that must be a scalar in (0,1);
-% rho = fixed factor, lesser than 1, used for reducing alpha0;
-% btmax = maximum number of steps for updating alpha during the backtracking strategy.
-%
-% OUTPUTS:
-% xk = the last x computed by the function;
-% fk = the value f(xk);
-% gradfk_norm = value of the norm of gradf(xk)
-% k = index of the last iteration performed
-% xseq = n-by-k matrix where the columns are the elements xk of the
-% sequence
-% btseq = 1-by-k vector where elements are the number of backtracking
-% iterations at each optimization step.
-%
+% MODIFIED_NEWTON: Newton method with backtracking line search and Hessian modification
+% INPUTS
+% x0: initial point
+% f: function handle for the objective function
+% gradf: function handle for the gradient of the objective function
+% Hessf: function handle for the Hessian of the objective function
+% beta: parameter for the Hessian modification
+% kmax: maximum number of iterations
+% tolgrad: tolerance for the norm of the gradient
+% c1: parameter for the Armijo condition
+% rho: parameter for the backtracking strategy
+% btmax: maximum number of backtracking steps
+% max_chol_iter: maximum number of attempts for Hessian modification
+% preconditioning: flag for preconditioning
+% logging: flag for logging the sequence of iterates
+% modification_coeff: parameter for the Hessian modification
+% OUTPUTS
+% xk: optimal point
+% fk: optimal value of the objective function
+% gradfk_norm: norm of the gradient at the optimal point
+% k: number of iterations
+% T: table with the sequence of iterates
+% success: flag for successful convergence
+% xseq: sequence of iterates
+
+% Default values
 if nargin < 14
     modification_coeff = 2;
 end
@@ -57,21 +60,11 @@ gradfk_norm = norm(gradfk);
 Hessfk = Hessf(xk);
 
 while k < kmax && gradfk_norm >= tolgrad
+    % Compute the Hessian modification
+    [B, tau] = chol_with_addition(Hessfk, beta, modification_coeff, max_chol_iter);
+    Hkm = Hessfk + B;
     % Compute the descent direction as solution of
     % Hessf(xk) p = - gradf(xk)
-    %%%%%% L.S. SOLVED WITH BACKSLASH (NOT USED) %%%%%%%%%%
-    % pk = -Hessf(xk)\gradfk;
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%%%%% L.S. SOLVED WITH pcg %%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % For simplicity: default values for tol and maxit; no preconditioning
-    % pk = pcg(Hessf(xk), -gradfk);
-    % If you want to silence the messages about "solution quality", use
-    % instead:
-    [B, tau] = chol_with_addition(Hessfk, beta, modification_coeff, max_chol_iter);
-    % B = eigenvalue_modification(Hessfk);
-    % B = modchol_ldlt(Hessfk);
-    % TODO Warning: Input tol may not be achievable by PCG - Try to use a bigger tolerance
-    Hkm = Hessfk + B;
     if preconditioning
         try
             L = ichol(Hkm);
@@ -82,7 +75,6 @@ while k < kmax && gradfk_norm >= tolgrad
     else
         [pk, ~, ~, iterk, ~] = pcg(Hkm, -gradfk);
     end
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Reset the value of alpha
     alpha = 1;
@@ -94,8 +86,7 @@ while k < kmax && gradfk_norm >= tolgrad
 
     c1_gradfk_pk = c1 * gradfk' * pk;
     bt = 0;
-    % Backtracking strategy:
-    % 2nd condition is the Armijo condition not satisfied
+    % Backtracking strategy
     while bt < btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
         % Reduce the value of alpha
         alpha = rho * alpha;
@@ -106,11 +97,15 @@ while k < kmax && gradfk_norm >= tolgrad
         % Increase the counter by one
         bt = bt + 1;
     end
+
+    % Check if the Armijo condition could not be satisfied
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
         disp("Armijo condition could not be satisfied!")
         success = 0;
         break
     end
+
+    % Compute the error norm
     errornormseq(k+1) = norm(xnew - xk);
     % Update xk, fk, gradfk_norm
     xk = xnew;
@@ -122,6 +117,7 @@ while k < kmax && gradfk_norm >= tolgrad
     % Increase the step by one
     k = k + 1;
 
+    % Log iteration data
     if logging
         xseq(:, k) = xk;
     end
@@ -132,6 +128,7 @@ while k < kmax && gradfk_norm >= tolgrad
     correctionseq(k) = tau;
 end
 
+% Truncate the sequences
 gradfkseq = gradfkseq(1:k);
 fkseq = fkseq(1:k);
 btseq = btseq(1:k);
@@ -143,7 +140,7 @@ T = table(gradfkseq', fkseq', btseq', pcgiterseq', correctionseq', errornormseq'
 if logging
     xseq = xseq(:, 1:k);
 end
-
+% Check if the algorithm did not converge within the maximum number of iterations
 if k >= kmax && gradfk_norm >= tolgrad
     success = 0;
 end

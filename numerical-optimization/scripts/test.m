@@ -1,25 +1,30 @@
 function [] = test(f, gradf, Hessf, initializer, gradf_fd, Hessf_fd, codiags,...
     kmax, tolgrad, c1, rho, btmax, chol_maxit, beta, fterms, pcg_maxit, root_dir, findiff, tau_coeff)
-%
-% INPUTS
-% n = dimension of the problem;
-% f = function handle that describes a function R^n->R;
-% gradf = function handle that describes the gradient of f;
-% Hessf = function handle that describes the Hessian of f;
-% initializer = function handle that generate starting point x0;
-% kmax = maximum number of iterations permitted;
-% tolgrad = value used as stopping criterion w.r.t. the norm of the gradient;
-% c1 = the factor of the Armijo condition that must be a scalar in (0,1);
-% rho = fixed factor, lesser than 1, used for reducing alpha0;
-% btmax = maximum number of steps for updating alpha during the backtracking strategy.
-% chol_maxit = maximum number of iterations for the Cholesky factorization
-% beta = fixed factor, greater than 1, used for the Cholesky factorization;
-% fterms = function handle taking as input arguments k and gradfk, and returning the forcing term etak
-% pcg_maxit = maximum number of iterations for the pcg solver
-% h = step size for the finite difference approximation of the gradient and Hessian.
-%
-% OUTPUTS
-%
+% TEST Run the optimization algorithm for different starting points and
+% different values of the dimension of the problem.
+% INPUTS:
+% f: function to minimize
+% gradf: gradient of the function
+% Hessf: Hessian of the function
+% initializer: function to initialize the starting point
+% gradf_fd: finite difference gradient of the function
+% Hessf_fd: finite difference Hessian of the function
+% codiags: not necessary anymore
+% kmax: maximum number of iterations
+% tolgrad: tolerance for the norm of the gradient
+% c1: parameter for the Armijo condition
+% rho: parameter for the Armijo condition
+% btmax: maximum number of iterations for the backtracking line search
+% chol_maxit: maximum number of iterations for the Hessian modification
+% beta: parameter for the Hessian modification
+% fterms: forcing term for the Modified Newton method
+% pcg_maxit: maximum number of iterations for the PCG method in the Truncated Newton method
+% root_dir: directory where the results will be saved
+% findiff: boolean to indicate if the finite difference gradient and Hessian should be used
+% tau_coeff: parameter for the Hessian modification
+% OUTPUTS:
+% None
+
 if ~exist(root_dir, 'dir')
     mkdir(root_dir);
 end
@@ -60,7 +65,6 @@ for i=[3, 4, 5]
 
                 % Absolute
                 disp([9, 9, '- ABSOLUTE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
-                % findiff_gradf = @(x) findiff_grad(f, x, h, 'c', false);
                 findiff_gradf = @(x) gradf_fd(x, h, false);
                 for pre = [0, 1]
                     [fk_m, gradfk_norm_m, k_m, T_m, time_m, success_m, ...
@@ -71,7 +75,6 @@ for i=[3, 4, 5]
                     experiment = experiment+1;
                 end
                 % Relative
-                % findiff_gradf = @(x) findiff_grad(f, x, h, 'c', true);
                 findiff_gradf = @(x) gradf_fd(x, h, true);
                 disp([9, 9, '- RELATIVE FINITE DIFFERENCE GRADIENT AND HESSIAN - h=', num2str(h), ' ****'])
                 for pre = [0, 1]

@@ -1,37 +1,30 @@
 function [xk, fk, gradfk_norm, k, T, success, xseq] = ...
     truncated_newton(x0, f, gradf, Hessf, ...
     kmax, tolgrad, c1, rho, btmax, fterms, pcg_maxit, preconditioning, logging)
-%
-% Function that performs the Inexact Newton optimization method, using
-% backtracking strategy for the step-length selection.
-%
-% INPUTS:
-% x0 = n-dimensional column vector;
-% f = function handle that describes a function R^n->R;
-% gradf = function handle that describes the gradient of f;
-% Hessf = function handle that describes the Hessian of f;
-% kmax = maximum number of iterations permitted;
-% tolgrad = value used as stopping criterion w.r.t. the norm of the
-% gradient;
-% c1 = the factor of the Armijo condition that must be a scalar in (0,1);
-% rho = fixed factor, lesser than 1, used for reducing alpha0;
-% btmax = maximum number of steps for updating alpha during the
-% backtracking strategy.
-% fterms = function handle taking as input arguments k and gradfk, and returning the forcing term etak
-% pcg_maxit = maximum number of iterations for the pcg solver
-%
-% OUTPUTS:
-% xk = the last x computed by the function;
-% fk = the value f(xk);
-% gradfk_norm = value of the norm of gradf(xk)
-% k = index of the last iteration performed
-% xseq = n-by-k matrix where the columns are the elements xk of the
-% sequence
-% btseq = 1-by-k vector where elements are the number of backtracking
-% iterations at each optimization step.
-% pcgiterseq = 1-by-k vector where elements are the number of pcg
-% iterations at each optimization step.
-%
+% TRUNCATED_NEWTON Truncated Newton method for unconstrained optimization
+% INPUTS
+% x0: initial point
+% f: function handle for the objective function
+% gradf: function handle for the gradient of the objective function
+% Hessf: function handle for the Hessian of the objective function
+% kmax: maximum number of iterations
+% tolgrad: tolerance for the norm of the gradient
+% c1: parameter for the Armijo condition
+% rho: parameter for the backtracking strategy
+% btmax: maximum number of backtracking steps
+% fterms: function handle for the tolerance varying w.r.t. forcing terms
+% pcg_maxit: maximum number of iterations for the pcg in the inner loop
+% preconditioning: flag for preconditioning
+% logging: flag for logging the sequence of iterates
+% OUTPUTS
+% xk: optimal point
+% fk: optimal value of the objective function
+% gradfk_norm: norm of the gradient at the optimal point
+% k: number of iterations
+% T: table with the sequence of iterates
+% success: flag for successful convergence
+% xseq: sequence of iterates
+
 n = length(x0);
 % Function handle for the armijo condition
 farmijo = @(fk, alpha, c1_gradfk_pk) ...
@@ -59,35 +52,21 @@ k = 0;
 gradfk_norm = norm(gradfk);
 
 while k < kmax && gradfk_norm >= tolgrad
-    % "INEXACTLY" compute the descent direction as approximated solution of
-    % Hessf(xk) p = - graf(xk)
-
-    % TOLERANCE VARYING W.R.T. FORCING TERMS:
+    % Compute adaptive tolerance for the pcg
     etak = fterms(k, gradfk);
-    % ATTENTION! We will use directly eta_k as tolerance in the pcg because
-    % this function looks at the RELATIVE RESIDUAL and not the RESIDUAL!
-
-    %%%%%% L.S. SOLVED WITH pcg %%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % For simplicity: default values for tol and maxit; no preconditioning
-    % pk = pcg(Hessf(xk), -gradfk, etak, pcg_maxit);
-    % If you want to silence the messages about solution "quality" use
-    % instead:
-    % [pk, flagk, relresk, iterk, resveck] = pcg(Hessf(xk), ...
-    % -gradfk, etak, pcg_maxit);
-    % [pk, ~, iterk] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
     Hk = Hessf(xk);
+    % Compute the descent direction
+    % Hessf(xk) p = -gradf(xk)
     if preconditioning
         try
             L = ichol(Hk);
             [pk, ~, iterk, truncated] = cg_preconditioned(Hk, -gradfk, pcg_maxit, etak, L);
         catch
-            % If the preconditioner fails, we will use the default one
             [pk, ~, iterk, truncated] = cg(Hk, -gradfk, pcg_maxit, etak);
         end
     else
         [pk, ~, iterk, truncated] = cg(Hessf(xk), -gradfk, pcg_maxit, etak);
     end
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     % Reset the value of alpha
     alpha = 1;
@@ -99,8 +78,7 @@ while k < kmax && gradfk_norm >= tolgrad
 
     c1_gradfk_pk = c1 * gradfk' * pk;
     bt = 0;
-    % Backtracking strategy:
-    % 2nd condition is the Armijo condition not satisfied
+    % Backtracking
     while bt < btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
         % Reduce the value of alpha
         alpha = rho * alpha;
@@ -111,11 +89,15 @@ while k < kmax && gradfk_norm >= tolgrad
         % Increase the counter by one
         bt = bt + 1;
     end
+
+    % Check if the Armijo condition could not be satisfied
     if bt == btmax && fnew > farmijo(fk, alpha, c1_gradfk_pk)
         disp('Armijo condition could not be satisfied!')
         success = 0;
         break
     end
+
+    % Compute the error norm
     errornormseq(k+1) = norm(xnew - xk);
     % Update xk, fk, gradfk_norm
     xk = xnew;
@@ -126,6 +108,7 @@ while k < kmax && gradfk_norm >= tolgrad
     % Increase the step by one
     k = k + 1;
 
+    % Log iteration data
     if logging
         xseq(:, k) = xk;
     end
@@ -136,6 +119,7 @@ while k < kmax && gradfk_norm >= tolgrad
     truncatedseq(k) = truncated;
 end
 
+% Truncate the sequence of iterates
 gradfkseq = gradfkseq(1:k);
 fkseq = fkseq(1:k);
 btseq = btseq(1:k);
@@ -144,11 +128,11 @@ truncatedseq = truncatedseq(1:k);
 errornormseq = errornormseq(1:k);
 T = table(gradfkseq', fkseq', btseq', pcgiterseq', truncatedseq', errornormseq', ...
     'VariableNames', {'gradient_norm', 'function_value', 'backtrack', 'inner_iterations', 'truncated', 'error_norm'});
-
 if logging
     xseq = xseq(:, 1:k);
 end
 
+% Check if the algorithm did not converge within the maximum number of iterations
 if k >= kmax && gradfk_norm >= tolgrad
     success = 0;
 end

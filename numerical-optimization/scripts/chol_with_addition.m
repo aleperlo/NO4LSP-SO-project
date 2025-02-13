@@ -1,5 +1,14 @@
 function [B, tau] = chol_with_addition(A, beta, coeffient, max_iter)
-
+% CHOL_WITH_ADDITION Compute the Cholesky factorization of a matrix with an
+% additional term, which is a multiple of the identity.
+% Input:
+% A: a symmetric matrix
+% beta: a positive scalar
+% coeffient: a scalar that is greater than 1
+% max_iter: a positive integer
+% Output:
+% B: the modification necessary to make the A positive definite
+% tau: a scalar
 mindiag = min(diag(A));
 if mindiag > 0
     tau = 0;

@@ -1,17 +1,18 @@
 function [xk, k, relres, truncated] = ...
     cg(A, b, kmax, tol)
-% function [xk, k, relres] = ...
-%     lab01_cg_linsys(A, b, x0, kmax, tol)
-%
-% Conjugate Gradient Method for linear systems.
-%
-% INPUTS:
-% A : n-by-n symmetric, positive (semi-)definite matrix of the system
-% b : column vector of n elements, known terms of the system
-% x0 : columns vector of n elements, starting guess
-% kmax : positive integer, maximum number of steps
-% tol : positive real value, tolerance for relative residual
+% CG Conjugate Gradient method
+% Input:
+%   A: matrix
+%   b: right-hand side vector
+%   kmax: maximum number of iterations
+%   tol: tolerance
+% Output:
+%   xk: approximate solution
+%   k: number of iterations
+%   relres: relative residual
+%   truncated: 1 if the method is truncated, 0 otherwise
 
+% Initializations
 xk = zeros(size(b));
 rk = b - A * xk;
 pk = rk;
@@ -24,12 +25,13 @@ relres = norm(rk) / norm_b;
 
 while k < kmax && relres > tol
     zk = A * pk;
+    % If negative curvature, truncate
     if pk' * zk <= 0
+        % If the first iteration, return -grad(f)
         if k == 0
             xk = b;
         end
         truncated = 1;
-        % disp(['Stopped at iteration ', num2str(k)]);
         return
     end
     alphak = (rk' * pk) / (pk' * zk);
