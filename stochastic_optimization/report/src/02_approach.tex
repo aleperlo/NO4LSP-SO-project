@@ -13,43 +13,8 @@
  to accept forbidden moves when they met a certain \textit{aspiration criterion}, for example if they lead to
  a better solution than the current one.
 
- The algorithm is the following:
-\begin{lstlisting}[language=c]
-    algorithm TabuSearch(S, maxIter, f, neighborhoods, aspirationCriteria):
-    // INPUT
-    //    S = the search space
-    //    maxIter = the maximal number of iterations
-    //    f = the objective function
-    //    neighborhoods = the definition of neighborhoods
-    //    aspirationCriteria = the aspiration criteria
-    // OUTPUT
-    //    The best solution found
-
-    Choose the initial candidate solution s in S
-    s* <- s  // Initialize the best-so-far solution
-    k <- 1
-
-    while k <= maxIter:
-        // Sample the allowed neighbors of s
-        Generate a sample V(s, k) of the allowed solutions in N(s, k)
-        // s' in V(s, k) iff (s' not in T) or (a(k, s') = true)
-
-        Set s to the best solution in V(s, k)
-
-        // Update the best-so-far if necessary
-        if f(s) < f(s*):
-            s* <- s
-
-        Update T
-
-        // Start another iteration
-        k <- k + 1
-
-    return s*
-\end{lstlisting}
-
-
  The next paragraphs will discuss the main aspects that need to be addressed in order to adapt TS to IHTP.
+
 
 
  \begin{subsection}
@@ -75,7 +40,6 @@
  \begin{subsection}
      {Starting Point}
      As already mentioned, a test instance starts with some patients already admitted to the hospital, called occupants.
-     \ap{We refer to unstable states of the problem as those where hard constraints are not satisfied.}
      This configuration clearly is an unstable state of the problem, since no hard constraint is guaranteed to be satisfied.
      With these premises, two approaches can be considered in order to generate a starting point: create a stable configuration from scratch
      using advanced and exhaustive combinatorial techniques, which is a very complex task both
@@ -84,9 +48,9 @@
      find a stable solution by opportunely tuning its behavior.
      The second approach is the one that has been chosen, since it is more efficient and allows to fully exploit
      the potential of the algorithm.
-     \ap{Basically, we are enforcing all hard constraints when generating the neighborhood, but constraints “Madatory patients need to be assigned during the provided period” and “Rooms with patient assigned must be covered”.
-     Eventually, these hard constraints will hopefully be satisfied by the algorithm due to the choices that will be discussed in the next paragraphs.}
-     The steps taken to direct the algorithm in a direction of stability are presented
+     Basically, the main idea is to generate a neighborhood that is able to direct the algorithm towards a stable status,
+     and hopefully the algorithm will be able to find a final solution that satisfies all the hard constraints.
+     The choices taken to accomplish this non-trivial task are presented
      in the next paragraphs.
 
  \end{subsection}
@@ -139,7 +103,7 @@
  \begin{subsection}
      {Tabu List Size}
      The tabu list size is a crucial parameter of the algorithm, depending
-     both on the problem dimension and the neighborhood definition we established.
+     both on the problem dimension (i.e. number of patients, nurses, rooms, etc.) and the neighborhood definition we established.
      A small tabu list size can lead to cycling and getting stuck to a local space, while a large one can
      slow down the algorithm and make it less effective.
 
@@ -165,7 +129,6 @@
      but evidence well how the tabu list size is the key parameter in order to
      opportunely balance the algorithm and avoid having
      hard constraints violated, nor them prevailing over the soft ones.
-     \ap{We remark that the correct tabu list size is a crucial problem-specific parameter, i.e. it depends on the number of rooms, patients, nurses, shifts, etc.}
 
 
  \end{subsection}
